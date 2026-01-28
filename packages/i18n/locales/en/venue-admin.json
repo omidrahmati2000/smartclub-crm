@@ -113,11 +113,102 @@
   },
   "customers": {
     "title": "Customers",
-    "search": "Search customers",
-    "totalBookings": "Total Bookings",
-    "totalSpent": "Total Spent",
-    "lastVisit": "Last Visit",
-    "viewDetails": "View Details"
+    "description": "Customer Management & CRM",
+    "search": "Search by name, email or phone",
+    "filterByStatus": "Filter by status",
+    "sortBy": "Sort by",
+    "exportCSV": "Export CSV",
+    "noCustomers": "No customers found",
+    "showingResults": "Showing {{count}} customers",
+
+    "status": {
+      "all": "All",
+      "ACTIVE": "Active",
+      "VIP": "VIP",
+      "REGULAR": "Regular",
+      "NEW": "New",
+      "BLACKLISTED": "Blacklisted",
+      "INACTIVE": "Inactive"
+    },
+
+    "sort": {
+      "name": "Name",
+      "totalSpent": "Total Spent",
+      "totalBookings": "Total Bookings",
+      "lastVisit": "Last Visit"
+    },
+
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "status": "Status",
+      "tags": "Tags",
+      "totalBookings": "Total Bookings",
+      "totalSpent": "Total Spent",
+      "lastVisit": "Last Visit",
+      "actions": "Actions"
+    },
+
+    "actions": {
+      "viewProfile": "View Profile",
+      "addTag": "Add Tag",
+      "addNote": "Add Note",
+      "changeStatus": "Change Status",
+      "blacklist": "Add to Blacklist",
+      "removeFromBlacklist": "Remove from Blacklist",
+      "makeVIP": "Make VIP"
+    },
+
+    "profile": {
+      "title": "Customer Profile",
+      "customerInfo": "Customer Information",
+      "statistics": "Statistics",
+      "bookingHistory": "Booking History",
+      "notes": "Notes",
+      "tags": "Tags",
+      "addNote": "Add Note",
+      "noNotes": "No notes yet",
+      "noteAdded": "Note added",
+      "noteContent": "Note Content",
+      "notePlaceholder": "Write your note here...",
+      "createdBy": "by {{name}}",
+      "createdAt": "on {{date}}",
+
+      "stats": {
+        "totalBookings": "Total Bookings",
+        "completedBookings": "Completed Bookings",
+        "cancelledBookings": "Cancelled Bookings",
+        "noShowCount": "No-Show Count",
+        "totalSpent": "Total Spent",
+        "averageBookingValue": "Average Booking Value",
+        "firstVisit": "First Visit",
+        "lastVisit": "Last Visit",
+        "memberSince": "Member Since",
+        "favoriteAssets": "Favorite Assets",
+        "preferredTimeSlots": "Preferred Time Slots"
+      }
+    },
+
+    "tags": {
+      "title": "Tags",
+      "add": "Add Tag",
+      "remove": "Remove Tag",
+      "select": "Select Tag",
+      "noTags": "No tags",
+      "tagAdded": "Tag added",
+      "tagRemoved": "Tag removed"
+    },
+
+    "statusChange": {
+      "title": "Change Customer Status",
+      "currentStatus": "Current Status",
+      "newStatus": "New Status",
+      "confirm": "Confirm Status Change",
+      "success": "Customer status changed",
+      "blacklistWarning": "Are you sure you want to blacklist this customer?",
+      "blacklistReason": "Reason for Blacklisting"
+    }
   },
   "staff": {
     "title": "Staff",

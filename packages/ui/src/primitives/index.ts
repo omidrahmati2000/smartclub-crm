@@ -42,3 +42,5 @@ export {
 } from './dialog';
 export { Textarea, type TextareaProps } from './textarea';
 export { Switch } from './switch';
+export { Avatar, AvatarImage, AvatarFallback } from './avatar';
+export { Alert, AlertTitle, AlertDescription } from './alert';

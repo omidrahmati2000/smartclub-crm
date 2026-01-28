@@ -113,11 +113,102 @@
   },
   "customers": {
     "title": "مشتریان",
-    "search": "جستجوی مشتریان",
-    "totalBookings": "تعداد رزروها",
-    "totalSpent": "مجموع خرج",
-    "lastVisit": "آخرین بازدید",
-    "viewDetails": "مشاهده جزئیات"
+    "description": "مدیریت مشتریان و CRM",
+    "search": "جستجو بر اساس نام، ایمیل یا تلفن",
+    "filterByStatus": "فیلتر بر اساس وضعیت",
+    "sortBy": "مرتب‌سازی بر اساس",
+    "exportCSV": "خروجی CSV",
+    "noCustomers": "هیچ مشتری‌ای یافت نشد",
+    "showingResults": "نمایش {{count}} مشتری",
+
+    "status": {
+      "all": "همه",
+      "ACTIVE": "فعال",
+      "VIP": "VIP",
+      "REGULAR": "عادی",
+      "NEW": "جدید",
+      "BLACKLISTED": "لیست سیاه",
+      "INACTIVE": "غیرفعال"
+    },
+
+    "sort": {
+      "name": "نام",
+      "totalSpent": "مجموع خرج",
+      "totalBookings": "تعداد رزروها",
+      "lastVisit": "آخرین بازدید"
+    },
+
+    "table": {
+      "name": "نام",
+      "email": "ایمیل",
+      "phone": "تلفن",
+      "status": "وضعیت",
+      "tags": "برچسب‌ها",
+      "totalBookings": "تعداد رزروها",
+      "totalSpent": "مجموع خرج",
+      "lastVisit": "آخرین بازدید",
+      "actions": "عملیات"
+    },
+
+    "actions": {
+      "viewProfile": "مشاهده پروفایل",
+      "addTag": "افزودن برچسب",
+      "addNote": "افزودن یادداشت",
+      "changeStatus": "تغییر وضعیت",
+      "blacklist": "افزودن به لیست سیاه",
+      "removeFromBlacklist": "حذف از لیست سیاه",
+      "makeVIP": "تبدیل به VIP"
+    },
+
+    "profile": {
+      "title": "پروفایل مشتری",
+      "customerInfo": "اطلاعات مشتری",
+      "statistics": "آمار",
+      "bookingHistory": "تاریخچه رزرو",
+      "notes": "یادداشت‌ها",
+      "tags": "برچسب‌ها",
+      "addNote": "افزودن یادداشت",
+      "noNotes": "یادداشتی ثبت نشده",
+      "noteAdded": "یادداشت اضافه شد",
+      "noteContent": "متن یادداشت",
+      "notePlaceholder": "یادداشت خود را بنویسید...",
+      "createdBy": "توسط {{name}}",
+      "createdAt": "در تاریخ {{date}}",
+
+      "stats": {
+        "totalBookings": "کل رزروها",
+        "completedBookings": "رزروهای تکمیل شده",
+        "cancelledBookings": "رزروهای لغو شده",
+        "noShowCount": "تعداد عدم حضور",
+        "totalSpent": "مجموع خرج",
+        "averageBookingValue": "میانگین هر رزرو",
+        "firstVisit": "اولین بازدید",
+        "lastVisit": "آخرین بازدید",
+        "memberSince": "عضو از تاریخ",
+        "favoriteAssets": "امکانات مورد علاقه",
+        "preferredTimeSlots": "زمان‌های ترجیحی"
+      }
+    },
+
+    "tags": {
+      "title": "برچسب‌ها",
+      "add": "افزودن برچسب",
+      "remove": "حذف برچسب",
+      "select": "انتخاب برچسب",
+      "noTags": "برچسبی وجود ندارد",
+      "tagAdded": "برچسب اضافه شد",
+      "tagRemoved": "برچسب حذف شد"
+    },
+
+    "statusChange": {
+      "title": "تغییر وضعیت مشتری",
+      "currentStatus": "وضعیت فعلی",
+      "newStatus": "وضعیت جدید",
+      "confirm": "تأیید تغییر وضعیت",
+      "success": "وضعیت مشتری تغییر کرد",
+      "blacklistWarning": "آیا از افزودن این مشتری به لیست سیاه اطمینان دارید؟",
+      "blacklistReason": "دلیل افزودن به لیست سیاه"
+    }
   },
   "staff": {
     "title": "کارکنان",

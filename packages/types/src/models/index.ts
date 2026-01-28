@@ -1,4 +1,13 @@
 export type { BaseUser, Customer, Coach, VenueStaff, PlatformAdmin, User } from './user';
+export { CustomerStatus } from './customer-profile';
+export type {
+  CustomerProfile,
+  CustomerStats,
+  CustomerTag,
+  CustomerNote,
+  CustomerFilters,
+  CustomerListItem,
+} from './customer-profile';
 export type { Venue, OperatingHours, Asset, Amenity } from './venue';
 export { CancellationPolicy } from './venue-settings';
 export type {

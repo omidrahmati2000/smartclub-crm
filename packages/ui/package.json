@@ -19,9 +19,12 @@
     "./table": "./src/primitives/table.tsx",
     "./dialog": "./src/primitives/dialog.tsx",
     "./textarea": "./src/primitives/textarea.tsx",
-    "./switch": "./src/primitives/switch.tsx"
+    "./switch": "./src/primitives/switch.tsx",
+    "./avatar": "./src/primitives/avatar.tsx",
+    "./alert": "./src/primitives/alert.tsx"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-select": "^2.2.6",
