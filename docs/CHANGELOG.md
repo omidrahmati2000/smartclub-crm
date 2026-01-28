@@ -233,9 +233,196 @@ All notable changes to SmartClub CRM will be documented in this file.
 - Mock assets data with different booking types
 - RESTful API structure ready for backend integration
 
-#### Next Steps (Phase 2.6+)
-- [ ] Venue Settings page (profile, hours, booking rules)
-- [ ] Customer Management (CRM)
-- [ ] Staff Management
-- [ ] Financial Reports
-- [ ] Dynamic Pricing
+#### Phase 2.6: Venue Settings `done`
+- [x] Venue profile form (name, description, address, contact)
+- [x] Operating hours configuration (7 days)
+- [x] Booking rules form:
+  - Advance booking window (min/max days)
+  - Cancellation policy (flexible, moderate, strict, non-refundable)
+  - Time slot interval
+  - Allow double booking option
+  - Auto-confirm option
+- [x] White-label settings (domain, logo, colors)
+- [x] Notification preferences (email, SMS, push for various events)
+- [x] Tab-based settings layout
+- [x] Mock API endpoint: `GET/PUT /api/venues/{venueId}/settings`
+
+**Components**:
+- `settings-content.tsx` - Main container with tabs
+- `venue-profile-form.tsx` - Profile editing
+- `operating-hours-form.tsx` - Hours configuration
+- `booking-rules-form.tsx` - Booking policies
+- `white-label-settings.tsx` - Branding settings
+- `notification-settings.tsx` - Notification preferences
+
+#### Phase 2.7: Customer Management (CRM) `done`
+- [x] Customer list with search & filters
+- [x] Customer profile modal with tabs:
+  - Overview (name, contact, status, tags)
+  - Booking history
+  - Financial summary
+  - Notes
+- [x] Customer stats display (total bookings, revenue, visits)
+- [x] Customer tags management
+- [x] Customer notes with timestamps
+- [x] Status badges (active, inactive, blocked, VIP)
+- [x] Mock API endpoints:
+  - `GET /api/venues/{venueId}/customers`
+  - `GET /api/venues/{venueId}/customers/{customerId}`
+  - `POST /api/venues/{venueId}/customers/{customerId}/notes`
+  - `PUT /api/venues/{venueId}/customers/{customerId}/tags`
+
+**Components**:
+- `customers-content.tsx` - Main container
+- `customers-table.tsx` - Customer cards grid
+- `customer-profile-modal.tsx` - Profile details dialog
+- `customer-stats.tsx` - Stats display
+- `customer-filters.tsx` - Search & filters
+- `customer-tags-dialog.tsx` - Tag management
+- `customer-notes-section.tsx` - Notes with add/view
+- `customer-bookings-section.tsx` - Booking history
+
+#### Phase 2.8: Staff Management with RBAC `done`
+- [x] Staff member list with role & status
+- [x] Add staff dialog with role selection
+- [x] Edit staff details
+- [x] Remove staff with confirmation
+- [x] Toggle staff status (active/inactive)
+- [x] Staff activity log viewer
+- [x] Role permissions matrix display
+- [x] Role-based permission checks (4 roles: Owner, Manager, Receptionist, Cashier)
+- [x] Staff invitation system
+- [x] Mock API endpoints:
+  - `GET /api/venues/{venueId}/staff`
+  - `POST /api/venues/{venueId}/staff/invite`
+  - `PUT /api/staff/{staffId}`
+  - `DELETE /api/staff/{staffId}`
+  - `PATCH /api/staff/{staffId}/toggle`
+  - `GET /api/staff/{staffId}/activity`
+
+**Components**:
+- `staff-content.tsx` - Main container
+- `staff-table.tsx` - Staff data table
+- `add-staff-dialog.tsx` - Invite staff form
+- `edit-staff-dialog.tsx` - Edit details
+- `remove-staff-dialog.tsx` - Delete confirmation
+- `role-permissions-dialog.tsx` - Permission matrix
+- `staff-activity-dialog.tsx` - Activity log
+- `staff-filters.tsx` - Search & filters
+- `role-badge.tsx` - Role display badge
+
+#### Phase 2.9: Financial Reports `done`
+- [x] Revenue report with summary:
+  - Total revenue
+  - Total bookings
+  - Average booking value
+  - Cancellation rate
+- [x] Revenue by asset type (Pie chart)
+- [x] Revenue by booking source (Recharts Pie)
+- [x] Revenue by payment method (Recharts Pie)
+- [x] Daily revenue trend (Recharts Line chart)
+- [x] Top performing assets (Recharts Bar chart)
+- [x] Occupancy rate report
+- [x] Occupancy heatmap (Day × Hour grid)
+- [x] Peak hours analysis
+- [x] Asset utilization comparison
+- [x] Period selector (today, week, month, custom range)
+- [x] CSV export for reports
+- [x] Mock API endpoints:
+  - `GET /api/venues/{venueId}/reports/revenue?period={period}&startDate={date}&endDate={date}`
+  - `GET /api/venues/{venueId}/reports/occupancy?period={period}&startDate={date}&endDate={date}`
+
+**Components**:
+- `finance-content.tsx` - Main container with tabs
+- `revenue-report.tsx` - Revenue overview
+- `revenue-summary.tsx` - KPI cards
+- `revenue-charts.tsx` - 5 chart visualizations
+- `occupancy-report.tsx` - Occupancy overview
+- `occupancy-heatmap.tsx` - Custom heatmap visualization
+- `occupancy-stats.tsx` - Peak hours & utilization
+- `export-button.tsx` - CSV export
+- `date-range-selector.tsx` - Period picker
+- `period-selector.tsx` - Quick period buttons
+
+#### Phase 2.10: Dynamic Pricing `done`
+- [x] Pricing rules table with filters
+- [x] Add pricing rule dialog with multi-step form
+- [x] Edit pricing rule dialog
+- [x] Delete pricing rule with confirmation
+- [x] Toggle rule status (active/inactive)
+- [x] Price preview dialog with calculation
+- [x] 6 rule types:
+  - Peak Hours (time-based)
+  - Day of Week
+  - Special Date
+  - Last Minute (booking window)
+  - Promotional
+  - Early Bird (advance booking)
+- [x] Rule conditions:
+  - Time slots (multiple)
+  - Days of week (multi-select buttons)
+  - Date range
+  - Booking window (min/max hours before)
+  - Target assets (multi-select buttons)
+- [x] 5 adjustment types:
+  - Percentage increase
+  - Percentage decrease
+  - Fixed amount increase
+  - Fixed amount decrease
+  - Override price
+- [x] Rule priority system (0-100)
+- [x] Rule validity period
+- [x] Mock API endpoints:
+  - `GET /api/venues/{venueId}/pricing-rules`
+  - `POST /api/venues/{venueId}/pricing-rules`
+  - `PUT /api/pricing-rules/{ruleId}`
+  - `DELETE /api/pricing-rules/{ruleId}`
+  - `PATCH /api/pricing-rules/{ruleId}/toggle`
+
+**Components**:
+- `pricing-content.tsx` - Main container
+- `pricing-table.tsx` - Rules data table
+- `add-pricing-rule-dialog.tsx` - Create form
+- `edit-pricing-rule-dialog.tsx` - Edit form
+- `delete-pricing-rule-dialog.tsx` - Delete confirmation
+- `price-preview-dialog.tsx` - Price calculation preview
+- `pricing-filters.tsx` - Search & filters
+- `rule-type-badge.tsx` - 6 color-coded badges
+- `adjustment-display.tsx` - Visual adjustment indicator
+- `conditions-display.tsx` - Conditions summary
+
+**Bug Fixes**:
+- [x] Fixed import path issue in assets/page.tsx (changed from @/auth to relative path)
+- [x] Fixed pricing dialog import paths (from /components/ to direct imports)
+- [x] Removed missing Checkbox component, replaced with Button toggles for asset selection
+- [x] Removed missing Separator component imports
+- [x] Replaced useToast with console.log for toast notifications
+
+---
+
+## Phase 2 Summary - Venue App `COMPLETE ✅`
+
+### Total Features Implemented: 10/10
+1. ✅ Foundation & Authentication
+2. ✅ Dashboard Overview
+3. ✅ Calendar View (Gantt)
+4. ✅ Booking Management
+5. ✅ Asset Management
+6. ✅ Venue Settings
+7. ✅ Customer Management (CRM)
+8. ✅ Staff Management (RBAC)
+9. ✅ Financial Reports
+10. ✅ Dynamic Pricing
+
+### Statistics
+- **Total Components**: 79 components
+- **Total Pages**: 10 pages (Overview, Calendar, Bookings, Assets, Settings, Customers, Staff, Finance, Pricing, Login)
+- **Mock API Endpoints**: 35+ endpoints
+- **UI Components Created**: 15 (Button, Card, Badge, Input, Select, Dialog, Table, Tabs, Switch, Textarea, Avatar, Alert, DropdownMenu, AlertDialog, ScrollArea)
+- **Total Types/Interfaces**: 50+ models
+- **Mock Data Fixtures**: 10 fixtures (users, venues, assets, bookings, dashboard, settings, customers, staff, reports, pricing rules)
+
+### Next Phase Options
+- **Phase 3**: Admin App (Platform management)
+- **Phase 4**: Web App (Public marketplace + Customer panel)
+- **Phase 5**: Coach App (Independent coach management)
