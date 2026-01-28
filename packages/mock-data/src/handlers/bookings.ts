@@ -2,6 +2,7 @@ import { http, HttpResponse } from 'msw';
 import type { Booking, TimeSlot } from '@smartclub/types';
 import { BookingType, BookingStatus, PaymentStatus } from '@smartclub/types';
 import { mockAssets } from '../fixtures/venues';
+import { mockBookings as initialMockBookings } from '../fixtures/bookings';
 
 // Generate time slots for a given date and asset
 function generateTimeSlots(date: string, assetId: string): TimeSlot[] {
@@ -42,8 +43,8 @@ function generateTimeSlots(date: string, assetId: string): TimeSlot[] {
   return slots;
 }
 
-// Mock bookings storage
-const mockBookings: Booking[] = [];
+// Mock bookings storage - initialized with fixture data
+const mockBookingsStore: Booking[] = [...initialMockBookings];
 
 export const bookingHandlers = [
   // Get available start times for duration-based bookings
@@ -148,7 +149,7 @@ export const bookingHandlers = [
       updatedAt: new Date().toISOString(),
     };
 
-    mockBookings.push(booking);
+    mockBookingsStore.push(booking);
 
     return HttpResponse.json({
       data: booking,
@@ -162,14 +163,14 @@ export const bookingHandlers = [
     const url = new URL(request.url);
     const userId = url.searchParams.get('userId');
 
-    let bookings = [...mockBookings];
+    let bookings = [...mockBookingsStore];
 
     if (userId) {
-      bookings = bookings.filter((b) => b.userId === userId);
+      bookings = bookings.filter((b) => b.customerId === userId);
     }
 
-    // Sort by start time descending
-    bookings.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
+    // Sort by created at descending
+    bookings.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     return HttpResponse.json({
       data: bookings,
@@ -185,9 +186,53 @@ export const bookingHandlers = [
     });
   }),
 
+  // Get venue bookings (for calendar and management)
+  http.get('/api/venues/:venueId/bookings', ({ request, params }) => {
+    const url = new URL(request.url);
+    const date = url.searchParams.get('date');
+    const status = url.searchParams.get('status');
+    const assetId = url.searchParams.get('asset');
+
+    let bookings = mockBookingsStore.filter(
+      (b) => b.venueId === params.venueId,
+    );
+
+    if (date) {
+      bookings = bookings.filter((b) => b.date === date);
+    }
+
+    if (status) {
+      bookings = bookings.filter((b) => b.status === status);
+    }
+
+    if (assetId) {
+      bookings = bookings.filter((b) => b.assetId === assetId);
+    }
+
+    // Sort by date and start time
+    bookings.sort((a, b) => {
+      const dateCompare = a.date.localeCompare(b.date);
+      if (dateCompare !== 0) return dateCompare;
+      return a.startTime.localeCompare(b.startTime);
+    });
+
+    return HttpResponse.json({
+      data: bookings,
+      pagination: {
+        page: 1,
+        limit: 100,
+        total: bookings.length,
+        totalPages: 1,
+        hasNext: false,
+        hasPrevious: false,
+      },
+      success: true,
+    });
+  }),
+
   // Get single booking
   http.get('/api/bookings/:id', ({ params }) => {
-    const booking = mockBookings.find((b) => b.id === params.id);
+    const booking = mockBookingsStore.find((b) => b.id === params.id);
 
     if (!booking) {
       return HttpResponse.json(
