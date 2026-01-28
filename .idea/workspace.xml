@@ -9,7 +9,9 @@
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/next.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/src/i18n/request.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/users.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
@@ -43,6 +45,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/home/omid/WebstormProjects/smartClubCRM/packages/types/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -61,7 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1769553035864</updated>
       <workItem from="1769553037063" duration="6409000" />
-      <workItem from="1769584469412" duration="10387000" />
+      <workItem from="1769584469412" duration="10913000" />
     </task>
     <servers />
   </component>

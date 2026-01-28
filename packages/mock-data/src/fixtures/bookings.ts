@@ -1,0 +1,130 @@
+import type { Booking } from '@smartclub/types';
+import { BookingStatus, BookingType, PaymentMethod, PaymentStatus } from '@smartclub/types';
+
+export const mockBookings: Booking[] = [
+  {
+    id: 'booking-1',
+    venueId: 'venue-1',
+    assetId: 'asset-1',
+    customerId: 'user-customer-1',
+    date: new Date().toISOString().split('T')[0], // Today
+    startTime: '09:00',
+    endTime: '10:30',
+    duration: 90,
+    status: BookingStatus.CONFIRMED,
+    bookingType: BookingType.SLOT_BASED,
+    totalPrice: 350000,
+    currency: 'IRT',
+    participants: [
+      {
+        userId: 'user-customer-1',
+        name: 'علی احمدی',
+        role: 'host',
+      },
+    ],
+    paymentMethod: PaymentMethod.ONLINE,
+    paymentStatus: PaymentStatus.COMPLETED,
+    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
+    updatedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'booking-2',
+    venueId: 'venue-1',
+    assetId: 'asset-1',
+    customerId: 'user-customer-1',
+    date: new Date().toISOString().split('T')[0], // Today
+    startTime: '14:00',
+    endTime: '15:30',
+    duration: 90,
+    status: BookingStatus.PENDING,
+    bookingType: BookingType.SLOT_BASED,
+    totalPrice: 350000,
+    currency: 'IRT',
+    participants: [
+      {
+        userId: 'user-customer-1',
+        name: 'علی احمدی',
+        role: 'host',
+      },
+    ],
+    paymentMethod: PaymentMethod.WALLET,
+    paymentStatus: PaymentStatus.PENDING,
+    createdAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30 minutes ago
+    updatedAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'booking-3',
+    venueId: 'venue-1',
+    assetId: 'asset-2',
+    customerId: 'user-customer-1',
+    date: new Date().toISOString().split('T')[0], // Today
+    startTime: '16:00',
+    endTime: '18:00',
+    duration: 120,
+    status: BookingStatus.CONFIRMED,
+    bookingType: BookingType.DURATION_BASED,
+    totalPrice: 300000,
+    currency: 'IRT',
+    participants: [
+      {
+        userId: 'user-customer-1',
+        name: 'علی احمدی',
+        role: 'host',
+      },
+    ],
+    paymentMethod: PaymentMethod.CASH,
+    paymentStatus: PaymentStatus.COMPLETED,
+    createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(), // 4 hours ago
+    updatedAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'booking-4',
+    venueId: 'venue-1',
+    assetId: 'asset-1',
+    customerId: 'user-customer-1',
+    date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Yesterday
+    startTime: '10:00',
+    endTime: '11:30',
+    duration: 90,
+    status: BookingStatus.COMPLETED,
+    bookingType: BookingType.SLOT_BASED,
+    totalPrice: 350000,
+    currency: 'IRT',
+    participants: [
+      {
+        userId: 'user-customer-1',
+        name: 'علی احمدی',
+        role: 'host',
+      },
+    ],
+    paymentMethod: PaymentMethod.ONLINE,
+    paymentStatus: PaymentStatus.COMPLETED,
+    createdAt: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 'booking-5',
+    venueId: 'venue-1',
+    assetId: 'asset-1',
+    customerId: 'user-customer-1',
+    date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Yesterday
+    startTime: '15:00',
+    endTime: '16:30',
+    duration: 90,
+    status: BookingStatus.COMPLETED,
+    bookingType: BookingType.SLOT_BASED,
+    totalPrice: 350000,
+    currency: 'IRT',
+    participants: [
+      {
+        userId: 'user-customer-1',
+        name: 'علی احمدی',
+        role: 'host',
+      },
+    ],
+    paymentMethod: PaymentMethod.CARD_ON_SITE,
+    paymentStatus: PaymentStatus.COMPLETED,
+    createdAt: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+  },
+];
