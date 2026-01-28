@@ -2,6 +2,7 @@ export type { BaseUser, Customer, Coach, VenueStaff, PlatformAdmin, User } from 
 export { CustomerStatus } from './customer-profile';
 export { StaffStatus, InvitationStatus } from './staff-member';
 export { BookingSource, ReportPeriod } from './financial-reports';
+export { PricingRuleType, PricingRuleStatus, AdjustmentType } from './pricing-rule';
 export type {
   CustomerProfile,
   CustomerStats,
@@ -38,6 +39,17 @@ export type {
   ReportFilters,
   ExportOptions,
 } from './financial-reports';
+export type {
+  PricingRule,
+  PricingCondition,
+  TimeSlot,
+  PriceAdjustment,
+  CreatePricingRuleDTO,
+  UpdatePricingRuleDTO,
+  PricePreview,
+  AppliedPricingRule,
+  PricingRuleFilters,
+} from './pricing-rule';
 export type { Venue, OperatingHours, Asset, Amenity } from './venue';
 export { CancellationPolicy } from './venue-settings';
 export type {

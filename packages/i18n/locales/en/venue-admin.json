@@ -430,12 +430,145 @@
     }
   },
   "pricing": {
-    "title": "Pricing",
-    "dynamicPricing": "Dynamic Pricing",
-    "peakHours": "Peak Hours",
-    "offPeakHours": "Off-Peak Hours",
-    "lastMinuteDiscount": "Last Minute Discount",
-    "earlyBirdDiscount": "Early Bird Discount"
+    "title": "Dynamic Pricing",
+    "description": "Manage pricing rules",
+    "addRule": "Add Rule",
+    "editRule": "Edit Rule",
+    "deleteRule": "Delete Rule",
+    "noPricingRules": "No pricing rules found",
+    "createFirstRule": "Create your first pricing rule",
+    "showingResults": "Showing {{count}} rules",
+    "search": "Search rules",
+    "filterByType": "Filter by type",
+    "filterByStatus": "Filter by status",
+    "sortBy": "Sort by",
+
+    "table": {
+      "name": "Rule Name",
+      "type": "Type",
+      "status": "Status",
+      "priority": "Priority",
+      "adjustment": "Price Adjustment",
+      "validPeriod": "Valid Period",
+      "actions": "Actions"
+    },
+
+    "types": {
+      "all": "All Types",
+      "PEAK_HOURS": "Peak Hours",
+      "DAY_OF_WEEK": "Day of Week",
+      "SPECIAL_DATE": "Special Dates",
+      "LAST_MINUTE": "Last Minute",
+      "PROMOTIONAL": "Promotional",
+      "EARLY_BIRD": "Early Bird"
+    },
+
+    "status": {
+      "all": "All",
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+      "SCHEDULED": "Scheduled",
+      "EXPIRED": "Expired"
+    },
+
+    "adjustmentTypes": {
+      "PERCENTAGE_INCREASE": "Percentage Increase",
+      "PERCENTAGE_DECREASE": "Percentage Decrease",
+      "FIXED_INCREASE": "Fixed Increase",
+      "FIXED_DECREASE": "Fixed Decrease",
+      "OVERRIDE": "Set Price"
+    },
+
+    "sort": {
+      "name": "Name",
+      "type": "Type",
+      "priority": "Priority",
+      "createdAt": "Created Date"
+    },
+
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "toggle": "Toggle Status",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "preview": "Price Preview",
+      "confirmDelete": "Are you sure you want to delete this rule?",
+      "deleteWarning": "This action cannot be undone."
+    },
+
+    "form": {
+      "title": "Pricing Rule",
+      "basicInfo": "Basic Information",
+      "name": "Rule Name",
+      "namePlaceholder": "e.g., Morning Discount",
+      "description": "Description",
+      "descriptionPlaceholder": "Optional description...",
+      "type": "Rule Type",
+      "selectType": "Select type",
+      "priority": "Priority",
+      "priorityHelp": "Rules with higher priority are applied first",
+
+      "targets": "Targeting",
+      "targetAssets": "Target Assets",
+      "allAssets": "All Assets",
+      "specificAssets": "Specific Assets",
+      "selectAssets": "Select assets",
+
+      "conditions": "Conditions",
+      "timeSlots": "Time Slots",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "addTimeSlot": "Add Time Slot",
+      "daysOfWeek": "Days of Week",
+      "saturday": "Sat",
+      "sunday": "Sun",
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "dateRange": "Date Range",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "bookingWindow": "Booking Window",
+      "minHoursBefore": "Minimum Hours Before",
+      "maxHoursBefore": "Maximum Hours Before",
+
+      "adjustment": "Price Adjustment",
+      "adjustmentType": "Adjustment Type",
+      "selectAdjustmentType": "Select type",
+      "value": "Value",
+      "valuePercentage": "Value (Percentage)",
+      "valueAmount": "Value (Amount)",
+      "overridePrice": "New Price",
+
+      "validity": "Validity Period",
+      "validFrom": "Valid From",
+      "validUntil": "Valid Until",
+      "validUntilOptional": "Valid Until (Optional)",
+
+      "submit": "Save Rule",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "updating": "Updating...",
+      "deleting": "Deleting...",
+      "created": "Rule created successfully",
+      "updated": "Rule updated successfully",
+      "deleted": "Rule deleted",
+      "activated": "Rule activated",
+      "deactivated": "Rule deactivated"
+    },
+
+    "preview": {
+      "title": "Price Preview",
+      "basePrice": "Base Price",
+      "appliedRules": "Applied Rules",
+      "finalPrice": "Final Price",
+      "totalAdjustment": "Total Adjustment",
+      "noRulesApplied": "No rules applied",
+      "calculate": "Calculate"
+    }
   },
   "reports": {
     "title": "Reports",

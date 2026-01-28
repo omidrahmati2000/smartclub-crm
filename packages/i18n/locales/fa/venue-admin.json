@@ -429,12 +429,144 @@
     }
   },
   "pricing": {
-    "title": "قیمت‌گذاری",
-    "dynamicPricing": "قیمت‌گذاری پویا",
-    "peakHours": "ساعات اوج",
-    "offPeakHours": "ساعات غیراوج",
-    "lastMinuteDiscount": "تخفیف لحظه آخری",
-    "earlyBirdDiscount": "تخفیف رزرو زودهنگام"
+    "title": "قیمت‌گذاری پویا",
+    "description": "مدیریت قوانین قیمت‌گذاری",
+    "addRule": "افزودن قانون",
+    "editRule": "ویرایش قانون",
+    "deleteRule": "حذف قانون",
+    "noPricingRules": "هیچ قانون قیمت‌گذاری وجود ندارد",
+    "createFirstRule": "اولین قانون را ایجاد کنید",
+    "showingResults": "نمایش {{count}} قانون",
+    "search": "جستجو در قوانین",
+    "filterByType": "فیلتر بر اساس نوع",
+    "filterByStatus": "فیلتر بر اساس وضعیت",
+    "sortBy": "مرتب‌سازی",
+
+    "table": {
+      "name": "نام قانون",
+      "type": "نوع",
+      "status": "وضعیت",
+      "priority": "اولویت",
+      "adjustment": "تغییر قیمت",
+      "validPeriod": "دوره اعتبار",
+      "actions": "عملیات"
+    },
+
+    "types": {
+      "all": "همه انواع",
+      "PEAK_HOURS": "ساعات اوج",
+      "DAY_OF_WEEK": "روزهای هفته",
+      "SPECIAL_DATE": "تاریخ‌های خاص",
+      "LAST_MINUTE": "لحظه آخری",
+      "PROMOTIONAL": "تبلیغاتی",
+      "EARLY_BIRD": "رزرو زودهنگام"
+    },
+
+    "status": {
+      "all": "همه",
+      "ACTIVE": "فعال",
+      "INACTIVE": "غیرفعال",
+      "SCHEDULED": "زمان‌بندی شده",
+      "EXPIRED": "منقضی شده"
+    },
+
+    "adjustmentTypes": {
+      "PERCENTAGE_INCREASE": "افزایش درصدی",
+      "PERCENTAGE_DECREASE": "کاهش درصدی",
+      "FIXED_INCREASE": "افزایش ثابت",
+      "FIXED_DECREASE": "کاهش ثابت",
+      "OVERRIDE": "تعیین قیمت"
+    },
+
+    "sort": {
+      "name": "نام",
+      "type": "نوع",
+      "priority": "اولویت",
+      "createdAt": "تاریخ ایجاد"
+    },
+
+    "actions": {
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "toggle": "تغییر وضعیت",
+      "activate": "فعال‌سازی",
+      "deactivate": "غیرفعال‌سازی",
+      "preview": "پیش‌نمایش قیمت",
+      "confirmDelete": "آیا از حذف این قانون اطمینان دارید؟",
+      "deleteWarning": "این عمل غیرقابل بازگشت است."
+    },
+
+    "form": {
+      "title": "قانون قیمت‌گذاری",
+      "basicInfo": "اطلاعات پایه",
+      "name": "نام قانون",
+      "namePlaceholder": "مثال: تخفیف صبح‌ها",
+      "description": "توضیحات",
+      "descriptionPlaceholder": "توضیحات اختیاری...",
+      "type": "نوع قانون",
+      "selectType": "نوع را انتخاب کنید",
+      "priority": "اولویت",
+      "priorityHelp": "قوانین با اولویت بالاتر اول اعمال می‌شوند",
+
+      "targets": "هدف‌گیری",
+      "targetAssets": "امکانات هدف",
+      "allAssets": "همه امکانات",
+      "specificAssets": "امکانات خاص",
+      "selectAssets": "امکانات را انتخاب کنید",
+
+      "conditions": "شرایط",
+      "timeSlots": "بازه‌های زمانی",
+      "startTime": "ساعت شروع",
+      "endTime": "ساعت پایان",
+      "addTimeSlot": "افزودن بازه زمانی",
+      "daysOfWeek": "روزهای هفته",
+      "saturday": "شنبه",
+      "sunday": "یکشنبه",
+      "monday": "دوشنبه",
+      "tuesday": "سه‌شنبه",
+      "wednesday": "چهارشنبه",
+      "thursday": "پنج‌شنبه",
+      "friday": "جمعه",
+      "dateRange": "بازه تاریخی",
+      "startDate": "تاریخ شروع",
+      "endDate": "تاریخ پایان",
+      "bookingWindow": "پنجره رزرو",
+      "minHoursBefore": "حداقل ساعت قبل",
+      "maxHoursBefore": "حداکثر ساعت قبل",
+
+      "adjustment": "تنظیم قیمت",
+      "adjustmentType": "نوع تنظیم",
+      "selectAdjustmentType": "نوع را انتخاب کنید",
+      "value": "مقدار",
+      "valuePercentage": "مقدار (درصد)",
+      "valueAmount": "مقدار (ریال)",
+      "overridePrice": "قیمت جدید",
+
+      "validity": "دوره اعتبار",
+      "validFrom": "معتبر از",
+      "validUntil": "معتبر تا",
+      "validUntilOptional": "معتبر تا (اختیاری)",
+
+      "submit": "ذخیره قانون",
+      "cancel": "لغو",
+      "creating": "در حال ایجاد...",
+      "updating": "در حال ویرایش...",
+      "created": "قانون با موفقیت ایجاد شد",
+      "updated": "قانون با موفقیت ویرایش شد",
+      "deleted": "قانون حذف شد",
+      "activated": "قانون فعال شد",
+      "deactivated": "قانون غیرفعال شد"
+    },
+
+    "preview": {
+      "title": "پیش‌نمایش قیمت",
+      "basePrice": "قیمت پایه",
+      "appliedRules": "قوانین اعمال شده",
+      "finalPrice": "قیمت نهایی",
+      "totalAdjustment": "کل تغییرات",
+      "noRulesApplied": "هیچ قانونی اعمال نشد",
+      "calculate": "محاسبه"
+    }
   },
   "reports": {
     "title": "گزارشات",

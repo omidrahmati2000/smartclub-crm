@@ -7,6 +7,7 @@ import { venueSettingsHandlers } from './venue-settings';
 import { customerHandlers } from './customers';
 import { staffHandlers } from './staff';
 import { financialReportsHandlers } from './financial-reports';
+import { pricingRulesHandlers } from './pricing-rules';
 
 export const handlers = [
   ...authHandlers,
@@ -18,4 +19,5 @@ export const handlers = [
   ...customerHandlers,
   ...staffHandlers,
   ...financialReportsHandlers,
+  ...pricingRulesHandlers,
 ];
