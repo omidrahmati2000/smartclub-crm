@@ -17,7 +17,9 @@
     "./separator": "./src/primitives/separator.tsx",
     "./tabs": "./src/primitives/tabs.tsx",
     "./table": "./src/primitives/table.tsx",
-    "./dialog": "./src/primitives/dialog.tsx"
+    "./dialog": "./src/primitives/dialog.tsx",
+    "./textarea": "./src/primitives/textarea.tsx",
+    "./switch": "./src/primitives/switch.tsx"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -25,6 +27,7 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-switch": "^1.1.13",
     "@radix-ui/react-tabs": "^1.1.13",
     "@smartclub/utils": "workspace:*",
     "class-variance-authority": "^0.7.1",

@@ -40,3 +40,5 @@ export {
   DialogTitle,
   DialogDescription,
 } from './dialog';
+export { Textarea, type TextareaProps } from './textarea';
+export { Switch } from './switch';

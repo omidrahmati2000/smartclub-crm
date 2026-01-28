@@ -49,4 +49,34 @@ export const venueHandlers = [
     const assets = mockAssets.filter((a) => a.venueId === params.venueId);
     return HttpResponse.json({ data: assets, success: true });
   }),
+
+  // PUT /api/venues/:venueId - Update venue profile
+  http.put('/api/venues/:venueId', async ({ params, request }) => {
+    const { venueId } = params;
+    const updates = await request.json();
+
+    const venueIndex = mockVenues.findIndex((v) => v.id === venueId);
+
+    if (venueIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Venue not found' },
+        { status: 404 }
+      );
+    }
+
+    // Simulate network delay
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // Update the venue
+    mockVenues[venueIndex] = {
+      ...mockVenues[venueIndex],
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockVenues[venueIndex],
+      success: true,
+    });
+  }),
 ];

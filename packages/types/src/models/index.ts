@@ -1,5 +1,12 @@
 export type { BaseUser, Customer, Coach, VenueStaff, PlatformAdmin, User } from './user';
 export type { Venue, OperatingHours, Asset, Amenity } from './venue';
+export { CancellationPolicy } from './venue-settings';
+export type {
+  VenueSettings,
+  BookingRules,
+  WhiteLabelSettings,
+  NotificationPreferences,
+} from './venue-settings';
 export type { Booking, BookingParticipant, TimeSlot } from './booking';
 export { PaymentMethod } from './payment';
 export type { Payment, Wallet, WalletTransaction } from './payment';

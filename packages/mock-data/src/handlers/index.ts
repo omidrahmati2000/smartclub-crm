@@ -3,6 +3,7 @@ import { venueHandlers } from './venues';
 import { bookingHandlers } from './bookings';
 import { venueDashboardHandlers } from './venue-dashboard';
 import { assetHandlers } from './assets';
+import { venueSettingsHandlers } from './venue-settings';
 
 export const handlers = [
   ...authHandlers,
@@ -10,4 +11,5 @@ export const handlers = [
   ...bookingHandlers,
   ...venueDashboardHandlers,
   ...assetHandlers,
+  ...venueSettingsHandlers,
 ];
