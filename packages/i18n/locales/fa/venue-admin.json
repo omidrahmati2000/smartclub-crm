@@ -323,11 +323,110 @@
     }
   },
   "finance": {
-    "title": "مالی",
-    "totalRevenue": "مجموع درآمد",
-    "totalPending": "در انتظار پرداخت",
-    "totalPaid": "پرداخت شده",
-    "recentTransactions": "تراکنش‌های اخیر"
+    "title": "گزارشات مالی",
+    "description": "گزارش‌های درآمد و اشغال",
+
+    "tabs": {
+      "revenue": "درآمد",
+      "occupancy": "اشغال"
+    },
+
+    "period": {
+      "label": "بازه زمانی",
+      "TODAY": "امروز",
+      "YESTERDAY": "دیروز",
+      "LAST_7_DAYS": "7 روز گذشته",
+      "LAST_30_DAYS": "30 روز گذشته",
+      "THIS_WEEK": "این هفته",
+      "LAST_WEEK": "هفته گذشته",
+      "THIS_MONTH": "این ماه",
+      "LAST_MONTH": "ماه گذشته",
+      "THIS_YEAR": "امسال",
+      "CUSTOM": "سفارشی"
+    },
+
+    "summary": {
+      "totalRevenue": "مجموع درآمد",
+      "totalBookings": "تعداد رزروها",
+      "completedBookings": "رزروهای تکمیل شده",
+      "cancelledBookings": "رزروهای لغو شده",
+      "averageBookingValue": "میانگین ارزش رزرو",
+      "growthPercentage": "رشد نسبت به دوره قبل",
+      "averageOccupancy": "میانگین اشغال",
+      "totalAvailableSlots": "کل بازه‌های موجود",
+      "totalBookedSlots": "بازه‌های رزرو شده",
+      "peakOccupancy": "بیشترین اشغال",
+      "peakOccupancyTime": "ساعت اوج",
+      "lowestOccupancy": "کمترین اشغال",
+      "lowestOccupancyTime": "کم‌ترین ساعت"
+    },
+
+    "revenue": {
+      "title": "گزارش درآمد",
+      "byAssetType": "درآمد بر اساس نوع امکانات",
+      "bySource": "درآمد بر اساس منبع رزرو",
+      "byPaymentMethod": "درآمد بر اساس روش پرداخت",
+      "dailyTrend": "روند روزانه درآمد",
+      "cancellations": "گزارش لغو رزرو",
+      "assetType": "نوع امکانات",
+      "revenue": "درآمد",
+      "bookings": "رزروها",
+      "percentage": "درصد",
+      "averageValue": "میانگین ارزش",
+      "source": "منبع",
+      "paymentMethod": "روش پرداخت",
+      "online": "آنلاین",
+      "walkIn": "حضوری",
+      "phone": "تلفنی",
+      "wallet": "کیف پول",
+      "card": "کارت بانکی",
+      "cash": "نقدی"
+    },
+
+    "cancellation": {
+      "title": "گزارش لغو رزرو",
+      "totalCancellations": "کل لغوها",
+      "cancellationRate": "نرخ لغو",
+      "totalRefunds": "کل بازپرداخت‌ها",
+      "lostRevenue": "درآمد از دست رفته",
+      "byReason": "لغوها بر اساس دلیل",
+      "reason": "دلیل",
+      "count": "تعداد"
+    },
+
+    "occupancy": {
+      "title": "گزارش اشغال",
+      "byAsset": "اشغال بر اساس امکانات",
+      "byHour": "اشغال بر اساس ساعت",
+      "byDayOfWeek": "اشغال بر اساس روز هفته",
+      "heatmap": "نقشه حرارتی اشغال",
+      "assetName": "نام امکانات",
+      "occupancyRate": "نرخ اشغال",
+      "totalSlots": "کل بازه‌ها",
+      "bookedSlots": "بازه‌های رزرو شده",
+      "hour": "ساعت",
+      "dayOfWeek": "روز هفته",
+      "date": "تاریخ",
+      "noData": "داده‌ای برای نمایش وجود ندارد"
+    },
+
+    "export": {
+      "title": "خروجی گزارش",
+      "exportCSV": "خروجی CSV",
+      "exportPDF": "خروجی PDF",
+      "exporting": "در حال تهیه خروجی...",
+      "success": "گزارش با موفقیت دانلود شد",
+      "error": "خطا در دانلود گزارش"
+    },
+
+    "chart": {
+      "revenue": "درآمد",
+      "bookings": "رزروها",
+      "date": "تاریخ",
+      "value": "مقدار",
+      "percentage": "درصد",
+      "noData": "داده‌ای برای نمایش وجود ندارد"
+    }
   },
   "pricing": {
     "title": "قیمت‌گذاری",

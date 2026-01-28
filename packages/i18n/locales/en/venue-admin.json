@@ -323,11 +323,111 @@
     }
   },
   "finance": {
-    "title": "Finance",
-    "totalRevenue": "Total Revenue",
-    "totalPending": "Total Pending",
-    "totalPaid": "Total Paid",
-    "recentTransactions": "Recent Transactions"
+    "title": "Financial Reports",
+    "description": "Revenue and Occupancy Reports",
+
+    "tabs": {
+      "revenue": "Revenue",
+      "occupancy": "Occupancy"
+    },
+
+    "period": {
+      "label": "Period",
+      "TODAY": "Today",
+      "YESTERDAY": "Yesterday",
+      "LAST_7_DAYS": "Last 7 Days",
+      "LAST_30_DAYS": "Last 30 Days",
+      "THIS_WEEK": "This Week",
+      "LAST_WEEK": "Last Week",
+      "THIS_MONTH": "This Month",
+      "LAST_MONTH": "Last Month",
+      "THIS_YEAR": "This Year",
+      "CUSTOM": "Custom"
+    },
+
+    "summary": {
+      "totalRevenue": "Total Revenue",
+      "totalBookings": "Total Bookings",
+      "completedBookings": "Completed Bookings",
+      "cancelledBookings": "Cancelled Bookings",
+      "averageBookingValue": "Average Booking Value",
+      "growthPercentage": "Growth vs Previous Period",
+      "averageOccupancy": "Average Occupancy",
+      "totalAvailableSlots": "Total Available Slots",
+      "totalBookedSlots": "Booked Slots",
+      "peakOccupancy": "Peak Occupancy",
+      "peakOccupancyTime": "Peak Time",
+      "lowestOccupancy": "Lowest Occupancy",
+      "lowestOccupancyTime": "Lowest Time"
+    },
+
+    "revenue": {
+      "title": "Revenue Report",
+      "byAssetType": "Revenue by Asset Type",
+      "bySource": "Revenue by Booking Source",
+      "byPaymentMethod": "Revenue by Payment Method",
+      "dailyTrend": "Daily Revenue Trend",
+      "cancellations": "Cancellation Report",
+      "assetType": "Asset Type",
+      "revenue": "Revenue",
+      "bookings": "Bookings",
+      "percentage": "Percentage",
+      "averageValue": "Average Value",
+      "source": "Source",
+      "paymentMethod": "Payment Method",
+      "online": "Online",
+      "walkIn": "Walk-in",
+      "phone": "Phone",
+      "wallet": "Wallet",
+      "card": "Card",
+      "cash": "Cash"
+    },
+
+    "cancellation": {
+      "title": "Cancellation Report",
+      "totalCancellations": "Total Cancellations",
+      "cancellationRate": "Cancellation Rate",
+      "totalRefunds": "Total Refunds",
+      "lostRevenue": "Lost Revenue",
+      "byReason": "Cancellations by Reason",
+      "reason": "Reason",
+      "count": "Count",
+      "noData": "No cancellation data available"
+    },
+
+    "occupancy": {
+      "title": "Occupancy Report",
+      "byAsset": "Occupancy by Asset",
+      "byHour": "Occupancy by Hour",
+      "byDayOfWeek": "Occupancy by Day of Week",
+      "heatmap": "Occupancy Heatmap",
+      "assetName": "Asset Name",
+      "occupancyRate": "Occupancy Rate",
+      "totalSlots": "Total Slots",
+      "bookedSlots": "Booked Slots",
+      "hour": "Hour",
+      "dayOfWeek": "Day of Week",
+      "date": "Date",
+      "noData": "No data available"
+    },
+
+    "export": {
+      "title": "Export Report",
+      "exportCSV": "Export CSV",
+      "exportPDF": "Export PDF",
+      "exporting": "Exporting...",
+      "success": "Report downloaded successfully",
+      "error": "Error downloading report"
+    },
+
+    "chart": {
+      "revenue": "Revenue",
+      "bookings": "Bookings",
+      "date": "Date",
+      "value": "Value",
+      "percentage": "Percentage",
+      "noData": "No data to display"
+    }
   },
   "pricing": {
     "title": "Pricing",

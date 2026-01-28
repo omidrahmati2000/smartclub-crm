@@ -1,6 +1,7 @@
 export type { BaseUser, Customer, Coach, VenueStaff, PlatformAdmin, User } from './user';
 export { CustomerStatus } from './customer-profile';
 export { StaffStatus, InvitationStatus } from './staff-member';
+export { BookingSource, ReportPeriod } from './financial-reports';
 export type {
   CustomerProfile,
   CustomerStats,
@@ -18,6 +19,25 @@ export type {
   UpdateStaffDTO,
   RolePermissions,
 } from './staff-member';
+export type {
+  RevenueReport,
+  RevenueSummary,
+  RevenueByAssetType,
+  RevenueBySource,
+  RevenueByPaymentMethod,
+  DailyRevenue,
+  CancellationReport,
+  CancellationByReason,
+  OccupancyReport,
+  OccupancySummary,
+  OccupancyByAsset,
+  OccupancyByHour,
+  OccupancyByDayOfWeek,
+  OccupancyHeatmap,
+  OccupancyHeatmapCell,
+  ReportFilters,
+  ExportOptions,
+} from './financial-reports';
 export type { Venue, OperatingHours, Asset, Amenity } from './venue';
 export { CancellationPolicy } from './venue-settings';
 export type {

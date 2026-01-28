@@ -6,6 +6,7 @@ import { assetHandlers } from './assets';
 import { venueSettingsHandlers } from './venue-settings';
 import { customerHandlers } from './customers';
 import { staffHandlers } from './staff';
+import { financialReportsHandlers } from './financial-reports';
 
 export const handlers = [
   ...authHandlers,
@@ -16,4 +17,5 @@ export const handlers = [
   ...venueSettingsHandlers,
   ...customerHandlers,
   ...staffHandlers,
+  ...financialReportsHandlers,
 ];
