@@ -131,9 +131,36 @@ The platform supports 4 booking archetypes:
 - Branch naming: `feature/`, `fix/`, `docs/`, `chore/`
 - PR-based workflow
 
+## Project Status (Updated: 2026-01-28)
+
+**Current Phase**: Phase 2 - Venue App Development (60% complete)
+
+### ✅ Completed
+- **Infrastructure** (Phase 0): Complete monorepo setup with 4 apps + 6 packages
+- **Venue App** (Phase 2.1-2.5):
+  - Authentication & Foundation
+  - Dashboard Overview with KPIs
+  - Calendar View with Gantt Timeline
+  - Booking Management with CRUD
+  - Asset Management with CRUD
+
+### 🚧 In Progress
+- Venue App: Week/month calendar views, CSV export
+
+### ⏳ Next Priorities
+Choose one of:
+1. **Complete Venue App** - Settings, CRM, Staff, Finance, Pricing (recommended)
+2. **Start Web App** - B2C customer app with booking flow
+3. **Start Admin/Coach Apps** - Platform admin or coach panel
+
+See `docs/CURRENT-STATUS.md` for detailed progress tracking.
+
+---
+
 ## Important Notes
 - This is a **frontend-only** project for now. Backend will be built later.
 - All data is mocked via MSW - designed to be easily swapped with real APIs.
 - The mock API structure should follow RESTful conventions so backend can match it.
 - Always maintain both Persian and English translations when adding UI strings.
 - Keep accessibility (a11y) in mind - ARIA labels, keyboard navigation.
+- Follow established patterns from venue-app when building new features.

@@ -1,19 +1,25 @@
 # Development Roadmap
 
+> **Current Status**: Phase 2 (Venue App) in progress - Dashboard, Calendar, Bookings, and Assets complete
+
 ## Phase Overview
 
 | Phase | Name | Focus | Status |
 |-------|------|-------|--------|
-| 0 | Infrastructure Setup | Monorepo, tooling, configs | `done` |
-| 1 | Core MVP - B2C | Auth, explore, basic booking | `pending` |
-| 2 | Core MVP - B2B | Venue admin panel basics | `pending` |
-| 3 | Full Booking Engine | All 4 booking archetypes | `pending` |
-| 4 | Social & Payments | Matchmaking, wallet, split pay | `pending` |
-| 5 | Business Intelligence | Pricing, reports, CRM | `pending` |
-| 6 | Gamification | Levels, leaderboards, achievements | `pending` |
-| 7 | Advanced Features | Tournaments, marketplace, coach | `pending` |
-| 8 | IoT & Kiosk | Smart venue UI, kiosk mode | `pending` |
-| 9 | Polish & Launch | Performance, a11y, final QA | `pending` |
+| 0 | Infrastructure Setup | Monorepo, tooling, configs | ✅ `done` |
+| 2 | Core MVP - Venue App | Venue admin panel (B2B) | 🟡 `in-progress` (60%) |
+| 2.5 | Complete Venue App | CRM, staff, finance, pricing, settings | ⏳ `pending` |
+| 3 | Admin + Coach Apps | Platform admin + Coach panel | ⏳ `pending` |
+| 4 | Core MVP - Web App | Customer app (B2C) | ⏳ `pending` |
+| 5 | Full Booking Engine | All 4 booking archetypes | ⏳ `pending` |
+| 6 | Social & Payments | Matchmaking, wallet, split pay | ⏳ `pending` |
+| 7 | Business Intelligence | Advanced pricing, reports | ⏳ `pending` |
+| 8 | Gamification | Levels, leaderboards, achievements | ⏳ `pending` |
+| 9 | Advanced Features | Tournaments, marketplace, coach | ⏳ `pending` |
+| 10 | IoT & Kiosk | Smart venue UI, kiosk mode | ⏳ `pending` |
+| 11 | Polish & Launch | Performance, a11y, final QA | ⏳ `pending` |
+
+**Note**: Phase 1 (B2C) moved to Phase 4 to complete B2B first.
 
 ---
 
@@ -115,57 +121,146 @@ A functional web app where someone can sign up, browse venues (marketplace or wh
 
 ---
 
-## Phase 2: Core MVP - Venue App (Venue Admin Panel) `pending`
+## Phase 2: Core MVP - Venue App (Venue Admin Panel) `in-progress`
 
 > Venue owners can manage their venue, assets, and bookings.
 
 ### Tasks
 
-#### 2.1 Venue Admin Dashboard
-- [ ] Overview page with KPI cards (today's bookings, revenue, occupancy)
-- [ ] Recent bookings feed
-- [ ] Quick actions (add booking, view calendar)
+#### 2.1 Venue Admin Foundation & Authentication `done`
+- [x] NextAuth.js setup with session management
+- [x] Login page layout
+- [x] Protected routes middleware
+- [x] Permission system implementation
+- [x] Role-based access control (Owner, Manager, Receptionist, Cashier)
+- [x] Dashboard layout with sidebar navigation
+- [x] User menu with profile & logout
 
-#### 2.2 Unified Calendar
-- [ ] Gantt-chart view of all assets for the day
-- [ ] Week view
-- [ ] Booking blocks with status colors
+#### 2.2 Dashboard Overview `done`
+- [x] Overview page with KPI cards (today's bookings, revenue, occupancy, pending)
+- [x] Recent bookings feed
+- [x] Quick actions (add booking, view calendar)
+- [x] Responsive layout with Tailwind CSS
+- [x] Skeleton loading states
+- [x] i18n support (Persian/English)
+
+#### 2.3 Unified Calendar `done`
+- [x] Gantt-chart view of all assets for the day
+- [x] 30-minute time slots (6 AM - 11 PM)
+- [x] Booking blocks with status colors
+- [x] Current time indicator on today's view
+- [x] Click booking to view details
+- [x] Booking details modal
+- [x] Date navigation (prev/next day)
+- [x] View mode selector (day/week/month)
+- [ ] Week view (placeholder)
+- [ ] Month view (placeholder)
 - [ ] Click to create booking
-- [ ] Click booking to view/edit details
 - [ ] Drag to resize (change duration)
 
-#### 2.3 Asset Management
-- [ ] Asset list page
-- [ ] Add new asset form (name, type, attributes)
-- [ ] Edit asset
-- [ ] Custom attributes per type (console type, court surface, etc.)
-- [ ] Asset status toggle (active/maintenance)
+#### 2.4 Booking Management `done`
+- [x] Bookings table with search & filters
+- [x] Filter by status, asset, customer name
+- [x] Manual booking creation (walk-in)
+- [x] Booking details modal (shared with calendar)
+- [x] Check-in action
+- [x] Cancel booking action
+- [x] No-show marking action
+- [x] Permission-based action visibility
+- [x] Optimistic updates
+- [ ] CSV export functionality
 
-#### 2.4 Booking Management
-- [ ] Bookings table with search & filters
-- [ ] Manual booking creation (walk-in)
-- [ ] Edit/cancel booking
-- [ ] No-show marking
-- [ ] Booking details drawer
+#### 2.5 Asset Management `done`
+- [x] Asset grid view
+- [x] Asset card component
+- [x] Add new asset form (name, type, attributes)
+- [x] Edit asset
+- [x] Delete asset
+- [x] Custom attributes per booking type (slot-based, duration-based, capacity-based, open-session)
+- [x] Asset status toggle (active/maintenance)
+- [x] Price display based on booking type
+- [x] Capacity management
+- [x] Duration constraints (min/max)
+- [x] Slot duration configuration
+- [x] Permission-based edit/delete visibility
 
-#### 2.5 Venue Settings
+#### 2.6 Venue Settings `pending`
 - [ ] Venue profile editing
 - [ ] Operating hours configuration
 - [ ] Booking rules (min duration, cancellation policy)
 - [ ] Business type selection
 
-#### 2.6 Role-Based Access
-- [ ] Owner: full access to everything
-- [ ] Manager: everything except financial settings & ownership
-- [ ] Receptionist: calendar, bookings, walk-ins
-- [ ] Cashier: bookings, payments, POS
+#### 2.7 Role-Based Access `done`
+- [x] Owner: full access to everything
+- [x] Manager: everything except financial settings & ownership
+- [x] Receptionist: calendar, bookings, walk-ins
+- [x] Cashier: bookings, payments, POS
+- [x] Permission enum in @smartclub/types
+- [x] hasPermission() utility function
+- [x] Navigation item visibility based on permissions
 
 ### Deliverable
 A functional venue admin panel where venue owners and staff can manage their assets, view bookings on a calendar, and handle daily operations with role-based permissions.
 
+**Status**: Dashboard, Calendar, Bookings, and Assets complete. Settings page pending.
+
 ---
 
-## Phase 2.5: Core MVP - Admin App + Coach App `pending`
+## Phase 2.5: Complete Venue App Features `pending`
+
+> Complete the remaining venue admin features before moving to other apps.
+
+### Tasks
+
+#### 2.5.1 Customer Management (CRM) `pending`
+- [ ] Customer list with search
+- [ ] Customer profile view (booking history, spending, level)
+- [ ] Customer tags (VIP, new, regular)
+- [ ] Blacklist management
+- [ ] Whitelist / VIP access
+- [ ] Customer notes
+- [ ] Export customer data
+
+#### 2.5.2 Staff Management `pending`
+- [ ] Staff list with search & filters
+- [ ] Add/edit/remove staff accounts
+- [ ] Role assignment (owner, manager, receptionist, cashier)
+- [ ] Permission matrix per role
+- [ ] Staff schedule/shifts (basic)
+- [ ] Activity log per staff member
+
+#### 2.5.3 Financial Reports `pending`
+- [ ] Revenue reports (by day/week/month)
+- [ ] Revenue by asset type
+- [ ] Revenue by booking source
+- [ ] Payment method breakdown
+- [ ] Cancellation & refund reports
+- [ ] Occupancy reports with heatmap
+- [ ] Export to CSV/PDF
+
+#### 2.5.4 Dynamic Pricing `pending`
+- [ ] Peak / off-peak price rules
+- [ ] Day-of-week pricing
+- [ ] Special date pricing (holidays)
+- [ ] Last-minute discount automation
+- [ ] Promotional pricing campaigns
+- [ ] Price preview before saving
+
+#### 2.5.5 Venue Settings (Complete) `pending`
+- [ ] Venue profile editing (name, address, photos, hours)
+- [ ] Business type configuration
+- [ ] Booking rules (min/max duration, cancellation policy)
+- [ ] Payment settings
+- [ ] White-label subdomain settings (slug, theme colors, logo)
+- [ ] Notification preferences
+- [ ] Operating hours configuration
+
+### Deliverable
+Complete venue admin panel with CRM, staff management, financial reports, dynamic pricing, and full settings.
+
+---
+
+## Phase 3: Core MVP - Admin App + Coach App `pending`
 
 ### Admin App Tasks
 - [ ] Platform overview dashboard (total venues, users, revenue)
@@ -186,7 +281,77 @@ Admin can oversee the platform. Coaches can manage their multi-venue schedule an
 
 ---
 
-## Phase 3: Full Booking Engine `pending`
+## Phase 4: Core MVP - Web App (Public + Customer) `pending`
+
+> Users can browse venues and make basic bookings (originally Phase 1).
+
+### Tasks
+
+#### 4.1 Authentication
+- [ ] Login page (email/phone + password)
+- [ ] Registration page
+- [ ] Auth state management (NextAuth session)
+- [ ] Protected route middleware
+- [ ] User profile page (view & edit)
+- [ ] Mock auth provider with test users
+
+#### 4.2 Explore & Search
+- [ ] Venue listing page with cards
+- [ ] Search bar with autocomplete
+- [ ] Filter sidebar (sport type, price, rating)
+- [ ] Sort options (distance, price, rating)
+- [ ] Map view placeholder (can be static initially)
+- [ ] Mock venue data (10+ venues, various types)
+
+#### 4.3 Venue Profile
+- [ ] Venue detail page
+- [ ] Photo gallery
+- [ ] Info section (hours, address, amenities)
+- [ ] Available assets list
+- [ ] Reviews section (mock data)
+- [ ] "Book Now" CTA
+
+#### 4.4 Slot-Based Booking
+- [ ] Date picker (Jalali + Gregorian)
+- [ ] Time slot grid (available/booked/selected states)
+- [ ] Booking summary sidebar
+- [ ] Participant selection (invite friends)
+- [ ] Confirmation page
+- [ ] Success page with booking details
+
+#### 4.5 Duration-Based Booking
+- [ ] Start time picker with availability
+- [ ] Duration slider/picker
+- [ ] Real-time price calculation
+- [ ] Conflict detection UI
+- [ ] Confirmation & success flow
+
+#### 4.6 My Bookings
+- [ ] Upcoming bookings tab
+- [ ] Past bookings tab
+- [ ] Booking card component (status, time, venue)
+- [ ] Booking detail modal/page
+- [ ] Cancel booking flow
+- [ ] Re-book action
+
+#### 4.7 Basic Payment (Mock)
+- [ ] Payment page with mock gateway
+- [ ] Payment confirmation
+- [ ] Receipt/invoice view
+
+#### 4.8 White-Label Venue Pages
+- [ ] Subdomain detection middleware
+- [ ] Venue-themed layout (logo, colors from venue settings)
+- [ ] Venue homepage with assets & booking
+- [ ] Venue-specific navigation
+- [ ] Fallback to marketplace if subdomain not found
+
+### Deliverable
+A functional web app where someone can sign up, browse venues (marketplace or white-label), book a slot or duration-based session, and view their bookings.
+
+---
+
+## Phase 5: Full Booking Engine `pending`
 
 ### Tasks
 - [ ] Capacity-based booking (B2C)
@@ -199,7 +364,7 @@ Admin can oversee the platform. Coaches can manage their multi-venue schedule an
 
 ---
 
-## Phase 4: Social & Payments `pending`
+## Phase 6: Social & Payments `pending`
 
 ### Tasks
 - [ ] Digital wallet (balance, top-up, history)
@@ -213,22 +378,24 @@ Admin can oversee the platform. Coaches can manage their multi-venue schedule an
 
 ---
 
-## Phase 5: Business Intelligence (B2B) `pending`
+## Phase 7: Business Intelligence (B2B) `pending`
+
+> Note: Most of these features overlap with Phase 2.5 and should be built together
 
 ### Tasks
-- [ ] Dynamic pricing rules UI
+- [ ] Dynamic pricing rules UI (see Phase 2.5.4)
 - [ ] Peak/off-peak pricing configuration
 - [ ] Last-minute discount automation
-- [ ] Revenue reports with charts
+- [ ] Revenue reports with charts (see Phase 2.5.3)
 - [ ] Occupancy reports
-- [ ] Customer CRM (search, tags, history)
+- [ ] Customer CRM (see Phase 2.5.1)
 - [ ] Blacklist/whitelist management
 - [ ] VIP access configuration
 - [ ] Export reports (CSV/PDF)
 
 ---
 
-## Phase 6: Gamification `pending`
+## Phase 8: Gamification `pending`
 
 ### Tasks
 - [ ] Per-sport skill level system
@@ -240,7 +407,7 @@ Admin can oversee the platform. Coaches can manage their multi-venue schedule an
 
 ---
 
-## Phase 7: Advanced Features `pending`
+## Phase 9: Advanced Features `pending`
 
 ### Tasks
 - [ ] Tournament creation wizard
@@ -250,12 +417,12 @@ Admin can oversee the platform. Coaches can manage their multi-venue schedule an
 - [ ] Coach profiles & booking
 - [ ] Marketplace / venue shop
 - [ ] F&B ordering from app
-- [ ] Staff management (roles, permissions, schedules)
+- [ ] Staff management (see Phase 2.5.2)
 - [ ] Equipment inventory tracking
 
 ---
 
-## Phase 8: IoT & Kiosk `pending`
+## Phase 10: IoT & Kiosk `pending`
 
 ### Tasks
 - [ ] Smart lock control UI (mock)
@@ -265,7 +432,7 @@ Admin can oversee the platform. Coaches can manage their multi-venue schedule an
 
 ---
 
-## Phase 9: Polish & Launch Prep `pending`
+## Phase 11: Polish & Launch Prep `pending`
 
 ### Tasks
 - [ ] Performance audit & optimization
