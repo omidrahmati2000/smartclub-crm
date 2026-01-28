@@ -253,16 +253,17 @@ export function EditPricingRuleDialog({
             <h3 className="text-sm font-semibold">{t('form.targets')}</h3>
             <div className="space-y-2">
               <Label>{t('form.targetAssets')}</Label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex flex-wrap gap-2">
                 {assets.map((asset) => (
-                  <div key={asset.id} className="flex items-center space-x-2">
-                    <label
-                      htmlFor={`asset-${asset.id}`}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      {asset.name}
-                    </label>
-                  </div>
+                  <Button
+                    key={asset.id}
+                    type="button"
+                    variant={selectedAssets.includes(asset.id) ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => toggleAsset(asset.id)}
+                  >
+                    {asset.name}
+                  </Button>
                 ))}
               </div>
               {selectedAssets.length === 0 && (
