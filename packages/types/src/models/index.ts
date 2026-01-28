@@ -1,5 +1,6 @@
 export type { BaseUser, Customer, Coach, VenueStaff, PlatformAdmin, User } from './user';
 export { CustomerStatus } from './customer-profile';
+export { StaffStatus, InvitationStatus } from './staff-member';
 export type {
   CustomerProfile,
   CustomerStats,
@@ -8,6 +9,15 @@ export type {
   CustomerFilters,
   CustomerListItem,
 } from './customer-profile';
+export type {
+  StaffMember,
+  StaffActivity,
+  StaffInvitation,
+  StaffFilters,
+  CreateStaffDTO,
+  UpdateStaffDTO,
+  RolePermissions,
+} from './staff-member';
 export type { Venue, OperatingHours, Asset, Amenity } from './venue';
 export { CancellationPolicy } from './venue-settings';
 export type {

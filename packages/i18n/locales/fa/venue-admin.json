@@ -212,23 +212,115 @@
   },
   "staff": {
     "title": "کارکنان",
+    "description": "مدیریت کارکنان و دسترسی‌ها",
+    "addStaff": "افزودن کارمند",
     "inviteStaff": "دعوت کارمند",
-    "name": "نام",
-    "email": "ایمیل",
-    "role": "نقش",
-    "status": "وضعیت",
-    "actions": "عملیات",
-    "active": "فعال",
-    "inactive": "غیرفعال",
-    "owner": "مالک",
-    "manager": "مدیر",
-    "receptionist": "پذیرش",
-    "cashier": "صندوقدار",
-    "editRole": "ویرایش نقش",
-    "deactivate": "غیرفعال کردن",
-    "activate": "فعال کردن",
-    "inviteEmail": "ایمیل دعوت",
-    "selectRole": "انتخاب نقش"
+    "editStaff": "ویرایش کارمند",
+    "deleteStaff": "حذف کارمند",
+    "viewActivity": "مشاهده فعالیت‌ها",
+    "noStaff": "هیچ کارمندی یافت نشد",
+    "showingResults": "نمایش {{count}} کارمند",
+    "search": "جستجو بر اساس نام یا ایمیل",
+    "filterByRole": "فیلتر بر اساس نقش",
+    "filterByStatus": "فیلتر بر اساس وضعیت",
+    "sortBy": "مرتب‌سازی بر اساس",
+
+    "table": {
+      "name": "نام",
+      "email": "ایمیل",
+      "phone": "تلفن",
+      "role": "نقش",
+      "status": "وضعیت",
+      "hireDate": "تاریخ استخدام",
+      "actions": "عملیات"
+    },
+
+    "roles": {
+      "all": "همه نقش‌ها",
+      "OWNER": "مالک",
+      "MANAGER": "مدیر",
+      "RECEPTIONIST": "پذیرش",
+      "CASHIER": "صندوقدار"
+    },
+
+    "status": {
+      "all": "همه",
+      "ACTIVE": "فعال",
+      "INACTIVE": "غیرفعال",
+      "INVITED": "دعوت شده",
+      "SUSPENDED": "تعلیق شده"
+    },
+
+    "sort": {
+      "name": "نام",
+      "role": "نقش",
+      "hireDate": "تاریخ استخدام"
+    },
+
+    "actions": {
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "viewActivity": "مشاهده فعالیت",
+      "viewPermissions": "مشاهده دسترسی‌ها",
+      "deactivate": "غیرفعال کردن",
+      "activate": "فعال کردن",
+      "suspend": "تعلیق",
+      "confirmDelete": "آیا از حذف این کارمند اطمینان دارید؟",
+      "deleteWarning": "این عمل غیرقابل بازگشت است."
+    },
+
+    "form": {
+      "title": "اطلاعات کارمند",
+      "name": "نام و نام خانوادگی",
+      "namePlaceholder": "نام کارمند را وارد کنید",
+      "email": "ایمیل",
+      "emailPlaceholder": "example@email.com",
+      "phone": "شماره تلفن",
+      "phonePlaceholder": "09121234567",
+      "role": "نقش",
+      "selectRole": "انتخاب نقش",
+      "notes": "یادداشت",
+      "notesPlaceholder": "یادداشت اختیاری در مورد کارمند...",
+      "hireDate": "تاریخ استخدام",
+      "submit": "ذخیره",
+      "cancel": "لغو",
+      "creating": "در حال افزودن...",
+      "updating": "در حال ویرایش...",
+      "created": "کارمند با موفقیت اضافه شد",
+      "updated": "کارمند با موفقیت ویرایش شد",
+      "deleted": "کارمند حذف شد"
+    },
+
+    "permissions": {
+      "title": "دسترسی‌های نقش",
+      "description": "دسترسی‌های این نقش را مشاهده کنید",
+      "viewPermissions": "مشاهده دسترسی‌ها",
+      "category": "دسته‌بندی",
+      "permission": "دسترسی",
+      "enabled": "فعال",
+      "disabled": "غیرفعال",
+      "fullAccess": "دسترسی کامل",
+      "limitedAccess": "دسترسی محدود",
+      "noAccess": "بدون دسترسی"
+    },
+
+    "activity": {
+      "title": "لاگ فعالیت",
+      "description": "فعالیت‌های اخیر این کارمند",
+      "noActivity": "هیچ فعالیتی ثبت نشده",
+      "action": "عملیات",
+      "entity": "موجودیت",
+      "details": "جزئیات",
+      "timestamp": "زمان",
+      "loadMore": "بارگذاری بیشتر"
+    },
+
+    "roleDescriptions": {
+      "OWNER": "دسترسی کامل به همه بخش‌ها شامل حذف مجموعه و مدیریت کارکنان",
+      "MANAGER": "دسترسی به اکثر بخش‌ها به جز حذف مجموعه و افزودن/حذف کارکنان",
+      "RECEPTIONIST": "مشاهده و ایجاد رزرو، مشاهده مشتریان و امکانات",
+      "CASHIER": "مشاهده رزروها، مشتریان و اطلاعات مالی"
+    }
   },
   "finance": {
     "title": "مالی",

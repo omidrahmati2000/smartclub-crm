@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b53c0f65-7429-4765-926a-e3de1c812029" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/en/venue-admin.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/en/venue-admin.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/i18n/locales/fa/venue-admin.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/fa/venue-admin.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/mock-data/src/handlers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/handlers/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/types/src/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/models/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/primitives/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/primitives/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +21,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/omidrahmati2000/smartclub-crm.git",
+    "accountId": "e1582620-afe8-435b-a6e9-742ad04ade34"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -59,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1769553035864</updated>
       <workItem from="1769553037063" duration="6409000" />
-      <workItem from="1769584469412" duration="17232000" />
+      <workItem from="1769584469412" duration="20196000" />
     </task>
     <servers />
   </component>

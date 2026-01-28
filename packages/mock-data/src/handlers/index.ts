@@ -5,6 +5,7 @@ import { venueDashboardHandlers } from './venue-dashboard';
 import { assetHandlers } from './assets';
 import { venueSettingsHandlers } from './venue-settings';
 import { customerHandlers } from './customers';
+import { staffHandlers } from './staff';
 
 export const handlers = [
   ...authHandlers,
@@ -14,4 +15,5 @@ export const handlers = [
   ...assetHandlers,
   ...venueSettingsHandlers,
   ...customerHandlers,
+  ...staffHandlers,
 ];
