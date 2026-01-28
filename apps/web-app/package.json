@@ -1,0 +1,40 @@
+{
+  "name": "@smartclub/web-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@smartclub/i18n": "workspace:*",
+    "@smartclub/mock-data": "workspace:*",
+    "@smartclub/types": "workspace:*",
+    "@smartclub/ui": "workspace:*",
+    "@smartclub/utils": "workspace:*",
+    "@tanstack/react-query": "^5.66.0",
+    "lucide-react": "^0.469.0",
+    "next": "^15.1.6",
+    "next-auth": "5.0.0-beta.30",
+    "next-intl": "^4.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.71.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@smartclub/config": "workspace:*",
+    "@types/node": "^22.12.0",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.7.3"
+  }
+}

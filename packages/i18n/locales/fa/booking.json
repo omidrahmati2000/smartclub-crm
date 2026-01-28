@@ -1,0 +1,69 @@
+{
+  "slotBased": {
+    "title": "رزرو {{assetName}}",
+    "selectDate": "انتخاب تاریخ",
+    "selectSlot": "انتخاب زمان",
+    "availableSlots": "زمان‌های موجود",
+    "noSlotsAvailable": "زمانی در این تاریخ موجود نیست",
+    "selectDateFirst": "لطفا ابتدا تاریخ را انتخاب کنید",
+    "slotDuration": "مدت: {{duration}} دقیقه",
+    "available": "موجود",
+    "booked": "رزرو شده",
+    "selected": "انتخاب شده"
+  },
+  "durationBased": {
+    "title": "رزرو {{assetName}}",
+    "selectDate": "انتخاب تاریخ",
+    "selectStartTime": "انتخاب زمان شروع",
+    "selectDuration": "انتخاب مدت زمان",
+    "availableTimes": "زمان‌های شروع موجود",
+    "noTimesAvailable": "زمان شروعی در این تاریخ موجود نیست",
+    "selectDateFirst": "لطفا ابتدا تاریخ را انتخاب کنید",
+    "selectTimeFirst": "لطفا ابتدا زمان شروع را انتخاب کنید",
+    "duration": "مدت زمان",
+    "minutes": "دقیقه",
+    "minDuration": "حداقل {{min}} دقیقه",
+    "maxDuration": "حداکثر {{max}} دقیقه",
+    "pricePerHour": "{{price}} / ساعت",
+    "estimatedEnd": "پایان تقریبی: {{time}}",
+    "available": "موجود",
+    "selected": "انتخاب شده"
+  },
+  "summary": {
+    "title": "خلاصه رزرو",
+    "venue": "مرکز",
+    "asset": "منبع",
+    "date": "تاریخ",
+    "time": "زمان",
+    "duration": "مدت زمان",
+    "price": "قیمت",
+    "total": "جمع کل",
+    "minutes": "دقیقه",
+    "confirm": "تأیید و پرداخت",
+    "cancel": "انصراف",
+    "processing": "در حال پردازش...",
+    "loginRequired": "برای رزرو باید وارد شوید",
+    "loginNow": "ورود به حساب کاربری"
+  },
+  "confirmation": {
+    "title": "رزرو شما تأیید شد!",
+    "subtitle": "جزئیات رزرو به ایمیل شما ارسال شد",
+    "bookingId": "شماره رزرو",
+    "viewBooking": "مشاهده رزرو",
+    "backToVenue": "بازگشت به مرکز",
+    "bookAnother": "رزرو جدید"
+  },
+  "error": {
+    "title": "خطا در رزرو",
+    "slotUnavailable": "این زمان دیگر موجود نیست",
+    "tryAgain": "تلاش مجدد",
+    "unknownError": "خطایی رخ داد. لطفا دوباره تلاش کنید"
+  },
+  "calendar": {
+    "today": "امروز",
+    "tomorrow": "فردا",
+    "selectDate": "انتخاب تاریخ",
+    "previousMonth": "ماه قبل",
+    "nextMonth": "ماه بعد"
+  }
+}

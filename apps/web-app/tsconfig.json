@@ -1,0 +1,19 @@
+{
+  "extends": "@smartclub/config/typescript/nextjs.json",
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@smartclub/ui": ["../../packages/ui/src"],
+      "@smartclub/types": ["../../packages/types/src"],
+      "@smartclub/utils": ["../../packages/utils/src"],
+      "@smartclub/i18n": ["../../packages/i18n/src"],
+      "@smartclub/i18n/*": ["../../packages/i18n/*"],
+      "@smartclub/mock-data": ["../../packages/mock-data/src"],
+      "@smartclub/mock-data/*": ["../../packages/mock-data/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

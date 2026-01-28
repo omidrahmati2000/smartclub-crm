@@ -1,0 +1,57 @@
+{
+  "title": "رزروهای من",
+  "subtitle": "مشاهده و مدیریت رزروهای خود",
+  "tabs": {
+    "upcoming": "پیش رو",
+    "past": "گذشته",
+    "cancelled": "لغو شده",
+    "all": "همه"
+  },
+  "filters": {
+    "search": "جستجو در رزروها...",
+    "sortBy": "مرتب‌سازی",
+    "dateAsc": "قدیمی‌ترین",
+    "dateDesc": "جدیدترین",
+    "priceAsc": "ارزان‌ترین",
+    "priceDesc": "گران‌ترین"
+  },
+  "card": {
+    "venue": "مرکز",
+    "asset": "منبع",
+    "date": "تاریخ",
+    "time": "زمان",
+    "duration": "مدت",
+    "minutes": "دقیقه",
+    "price": "قیمت",
+    "status": "وضعیت",
+    "bookingId": "شماره رزرو",
+    "viewDetails": "مشاهده جزئیات",
+    "cancel": "لغو رزرو",
+    "cancelled": "لغو شده",
+    "confirmCancel": "آیا مطمئن هستید؟",
+    "cancelConfirm": "بله، لغو کن",
+    "cancelDecline": "خیر"
+  },
+  "status": {
+    "pending": "در انتظار تأیید",
+    "confirmed": "تأیید شده",
+    "checkedIn": "حضور یافته",
+    "completed": "تکمیل شده",
+    "cancelled": "لغو شده",
+    "noShow": "عدم حضور"
+  },
+  "empty": {
+    "title": "رزروی یافت نشد",
+    "subtitle": "هنوز هیچ رزروی ندارید",
+    "action": "کاوش مراکز",
+    "noUpcoming": "رزرو پیش رویی ندارید",
+    "noPast": "رزرو گذشته‌ای ندارید",
+    "noCancelled": "رزرو لغو شده‌ای ندارید"
+  },
+  "stats": {
+    "total": "مجموع رزروها",
+    "upcoming": "پیش رو",
+    "completed": "تکمیل شده",
+    "spent": "هزینه کل"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "profile": {
+    "title": "About Venue",
+    "overview": "Overview",
+    "assets": "Assets & Facilities",
+    "reviews": "Reviews",
+    "location": "Location",
+    "about": "About",
+    "operatingHours": "Operating Hours",
+    "amenities": "Amenities",
+    "sports": "Sports",
+    "gallery": "Photo Gallery",
+    "contactInfo": "Contact Information",
+    "bookNow": "Book Now"
+  },
+  "hours": {
+    "openNow": "Open Now",
+    "closedNow": "Closed",
+    "opensAt": "Opens at {{time}}",
+    "closesAt": "Closes at {{time}}",
+    "closed": "Closed",
+    "days": {
+      "0": "Sunday",
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday"
+    }
+  },
+  "assets": {
+    "title": "Bookable Assets",
+    "available": "Available",
+    "unavailable": "Booked",
+    "viewSchedule": "View Schedule",
+    "bookAsset": "Book {{name}}",
+    "capacity": "Capacity",
+    "people": "people",
+    "duration": "Duration",
+    "minutes": "minutes",
+    "price": "Price",
+    "perHour": "per hour",
+    "perSlot": "per slot",
+    "perSession": "per session",
+    "slotBased": "Slot-based booking",
+    "durationBased": "Duration-based booking",
+    "capacityBased": "Capacity-based booking",
+    "openSession": "Open session"
+  },
+  "reviews": {
+    "title": "Reviews & Ratings",
+    "rating": "Rating",
+    "outOf": "out of 5",
+    "basedOn": "Based on {{count}} reviews",
+    "writeReview": "Write a Review",
+    "readMore": "Read more",
+    "showLess": "Show less",
+    "noReviews": "No reviews yet",
+    "beFirst": "Be the first to review"
+  },
+  "contact": {
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "website": "Website",
+    "getDirections": "Get Directions",
+    "callNow": "Call Now"
+  },
+  "notFound": {
+    "title": "Venue Not Found",
+    "description": "Sorry, we couldn't find the venue you're looking for.",
+    "backToExplore": "Back to Explore"
+  }
+}

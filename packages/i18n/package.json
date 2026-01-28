@@ -1,0 +1,20 @@
+{
+  "name": "@smartclub/i18n",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./config": "./src/config.ts",
+    "./request": "./src/request.ts",
+    "./navigation": "./src/navigation.ts",
+    "./locales/*": "./locales/*"
+  },
+  "dependencies": {
+    "next-intl": "^4.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

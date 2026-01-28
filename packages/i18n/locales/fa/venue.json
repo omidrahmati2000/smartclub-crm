@@ -1,0 +1,75 @@
+{
+  "profile": {
+    "title": "درباره مرکز",
+    "overview": "مرور کلی",
+    "assets": "منابع و امکانات",
+    "reviews": "نظرات",
+    "location": "موقعیت مکانی",
+    "about": "درباره",
+    "operatingHours": "ساعات کاری",
+    "amenities": "امکانات",
+    "sports": "ورزش‌ها",
+    "gallery": "گالری تصاویر",
+    "contactInfo": "اطلاعات تماس",
+    "bookNow": "رزرو کنید"
+  },
+  "hours": {
+    "openNow": "اکنون باز است",
+    "closedNow": "بسته است",
+    "opensAt": "باز می‌شود در {{time}}",
+    "closesAt": "بسته می‌شود در {{time}}",
+    "closed": "تعطیل",
+    "days": {
+      "0": "یکشنبه",
+      "1": "دوشنبه",
+      "2": "سه‌شنبه",
+      "3": "چهارشنبه",
+      "4": "پنج‌شنبه",
+      "5": "جمعه",
+      "6": "شنبه"
+    }
+  },
+  "assets": {
+    "title": "منابع قابل رزرو",
+    "available": "موجود",
+    "unavailable": "رزرو شده",
+    "viewSchedule": "مشاهده برنامه",
+    "bookAsset": "رزرو {{name}}",
+    "capacity": "ظرفیت",
+    "people": "نفر",
+    "duration": "مدت زمان",
+    "minutes": "دقیقه",
+    "price": "قیمت",
+    "perHour": "در ساعت",
+    "perSlot": "هر نوبت",
+    "perSession": "هر سانس",
+    "slotBased": "رزرو نوبتی",
+    "durationBased": "رزرو بر اساس مدت",
+    "capacityBased": "رزرو سانسی",
+    "openSession": "سشن آزاد"
+  },
+  "reviews": {
+    "title": "نظرات و امتیازها",
+    "rating": "امتیاز",
+    "outOf": "از ۵",
+    "basedOn": "بر اساس {{count}} نظر",
+    "writeReview": "ثبت نظر",
+    "readMore": "بیشتر بخوانید",
+    "showLess": "نمایش کمتر",
+    "noReviews": "هنوز نظری ثبت نشده",
+    "beFirst": "اولین نفری باشید که نظر می‌دهید"
+  },
+  "contact": {
+    "phone": "تلفن",
+    "email": "ایمیل",
+    "address": "آدرس",
+    "website": "وب‌سایت",
+    "getDirections": "مسیریابی",
+    "callNow": "تماس"
+  },
+  "notFound": {
+    "title": "مرکز یافت نشد",
+    "description": "متاسفانه مرکز مورد نظر شما یافت نشد.",
+    "backToExplore": "بازگشت به صفحه کاوش"
+  }
+}

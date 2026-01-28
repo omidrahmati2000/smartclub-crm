@@ -1,0 +1,47 @@
+{
+  "title": "کاوش مراکز",
+  "subtitle": "مراکز تفریحی و ورزشی را جستجو و رزرو کنید",
+  "search": {
+    "placeholder": "جستجوی مرکز، ورزش، یا محله...",
+    "button": "جستجو",
+    "clear": "پاک کردن"
+  },
+  "filters": {
+    "title": "فیلترها",
+    "city": "شهر",
+    "sport": "نوع ورزش",
+    "amenities": "امکانات",
+    "priceRange": "محدوده قیمت",
+    "rating": "امتیاز",
+    "availability": "موجودیت",
+    "all": "همه",
+    "apply": "اعمال فیلتر",
+    "reset": "حذف فیلترها"
+  },
+  "sort": {
+    "label": "مرتب‌سازی بر اساس",
+    "relevance": "مرتبط‌ترین",
+    "rating": "بالاترین امتیاز",
+    "reviewCount": "بیشترین نظرات",
+    "priceAsc": "ارزان‌ترین",
+    "priceDesc": "گران‌ترین",
+    "newest": "جدیدترین"
+  },
+  "results": {
+    "showing": "نمایش {{count}} مرکز",
+    "noResults": "مرکزی یافت نشد",
+    "noResultsSubtitle": "لطفا فیلترهای دیگری امتحان کنید یا جستجوی خود را تغییر دهید"
+  },
+  "venueCard": {
+    "rating": "امتیاز",
+    "reviews": "نظر",
+    "openNow": "اکنون باز است",
+    "closedNow": "بسته است",
+    "viewDetails": "مشاهده جزئیات",
+    "bookNow": "رزرو",
+    "from": "از",
+    "perHour": "/ ساعت",
+    "perSlot": "/ نوبت",
+    "perSession": "/ سانس"
+  }
+}

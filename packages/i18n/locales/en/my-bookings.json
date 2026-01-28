@@ -1,0 +1,57 @@
+{
+  "title": "My Bookings",
+  "subtitle": "View and manage your bookings",
+  "tabs": {
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "cancelled": "Cancelled",
+    "all": "All"
+  },
+  "filters": {
+    "search": "Search bookings...",
+    "sortBy": "Sort by",
+    "dateAsc": "Oldest first",
+    "dateDesc": "Newest first",
+    "priceAsc": "Lowest price",
+    "priceDesc": "Highest price"
+  },
+  "card": {
+    "venue": "Venue",
+    "asset": "Asset",
+    "date": "Date",
+    "time": "Time",
+    "duration": "Duration",
+    "minutes": "minutes",
+    "price": "Price",
+    "status": "Status",
+    "bookingId": "Booking ID",
+    "viewDetails": "View Details",
+    "cancel": "Cancel Booking",
+    "cancelled": "Cancelled",
+    "confirmCancel": "Are you sure?",
+    "cancelConfirm": "Yes, Cancel",
+    "cancelDecline": "No"
+  },
+  "status": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "checkedIn": "Checked In",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "noShow": "No Show"
+  },
+  "empty": {
+    "title": "No Bookings Found",
+    "subtitle": "You don't have any bookings yet",
+    "action": "Explore Venues",
+    "noUpcoming": "No upcoming bookings",
+    "noPast": "No past bookings",
+    "noCancelled": "No cancelled bookings"
+  },
+  "stats": {
+    "total": "Total Bookings",
+    "upcoming": "Upcoming",
+    "completed": "Completed",
+    "spent": "Total Spent"
+  }
+}

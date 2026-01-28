@@ -1,0 +1,69 @@
+{
+  "slotBased": {
+    "title": "Book {{assetName}}",
+    "selectDate": "Select Date",
+    "selectSlot": "Select Time",
+    "availableSlots": "Available Times",
+    "noSlotsAvailable": "No slots available on this date",
+    "selectDateFirst": "Please select a date first",
+    "slotDuration": "Duration: {{duration}} minutes",
+    "available": "Available",
+    "booked": "Booked",
+    "selected": "Selected"
+  },
+  "durationBased": {
+    "title": "Book {{assetName}}",
+    "selectDate": "Select Date",
+    "selectStartTime": "Select Start Time",
+    "selectDuration": "Select Duration",
+    "availableTimes": "Available Start Times",
+    "noTimesAvailable": "No start times available on this date",
+    "selectDateFirst": "Please select a date first",
+    "selectTimeFirst": "Please select a start time first",
+    "duration": "Duration",
+    "minutes": "minutes",
+    "minDuration": "Min {{min}} minutes",
+    "maxDuration": "Max {{max}} minutes",
+    "pricePerHour": "{{price}} / hour",
+    "estimatedEnd": "Estimated end: {{time}}",
+    "available": "Available",
+    "selected": "Selected"
+  },
+  "summary": {
+    "title": "Booking Summary",
+    "venue": "Venue",
+    "asset": "Asset",
+    "date": "Date",
+    "time": "Time",
+    "duration": "Duration",
+    "price": "Price",
+    "total": "Total",
+    "minutes": "minutes",
+    "confirm": "Confirm & Pay",
+    "cancel": "Cancel",
+    "processing": "Processing...",
+    "loginRequired": "Please login to book",
+    "loginNow": "Login Now"
+  },
+  "confirmation": {
+    "title": "Booking Confirmed!",
+    "subtitle": "Booking details sent to your email",
+    "bookingId": "Booking ID",
+    "viewBooking": "View Booking",
+    "backToVenue": "Back to Venue",
+    "bookAnother": "Book Another"
+  },
+  "error": {
+    "title": "Booking Error",
+    "slotUnavailable": "This slot is no longer available",
+    "tryAgain": "Try Again",
+    "unknownError": "An error occurred. Please try again"
+  },
+  "calendar": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "selectDate": "Select Date",
+    "previousMonth": "Previous Month",
+    "nextMonth": "Next Month"
+  }
+}

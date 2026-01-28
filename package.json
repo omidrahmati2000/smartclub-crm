@@ -1,0 +1,32 @@
+{
+  "name": "smartclub-crm",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "clean": "turbo clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "turbo": "^2.4.4"
+  },
+  "packageManager": "pnpm@10.28.2",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "sharp",
+      "msw",
+      "@parcel/watcher"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "next-auth": "5.0.0-beta.30"
+  }
+}

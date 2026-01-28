@@ -1,0 +1,47 @@
+{
+  "title": "Explore Venues",
+  "subtitle": "Search and book leisure and sports venues",
+  "search": {
+    "placeholder": "Search venue, sport, or area...",
+    "button": "Search",
+    "clear": "Clear"
+  },
+  "filters": {
+    "title": "Filters",
+    "city": "City",
+    "sport": "Sport Type",
+    "amenities": "Amenities",
+    "priceRange": "Price Range",
+    "rating": "Rating",
+    "availability": "Availability",
+    "all": "All",
+    "apply": "Apply Filters",
+    "reset": "Reset Filters"
+  },
+  "sort": {
+    "label": "Sort by",
+    "relevance": "Most Relevant",
+    "rating": "Highest Rating",
+    "reviewCount": "Most Reviews",
+    "priceAsc": "Lowest Price",
+    "priceDesc": "Highest Price",
+    "newest": "Newest"
+  },
+  "results": {
+    "showing": "Showing {{count}} venues",
+    "noResults": "No venues found",
+    "noResultsSubtitle": "Try different filters or modify your search"
+  },
+  "venueCard": {
+    "rating": "Rating",
+    "reviews": "reviews",
+    "openNow": "Open Now",
+    "closedNow": "Closed",
+    "viewDetails": "View Details",
+    "bookNow": "Book Now",
+    "from": "From",
+    "perHour": "/ hour",
+    "perSlot": "/ slot",
+    "perSession": "/ session"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@smartclub/config",
+  "version": "0.1.0",
+  "private": true,
+  "files": ["tailwind", "eslint", "typescript"],
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  }
+}
