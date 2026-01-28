@@ -68,6 +68,36 @@ export const mockVenueManager: VenueStaff = {
   updatedAt: '2025-01-01T00:00:00Z',
 };
 
+export const mockVenueReceptionist: VenueStaff = {
+  id: 'user-venue-receptionist-1',
+  email: 'receptionist@test.com',
+  phone: '09125678901',
+  firstName: 'مینا',
+  lastName: 'احمدزاده',
+  avatarUrl: undefined,
+  userType: UserType.VENUE_STAFF,
+  locale: 'fa',
+  venueId: 'venue-1',
+  role: VenueRole.RECEPTIONIST,
+  createdAt: '2025-01-01T00:00:00Z',
+  updatedAt: '2025-01-01T00:00:00Z',
+};
+
+export const mockVenueCashier: VenueStaff = {
+  id: 'user-venue-cashier-1',
+  email: 'cashier@test.com',
+  phone: '09126789012',
+  firstName: 'حسین',
+  lastName: 'نوری',
+  avatarUrl: undefined,
+  userType: UserType.VENUE_STAFF,
+  locale: 'fa',
+  venueId: 'venue-1',
+  role: VenueRole.CASHIER,
+  createdAt: '2025-01-01T00:00:00Z',
+  updatedAt: '2025-01-01T00:00:00Z',
+};
+
 export const mockAdmin: PlatformAdmin = {
   id: 'user-admin-1',
   email: 'admin@test.com',
@@ -87,5 +117,7 @@ export const allMockUsers = [
   mockCoach,
   mockVenueOwner,
   mockVenueManager,
+  mockVenueReceptionist,
+  mockVenueCashier,
   mockAdmin,
 ];

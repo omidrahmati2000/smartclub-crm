@@ -8,8 +8,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale;
   }
 
+  const common = (await import(`../../../../packages/i18n/locales/${locale}/common.json`)).default;
+  const venueAdmin = (await import(`../../../../packages/i18n/locales/${locale}/venue-admin.json`)).default;
+
   return {
     locale,
-    messages: (await import(`../../../../packages/i18n/locales/${locale}/common.json`)).default,
+    messages: {
+      ...common,
+      'venue-admin': venueAdmin,
+    },
   };
 });
