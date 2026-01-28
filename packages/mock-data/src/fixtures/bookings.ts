@@ -6,6 +6,7 @@ export const mockBookings: Booking[] = [
     id: 'booking-1',
     venueId: 'venue-1',
     assetId: 'asset-1',
+    userId: 'user-customer-1',
     customerId: 'user-customer-1',
     date: new Date().toISOString().split('T')[0], // Today
     startTime: '09:00',
@@ -19,7 +20,8 @@ export const mockBookings: Booking[] = [
       {
         userId: 'user-customer-1',
         name: 'علی احمدی',
-        role: 'host',
+        isHost: true,
+        paymentStatus: PaymentStatus.COMPLETED,
       },
     ],
     paymentMethod: PaymentMethod.ONLINE,
@@ -31,6 +33,7 @@ export const mockBookings: Booking[] = [
     id: 'booking-2',
     venueId: 'venue-1',
     assetId: 'asset-1',
+    userId: 'user-customer-1',
     customerId: 'user-customer-1',
     date: new Date().toISOString().split('T')[0], // Today
     startTime: '14:00',
@@ -44,7 +47,8 @@ export const mockBookings: Booking[] = [
       {
         userId: 'user-customer-1',
         name: 'علی احمدی',
-        role: 'host',
+        isHost: true,
+        paymentStatus: PaymentStatus.PENDING,
       },
     ],
     paymentMethod: PaymentMethod.WALLET,
@@ -56,6 +60,7 @@ export const mockBookings: Booking[] = [
     id: 'booking-3',
     venueId: 'venue-1',
     assetId: 'asset-2',
+    userId: 'user-customer-1',
     customerId: 'user-customer-1',
     date: new Date().toISOString().split('T')[0], // Today
     startTime: '16:00',
@@ -69,7 +74,8 @@ export const mockBookings: Booking[] = [
       {
         userId: 'user-customer-1',
         name: 'علی احمدی',
-        role: 'host',
+        isHost: true,
+        paymentStatus: PaymentStatus.COMPLETED,
       },
     ],
     paymentMethod: PaymentMethod.CASH,
@@ -81,6 +87,7 @@ export const mockBookings: Booking[] = [
     id: 'booking-4',
     venueId: 'venue-1',
     assetId: 'asset-1',
+    userId: 'user-customer-1',
     customerId: 'user-customer-1',
     date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Yesterday
     startTime: '10:00',
@@ -94,7 +101,8 @@ export const mockBookings: Booking[] = [
       {
         userId: 'user-customer-1',
         name: 'علی احمدی',
-        role: 'host',
+        isHost: true,
+        paymentStatus: PaymentStatus.COMPLETED,
       },
     ],
     paymentMethod: PaymentMethod.ONLINE,
@@ -106,6 +114,7 @@ export const mockBookings: Booking[] = [
     id: 'booking-5',
     venueId: 'venue-1',
     assetId: 'asset-1',
+    userId: 'user-customer-1',
     customerId: 'user-customer-1',
     date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Yesterday
     startTime: '15:00',
@@ -119,7 +128,8 @@ export const mockBookings: Booking[] = [
       {
         userId: 'user-customer-1',
         name: 'علی احمدی',
-        role: 'host',
+        isHost: true,
+        paymentStatus: PaymentStatus.COMPLETED,
       },
     ],
     paymentMethod: PaymentMethod.CARD_ON_SITE,
@@ -132,6 +142,7 @@ export const mockBookings: Booking[] = [
     id: 'booking-6',
     venueId: 'venue-1',
     assetId: 'asset-1',
+    userId: 'user-customer-1',
     customerId: 'user-customer-1',
     date: new Date().toISOString().split('T')[0],
     startTime: '11:00',
@@ -145,7 +156,8 @@ export const mockBookings: Booking[] = [
       {
         userId: 'user-customer-1',
         name: 'محمد رضایی',
-        role: 'host',
+        isHost: true,
+        paymentStatus: PaymentStatus.COMPLETED,
       },
     ],
     paymentMethod: PaymentMethod.ONLINE,
@@ -157,6 +169,7 @@ export const mockBookings: Booking[] = [
     id: 'booking-7',
     venueId: 'venue-1',
     assetId: 'asset-2',
+    userId: 'user-customer-1',
     customerId: 'user-customer-1',
     date: new Date().toISOString().split('T')[0],
     startTime: '10:00',
@@ -170,7 +183,8 @@ export const mockBookings: Booking[] = [
       {
         userId: 'user-customer-1',
         name: 'سارا کریمی',
-        role: 'host',
+        isHost: true,
+        paymentStatus: PaymentStatus.COMPLETED,
       },
     ],
     paymentMethod: PaymentMethod.WALLET,

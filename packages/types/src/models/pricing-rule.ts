@@ -45,7 +45,7 @@ export enum PricingRuleStatus {
 
 export interface PricingCondition {
   // Time of day
-  timeSlots?: TimeSlot[];
+  timeSlots?: PricingTimeSlot[];
 
   // Days of week (0-6, 0=Saturday for Persian)
   daysOfWeek?: number[];
@@ -69,7 +69,7 @@ export interface PricingCondition {
   minDuration?: number; // minutes
 }
 
-export interface TimeSlot {
+export interface PricingTimeSlot {
   startTime: string; // "HH:mm" format
   endTime: string; // "HH:mm" format
 }

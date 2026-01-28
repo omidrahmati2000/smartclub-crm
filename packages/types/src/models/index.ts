@@ -42,7 +42,7 @@ export type {
 export type {
   PricingRule,
   PricingCondition,
-  TimeSlot,
+  PricingTimeSlot,
   PriceAdjustment,
   CreatePricingRuleDTO,
   UpdatePricingRuleDTO,
@@ -85,4 +85,3 @@ export type {
   CoachSession,
 } from './coach';
 export type { Notification, NotificationType } from './notification';
-export type { PricingRule, PricingRuleType, PricingCondition, PriceAdjustment } from './pricing';

@@ -100,7 +100,7 @@ export const pricingRulesHandlers = [
   // POST /api/venues/:venueId/pricing-rules - Create pricing rule
   http.post(`${BASE_URL}/venues/:venueId/pricing-rules`, async ({ params, request }) => {
     const { venueId } = params;
-    const body = await request.json();
+    const body = (await request.json()) as any;
 
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -119,7 +119,7 @@ export const pricingRulesHandlers = [
   // PUT /api/pricing-rules/:ruleId - Update pricing rule
   http.put(`${BASE_URL}/pricing-rules/:ruleId`, async ({ params, request }) => {
     const { ruleId } = params;
-    const updates = await request.json();
+    const updates = (await request.json()) as any;
 
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -176,7 +176,8 @@ export const pricingRulesHandlers = [
 
   // POST /api/pricing-rules/preview - Preview price with rules
   http.post(`${BASE_URL}/pricing-rules/preview`, async ({ request }) => {
-    const { basePrice, assetId, dateTime, duration } = await request.json();
+    const body = (await request.json()) as any;
+    const { basePrice, assetId, dateTime, duration } = body;
 
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 300));

@@ -113,7 +113,8 @@ export const customerHandlers = [
   // POST /api/customers/:customerId/tags - Add tag to customer
   http.post(`${BASE_URL}/customers/:customerId/tags`, async ({ params, request }) => {
     const { customerId } = params;
-    const { tagId } = await request.json();
+    const body = (await request.json()) as any;
+    const { tagId } = body;
 
     const tag = customerTags.find((t) => t.id === tagId);
     if (!tag) {
@@ -157,7 +158,8 @@ export const customerHandlers = [
   // POST /api/customers/:customerId/notes - Add note to customer
   http.post(`${BASE_URL}/customers/:customerId/notes`, async ({ params, request }) => {
     const { customerId } = params;
-    const { content, createdBy, createdByName } = await request.json();
+    const body = (await request.json()) as any;
+    const { content, createdBy, createdByName } = body;
 
     const customer = addCustomerNote(customerId as string, {
       content,
@@ -181,7 +183,8 @@ export const customerHandlers = [
   // PATCH /api/customers/:customerId/status - Update customer status
   http.patch(`${BASE_URL}/customers/:customerId/status`, async ({ params, request }) => {
     const { customerId } = params;
-    const { status } = await request.json();
+    const body = (await request.json()) as any;
+    const { status } = body;
 
     const customer = updateCustomerStatus(customerId as string, status);
 

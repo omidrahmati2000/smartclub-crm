@@ -23,7 +23,7 @@ export const venueSettingsHandlers = [
   // PUT /api/venues/:venueId/settings - Update venue settings
   http.put(`${BASE_URL}/venues/:venueId/settings`, async ({ params, request }) => {
     const { venueId } = params;
-    const updates = await request.json();
+    const updates = (await request.json()) as any;
 
     try {
       const updatedSettings = updateVenueSettings(venueId as string, updates);

@@ -7,17 +7,21 @@ export interface Booking {
   venueId: string;
   assetId: string;
   userId: string;
-  type: BookingType;
+  customerId?: string; // Alias for userId (for backward compatibility)
+  type?: BookingType;
+  bookingType?: BookingType; // Alias for type (for backward compatibility)
   status: BookingStatus;
-  startTime: string;
-  endTime: string;
+  date: string; // YYYY-MM-DD format
+  startTime: string; // HH:mm format
+  endTime: string; // HH:mm format
   duration: number; // minutes
   participants: BookingParticipant[];
   totalPrice: number;
   currency: string;
+  paymentMethod?: string;
   paymentStatus: PaymentStatus;
   notes?: string;
-  isRecurring: boolean;
+  isRecurring?: boolean;
   recurringGroupId?: string;
   createdAt: string;
   updatedAt: string;

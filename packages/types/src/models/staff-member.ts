@@ -1,5 +1,5 @@
 import { VenueRole } from '../enums/venue-role';
-import { Permission } from '../rbac/permissions';
+import { PermissionKey } from '../rbac/permissions';
 
 export interface StaffMember {
   id: string;
@@ -17,7 +17,7 @@ export interface StaffMember {
   notes?: string;
 
   // Permissions (derived from role)
-  permissions: Permission[];
+  permissions: PermissionKey[];
 
   // Dates
   createdAt: string;
@@ -96,7 +96,7 @@ export interface RolePermissions {
   permissions: {
     category: string;
     items: {
-      permission: Permission;
+      permission: PermissionKey;
       label: string;
       enabled: boolean;
     }[];

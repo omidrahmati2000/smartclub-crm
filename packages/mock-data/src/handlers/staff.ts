@@ -99,7 +99,7 @@ export const staffHandlers = [
   // POST /api/venues/:venueId/staff - Create new staff member
   http.post(`${BASE_URL}/venues/:venueId/staff`, async ({ params, request }) => {
     const { venueId } = params;
-    const body = await request.json();
+    const body = (await request.json()) as any;
 
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -119,7 +119,7 @@ export const staffHandlers = [
   // PUT /api/staff/:staffId - Update staff member
   http.put(`${BASE_URL}/staff/:staffId`, async ({ params, request }) => {
     const { staffId } = params;
-    const updates = await request.json();
+    const updates = (await request.json()) as any;
 
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));

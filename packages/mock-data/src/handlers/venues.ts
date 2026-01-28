@@ -53,7 +53,7 @@ export const venueHandlers = [
   // PUT /api/venues/:venueId - Update venue profile
   http.put('/api/venues/:venueId', async ({ params, request }) => {
     const { venueId } = params;
-    const updates = await request.json();
+    const updates = (await request.json()) as any;
 
     const venueIndex = mockVenues.findIndex((v) => v.id === venueId);
 

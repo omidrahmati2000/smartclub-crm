@@ -5,58 +5,72 @@ import {
   StaffInvitation,
   InvitationStatus,
   RolePermissions,
+  PermissionKey,
 } from '@smartclub/types';
 import { VenueRole } from '@smartclub/types';
 import { Permission } from '@smartclub/types';
 
 // Helper to get permissions for a role
-function getPermissionsForRole(role: VenueRole): Permission[] {
-  const rolePermissions: Record<VenueRole, Permission[]> = {
+function getPermissionsForRole(role: VenueRole): PermissionKey[] {
+  const rolePermissions: Record<VenueRole, PermissionKey[]> = {
     [VenueRole.OWNER]: [
       Permission.VENUE_VIEW,
       Permission.VENUE_EDIT,
       Permission.VENUE_DELETE,
       Permission.VENUE_SETTINGS,
-      Permission.VENUE_ASSETS_VIEW,
-      Permission.VENUE_ASSETS_WRITE,
-      Permission.VENUE_BOOKINGS_VIEW,
-      Permission.VENUE_BOOKINGS_WRITE,
-      Permission.VENUE_CUSTOMERS_VIEW,
-      Permission.VENUE_CUSTOMERS_WRITE,
-      Permission.VENUE_STAFF_VIEW,
-      Permission.VENUE_STAFF_WRITE,
-      Permission.VENUE_FINANCE_VIEW,
-      Permission.VENUE_FINANCE_WRITE,
-      Permission.VENUE_REPORTS_VIEW,
-      Permission.VENUE_PRICING_VIEW,
-      Permission.VENUE_PRICING_WRITE,
+      Permission.ASSET_VIEW,
+      Permission.ASSET_CREATE,
+      Permission.ASSET_EDIT,
+      Permission.ASSET_DELETE,
+      Permission.BOOKING_VIEW,
+      Permission.BOOKING_CREATE,
+      Permission.BOOKING_EDIT,
+      Permission.BOOKING_CANCEL,
+      Permission.CALENDAR_VIEW,
+      Permission.CALENDAR_MANAGE,
+      Permission.CUSTOMER_VIEW,
+      Permission.CUSTOMER_MANAGE,
+      Permission.STAFF_VIEW,
+      Permission.STAFF_MANAGE,
+      Permission.FINANCE_VIEW,
+      Permission.FINANCE_MANAGE,
+      Permission.REPORTS_VIEW,
+      Permission.PRICING_VIEW,
+      Permission.PRICING_MANAGE,
     ],
     [VenueRole.MANAGER]: [
       Permission.VENUE_VIEW,
       Permission.VENUE_EDIT,
-      Permission.VENUE_ASSETS_VIEW,
-      Permission.VENUE_ASSETS_WRITE,
-      Permission.VENUE_BOOKINGS_VIEW,
-      Permission.VENUE_BOOKINGS_WRITE,
-      Permission.VENUE_CUSTOMERS_VIEW,
-      Permission.VENUE_CUSTOMERS_WRITE,
-      Permission.VENUE_STAFF_VIEW,
-      Permission.VENUE_FINANCE_VIEW,
-      Permission.VENUE_REPORTS_VIEW,
-      Permission.VENUE_PRICING_VIEW,
+      Permission.ASSET_VIEW,
+      Permission.ASSET_CREATE,
+      Permission.ASSET_EDIT,
+      Permission.BOOKING_VIEW,
+      Permission.BOOKING_CREATE,
+      Permission.BOOKING_EDIT,
+      Permission.BOOKING_CANCEL,
+      Permission.CALENDAR_VIEW,
+      Permission.CALENDAR_MANAGE,
+      Permission.CUSTOMER_VIEW,
+      Permission.CUSTOMER_MANAGE,
+      Permission.STAFF_VIEW,
+      Permission.FINANCE_VIEW,
+      Permission.REPORTS_VIEW,
+      Permission.PRICING_VIEW,
     ],
     [VenueRole.RECEPTIONIST]: [
       Permission.VENUE_VIEW,
-      Permission.VENUE_ASSETS_VIEW,
-      Permission.VENUE_BOOKINGS_VIEW,
-      Permission.VENUE_BOOKINGS_WRITE,
-      Permission.VENUE_CUSTOMERS_VIEW,
+      Permission.ASSET_VIEW,
+      Permission.BOOKING_VIEW,
+      Permission.BOOKING_CREATE,
+      Permission.BOOKING_EDIT,
+      Permission.CALENDAR_VIEW,
+      Permission.CUSTOMER_VIEW,
     ],
     [VenueRole.CASHIER]: [
       Permission.VENUE_VIEW,
-      Permission.VENUE_BOOKINGS_VIEW,
-      Permission.VENUE_CUSTOMERS_VIEW,
-      Permission.VENUE_FINANCE_VIEW,
+      Permission.BOOKING_VIEW,
+      Permission.CUSTOMER_VIEW,
+      Permission.FINANCE_VIEW,
     ],
   };
 
@@ -227,44 +241,44 @@ export const rolePermissionsData: RolePermissions[] = [
       {
         category: 'امکانات',
         items: [
-          { permission: Permission.VENUE_ASSETS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_ASSETS_WRITE, label: 'ایجاد/ویرایش', enabled: true },
+          { permission: Permission.ASSET_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.ASSET_CREATE, label: 'ایجاد/ویرایش', enabled: true },
         ],
       },
       {
         category: 'رزروها',
         items: [
-          { permission: Permission.VENUE_BOOKINGS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_BOOKINGS_WRITE, label: 'ایجاد/ویرایش', enabled: true },
+          { permission: Permission.BOOKING_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.BOOKING_CREATE, label: 'ایجاد/ویرایش', enabled: true },
         ],
       },
       {
         category: 'مشتریان',
         items: [
-          { permission: Permission.VENUE_CUSTOMERS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_CUSTOMERS_WRITE, label: 'مدیریت', enabled: true },
+          { permission: Permission.CUSTOMER_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.CUSTOMER_MANAGE, label: 'مدیریت', enabled: true },
         ],
       },
       {
         category: 'کارکنان',
         items: [
-          { permission: Permission.VENUE_STAFF_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_STAFF_WRITE, label: 'مدیریت', enabled: true },
+          { permission: Permission.STAFF_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.STAFF_MANAGE, label: 'مدیریت', enabled: true },
         ],
       },
       {
         category: 'مالی',
         items: [
-          { permission: Permission.VENUE_FINANCE_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_FINANCE_WRITE, label: 'مدیریت', enabled: true },
+          { permission: Permission.FINANCE_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.FINANCE_MANAGE, label: 'مدیریت', enabled: true },
         ],
       },
       {
         category: 'گزارشات و قیمت‌گذاری',
         items: [
-          { permission: Permission.VENUE_REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: true },
-          { permission: Permission.VENUE_PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: true },
-          { permission: Permission.VENUE_PRICING_WRITE, label: 'مدیریت قیمت‌ها', enabled: true },
+          { permission: Permission.REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: true },
+          { permission: Permission.PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: true },
+          { permission: Permission.PRICING_MANAGE, label: 'مدیریت قیمت‌ها', enabled: true },
         ],
       },
     ],
@@ -286,44 +300,44 @@ export const rolePermissionsData: RolePermissions[] = [
       {
         category: 'امکانات',
         items: [
-          { permission: Permission.VENUE_ASSETS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_ASSETS_WRITE, label: 'ایجاد/ویرایش', enabled: true },
+          { permission: Permission.ASSET_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.ASSET_CREATE, label: 'ایجاد/ویرایش', enabled: true },
         ],
       },
       {
         category: 'رزروها',
         items: [
-          { permission: Permission.VENUE_BOOKINGS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_BOOKINGS_WRITE, label: 'ایجاد/ویرایش', enabled: true },
+          { permission: Permission.BOOKING_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.BOOKING_CREATE, label: 'ایجاد/ویرایش', enabled: true },
         ],
       },
       {
         category: 'مشتریان',
         items: [
-          { permission: Permission.VENUE_CUSTOMERS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_CUSTOMERS_WRITE, label: 'مدیریت', enabled: true },
+          { permission: Permission.CUSTOMER_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.CUSTOMER_MANAGE, label: 'مدیریت', enabled: true },
         ],
       },
       {
         category: 'کارکنان',
         items: [
-          { permission: Permission.VENUE_STAFF_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_STAFF_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.STAFF_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.STAFF_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'مالی',
         items: [
-          { permission: Permission.VENUE_FINANCE_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_FINANCE_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.FINANCE_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.FINANCE_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'گزارشات و قیمت‌گذاری',
         items: [
-          { permission: Permission.VENUE_REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: true },
-          { permission: Permission.VENUE_PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: true },
-          { permission: Permission.VENUE_PRICING_WRITE, label: 'مدیریت قیمت‌ها', enabled: false },
+          { permission: Permission.REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: true },
+          { permission: Permission.PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: true },
+          { permission: Permission.PRICING_MANAGE, label: 'مدیریت قیمت‌ها', enabled: false },
         ],
       },
     ],
@@ -345,44 +359,44 @@ export const rolePermissionsData: RolePermissions[] = [
       {
         category: 'امکانات',
         items: [
-          { permission: Permission.VENUE_ASSETS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_ASSETS_WRITE, label: 'ایجاد/ویرایش', enabled: false },
+          { permission: Permission.ASSET_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.ASSET_CREATE, label: 'ایجاد/ویرایش', enabled: false },
         ],
       },
       {
         category: 'رزروها',
         items: [
-          { permission: Permission.VENUE_BOOKINGS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_BOOKINGS_WRITE, label: 'ایجاد/ویرایش', enabled: true },
+          { permission: Permission.BOOKING_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.BOOKING_CREATE, label: 'ایجاد/ویرایش', enabled: true },
         ],
       },
       {
         category: 'مشتریان',
         items: [
-          { permission: Permission.VENUE_CUSTOMERS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_CUSTOMERS_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.CUSTOMER_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.CUSTOMER_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'کارکنان',
         items: [
-          { permission: Permission.VENUE_STAFF_VIEW, label: 'مشاهده', enabled: false },
-          { permission: Permission.VENUE_STAFF_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.STAFF_VIEW, label: 'مشاهده', enabled: false },
+          { permission: Permission.STAFF_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'مالی',
         items: [
-          { permission: Permission.VENUE_FINANCE_VIEW, label: 'مشاهده', enabled: false },
-          { permission: Permission.VENUE_FINANCE_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.FINANCE_VIEW, label: 'مشاهده', enabled: false },
+          { permission: Permission.FINANCE_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'گزارشات و قیمت‌گذاری',
         items: [
-          { permission: Permission.VENUE_REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: false },
-          { permission: Permission.VENUE_PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: false },
-          { permission: Permission.VENUE_PRICING_WRITE, label: 'مدیریت قیمت‌ها', enabled: false },
+          { permission: Permission.REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: false },
+          { permission: Permission.PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: false },
+          { permission: Permission.PRICING_MANAGE, label: 'مدیریت قیمت‌ها', enabled: false },
         ],
       },
     ],
@@ -404,44 +418,44 @@ export const rolePermissionsData: RolePermissions[] = [
       {
         category: 'امکانات',
         items: [
-          { permission: Permission.VENUE_ASSETS_VIEW, label: 'مشاهده', enabled: false },
-          { permission: Permission.VENUE_ASSETS_WRITE, label: 'ایجاد/ویرایش', enabled: false },
+          { permission: Permission.ASSET_VIEW, label: 'مشاهده', enabled: false },
+          { permission: Permission.ASSET_CREATE, label: 'ایجاد/ویرایش', enabled: false },
         ],
       },
       {
         category: 'رزروها',
         items: [
-          { permission: Permission.VENUE_BOOKINGS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_BOOKINGS_WRITE, label: 'ایجاد/ویرایش', enabled: false },
+          { permission: Permission.BOOKING_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.BOOKING_CREATE, label: 'ایجاد/ویرایش', enabled: false },
         ],
       },
       {
         category: 'مشتریان',
         items: [
-          { permission: Permission.VENUE_CUSTOMERS_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_CUSTOMERS_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.CUSTOMER_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.CUSTOMER_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'کارکنان',
         items: [
-          { permission: Permission.VENUE_STAFF_VIEW, label: 'مشاهده', enabled: false },
-          { permission: Permission.VENUE_STAFF_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.STAFF_VIEW, label: 'مشاهده', enabled: false },
+          { permission: Permission.STAFF_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'مالی',
         items: [
-          { permission: Permission.VENUE_FINANCE_VIEW, label: 'مشاهده', enabled: true },
-          { permission: Permission.VENUE_FINANCE_WRITE, label: 'مدیریت', enabled: false },
+          { permission: Permission.FINANCE_VIEW, label: 'مشاهده', enabled: true },
+          { permission: Permission.FINANCE_MANAGE, label: 'مدیریت', enabled: false },
         ],
       },
       {
         category: 'گزارشات و قیمت‌گذاری',
         items: [
-          { permission: Permission.VENUE_REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: false },
-          { permission: Permission.VENUE_PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: false },
-          { permission: Permission.VENUE_PRICING_WRITE, label: 'مدیریت قیمت‌ها', enabled: false },
+          { permission: Permission.REPORTS_VIEW, label: 'مشاهده گزارشات', enabled: false },
+          { permission: Permission.PRICING_VIEW, label: 'مشاهده قیمت‌ها', enabled: false },
+          { permission: Permission.PRICING_MANAGE, label: 'مدیریت قیمت‌ها', enabled: false },
         ],
       },
     ],
