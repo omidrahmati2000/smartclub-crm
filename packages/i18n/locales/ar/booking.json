@@ -1,0 +1,69 @@
+{
+  "slotBased": {
+    "title": "حجز {{assetName}}",
+    "selectDate": "اختر التاريخ",
+    "selectSlot": "اختر الوقت",
+    "availableSlots": "الأوقات المتاحة",
+    "noSlotsAvailable": "لا توجد أوقات متاحة في هذا التاريخ",
+    "selectDateFirst": "يرجى اختيار التاريخ أولاً",
+    "slotDuration": "المدة: {{duration}} دقيقة",
+    "available": "متاح",
+    "booked": "محجوز",
+    "selected": "محدد"
+  },
+  "durationBased": {
+    "title": "حجز {{assetName}}",
+    "selectDate": "اختر التاريخ",
+    "selectStartTime": "اختر وقت البدء",
+    "selectDuration": "اختر المدة",
+    "availableTimes": "أوقات البدء المتاحة",
+    "noTimesAvailable": "لا توجد أوقات بدء متاحة في هذا التاريخ",
+    "selectDateFirst": "يرجى اختيار التاريخ أولاً",
+    "selectTimeFirst": "يرجى اختيار وقت البدء أولاً",
+    "duration": "المدة",
+    "minutes": "دقيقة",
+    "minDuration": "{{min}} دقيقة كحد أدنى",
+    "maxDuration": "{{max}} دقيقة كحد أقصى",
+    "pricePerHour": "{{price}} / ساعة",
+    "estimatedEnd": "وقت الانتهاء التقريبي: {{time}}",
+    "available": "متاح",
+    "selected": "محدد"
+  },
+  "summary": {
+    "title": "ملخص الحجز",
+    "venue": "المركز",
+    "asset": "المرفق",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "duration": "المدة",
+    "price": "السعر",
+    "total": "المجموع",
+    "minutes": "دقيقة",
+    "confirm": "تأكيد والدفع",
+    "cancel": "إلغاء",
+    "processing": "جارٍ المعالجة...",
+    "loginRequired": "يجب تسجيل الدخول للحجز",
+    "loginNow": "تسجيل الدخول"
+  },
+  "confirmation": {
+    "title": "تم تأكيد حجزك!",
+    "subtitle": "تم إرسال تفاصيل الحجز إلى بريدك الإلكتروني",
+    "bookingId": "رقم الحجز",
+    "viewBooking": "عرض الحجز",
+    "backToVenue": "العودة إلى المركز",
+    "bookAnother": "حجز جديد"
+  },
+  "error": {
+    "title": "خطأ في الحجز",
+    "slotUnavailable": "هذا الوقت لم يعد متاحاً",
+    "tryAgain": "إعادة المحاولة",
+    "unknownError": "حدث خطأ. يرجى المحاولة مرة أخرى"
+  },
+  "calendar": {
+    "today": "اليوم",
+    "tomorrow": "غداً",
+    "selectDate": "اختر التاريخ",
+    "previousMonth": "الشهر السابق",
+    "nextMonth": "الشهر التالي"
+  }
+}

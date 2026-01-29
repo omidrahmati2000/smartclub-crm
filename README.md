@@ -271,12 +271,13 @@ pnpm dev
 |------|-----|-----|-------|--------------|
 | **فارسی** | `fa` | RTL | ✅ کامل | ~500 کلید |
 | **انگلیسی** | `en` | LTR | ✅ کامل | ~500 کلید |
+| **عربی** | `ar` | RTL | ✅ کامل | ~500 کلید |
 
 ### ساختار فایل‌های ترجمه
 
 ```
 packages/i18n/locales/
-├── fa/                              # فارسی (اصلی)
+├── fa/                              # فارسی (اصلی) - RTL
 │   ├── common.json                  # کلمات مشترک
 │   ├── auth.json                    # احراز هویت
 │   ├── venue-admin.json             # پنل باشگاه
@@ -284,7 +285,15 @@ packages/i18n/locales/
 │   ├── explore.json                 # جستجو
 │   ├── my-bookings.json             # رزروهای من
 │   └── venue.json                   # اطلاعات باشگاه
-└── en/                              # English (secondary)
+├── en/                              # English (secondary) - LTR
+│   ├── common.json
+│   ├── auth.json
+│   ├── venue-admin.json
+│   ├── booking.json
+│   ├── explore.json
+│   ├── my-bookings.json
+│   └── venue.json
+└── ar/                              # العربية - RTL
     ├── common.json
     ├── auth.json
     ├── venue-admin.json
@@ -317,6 +326,7 @@ function MyComponent() {
 // در URL:
 /fa/overview  → فارسی
 /en/overview  → انگلیسی
+/ar/overview  → عربی
 
 // در کد:
 import { useRouter, usePathname } from 'next/navigation';

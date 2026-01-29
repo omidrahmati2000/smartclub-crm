@@ -1,0 +1,47 @@
+{
+  "title": "استكشاف المراكز",
+  "subtitle": "ابحث واحجز في المراكز الترفيهية والرياضية",
+  "search": {
+    "placeholder": "ابحث عن مركز أو رياضة أو منطقة...",
+    "button": "بحث",
+    "clear": "مسح"
+  },
+  "filters": {
+    "title": "التصفية",
+    "city": "المدينة",
+    "sport": "نوع الرياضة",
+    "amenities": "المرافق",
+    "priceRange": "نطاق السعر",
+    "rating": "التقييم",
+    "availability": "التوفر",
+    "all": "الكل",
+    "apply": "تطبيق",
+    "reset": "إعادة تعيين"
+  },
+  "sort": {
+    "label": "ترتيب حسب",
+    "relevance": "الأكثر صلة",
+    "rating": "الأعلى تقييماً",
+    "reviewCount": "الأكثر تقييمات",
+    "priceAsc": "الأرخص",
+    "priceDesc": "الأغلى",
+    "newest": "الأحدث"
+  },
+  "results": {
+    "showing": "عرض {{count}} مركز",
+    "noResults": "لم يتم العثور على مراكز",
+    "noResultsSubtitle": "يرجى تجربة فلاتر أخرى أو تغيير البحث"
+  },
+  "venueCard": {
+    "rating": "التقييم",
+    "reviews": "تقييم",
+    "openNow": "مفتوح الآن",
+    "closedNow": "مغلق",
+    "viewDetails": "عرض التفاصيل",
+    "bookNow": "احجز الآن",
+    "from": "من",
+    "perHour": "/ ساعة",
+    "perSlot": "/ فترة",
+    "perSession": "/ جلسة"
+  }
+}

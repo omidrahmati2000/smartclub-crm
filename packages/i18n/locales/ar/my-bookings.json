@@ -1,0 +1,57 @@
+{
+  "title": "حجوزاتي",
+  "subtitle": "عرض وإدارة حجوزاتك",
+  "tabs": {
+    "upcoming": "القادمة",
+    "past": "السابقة",
+    "cancelled": "الملغية",
+    "all": "الكل"
+  },
+  "filters": {
+    "search": "البحث في الحجوزات...",
+    "sortBy": "ترتيب حسب",
+    "dateAsc": "الأقدم",
+    "dateDesc": "الأحدث",
+    "priceAsc": "الأرخص",
+    "priceDesc": "الأغلى"
+  },
+  "card": {
+    "venue": "المركز",
+    "asset": "المرفق",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "duration": "المدة",
+    "minutes": "دقيقة",
+    "price": "السعر",
+    "status": "الحالة",
+    "bookingId": "رقم الحجز",
+    "viewDetails": "عرض التفاصيل",
+    "cancel": "إلغاء الحجز",
+    "cancelled": "ملغي",
+    "confirmCancel": "هل أنت متأكد؟",
+    "cancelConfirm": "نعم، إلغاء",
+    "cancelDecline": "لا"
+  },
+  "status": {
+    "pending": "قيد الانتظار",
+    "confirmed": "مؤكد",
+    "checkedIn": "تم الحضور",
+    "completed": "مكتمل",
+    "cancelled": "ملغي",
+    "noShow": "عدم الحضور"
+  },
+  "empty": {
+    "title": "لا توجد حجوزات",
+    "subtitle": "ليس لديك أي حجوزات بعد",
+    "action": "استكشاف المراكز",
+    "noUpcoming": "لا توجد حجوزات قادمة",
+    "noPast": "لا توجد حجوزات سابقة",
+    "noCancelled": "لا توجد حجوزات ملغية"
+  },
+  "stats": {
+    "total": "إجمالي الحجوزات",
+    "upcoming": "القادمة",
+    "completed": "المكتملة",
+    "spent": "إجمالي الإنفاق"
+  }
+}

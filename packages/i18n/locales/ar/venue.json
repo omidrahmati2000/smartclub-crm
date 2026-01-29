@@ -1,0 +1,75 @@
+{
+  "profile": {
+    "title": "حول المركز",
+    "overview": "نظرة عامة",
+    "assets": "المرافق والموارد",
+    "reviews": "التقييمات",
+    "location": "الموقع",
+    "about": "حول",
+    "operatingHours": "ساعات العمل",
+    "amenities": "المرافق",
+    "sports": "الرياضات",
+    "gallery": "معرض الصور",
+    "contactInfo": "معلومات الاتصال",
+    "bookNow": "احجز الآن"
+  },
+  "hours": {
+    "openNow": "مفتوح الآن",
+    "closedNow": "مغلق",
+    "opensAt": "يفتح في {{time}}",
+    "closesAt": "يغلق في {{time}}",
+    "closed": "مغلق",
+    "days": {
+      "0": "الأحد",
+      "1": "الاثنين",
+      "2": "الثلاثاء",
+      "3": "الأربعاء",
+      "4": "الخميس",
+      "5": "الجمعة",
+      "6": "السبت"
+    }
+  },
+  "assets": {
+    "title": "المرافق المتاحة للحجز",
+    "available": "متاح",
+    "unavailable": "محجوز",
+    "viewSchedule": "عرض الجدول",
+    "bookAsset": "حجز {{name}}",
+    "capacity": "السعة",
+    "people": "شخص",
+    "duration": "المدة",
+    "minutes": "دقيقة",
+    "price": "السعر",
+    "perHour": "في الساعة",
+    "perSlot": "للفترة",
+    "perSession": "للجلسة",
+    "slotBased": "حجز بالفترة",
+    "durationBased": "حجز بالمدة",
+    "capacityBased": "حجز بالجلسة",
+    "openSession": "جلسة مفتوحة"
+  },
+  "reviews": {
+    "title": "التقييمات والمراجعات",
+    "rating": "التقييم",
+    "outOf": "من 5",
+    "basedOn": "بناءً على {{count}} تقييم",
+    "writeReview": "اكتب تقييماً",
+    "readMore": "اقرأ المزيد",
+    "showLess": "عرض أقل",
+    "noReviews": "لا توجد تقييمات بعد",
+    "beFirst": "كن أول من يقيّم"
+  },
+  "contact": {
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "address": "العنوان",
+    "website": "الموقع الإلكتروني",
+    "getDirections": "الاتجاهات",
+    "callNow": "اتصل الآن"
+  },
+  "notFound": {
+    "title": "المركز غير موجود",
+    "description": "عذراً، لم يتم العثور على المركز المطلوب.",
+    "backToExplore": "العودة إلى صفحة الاستكشاف"
+  }
+}
