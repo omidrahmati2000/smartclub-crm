@@ -1,0 +1,68 @@
+{
+  "title": "الملف الشخصي",
+  "subtitle": "إدارة إعدادات حسابك",
+  "tabs": {
+    "info": "المعلومات الشخصية",
+    "preferences": "التفضيلات",
+    "security": "الأمان"
+  },
+  "info": {
+    "title": "المعلومات الشخصية",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "bio": "نبذة عني",
+    "bioPlaceholder": "أخبرنا عن نفسك...",
+    "avatar": "صورة الملف الشخصي",
+    "uploadAvatar": "رفع صورة",
+    "removeAvatar": "إزالة",
+    "save": "حفظ التغييرات",
+    "saving": "جارٍ الحفظ...",
+    "saved": "تم حفظ التغييرات بنجاح"
+  },
+  "preferences": {
+    "title": "التفضيلات",
+    "language": "اللغة",
+    "languageDescription": "اختر لغتك المفضلة",
+    "sports": "الرياضات المفضلة",
+    "sportsDescription": "اختر الرياضات التي تهتم بها",
+    "notifications": "الإشعارات",
+    "notificationsDescription": "إدارة تفضيلات الإشعارات",
+    "emailNotifications": "إشعارات البريد الإلكتروني",
+    "pushNotifications": "الإشعارات الفورية",
+    "smsNotifications": "إشعارات الرسائل القصيرة",
+    "bookingReminders": "تذكيرات الحجز",
+    "promotions": "العروض والتخفيضات"
+  },
+  "security": {
+    "title": "الأمان",
+    "changePassword": "تغيير كلمة المرور",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور الجديدة",
+    "updatePassword": "تحديث كلمة المرور",
+    "updating": "جارٍ التحديث...",
+    "passwordUpdated": "تم تحديث كلمة المرور بنجاح",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين",
+    "incorrectPassword": "كلمة المرور الحالية غير صحيحة",
+    "twoFactor": "المصادقة الثنائية",
+    "twoFactorDescription": "أضف طبقة أمان إضافية لحسابك",
+    "enable2FA": "تفعيل المصادقة الثنائية",
+    "disable2FA": "إلغاء تفعيل المصادقة الثنائية",
+    "sessions": "الجلسات النشطة",
+    "sessionsDescription": "إدارة جلساتك النشطة",
+    "currentSession": "الجلسة الحالية",
+    "logoutOthers": "تسجيل الخروج من الجلسات الأخرى"
+  },
+  "stats": {
+    "totalBookings": "إجمالي الحجوزات",
+    "memberSince": "عضو منذ",
+    "sportsPlayed": "الرياضات التي مارستها"
+  },
+  "languages": {
+    "fa": "الفارسية",
+    "en": "الإنجليزية",
+    "ar": "العربية"
+  }
+}

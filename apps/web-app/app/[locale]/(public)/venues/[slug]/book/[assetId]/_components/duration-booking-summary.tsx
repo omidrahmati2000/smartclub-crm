@@ -84,9 +84,7 @@ export function DurationBookingSummary({
 
     try {
       const dateStr = selectedDate.toISOString().split('T')[0];
-      const startDateTime = `${dateStr}T${selectedStartTime}:00`;
       const endTime = calculateEndTime(selectedStartTime, selectedDuration);
-      const endDateTime = `${dateStr}T${endTime}:00`;
 
       const response = await fetch('/api/bookings', {
         method: 'POST',
@@ -94,8 +92,9 @@ export function DurationBookingSummary({
         body: JSON.stringify({
           assetId: asset.id,
           userId: session.user.id,
-          startTime: startDateTime,
-          endTime: endDateTime,
+          date: dateStr,
+          startTime: selectedStartTime,
+          endTime: endTime,
           duration: selectedDuration,
           totalPrice: calculatePrice(),
           currency: asset.currency,

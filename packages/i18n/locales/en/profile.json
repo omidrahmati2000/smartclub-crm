@@ -1,0 +1,68 @@
+{
+  "title": "Profile",
+  "subtitle": "Manage your account settings",
+  "tabs": {
+    "info": "Personal Info",
+    "preferences": "Preferences",
+    "security": "Security"
+  },
+  "info": {
+    "title": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself...",
+    "avatar": "Profile Picture",
+    "uploadAvatar": "Upload Photo",
+    "removeAvatar": "Remove",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "saved": "Changes saved successfully"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "language": "Language",
+    "languageDescription": "Select your preferred language",
+    "sports": "Preferred Sports",
+    "sportsDescription": "Select sports you're interested in",
+    "notifications": "Notifications",
+    "notificationsDescription": "Manage your notification preferences",
+    "emailNotifications": "Email Notifications",
+    "pushNotifications": "Push Notifications",
+    "smsNotifications": "SMS Notifications",
+    "bookingReminders": "Booking Reminders",
+    "promotions": "Promotions & Offers"
+  },
+  "security": {
+    "title": "Security",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "updatePassword": "Update Password",
+    "updating": "Updating...",
+    "passwordUpdated": "Password updated successfully",
+    "passwordMismatch": "Passwords do not match",
+    "incorrectPassword": "Current password is incorrect",
+    "twoFactor": "Two-Factor Authentication",
+    "twoFactorDescription": "Add an extra layer of security to your account",
+    "enable2FA": "Enable 2FA",
+    "disable2FA": "Disable 2FA",
+    "sessions": "Active Sessions",
+    "sessionsDescription": "Manage your active sessions",
+    "currentSession": "Current Session",
+    "logoutOthers": "Logout Other Sessions"
+  },
+  "stats": {
+    "totalBookings": "Total Bookings",
+    "memberSince": "Member Since",
+    "sportsPlayed": "Sports Played"
+  },
+  "languages": {
+    "fa": "Persian (Farsi)",
+    "en": "English",
+    "ar": "Arabic"
+  }
+}

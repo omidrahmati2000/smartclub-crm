@@ -1,0 +1,68 @@
+{
+  "title": "پروفایل",
+  "subtitle": "مدیریت تنظیمات حساب کاربری",
+  "tabs": {
+    "info": "اطلاعات شخصی",
+    "preferences": "ترجیحات",
+    "security": "امنیت"
+  },
+  "info": {
+    "title": "اطلاعات شخصی",
+    "firstName": "نام",
+    "lastName": "نام خانوادگی",
+    "email": "ایمیل",
+    "phone": "شماره تلفن",
+    "bio": "درباره من",
+    "bioPlaceholder": "خودتان را معرفی کنید...",
+    "avatar": "تصویر پروفایل",
+    "uploadAvatar": "آپلود تصویر",
+    "removeAvatar": "حذف",
+    "save": "ذخیره تغییرات",
+    "saving": "در حال ذخیره...",
+    "saved": "تغییرات با موفقیت ذخیره شد"
+  },
+  "preferences": {
+    "title": "ترجیحات",
+    "language": "زبان",
+    "languageDescription": "زبان مورد نظر خود را انتخاب کنید",
+    "sports": "ورزش‌های مورد علاقه",
+    "sportsDescription": "ورزش‌هایی که به آن‌ها علاقه‌مندید را انتخاب کنید",
+    "notifications": "اعلان‌ها",
+    "notificationsDescription": "تنظیمات اعلان‌های خود را مدیریت کنید",
+    "emailNotifications": "اعلان‌های ایمیل",
+    "pushNotifications": "اعلان‌های پوش",
+    "smsNotifications": "اعلان‌های پیامکی",
+    "bookingReminders": "یادآوری رزروها",
+    "promotions": "تخفیف‌ها و پیشنهادات"
+  },
+  "security": {
+    "title": "امنیت",
+    "changePassword": "تغییر رمز عبور",
+    "currentPassword": "رمز عبور فعلی",
+    "newPassword": "رمز عبور جدید",
+    "confirmPassword": "تأیید رمز عبور جدید",
+    "updatePassword": "به‌روزرسانی رمز عبور",
+    "updating": "در حال به‌روزرسانی...",
+    "passwordUpdated": "رمز عبور با موفقیت به‌روزرسانی شد",
+    "passwordMismatch": "رمزهای عبور مطابقت ندارند",
+    "incorrectPassword": "رمز عبور فعلی اشتباه است",
+    "twoFactor": "احراز هویت دو مرحله‌ای",
+    "twoFactorDescription": "یک لایه امنیتی اضافی به حساب کاربری خود اضافه کنید",
+    "enable2FA": "فعال‌سازی ۲FA",
+    "disable2FA": "غیرفعال‌سازی ۲FA",
+    "sessions": "جلسات فعال",
+    "sessionsDescription": "جلسات فعال خود را مدیریت کنید",
+    "currentSession": "جلسه فعلی",
+    "logoutOthers": "خروج از سایر جلسات"
+  },
+  "stats": {
+    "totalBookings": "کل رزروها",
+    "memberSince": "عضویت از",
+    "sportsPlayed": "ورزش‌های انجام شده"
+  },
+  "languages": {
+    "fa": "فارسی",
+    "en": "انگلیسی",
+    "ar": "عربی"
+  }
+}

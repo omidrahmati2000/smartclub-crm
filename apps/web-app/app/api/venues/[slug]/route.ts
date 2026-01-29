@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { mockVenues } from '@smartclub/mock-data';
+import { mockVenues } from '@smartclub/mock-data/fixtures';
 
 export async function GET(
     request: Request,

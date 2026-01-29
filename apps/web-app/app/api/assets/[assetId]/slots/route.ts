@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { mockAssets, mockVenues, mockBookings } from '@smartclub/mock-data';
+import { mockAssets, mockVenues, mockBookings } from '@smartclub/mock-data/fixtures';
 import { BookingStatus } from '@smartclub/types';
 
 export async function GET(

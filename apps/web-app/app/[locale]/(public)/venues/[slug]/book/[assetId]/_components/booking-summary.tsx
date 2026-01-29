@@ -68,10 +68,8 @@ export function BookingSummary({
     setError(null);
 
     try {
-      // Create ISO datetime strings
+      // Extract date and time separately
       const dateStr = selectedDate.toISOString().split('T')[0];
-      const startDateTime = `${dateStr}T${selectedSlot.startTime}:00`;
-      const endDateTime = `${dateStr}T${selectedSlot.endTime}:00`;
 
       const response = await fetch('/api/bookings', {
         method: 'POST',
@@ -79,8 +77,9 @@ export function BookingSummary({
         body: JSON.stringify({
           assetId: asset.id,
           userId: session.user.id,
-          startTime: startDateTime,
-          endTime: endDateTime,
+          date: dateStr,
+          startTime: selectedSlot.startTime,
+          endTime: selectedSlot.endTime,
           duration: asset.slotDuration || 90,
           totalPrice: selectedSlot.price,
           currency: asset.currency,
