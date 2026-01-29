@@ -1,3 +1,6 @@
+import { VenueTaxSettings } from './tax-settings';
+import { VenueComplianceSettings } from './compliance';
+
 export interface VenueSettings {
   id: string;
   venueId: string;
@@ -10,6 +13,12 @@ export interface VenueSettings {
 
   // Notification Preferences
   notificationPreferences: NotificationPreferences;
+
+  // NEW: Tax Settings
+  taxSettings?: VenueTaxSettings;
+
+  // NEW: Compliance & GDPR Settings
+  complianceSettings?: VenueComplianceSettings;
 
   updatedAt: string;
   updatedBy: string;

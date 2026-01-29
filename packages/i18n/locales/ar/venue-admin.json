@@ -546,7 +546,10 @@
       "hours": "ساعات العمل",
       "bookingRules": "قواعد الحجز",
       "whiteLabel": "التخصيص",
-      "notifications": "الإشعارات"
+      "notifications": "الإشعارات",
+      "location": "الموقع والمنطقة",
+      "tax": "إعدادات الضرائب",
+      "compliance": "الامتثال"
     },
     "profile": {
       "title": "ملف المركز",

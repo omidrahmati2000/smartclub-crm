@@ -1,0 +1,438 @@
+import type { CountryInfo, StateProvince, CountryTaxConfig } from '@smartclub/types';
+import { Country, Currency, TaxType, TaxDisplayMode } from '@smartclub/types';
+
+/**
+ * Complete country information for UI display
+ */
+export const mockCountries: CountryInfo[] = [
+  // Middle East
+  {
+    code: Country.IR,
+    name: 'Iran',
+    nameLocal: 'ایران',
+    names: { en: 'Iran', fa: 'ایران', ar: 'إيران' },
+    flag: '🇮🇷',
+    dialCode: '+98',
+    hasStates: true,
+    stateLabel: 'Province',
+    defaultTimezone: 'Asia/Tehran',
+    postalCode: { required: true, label: 'Postal Code', pattern: '^\\d{10}$', example: '1234567890' },
+    addressFormat: '{addressLine1}, {city}, {state}',
+    region: 'middle_east',
+  },
+  {
+    code: Country.AE,
+    name: 'United Arab Emirates',
+    nameLocal: 'الإمارات العربية المتحدة',
+    names: { en: 'United Arab Emirates', fa: 'امارات متحده عربی', ar: 'الإمارات العربية المتحدة' },
+    flag: '🇦🇪',
+    dialCode: '+971',
+    hasStates: true,
+    stateLabel: 'Emirate',
+    defaultTimezone: 'Asia/Dubai',
+    postalCode: { required: false, label: 'P.O. Box', pattern: '^[0-9]{5,6}$', example: '00000' },
+    addressFormat: '{addressLine1}, {city}, {state}',
+    region: 'middle_east',
+  },
+  {
+    code: Country.SA,
+    name: 'Saudi Arabia',
+    nameLocal: 'المملكة العربية السعودية',
+    names: { en: 'Saudi Arabia', fa: 'عربستان سعودی', ar: 'المملكة العربية السعودية' },
+    flag: '🇸🇦',
+    dialCode: '+966',
+    hasStates: true,
+    stateLabel: 'Province',
+    defaultTimezone: 'Asia/Riyadh',
+    postalCode: { required: false, label: 'Postal Code', pattern: '^\\d{5}(-\\d{4})?$', example: '12345' },
+    addressFormat: '{addressLine1}, {city}, {postalCode}',
+    region: 'middle_east',
+  },
+  {
+    code: Country.QA,
+    name: 'Qatar',
+    nameLocal: 'قطر',
+    names: { en: 'Qatar', fa: 'قطر', ar: 'قطر' },
+    flag: '🇶🇦',
+    dialCode: '+974',
+    hasStates: false,
+    defaultTimezone: 'Asia/Qatar',
+    postalCode: { required: false, label: 'P.O. Box', pattern: '^.*$', example: '' },
+    addressFormat: '{addressLine1}, {city}',
+    region: 'middle_east',
+  },
+  {
+    code: Country.TR,
+    name: 'Turkey',
+    nameLocal: 'Türkiye',
+    names: { en: 'Turkey', fa: 'ترکیه', ar: 'تركيا' },
+    flag: '🇹🇷',
+    dialCode: '+90',
+    hasStates: true,
+    stateLabel: 'Province',
+    defaultTimezone: 'Europe/Istanbul',
+    postalCode: { required: true, label: 'Postal Code', pattern: '^\\d{5}$', example: '34000' },
+    addressFormat: '{addressLine1}, {postalCode} {city}',
+    region: 'middle_east',
+  },
+
+  // Europe
+  {
+    code: Country.DE,
+    name: 'Germany',
+    nameLocal: 'Deutschland',
+    names: { en: 'Germany', fa: 'آلمان', ar: 'ألمانيا' },
+    flag: '🇩🇪',
+    dialCode: '+49',
+    hasStates: true,
+    stateLabel: 'State',
+    defaultTimezone: 'Europe/Berlin',
+    postalCode: { required: true, label: 'PLZ', pattern: '^\\d{5}$', example: '10115' },
+    addressFormat: '{addressLine1}, {postalCode} {city}',
+    region: 'europe',
+  },
+  {
+    code: Country.FR,
+    name: 'France',
+    nameLocal: 'France',
+    names: { en: 'France', fa: 'فرانسه', ar: 'فرنسا' },
+    flag: '🇫🇷',
+    dialCode: '+33',
+    hasStates: false,
+    defaultTimezone: 'Europe/Paris',
+    postalCode: { required: true, label: 'Code Postal', pattern: '^\\d{5}$', example: '75001' },
+    addressFormat: '{addressLine1}, {postalCode} {city}',
+    region: 'europe',
+  },
+  {
+    code: Country.GB,
+    name: 'United Kingdom',
+    nameLocal: 'United Kingdom',
+    names: { en: 'United Kingdom', fa: 'بریتانیا', ar: 'المملكة المتحدة' },
+    flag: '🇬🇧',
+    dialCode: '+44',
+    hasStates: false,
+    defaultTimezone: 'Europe/London',
+    postalCode: { required: true, label: 'Postcode', pattern: '^[A-Z]{1,2}\\d[A-Z\\d]?\\s?\\d[A-Z]{2}$', example: 'SW1A 1AA' },
+    addressFormat: '{addressLine1}, {city}, {postalCode}',
+    region: 'europe',
+  },
+  {
+    code: Country.ES,
+    name: 'Spain',
+    nameLocal: 'España',
+    names: { en: 'Spain', fa: 'اسپانیا', ar: 'إسبانيا' },
+    flag: '🇪🇸',
+    dialCode: '+34',
+    hasStates: true,
+    stateLabel: 'Province',
+    defaultTimezone: 'Europe/Madrid',
+    postalCode: { required: true, label: 'Código Postal', pattern: '^\\d{5}$', example: '28001' },
+    addressFormat: '{addressLine1}, {postalCode} {city}, {state}',
+    region: 'europe',
+  },
+  {
+    code: Country.IT,
+    name: 'Italy',
+    nameLocal: 'Italia',
+    names: { en: 'Italy', fa: 'ایتالیا', ar: 'إيطاليا' },
+    flag: '🇮🇹',
+    dialCode: '+39',
+    hasStates: true,
+    stateLabel: 'Region',
+    defaultTimezone: 'Europe/Rome',
+    postalCode: { required: true, label: 'CAP', pattern: '^\\d{5}$', example: '00100' },
+    addressFormat: '{addressLine1}, {postalCode} {city} ({state})',
+    region: 'europe',
+  },
+  {
+    code: Country.NL,
+    name: 'Netherlands',
+    nameLocal: 'Nederland',
+    names: { en: 'Netherlands', fa: 'هلند', ar: 'هولندا' },
+    flag: '🇳🇱',
+    dialCode: '+31',
+    hasStates: false,
+    defaultTimezone: 'Europe/Amsterdam',
+    postalCode: { required: true, label: 'Postcode', pattern: '^\\d{4}\\s?[A-Z]{2}$', example: '1012 AB' },
+    addressFormat: '{addressLine1}, {postalCode} {city}',
+    region: 'europe',
+  },
+
+  // Americas
+  {
+    code: Country.US,
+    name: 'United States',
+    nameLocal: 'United States',
+    names: { en: 'United States', fa: 'ایالات متحده', ar: 'الولايات المتحدة' },
+    flag: '🇺🇸',
+    dialCode: '+1',
+    hasStates: true,
+    stateLabel: 'State',
+    defaultTimezone: 'America/New_York',
+    postalCode: { required: true, label: 'ZIP Code', pattern: '^\\d{5}(-\\d{4})?$', example: '10001' },
+    addressFormat: '{addressLine1}, {city}, {state} {postalCode}',
+    region: 'americas',
+  },
+  {
+    code: Country.CA,
+    name: 'Canada',
+    nameLocal: 'Canada',
+    names: { en: 'Canada', fa: 'کانادا', ar: 'كندا' },
+    flag: '🇨🇦',
+    dialCode: '+1',
+    hasStates: true,
+    stateLabel: 'Province',
+    defaultTimezone: 'America/Toronto',
+    postalCode: { required: true, label: 'Postal Code', pattern: '^[A-Z]\\d[A-Z]\\s?\\d[A-Z]\\d$', example: 'K1A 0B1' },
+    addressFormat: '{addressLine1}, {city}, {state} {postalCode}',
+    region: 'americas',
+  },
+  {
+    code: Country.BR,
+    name: 'Brazil',
+    nameLocal: 'Brasil',
+    names: { en: 'Brazil', fa: 'برزیل', ar: 'البرازيل' },
+    flag: '🇧🇷',
+    dialCode: '+55',
+    hasStates: true,
+    stateLabel: 'State',
+    defaultTimezone: 'America/Sao_Paulo',
+    postalCode: { required: true, label: 'CEP', pattern: '^\\d{5}-?\\d{3}$', example: '01310-100' },
+    addressFormat: '{addressLine1}, {city} - {state}, {postalCode}',
+    region: 'americas',
+  },
+  {
+    code: Country.MX,
+    name: 'Mexico',
+    nameLocal: 'México',
+    names: { en: 'Mexico', fa: 'مکزیک', ar: 'المكسيك' },
+    flag: '🇲🇽',
+    dialCode: '+52',
+    hasStates: true,
+    stateLabel: 'State',
+    defaultTimezone: 'America/Mexico_City',
+    postalCode: { required: true, label: 'Código Postal', pattern: '^\\d{5}$', example: '06600' },
+    addressFormat: '{addressLine1}, {city}, {state} {postalCode}',
+    region: 'americas',
+  },
+
+  // Asia Pacific
+  {
+    code: Country.AU,
+    name: 'Australia',
+    nameLocal: 'Australia',
+    names: { en: 'Australia', fa: 'استرالیا', ar: 'أستراليا' },
+    flag: '🇦🇺',
+    dialCode: '+61',
+    hasStates: true,
+    stateLabel: 'State',
+    defaultTimezone: 'Australia/Sydney',
+    postalCode: { required: true, label: 'Postcode', pattern: '^\\d{4}$', example: '2000' },
+    addressFormat: '{addressLine1}, {city} {state} {postalCode}',
+    region: 'asia_pacific',
+  },
+  {
+    code: Country.IN,
+    name: 'India',
+    nameLocal: 'भारत',
+    names: { en: 'India', fa: 'هند', ar: 'الهند' },
+    flag: '🇮🇳',
+    dialCode: '+91',
+    hasStates: true,
+    stateLabel: 'State',
+    defaultTimezone: 'Asia/Kolkata',
+    postalCode: { required: true, label: 'PIN Code', pattern: '^\\d{6}$', example: '110001' },
+    addressFormat: '{addressLine1}, {city}, {state} {postalCode}',
+    region: 'asia_pacific',
+  },
+  {
+    code: Country.SG,
+    name: 'Singapore',
+    nameLocal: 'Singapore',
+    names: { en: 'Singapore', fa: 'سنگاپور', ar: 'سنغافورة' },
+    flag: '🇸🇬',
+    dialCode: '+65',
+    hasStates: false,
+    defaultTimezone: 'Asia/Singapore',
+    postalCode: { required: true, label: 'Postal Code', pattern: '^\\d{6}$', example: '018956' },
+    addressFormat: '{addressLine1}, Singapore {postalCode}',
+    region: 'asia_pacific',
+  },
+  {
+    code: Country.JP,
+    name: 'Japan',
+    nameLocal: '日本',
+    names: { en: 'Japan', fa: 'ژاپن', ar: 'اليابان' },
+    flag: '🇯🇵',
+    dialCode: '+81',
+    hasStates: true,
+    stateLabel: 'Prefecture',
+    defaultTimezone: 'Asia/Tokyo',
+    postalCode: { required: true, label: 'Postal Code', pattern: '^\\d{3}-?\\d{4}$', example: '100-0001' },
+    addressFormat: '{postalCode} {state} {city} {addressLine1}',
+    region: 'asia_pacific',
+  },
+  {
+    code: Country.KR,
+    name: 'South Korea',
+    nameLocal: '대한민국',
+    names: { en: 'South Korea', fa: 'کره جنوبی', ar: 'كوريا الجنوبية' },
+    flag: '🇰🇷',
+    dialCode: '+82',
+    hasStates: true,
+    stateLabel: 'Province',
+    defaultTimezone: 'Asia/Seoul',
+    postalCode: { required: true, label: 'Postal Code', pattern: '^\\d{5}$', example: '03051' },
+    addressFormat: '{state} {city} {addressLine1}, {postalCode}',
+    region: 'asia_pacific',
+  },
+
+  // Africa
+  {
+    code: Country.ZA,
+    name: 'South Africa',
+    nameLocal: 'South Africa',
+    names: { en: 'South Africa', fa: 'آفریقای جنوبی', ar: 'جنوب أفريقيا' },
+    flag: '🇿🇦',
+    dialCode: '+27',
+    hasStates: true,
+    stateLabel: 'Province',
+    defaultTimezone: 'Africa/Johannesburg',
+    postalCode: { required: true, label: 'Postal Code', pattern: '^\\d{4}$', example: '2000' },
+    addressFormat: '{addressLine1}, {city}, {state}, {postalCode}',
+    region: 'africa',
+  },
+];
+
+/**
+ * States/provinces by country
+ */
+export const mockStates: Partial<Record<Country, StateProvince[]>> = {
+  [Country.IR]: [
+    { code: 'TEH', name: 'Tehran', nameLocal: 'تهران', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'ISF', name: 'Isfahan', nameLocal: 'اصفهان', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'FRS', name: 'Fars', nameLocal: 'فارس', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'KHZ', name: 'Khuzestan', nameLocal: 'خوزستان', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'AZS', name: 'East Azerbaijan', nameLocal: 'آذربایجان شرقی', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'AZG', name: 'West Azerbaijan', nameLocal: 'آذربایجان غربی', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'GIL', name: 'Gilan', nameLocal: 'گیلان', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'MZN', name: 'Mazandaran', nameLocal: 'مازندران', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'KRN', name: 'Kerman', nameLocal: 'کرمان', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+    { code: 'KRS', name: 'Kermanshah', nameLocal: 'کرمانشاه', countryCode: Country.IR, timezone: 'Asia/Tehran' },
+  ],
+  [Country.AE]: [
+    { code: 'DXB', name: 'Dubai', nameLocal: 'دبي', countryCode: Country.AE, timezone: 'Asia/Dubai' },
+    { code: 'AUH', name: 'Abu Dhabi', nameLocal: 'أبو ظبي', countryCode: Country.AE, timezone: 'Asia/Dubai' },
+    { code: 'SHJ', name: 'Sharjah', nameLocal: 'الشارقة', countryCode: Country.AE, timezone: 'Asia/Dubai' },
+    { code: 'AJM', name: 'Ajman', nameLocal: 'عجمان', countryCode: Country.AE, timezone: 'Asia/Dubai' },
+    { code: 'RAK', name: 'Ras Al Khaimah', nameLocal: 'رأس الخيمة', countryCode: Country.AE, timezone: 'Asia/Dubai' },
+    { code: 'FUJ', name: 'Fujairah', nameLocal: 'الفجيرة', countryCode: Country.AE, timezone: 'Asia/Dubai' },
+    { code: 'UAQ', name: 'Umm Al Quwain', nameLocal: 'أم القيوين', countryCode: Country.AE, timezone: 'Asia/Dubai' },
+  ],
+  [Country.US]: [
+    { code: 'CA', name: 'California', countryCode: Country.US, timezone: 'America/Los_Angeles' },
+    { code: 'NY', name: 'New York', countryCode: Country.US, timezone: 'America/New_York' },
+    { code: 'TX', name: 'Texas', countryCode: Country.US, timezone: 'America/Chicago' },
+    { code: 'FL', name: 'Florida', countryCode: Country.US, timezone: 'America/New_York' },
+    { code: 'IL', name: 'Illinois', countryCode: Country.US, timezone: 'America/Chicago' },
+    { code: 'WA', name: 'Washington', countryCode: Country.US, timezone: 'America/Los_Angeles' },
+    { code: 'MA', name: 'Massachusetts', countryCode: Country.US, timezone: 'America/New_York' },
+    { code: 'CO', name: 'Colorado', countryCode: Country.US, timezone: 'America/Denver' },
+    { code: 'AZ', name: 'Arizona', countryCode: Country.US, timezone: 'America/Phoenix' },
+    { code: 'GA', name: 'Georgia', countryCode: Country.US, timezone: 'America/New_York' },
+  ],
+  [Country.CA]: [
+    { code: 'ON', name: 'Ontario', countryCode: Country.CA, timezone: 'America/Toronto' },
+    { code: 'QC', name: 'Quebec', countryCode: Country.CA, timezone: 'America/Montreal' },
+    { code: 'BC', name: 'British Columbia', countryCode: Country.CA, timezone: 'America/Vancouver' },
+    { code: 'AB', name: 'Alberta', countryCode: Country.CA, timezone: 'America/Edmonton' },
+    { code: 'MB', name: 'Manitoba', countryCode: Country.CA, timezone: 'America/Winnipeg' },
+    { code: 'SK', name: 'Saskatchewan', countryCode: Country.CA, timezone: 'America/Regina' },
+    { code: 'NS', name: 'Nova Scotia', countryCode: Country.CA, timezone: 'America/Halifax' },
+    { code: 'NB', name: 'New Brunswick', countryCode: Country.CA, timezone: 'America/Moncton' },
+  ],
+  [Country.DE]: [
+    { code: 'BE', name: 'Berlin', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+    { code: 'BY', name: 'Bavaria', nameLocal: 'Bayern', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+    { code: 'NW', name: 'North Rhine-Westphalia', nameLocal: 'Nordrhein-Westfalen', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+    { code: 'HE', name: 'Hesse', nameLocal: 'Hessen', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+    { code: 'BW', name: 'Baden-Württemberg', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+    { code: 'NI', name: 'Lower Saxony', nameLocal: 'Niedersachsen', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+    { code: 'SN', name: 'Saxony', nameLocal: 'Sachsen', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+    { code: 'HH', name: 'Hamburg', countryCode: Country.DE, timezone: 'Europe/Berlin' },
+  ],
+  [Country.AU]: [
+    { code: 'NSW', name: 'New South Wales', countryCode: Country.AU, timezone: 'Australia/Sydney' },
+    { code: 'VIC', name: 'Victoria', countryCode: Country.AU, timezone: 'Australia/Melbourne' },
+    { code: 'QLD', name: 'Queensland', countryCode: Country.AU, timezone: 'Australia/Brisbane' },
+    { code: 'WA', name: 'Western Australia', countryCode: Country.AU, timezone: 'Australia/Perth' },
+    { code: 'SA', name: 'South Australia', countryCode: Country.AU, timezone: 'Australia/Adelaide' },
+    { code: 'TAS', name: 'Tasmania', countryCode: Country.AU, timezone: 'Australia/Hobart' },
+    { code: 'ACT', name: 'Australian Capital Territory', countryCode: Country.AU, timezone: 'Australia/Sydney' },
+    { code: 'NT', name: 'Northern Territory', countryCode: Country.AU, timezone: 'Australia/Darwin' },
+  ],
+  [Country.IN]: [
+    { code: 'MH', name: 'Maharashtra', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+    { code: 'KA', name: 'Karnataka', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+    { code: 'TN', name: 'Tamil Nadu', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+    { code: 'DL', name: 'Delhi', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+    { code: 'UP', name: 'Uttar Pradesh', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+    { code: 'GJ', name: 'Gujarat', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+    { code: 'WB', name: 'West Bengal', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+    { code: 'RJ', name: 'Rajasthan', countryCode: Country.IN, timezone: 'Asia/Kolkata' },
+  ],
+};
+
+/**
+ * US state tax rates (simplified)
+ */
+export const mockUSStateTaxRates: Record<string, { stateRate: number; avgLocalRate: number }> = {
+  CA: { stateRate: 7.25, avgLocalRate: 1.57 },
+  NY: { stateRate: 4.0, avgLocalRate: 4.52 },
+  TX: { stateRate: 6.25, avgLocalRate: 1.94 },
+  FL: { stateRate: 6.0, avgLocalRate: 1.02 },
+  WA: { stateRate: 6.5, avgLocalRate: 2.73 },
+  IL: { stateRate: 6.25, avgLocalRate: 2.61 },
+  MA: { stateRate: 6.25, avgLocalRate: 0 },
+  CO: { stateRate: 2.9, avgLocalRate: 4.87 },
+  AZ: { stateRate: 5.6, avgLocalRate: 2.8 },
+  GA: { stateRate: 4.0, avgLocalRate: 3.32 },
+};
+
+/**
+ * Canadian province tax rates
+ */
+export const mockCanadaTaxRates: Record<string, { gst: number; pst?: number; hst?: number }> = {
+  ON: { gst: 0, hst: 13 },
+  QC: { gst: 5, pst: 9.975 },
+  BC: { gst: 5, pst: 7 },
+  AB: { gst: 5 },
+  MB: { gst: 5, pst: 7 },
+  SK: { gst: 5, pst: 6 },
+  NS: { gst: 0, hst: 15 },
+  NB: { gst: 0, hst: 15 },
+};
+
+/**
+ * Get country info by code
+ */
+export function getCountryInfo(code: Country): CountryInfo | undefined {
+  return mockCountries.find((c) => c.code === code);
+}
+
+/**
+ * Get states for a country
+ */
+export function getStatesForCountry(code: Country): StateProvince[] {
+  return mockStates[code] || [];
+}
+
+/**
+ * Get countries by region
+ */
+export function getCountriesByRegion(
+  region: CountryInfo['region']
+): CountryInfo[] {
+  return mockCountries.filter((c) => c.region === region);
+}

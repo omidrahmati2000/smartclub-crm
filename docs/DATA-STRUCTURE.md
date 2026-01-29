@@ -166,8 +166,62 @@ interface Venue {
   subdomain: string; // For white-label (e.g., "padel-tehran")
   themeColor?: string; // Hex color
   ownerId: string; // User ID of owner
+
+  // Multi-region fields (optional, backward-compatible)
+  location?: VenueLocation;
+  countryCode?: Country; // ISO 3166-1 alpha-2
+  currency?: Currency;   // ISO 4217
+  timezone?: string;     // IANA timezone
+
   createdAt: string;
   updatedAt: string;
+}
+```
+
+### VenueLocation
+```typescript
+interface VenueLocation {
+  addressLine1: string;
+  addressLine2?: string;
+  city: string;
+  state?: string;
+  postalCode?: string;
+  country: Country;
+  latitude: number;
+  longitude: number;
+  timezone: string; // IANA format (e.g., "Europe/Berlin")
+}
+```
+
+### VenueTaxSettings
+```typescript
+interface VenueTaxSettings {
+  taxEnabled: boolean;
+  taxType: TaxType; // VAT, GST, HST, PST, SALES_TAX, CONSUMPTION_TAX, NONE
+  taxIdNumber?: string;
+  taxIdLabel?: string;
+  defaultTaxRate: number;
+  displayMode: TaxDisplayMode; // INCLUSIVE | EXCLUSIVE
+  showTaxBreakdown: boolean;
+}
+```
+
+### VenueComplianceSettings
+```typescript
+interface VenueComplianceSettings {
+  gdprEnabled: boolean;
+  gdprSettings?: GDPRSettings;
+  privacyPolicyUrl?: string;
+  termsOfServiceUrl?: string;
+  minimumBookingAge?: number;
+}
+
+interface GDPRSettings {
+  dataRetentionPeriodMonths: number;
+  requireExplicitConsent: boolean;
+  allowDataDeletionRequest: boolean;
+  allowDataExport: boolean;
+  dpo?: DataProtectionOfficer;
 }
 ```
 
@@ -509,6 +563,40 @@ enum PaymentStatus {
 }
 ```
 
+### Country (ISO 3166-1 alpha-2)
+```typescript
+enum Country {
+  IR = 'IR', AE = 'AE', SA = 'SA', QA = 'QA', TR = 'TR', // Middle East
+  DE = 'DE', FR = 'FR', GB = 'GB', ES = 'ES', IT = 'IT', // Europe
+  US = 'US', CA = 'CA', MX = 'MX', BR = 'BR',            // Americas
+  AU = 'AU', IN = 'IN', SG = 'SG', JP = 'JP', KR = 'KR', // Asia Pacific
+  ZA = 'ZA', // Africa
+  // ... 50+ countries supported
+}
+```
+
+### Currency (ISO 4217)
+```typescript
+enum Currency {
+  IRR = 'IRR', IRT = 'IRT', AED = 'AED', SAR = 'SAR',
+  USD = 'USD', EUR = 'EUR', GBP = 'GBP',
+  // ... 40+ currencies supported
+}
+```
+
+### TaxType
+```typescript
+enum TaxType {
+  VAT = 'VAT',
+  GST = 'GST',
+  HST = 'HST',
+  PST = 'PST',
+  SALES_TAX = 'SALES_TAX',
+  CONSUMPTION_TAX = 'CONSUMPTION_TAX',
+  NONE = 'NONE',
+}
+```
+
 ### SportType
 ```typescript
 enum SportType {
@@ -635,6 +723,34 @@ GET    /api/assets/:id/slots        // Get available slots (slot-based)
 GET    /api/assets/:id/available-times // Get start times (duration-based)
 ```
 
+### Countries & Location
+```
+GET    /api/countries                     // List all supported countries
+GET    /api/countries/:code               // Get country details
+GET    /api/countries/:code/states        // Get states/provinces for country
+GET    /api/regions                       // Get country regions
+POST   /api/location/timezone             // Get timezone from lat/lng
+POST   /api/location/validate-postal      // Validate postal code
+```
+
+### Tax Settings
+```
+GET    /api/tax/countries/:code           // Get country tax config
+GET    /api/venues/:venueId/tax-settings  // Get venue tax settings
+PUT    /api/venues/:venueId/tax-settings  // Update venue tax settings
+POST   /api/tax/validate-id               // Validate tax ID
+POST   /api/tax/calculate                 // Calculate tax amount
+```
+
+### Compliance (GDPR)
+```
+GET    /api/venues/:venueId/compliance              // Get compliance settings
+PUT    /api/venues/:venueId/compliance              // Update compliance settings
+POST   /api/venues/:venueId/gdpr/data-export-request    // Request data export
+POST   /api/venues/:venueId/gdpr/data-deletion-request  // Request data deletion
+GET    /api/venues/:venueId/gdpr/consents           // Get consent records
+```
+
 **Query Parameters for slots:**
 - `date` (string): Date in YYYY-MM-DD format (required)
 
@@ -681,12 +797,16 @@ CREATE INDEX idx_bookings_status ON bookings(status);
 
 ## Mock Data Summary
 
-### Current Mock Data (Phase 1)
+### Current Mock Data (Phase 1 + Multi-Region)
 
-**Venues: 3**
-1. Padel Tehran (Padel, Tennis) - 4.7 rating
-2. GameLand Pasdaran (Gaming, Billiards, VR, Board Games) - 4.3 rating
-3. Abi Pool (Swimming) - 4.5 rating
+**Venues: 7**
+1. Padel Tehran, Iran (Padel, Tennis) - 4.7 rating
+2. GameLand Pasdaran, Iran (Gaming, Billiards, VR, Board Games) - 4.3 rating
+3. Abi Pool, Iran (Swimming) - 4.5 rating
+4. SportHalle Berlin, Germany (Tennis, Padel) - EU/GDPR venue
+5. Dubai Sports Hub, UAE (Padel, Football, Swimming)
+6. Manhattan Sports Club, USA (Tennis, Basketball)
+7. Barcelona Padel Center, Spain (Padel, Tennis) - EU/GDPR venue
 
 **Assets: 4**
 1. Padel Court 1 (slot-based, 90 min, 350,000 IRT)
@@ -742,5 +862,5 @@ import {
 
 ---
 
-*Last Updated: 2026-01-28*
-*Version: 1.0.0*
+*Last Updated: 2026-01-30*
+*Version: 1.1.0*

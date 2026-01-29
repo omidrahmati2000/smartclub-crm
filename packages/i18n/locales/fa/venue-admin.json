@@ -584,7 +584,10 @@
       "hours": "ساعات کاری",
       "bookingRules": "قوانین رزرو",
       "whiteLabel": "تنظیمات سفارشی‌سازی",
-      "notifications": "اعلان‌ها"
+      "notifications": "اعلان‌ها",
+      "location": "مکان و منطقه",
+      "tax": "تنظیمات مالیات",
+      "compliance": "انطباق و GDPR"
     },
     "profile": {
       "title": "پروفایل مجموعه",

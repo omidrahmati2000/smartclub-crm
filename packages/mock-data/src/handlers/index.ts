@@ -8,6 +8,9 @@ import { customerHandlers } from './customers';
 import { staffHandlers } from './staff';
 import { financialReportsHandlers } from './financial-reports';
 import { pricingRulesHandlers } from './pricing-rules';
+import { countryHandlers } from './countries';
+import { taxSettingsHandlers } from './tax-settings';
+import { complianceHandlers } from './compliance';
 
 export const handlers = [
   ...authHandlers,
@@ -20,4 +23,7 @@ export const handlers = [
   ...staffHandlers,
   ...financialReportsHandlers,
   ...pricingRulesHandlers,
+  ...countryHandlers,
+  ...taxSettingsHandlers,
+  ...complianceHandlers,
 ];

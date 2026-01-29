@@ -1,15 +1,29 @@
 import { SportType } from '../enums/sport-type';
 import { BookingType } from '../enums/booking-type';
+import { Country, isGDPRRequired } from '../enums/country';
+import { Currency } from '../enums/currency';
+import { VenueLocation } from './location';
 
 export interface Venue {
   id: string;
   name: string;
   slug: string;
   description: string;
+
+  // Legacy address fields (kept for backward compatibility)
   address: string;
   city: string;
   latitude: number;
   longitude: number;
+
+  // NEW: Extended location with full address details
+  location?: VenueLocation;
+
+  // NEW: Country and regional settings
+  countryCode?: Country;
+  currency?: Currency;
+  timezone?: string;
+
   phone: string;
   email?: string;
   website?: string;
@@ -27,6 +41,40 @@ export interface Venue {
   ownerId: string;
   createdAt: string;
   updatedAt: string;
+}
+
+/**
+ * Check if a venue requires GDPR compliance
+ */
+export function venueRequiresGDPR(venue: Venue): boolean {
+  if (venue.countryCode) {
+    return isGDPRRequired(venue.countryCode);
+  }
+  if (venue.location?.country) {
+    return isGDPRRequired(venue.location.country);
+  }
+  return false;
+}
+
+/**
+ * Get venue country (from new or legacy fields)
+ */
+export function getVenueCountry(venue: Venue): Country | undefined {
+  return venue.countryCode || venue.location?.country;
+}
+
+/**
+ * Get venue timezone (from new or legacy fields)
+ */
+export function getVenueTimezone(venue: Venue): string {
+  return venue.timezone || venue.location?.timezone || 'Asia/Tehran';
+}
+
+/**
+ * Get venue currency with default fallback
+ */
+export function getVenueCurrency(venue: Venue): Currency {
+  return venue.currency || Currency.IRT;
 }
 
 export interface OperatingHours {

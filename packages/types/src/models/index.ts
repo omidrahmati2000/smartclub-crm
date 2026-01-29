@@ -51,6 +51,12 @@ export type {
   PricingRuleFilters,
 } from './pricing-rule';
 export type { Venue, OperatingHours, Asset, Amenity } from './venue';
+export {
+  venueRequiresGDPR,
+  getVenueCountry,
+  getVenueTimezone,
+  getVenueCurrency,
+} from './venue';
 export { CancellationPolicy } from './venue-settings';
 export type {
   VenueSettings,
@@ -85,3 +91,60 @@ export type {
   CoachSession,
 } from './coach';
 export type { Notification, NotificationType } from './notification';
+
+// Multi-region support
+export type {
+  VenueLocation,
+  StateProvince,
+  PostalCodeConfig,
+  City,
+  CountryInfo,
+} from './location';
+export {
+  POSTAL_CODE_CONFIGS,
+  validatePostalCode,
+  formatAddress,
+} from './location';
+
+export type {
+  VenueTaxSettings,
+  TaxRateCategory,
+  VenueTaxExemption,
+  TaxExemptionCondition,
+  TaxInvoiceSettings,
+  CountryTaxConfig,
+  TaxCalculation,
+} from './tax-settings';
+export {
+  COUNTRY_TAX_CONFIGS,
+  getCountryTaxConfig,
+  validateTaxId,
+} from './tax-settings';
+
+export type {
+  VenueComplianceSettings,
+  GDPRSettings,
+  DataProtectionOfficer,
+  ConsentCategory,
+  ParentalConsentSettings,
+  CookieConsentSettings,
+  ThirdPartyDisclosure,
+  CountrySpecificCompliance,
+  CustomerConsent,
+  DataDeletionRequest,
+  DataExportRequest,
+  DataBreachRecord,
+  ComplianceRequirement,
+} from './compliance';
+export type {
+  ConsentType,
+  LegalBasis,
+  DataExportFormat,
+  DataRequestStatus,
+} from './compliance';
+export {
+  COMPLIANCE_REQUIREMENTS,
+  getComplianceRequirements,
+  isGDPRRequiredForCountry,
+  getDefaultGDPRSettings,
+} from './compliance';

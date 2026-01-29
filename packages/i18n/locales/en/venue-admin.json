@@ -586,7 +586,10 @@
       "hours": "Operating Hours",
       "bookingRules": "Booking Rules",
       "whiteLabel": "White Label Settings",
-      "notifications": "Notifications"
+      "notifications": "Notifications",
+      "location": "Location & Region",
+      "tax": "Tax Settings",
+      "compliance": "Compliance"
     },
     "profile": {
       "title": "Venue Profile",

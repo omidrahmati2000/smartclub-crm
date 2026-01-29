@@ -6,6 +6,38 @@ All notable changes to SmartClub CRM will be documented in this file.
 
 ## [Unreleased]
 
+### 2026-01-30 - Multi-Country/Multi-Region Support
+
+#### Added
+- **50+ countries** with ISO 3166-1 alpha-2 codes, grouped by region (Middle East, Europe, Americas, Asia Pacific, Africa)
+- **40+ currencies** with ISO 4217 codes, formatting configs (symbol, position, decimals, separators)
+- **Tax system support**: VAT (Europe), GST (Australia/India/Canada), HST/PST (Canada), Sales Tax (USA), Consumption Tax (Japan)
+- **GDPR compliance**: Data retention, explicit consent, data deletion/export requests, DPO management
+- **Country-specific postal code validation** patterns for all supported countries
+- **New type enums**: Country, Currency, TaxType, TaxDisplayMode, TaxExemptionReason, TaxCategory
+- **New type models**: VenueLocation, VenueTaxSettings, VenueComplianceSettings, GDPRSettings, CountryInfo, StateProvince, CountryTaxConfig
+- **Venue model updated**: Added location?, countryCode?, currency?, timezone? (backward-compatible)
+- **VenueSettings model updated**: Added taxSettings?, complianceSettings?
+- **Mock data**: 4 international venues (Germany, UAE, USA, Spain) with tax/compliance configs
+- **MSW handlers**: 15+ new endpoints for countries, tax settings, compliance/GDPR
+- **i18n translations**: location-compliance.json in EN/FA/AR (countries, tax labels, compliance terms)
+- **5 new UI composites**: CountrySelector, StateSelector, PostalCodeInput, TaxRateInput, CurrencySelector
+- **3 new settings forms**: LocationSettingsForm, TaxSettingsForm, ComplianceSettingsForm
+- **Settings tabs expanded**: 5 → 8 tabs (added Location, Tax, Compliance)
+
+#### Updated
+- `packages/types/` - New enums and models for multi-region support
+- `packages/mock-data/` - International venues, tax configs, compliance settings
+- `packages/i18n/` - location-compliance translations + venue-admin tab labels
+- `packages/ui/` - New composites directory with 5 reusable components
+- `apps/venue-app/settings/` - 3 new form components, updated settings-content.tsx
+- `docs/CURRENT-STATUS.md` - Updated stats and feature list
+- `docs/DATA-STRUCTURE.md` - New venue fields, enums, API endpoints
+- `docs/CHANGELOG.md` - This entry
+- `CLAUDE.md` - Added Multi-Region to tech stack
+
+---
+
 ### 2025-01-28 - Project Initialization
 
 #### Added

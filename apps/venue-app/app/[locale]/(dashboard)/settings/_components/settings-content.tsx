@@ -8,8 +8,11 @@ import { OperatingHoursForm } from './operating-hours-form';
 import { BookingRulesForm } from './booking-rules-form';
 import { WhiteLabelSettingsForm } from './white-label-settings';
 import { NotificationSettingsForm } from './notification-settings';
+import { LocationSettingsForm } from './location-settings-form';
+import { TaxSettingsForm } from './tax-settings-form';
+import { ComplianceSettingsForm } from './compliance-settings-form';
 
-type SettingsTab = 'profile' | 'hours' | 'bookingRules' | 'whiteLabel' | 'notifications';
+type SettingsTab = 'profile' | 'hours' | 'bookingRules' | 'whiteLabel' | 'notifications' | 'location' | 'tax' | 'compliance';
 
 export function SettingsContent() {
   const t = useTranslations('venue-admin.settings');
@@ -19,6 +22,9 @@ export function SettingsContent() {
     { id: 'profile', label: t('tabs.profile') },
     { id: 'hours', label: t('tabs.hours') },
     { id: 'bookingRules', label: t('tabs.bookingRules') },
+    { id: 'location', label: t('tabs.location') },
+    { id: 'tax', label: t('tabs.tax') },
+    { id: 'compliance', label: t('tabs.compliance') },
     { id: 'whiteLabel', label: t('tabs.whiteLabel') },
     { id: 'notifications', label: t('tabs.notifications') },
   ];
@@ -56,6 +62,9 @@ export function SettingsContent() {
         {activeTab === 'profile' && <VenueProfileForm />}
         {activeTab === 'hours' && <OperatingHoursForm />}
         {activeTab === 'bookingRules' && <BookingRulesForm />}
+        {activeTab === 'location' && <LocationSettingsForm />}
+        {activeTab === 'tax' && <TaxSettingsForm />}
+        {activeTab === 'compliance' && <ComplianceSettingsForm />}
         {activeTab === 'whiteLabel' && <WhiteLabelSettingsForm />}
         {activeTab === 'notifications' && <NotificationSettingsForm />}
       </div>
