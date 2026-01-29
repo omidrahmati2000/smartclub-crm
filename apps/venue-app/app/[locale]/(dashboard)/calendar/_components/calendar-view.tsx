@@ -8,6 +8,8 @@ import { Skeleton } from '@smartclub/ui/skeleton';
 import type { Booking, Asset } from '@smartclub/types';
 import { CalendarHeader } from './calendar-header';
 import { DayView } from './day-view';
+import { WeekView } from './week-view';
+import { MonthView } from './month-view';
 import { BookingDetailsModal } from './booking-details-modal';
 
 type ViewMode = 'day' | 'week' | 'month';
@@ -26,7 +28,7 @@ export function CalendarView({ locale }: { locale: string }) {
     if (session?.user?.venueId) {
       fetchData(session.user.venueId);
     }
-  }, [session, currentDate]);
+  }, [session, currentDate, viewMode]);
 
   const fetchData = async (venueId: string) => {
     setIsLoading(true);
@@ -38,10 +40,32 @@ export function CalendarView({ locale }: { locale: string }) {
         setAssets(assetsData.data);
       }
 
-      // Fetch bookings for the current date
-      const dateStr = currentDate.toISOString().split('T')[0];
+      // Calculate date range based on view mode
+      let startDate: Date;
+      let endDate: Date;
+
+      if (viewMode === 'day') {
+        startDate = new Date(currentDate);
+        endDate = new Date(currentDate);
+      } else if (viewMode === 'week') {
+        startDate = new Date(currentDate);
+        const dayOfWeek = startDate.getDay();
+        const diff = dayOfWeek === 6 ? 0 : dayOfWeek + 1;
+        startDate.setDate(startDate.getDate() - diff);
+        endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 6);
+      } else {
+        // month
+        startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+      }
+
+      const startStr = startDate.toISOString().split('T')[0];
+      const endStr = endDate.toISOString().split('T')[0];
+
+      // Fetch bookings for the date range
       const bookingsResponse = await fetch(
-        `/api/venues/${venueId}/bookings?date=${dateStr}`,
+        `/api/venues/${venueId}/bookings?startDate=${startStr}&endDate=${endStr}`,
       );
       const bookingsData = await bookingsResponse.json();
       if (bookingsData.success) {
@@ -133,14 +157,25 @@ export function CalendarView({ locale }: { locale: string }) {
             />
           )}
           {viewMode === 'week' && (
-            <div className="flex items-center justify-center h-64 text-muted-foreground">
-              نمای هفتگی به زودی...
-            </div>
+            <WeekView
+              startDate={currentDate}
+              assets={assets}
+              bookings={bookings}
+              onBookingClick={handleBookingClick}
+              locale={locale}
+            />
           )}
           {viewMode === 'month' && (
-            <div className="flex items-center justify-center h-64 text-muted-foreground">
-              نمای ماهانه به زودی...
-            </div>
+            <MonthView
+              currentDate={currentDate}
+              bookings={bookings}
+              onBookingClick={handleBookingClick}
+              onDayClick={(date) => {
+                setCurrentDate(date);
+                setViewMode('day');
+              }}
+              locale={locale}
+            />
           )}
         </CardContent>
       </Card>

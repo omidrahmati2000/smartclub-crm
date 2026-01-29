@@ -193,6 +193,8 @@ export const bookingHandlers = [
   http.get('/api/venues/:venueId/bookings', ({ request, params }) => {
     const url = new URL(request.url);
     const date = url.searchParams.get('date');
+    const startDate = url.searchParams.get('startDate');
+    const endDate = url.searchParams.get('endDate');
     const status = url.searchParams.get('status');
     const assetId = url.searchParams.get('asset');
 
@@ -200,8 +202,11 @@ export const bookingHandlers = [
       (b) => b.venueId === params.venueId,
     );
 
+    // Filter by single date or date range
     if (date) {
       bookings = bookings.filter((b) => b.date === date);
+    } else if (startDate && endDate) {
+      bookings = bookings.filter((b) => b.date >= startDate && b.date <= endDate);
     }
 
     if (status) {
@@ -247,6 +252,102 @@ export const bookingHandlers = [
     return HttpResponse.json({
       data: booking,
       success: true,
+    });
+  }),
+
+  // Check-in a booking
+  http.patch('/api/bookings/:id/check-in', ({ params }) => {
+    const bookingIndex = mockBookingsStore.findIndex((b) => b.id === params.id);
+
+    if (bookingIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Not Found', message: 'Booking not found', statusCode: 404 },
+        { status: 404 }
+      );
+    }
+
+    mockBookingsStore[bookingIndex] = {
+      ...mockBookingsStore[bookingIndex],
+      status: BookingStatus.CHECKED_IN,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockBookingsStore[bookingIndex],
+      success: true,
+      message: 'Booking checked in successfully',
+    });
+  }),
+
+  // Cancel a booking
+  http.patch('/api/bookings/:id/cancel', ({ params }) => {
+    const bookingIndex = mockBookingsStore.findIndex((b) => b.id === params.id);
+
+    if (bookingIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Not Found', message: 'Booking not found', statusCode: 404 },
+        { status: 404 }
+      );
+    }
+
+    mockBookingsStore[bookingIndex] = {
+      ...mockBookingsStore[bookingIndex],
+      status: BookingStatus.CANCELLED,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockBookingsStore[bookingIndex],
+      success: true,
+      message: 'Booking cancelled successfully',
+    });
+  }),
+
+  // Mark booking as no-show
+  http.patch('/api/bookings/:id/no-show', ({ params }) => {
+    const bookingIndex = mockBookingsStore.findIndex((b) => b.id === params.id);
+
+    if (bookingIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Not Found', message: 'Booking not found', statusCode: 404 },
+        { status: 404 }
+      );
+    }
+
+    mockBookingsStore[bookingIndex] = {
+      ...mockBookingsStore[bookingIndex],
+      status: BookingStatus.NO_SHOW,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockBookingsStore[bookingIndex],
+      success: true,
+      message: 'Booking marked as no-show',
+    });
+  }),
+
+  // Complete a booking
+  http.patch('/api/bookings/:id/complete', ({ params }) => {
+    const bookingIndex = mockBookingsStore.findIndex((b) => b.id === params.id);
+
+    if (bookingIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Not Found', message: 'Booking not found', statusCode: 404 },
+        { status: 404 }
+      );
+    }
+
+    mockBookingsStore[bookingIndex] = {
+      ...mockBookingsStore[bookingIndex],
+      status: BookingStatus.COMPLETED,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockBookingsStore[bookingIndex],
+      success: true,
+      message: 'Booking completed successfully',
     });
   }),
 ];
