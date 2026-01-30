@@ -224,6 +224,10 @@
     "filterByRole": "فیلتر بر اساس نقش",
     "filterByStatus": "فیلتر بر اساس وضعیت",
     "sortBy": "مرتب‌سازی بر اساس",
+    "owner": "مالک",
+    "manager": "مدیر",
+    "receptionist": "پذیرش",
+    "cashier": "صندوقدار",
 
     "table": {
       "name": "نام",

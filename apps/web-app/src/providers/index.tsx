@@ -1,7 +1,12 @@
 'use client';
 
+import { MSWProvider } from './msw-provider';
 import { SessionProvider } from './session-provider';
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <SessionProvider>{children}</SessionProvider>;
+  return (
+    <MSWProvider>
+      <SessionProvider>{children}</SessionProvider>
+    </MSWProvider>
+  );
 }
