@@ -1,6 +1,6 @@
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { allMockUsers } from '@smartclub/mock-data';
+import { allMockUsers } from '@smartclub/mock-data/fixtures';
 import { UserType } from '@smartclub/types';
 import './auth.types';
 

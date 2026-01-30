@@ -2,29 +2,28 @@
 
 import { useEffect } from 'react';
 
-const IS_BROWSER = typeof window !== 'undefined';
-
-// Only import on client side
-let worker: any = null;
-if (IS_BROWSER) {
-  try {
-    worker = require('@smartclub/mock-data/browser').worker;
-  } catch (e) {
-    // MSW not available
-  }
-}
+let mswStarted = false;
 
 export function MSWProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (!IS_BROWSER || !worker) return;
+    if (typeof window === 'undefined' || mswStarted) return;
 
     async function initMSW() {
       try {
+        const { worker } = await import('@smartclub/mock-data/browser');
+
+        console.log('[MSW] Initializing mock service worker...');
+
+        // Start the worker
         await worker.start({
           onUnhandledRequest: 'bypass',
+          quiet: false,
         });
-      } catch (error) {
-        // Ignore errors if already started
+
+        mswStarted = true;
+        console.log('[MSW] ✓ Mock service worker started successfully');
+      } catch (error: any) {
+        console.error('[MSW] Error starting worker:', error?.message || error);
       }
     }
 

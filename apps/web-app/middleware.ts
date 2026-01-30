@@ -1,20 +1,47 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import createIntlMiddleware from 'next-intl/middleware';
-import { routing } from './src/i18n/routing';
 import { auth } from './auth';
-
-const intlMiddleware = createIntlMiddleware(routing);
+import { detectLocaleFromRequest, LOCALE_COOKIE_NAME, LOCALE_COOKIE_CONFIG } from '@smartclub/i18n';
+import { logger } from '@smartclub/utils';
 
 export default async function middleware(request: NextRequest) {
-  // Run i18n middleware first
-  const intlResponse = intlMiddleware(request);
-
-  // Then run auth middleware
-  const session = await auth();
   const pathname = request.nextUrl.pathname;
+  const method = request.method;
 
-  // Protected routes that require authentication
+  logger.middleware('request', { method, pathname });
+
+  // Backward compatibility: redirect old locale-prefixed URLs
+  const localeMatch = pathname.match(/^\/(fa|en|ar)(\/.*)?$/);
+  if (localeMatch) {
+    const locale = localeMatch[1];
+    const rest = localeMatch[2] || '/';
+    logger.middleware('legacy locale redirect', { from: pathname, to: rest, locale });
+    const response = NextResponse.redirect(new URL(rest, request.url));
+    response.cookies.set(LOCALE_COOKIE_NAME, locale, {
+      maxAge: LOCALE_COOKIE_CONFIG.maxAge,
+      path: LOCALE_COOKIE_CONFIG.path,
+      sameSite: LOCALE_COOKIE_CONFIG.sameSite,
+    });
+    return response;
+  }
+
+  const response = NextResponse.next();
+
+  // Detect and set locale cookie if not present
+  const existingLocale = request.cookies.get(LOCALE_COOKIE_NAME)?.value;
+  if (!existingLocale) {
+    const detected = detectLocaleFromRequest(request);
+    logger.i18n('locale auto-detected (no cookie)', { detected });
+    response.cookies.set(LOCALE_COOKIE_NAME, detected, {
+      maxAge: LOCALE_COOKIE_CONFIG.maxAge,
+      path: LOCALE_COOKIE_CONFIG.path,
+      sameSite: LOCALE_COOKIE_CONFIG.sameSite,
+    });
+  }
+
+  // Auth middleware
+  const session = await auth();
+
   const isProtectedRoute =
     pathname.includes('/my-bookings') ||
     pathname.includes('/profile') ||
@@ -25,17 +52,23 @@ export default async function middleware(request: NextRequest) {
     pathname.includes('/leaderboard') ||
     pathname.includes('/notifications');
 
+  if (isProtectedRoute) {
+    logger.auth('protected route check', {
+      pathname,
+      hasSession: !!session,
+    });
+  }
+
   if (isProtectedRoute && !session) {
-    // Redirect to login
-    const locale = pathname.split('/')[1]; // Extract locale (fa or en)
-    const loginUrl = new URL(`/${locale}/login`, request.url);
+    const loginUrl = new URL('/login', request.url);
     loginUrl.searchParams.set('callbackUrl', pathname);
+    logger.auth('redirecting to login', { pathname, reason: 'no session' });
     return NextResponse.redirect(loginUrl);
   }
 
-  return intlResponse;
+  return response;
 }
 
 export const config = {
-  matcher: ['/', '/(fa|en|ar)/:path*', '/((?!api|_next|.*\\..*).*)'],
+  matcher: ['/((?!api|_next|.*\\..*).*)', '/'],
 };

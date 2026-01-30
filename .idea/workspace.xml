@@ -6,10 +6,164 @@
   <component name="ChangeListManager">
     <list default="true" id="b53c0f65-7429-4765-926a-e3de1c812029" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/en/venue-admin.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/en/venue-admin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/fa/venue-admin.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/fa/venue-admin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/handlers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/handlers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/models/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/app/[locale]/(auth)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/app/[locale]/(auth)/login/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/app/[locale]/(dashboard)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/app/[locale]/(dashboard)/overview/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/app/[locale]/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/app/[locale]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin-app/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin-app/src/i18n/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/admin-app/src/i18n/routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/admin-app/src/i18n/routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/app/[locale]/(auth)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/app/[locale]/(auth)/login/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/app/[locale]/(dashboard)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/app/[locale]/(dashboard)/overview/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/app/[locale]/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/app/[locale]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/coach-app/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/coach-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/coach-app/src/i18n/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/coach-app/src/i18n/routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/coach-app/src/i18n/routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(auth)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(auth)/login/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/_components/nav-item.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/_components/sidebar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/_components/user-menu.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/assets/_components/asset-card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/assets/_components/asset-form-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/assets/_components/assets-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/assets/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/bookings/_components/booking-filters.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/bookings/_components/bookings-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/bookings/_components/bookings-table.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/bookings/_components/create-booking-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/bookings/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/_components/booking-block.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/_components/booking-details-modal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/_components/calendar-header.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/_components/calendar-view.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/_components/day-view.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/_components/month-view.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/_components/week-view.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/calendar/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/_components/add-note-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/_components/change-status-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/_components/customer-filters.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/_components/customer-profile-modal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/_components/customer-stats.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/_components/customers-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/_components/customers-table.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/customers/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/cancellation-report.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/export-buttons.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/finance-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/occupancy-charts.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/occupancy-heatmap.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/occupancy-report.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/period-selector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/revenue-charts.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/revenue-report.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/_components/summary-cards.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/finance/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/overview/_components/kpi-card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/overview/_components/overview-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/overview/_components/quick-actions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/overview/_components/recent-bookings.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/overview/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/add-pricing-rule-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/adjustment-display.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/delete-pricing-rule-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/edit-pricing-rule-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/price-preview-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/pricing-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/pricing-filters.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/pricing-table.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/_components/rule-type-badge.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/pricing/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/reports/_components/bookings-report.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/reports/_components/customers-report.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/reports/_components/performance-report.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/reports/_components/period-selector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/reports/_components/reports-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/reports/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/booking-rules-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/compliance-settings-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/location-settings-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/notification-settings.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/operating-hours-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/settings-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/tax-settings-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/venue-profile-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/_components/white-label-settings.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/settings/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/add-staff-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/delete-staff-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/edit-staff-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/role-permissions-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/staff-activity-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/staff-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/staff-filters.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/_components/staff-table.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/(dashboard)/staff/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/[locale]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/auth.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/auth.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/src/i18n/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/src/i18n/routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/src/i18n/routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(auth)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(auth)/login/_components/login-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(auth)/login/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(auth)/register/_components/register-form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(auth)/register/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/my-bookings/_components/booking-card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/my-bookings/_components/my-bookings-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/my-bookings/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/profile/_components/personal-info-tab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/profile/_components/preferences-tab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/profile/_components/profile-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/profile/_components/security-tab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(customer)/profile/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/explore/_components/explore-content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/explore/_components/search-filters.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/explore/_components/venue-card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/explore/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/_components/venue-assets.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/_components/venue-hours.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/_components/venue-profile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/booking-flow.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/booking-summary.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/date-picker.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/duration-booking-flow.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/duration-booking-summary.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/duration-selector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/slot-selector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/_components/start-time-selector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/book/[assetId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/not-found.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/(public)/venues/[slug]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/[locale]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/src/i18n/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web-app/src/i18n/routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web-app/src/i18n/routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/ar/auth.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/ar/auth.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/en/auth.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/en/auth.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/fa/auth.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/fa/auth.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/i18n/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/i18n/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/i18n/src/navigation.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/utils/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/utils/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,18 +173,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "omidrahmati2000"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;omidrahmati2000&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/omidrahmati2000/smartclub-crm.git",
-    "accountId": "e1582620-afe8-435b-a6e9-742ad04ade34"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/omidrahmati2000/smartclub-crm.git&quot;,
+    &quot;accountId&quot;: &quot;e1582620-afe8-435b-a6e9-742ad04ade34&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -39,24 +193,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/home/omid/WebstormProjects/smartClubCRM/packages/types/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/omid/WebstormProjects/smartClubCRM/packages/types/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -72,7 +226,9 @@
       <option name="presentableId" value="Default" />
       <updated>1769553035864</updated>
       <workItem from="1769553037063" duration="6409000" />
-      <workItem from="1769584469412" duration="22953000" />
+      <workItem from="1769584469412" duration="26057000" />
+      <workItem from="1769674431620" duration="14731000" />
+      <workItem from="1769762257951" duration="3153000" />
     </task>
     <servers />
   </component>

@@ -7,14 +7,21 @@
   "exports": {
     ".": "./src/index.ts",
     "./config": "./src/config.ts",
-    "./request": "./src/request.ts",
-    "./navigation": "./src/navigation.ts",
+    "./locale-cookie": "./src/locale-cookie.ts",
+    "./locale-provider": "./src/locale-provider.tsx",
     "./locales/*": "./locales/*"
   },
   "dependencies": {
     "next-intl": "^4.1.0"
   },
   "devDependencies": {
+    "@types/react": "^19.0.0",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
     "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "next": ">=14",
+    "react": ">=18"
   }
 }
