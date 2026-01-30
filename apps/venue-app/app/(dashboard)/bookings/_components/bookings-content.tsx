@@ -1,14 +1,16 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@smartclub/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@smartclub/ui/card';
 import { Skeleton } from '@smartclub/ui/skeleton';
-import type { Booking, Asset } from '@smartclub/types';
+import type { Booking } from '@smartclub/types';
 import { BookingStatus, Permission } from '@smartclub/types';
 import { hasPermission } from '@smartclub/types';
+import { useBookings, useUpdateBookingStatus, useCreateBooking } from '@/hooks/use-bookings';
+import { useAssets } from '@/hooks/use-assets';
 import { BookingFilters } from './booking-filters';
 import { BookingsTable } from './bookings-table';
 import { CreateBookingDialog } from './create-booking-dialog';
@@ -18,9 +20,13 @@ import { Plus, Download } from 'lucide-react';
 export function BookingsContent() {
   const { data: session } = useSession();
   const t = useTranslations('venue-admin.bookings');
-  const [bookings, setBookings] = useState<Booking[]>([]);
-  const [assets, setAssets] = useState<Asset[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+
+  // Use React Query hooks for data fetching
+  const { data: bookings = [], isLoading: isLoadingBookings } = useBookings();
+  const { data: assets = [], isLoading: isLoadingAssets } = useAssets();
+  const updateBookingStatus = useUpdateBookingStatus();
+  const createBooking = useCreateBooking();
+
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [assetFilter, setAssetFilter] = useState('all');
@@ -29,35 +35,7 @@ export function BookingsContent() {
 
   const user = session?.user as any;
   const canCreate = user && hasPermission(user, Permission.BOOKING_CREATE);
-
-  useEffect(() => {
-    if (session?.user?.venueId) {
-      fetchData(session.user.venueId);
-    }
-  }, [session]);
-
-  const fetchData = async (venueId: string) => {
-    setIsLoading(true);
-    try {
-      // Fetch assets
-      const assetsResponse = await fetch(`/api/venues/${venueId}/assets`);
-      const assetsData = await assetsResponse.json();
-      if (assetsData.success) {
-        setAssets(assetsData.data);
-      }
-
-      // Fetch all bookings
-      const bookingsResponse = await fetch(`/api/venues/${venueId}/bookings`);
-      const bookingsData = await bookingsResponse.json();
-      if (bookingsData.success) {
-        setBookings(bookingsData.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch bookings data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const isLoading = isLoadingBookings || isLoadingAssets;
 
   // Filter bookings
   const filteredBookings = useMemo(() => {
@@ -86,49 +64,29 @@ export function BookingsContent() {
   }, [bookings, searchQuery, statusFilter, assetFilter]);
 
   const handleCreateBooking = async (data: any) => {
-    // TODO: Implement create booking API call
-    console.log('Create booking:', data);
-
-    // Refresh bookings after creation
-    if (session?.user?.venueId) {
-      await fetchData(session.user.venueId);
-    }
+    await createBooking.mutateAsync(data);
+    setIsCreateDialogOpen(false);
   };
 
   const handleCheckIn = async (bookingId: string) => {
-    // TODO: Implement check-in API call
-    console.log('Check in booking:', bookingId);
-
-    // Update local state optimistically
-    setBookings((prev) =>
-      prev.map((b) =>
-        b.id === bookingId ? { ...b, status: BookingStatus.CHECKED_IN } : b,
-      ),
-    );
+    await updateBookingStatus.mutateAsync({
+      bookingId,
+      status: BookingStatus.CHECKED_IN,
+    });
   };
 
   const handleCancel = async (bookingId: string) => {
-    // TODO: Implement cancel API call
-    console.log('Cancel booking:', bookingId);
-
-    // Update local state optimistically
-    setBookings((prev) =>
-      prev.map((b) =>
-        b.id === bookingId ? { ...b, status: BookingStatus.CANCELLED } : b,
-      ),
-    );
+    await updateBookingStatus.mutateAsync({
+      bookingId,
+      status: BookingStatus.CANCELLED,
+    });
   };
 
   const handleMarkNoShow = async (bookingId: string) => {
-    // TODO: Implement mark no-show API call
-    console.log('Mark no-show:', bookingId);
-
-    // Update local state optimistically
-    setBookings((prev) =>
-      prev.map((b) =>
-        b.id === bookingId ? { ...b, status: BookingStatus.NO_SHOW } : b,
-      ),
-    );
+    await updateBookingStatus.mutateAsync({
+      bookingId,
+      status: BookingStatus.NO_SHOW,
+    });
   };
 
   const handleExportCSV = () => {

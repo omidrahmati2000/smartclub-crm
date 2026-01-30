@@ -19,6 +19,7 @@
     "@smartclub/ui": "workspace:*",
     "@smartclub/utils": "workspace:*",
     "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-query-devtools": "^5.91.3",
     "date-fns": "^4.1.0",
     "date-fns-jalali": "4.1.0-0",
     "lucide-react": "^0.469.0",
