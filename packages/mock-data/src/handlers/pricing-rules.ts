@@ -8,11 +8,9 @@ import {
   togglePricingRuleStatus,
 } from '../fixtures/pricing-rules';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-
 export const pricingRulesHandlers = [
   // GET /api/venues/:venueId/pricing-rules - Get pricing rules list
-  http.get(`${BASE_URL}/venues/:venueId/pricing-rules`, ({ params, request }) => {
+  http.get('/api/venues/:venueId/pricing-rules', ({ params, request }) => {
     const { venueId } = params;
     const url = new URL(request.url);
 
@@ -83,7 +81,7 @@ export const pricingRulesHandlers = [
   }),
 
   // GET /api/pricing-rules/:ruleId - Get pricing rule details
-  http.get(`${BASE_URL}/pricing-rules/:ruleId`, ({ params }) => {
+  http.get('/api/pricing-rules/:ruleId', ({ params }) => {
     const { ruleId } = params;
     const rule = getPricingRuleById(ruleId as string);
 
@@ -98,7 +96,7 @@ export const pricingRulesHandlers = [
   }),
 
   // POST /api/venues/:venueId/pricing-rules - Create pricing rule
-  http.post(`${BASE_URL}/venues/:venueId/pricing-rules`, async ({ params, request }) => {
+  http.post('/api/venues/:venueId/pricing-rules', async ({ params, request }) => {
     const { venueId } = params;
     const body = (await request.json()) as any;
 
@@ -117,7 +115,7 @@ export const pricingRulesHandlers = [
   }),
 
   // PUT /api/pricing-rules/:ruleId - Update pricing rule
-  http.put(`${BASE_URL}/pricing-rules/:ruleId`, async ({ params, request }) => {
+  http.put('/api/pricing-rules/:ruleId', async ({ params, request }) => {
     const { ruleId } = params;
     const updates = (await request.json()) as any;
 
@@ -137,7 +135,7 @@ export const pricingRulesHandlers = [
   }),
 
   // DELETE /api/pricing-rules/:ruleId - Delete pricing rule
-  http.delete(`${BASE_URL}/pricing-rules/:ruleId`, async ({ params }) => {
+  http.delete('/api/pricing-rules/:ruleId', async ({ params }) => {
     const { ruleId } = params;
 
     // Simulate network delay
@@ -156,7 +154,7 @@ export const pricingRulesHandlers = [
   }),
 
   // PATCH /api/pricing-rules/:ruleId/toggle - Toggle pricing rule status
-  http.patch(`${BASE_URL}/pricing-rules/:ruleId/toggle`, async ({ params }) => {
+  http.patch('/api/pricing-rules/:ruleId/toggle', async ({ params }) => {
     const { ruleId } = params;
 
     // Simulate network delay
@@ -175,7 +173,7 @@ export const pricingRulesHandlers = [
   }),
 
   // POST /api/pricing-rules/preview - Preview price with rules
-  http.post(`${BASE_URL}/pricing-rules/preview`, async ({ request }) => {
+  http.post('/api/pricing-rules/preview', async ({ request }) => {
     const body = (await request.json()) as any;
     const { basePrice, assetId, dateTime, duration } = body;
 

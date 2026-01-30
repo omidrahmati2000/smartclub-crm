@@ -10,11 +10,9 @@ import {
 } from '../fixtures/customers';
 import type { CustomerFilters, CustomerListItem } from '@smartclub/types';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-
 export const customerHandlers = [
   // GET /api/venues/:venueId/customers - Get customers list with filters
-  http.get(`${BASE_URL}/venues/:venueId/customers`, ({ params, request }) => {
+  http.get('/api/venues/:venueId/customers', ({ params, request }) => {
     const { venueId } = params;
     const url = new URL(request.url);
 
@@ -96,7 +94,7 @@ export const customerHandlers = [
   }),
 
   // GET /api/customers/:customerId - Get customer profile
-  http.get(`${BASE_URL}/customers/:customerId`, ({ params }) => {
+  http.get('/api/customers/:customerId', ({ params }) => {
     const { customerId } = params;
     const customer = getCustomerById(customerId as string);
 
@@ -111,7 +109,7 @@ export const customerHandlers = [
   }),
 
   // POST /api/customers/:customerId/tags - Add tag to customer
-  http.post(`${BASE_URL}/customers/:customerId/tags`, async ({ params, request }) => {
+  http.post('/api/customers/:customerId/tags', async ({ params, request }) => {
     const { customerId } = params;
     const body = (await request.json()) as any;
     const { tagId } = body;
@@ -137,7 +135,7 @@ export const customerHandlers = [
   }),
 
   // DELETE /api/customers/:customerId/tags/:tagId - Remove tag from customer
-  http.delete(`${BASE_URL}/customers/:customerId/tags/:tagId`, async ({ params }) => {
+  http.delete('/api/customers/:customerId/tags/:tagId', async ({ params }) => {
     const { customerId, tagId } = params;
 
     const customer = removeCustomerTag(customerId as string, tagId as string);
@@ -156,7 +154,7 @@ export const customerHandlers = [
   }),
 
   // POST /api/customers/:customerId/notes - Add note to customer
-  http.post(`${BASE_URL}/customers/:customerId/notes`, async ({ params, request }) => {
+  http.post('/api/customers/:customerId/notes', async ({ params, request }) => {
     const { customerId } = params;
     const body = (await request.json()) as any;
     const { content, createdBy, createdByName } = body;
@@ -181,7 +179,7 @@ export const customerHandlers = [
   }),
 
   // PATCH /api/customers/:customerId/status - Update customer status
-  http.patch(`${BASE_URL}/customers/:customerId/status`, async ({ params, request }) => {
+  http.patch('/api/customers/:customerId/status', async ({ params, request }) => {
     const { customerId } = params;
     const body = (await request.json()) as any;
     const { status } = body;
@@ -202,7 +200,7 @@ export const customerHandlers = [
   }),
 
   // GET /api/venues/:venueId/customer-tags - Get available tags
-  http.get(`${BASE_URL}/venues/:venueId/customer-tags`, () => {
+  http.get('/api/venues/:venueId/customer-tags', () => {
     return HttpResponse.json({
       data: customerTags,
       success: true,
@@ -210,7 +208,7 @@ export const customerHandlers = [
   }),
 
   // GET /api/venues/:venueId/customers/export - Export customers to CSV
-  http.get(`${BASE_URL}/venues/:venueId/customers/export`, ({ params }) => {
+  http.get('/api/venues/:venueId/customers/export', ({ params }) => {
     const { venueId } = params;
     const customers = getCustomersByVenue(venueId as string);
 

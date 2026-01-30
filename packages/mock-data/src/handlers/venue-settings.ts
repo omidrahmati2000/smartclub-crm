@@ -1,11 +1,9 @@
 import { http, HttpResponse } from 'msw';
 import { getVenueSettings, updateVenueSettings } from '../fixtures/venue-settings';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-
 export const venueSettingsHandlers = [
   // GET /api/venues/:venueId/settings - Get venue settings
-  http.get(`${BASE_URL}/venues/:venueId/settings`, ({ params }) => {
+  http.get('/api/venues/:venueId/settings', ({ params }) => {
     const { venueId } = params;
 
     const settings = getVenueSettings(venueId as string);
@@ -21,7 +19,7 @@ export const venueSettingsHandlers = [
   }),
 
   // PUT /api/venues/:venueId/settings - Update venue settings
-  http.put(`${BASE_URL}/venues/:venueId/settings`, async ({ params, request }) => {
+  http.put('/api/venues/:venueId/settings', async ({ params, request }) => {
     const { venueId } = params;
     const updates = (await request.json()) as any;
 

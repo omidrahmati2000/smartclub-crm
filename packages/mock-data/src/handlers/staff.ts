@@ -10,11 +10,9 @@ import {
   rolePermissionsData,
 } from '../fixtures/staff';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-
 export const staffHandlers = [
   // GET /api/venues/:venueId/staff - Get staff list with filters
-  http.get(`${BASE_URL}/venues/:venueId/staff`, ({ params, request }) => {
+  http.get('/api/venues/:venueId/staff', ({ params, request }) => {
     const { venueId } = params;
     const url = new URL(request.url);
 
@@ -82,7 +80,7 @@ export const staffHandlers = [
   }),
 
   // GET /api/staff/:staffId - Get staff member details
-  http.get(`${BASE_URL}/staff/:staffId`, ({ params }) => {
+  http.get('/api/staff/:staffId', ({ params }) => {
     const { staffId } = params;
     const staff = getStaffById(staffId as string);
 
@@ -97,7 +95,7 @@ export const staffHandlers = [
   }),
 
   // POST /api/venues/:venueId/staff - Create new staff member
-  http.post(`${BASE_URL}/venues/:venueId/staff`, async ({ params, request }) => {
+  http.post('/api/venues/:venueId/staff', async ({ params, request }) => {
     const { venueId } = params;
     const body = (await request.json()) as any;
 
@@ -117,7 +115,7 @@ export const staffHandlers = [
   }),
 
   // PUT /api/staff/:staffId - Update staff member
-  http.put(`${BASE_URL}/staff/:staffId`, async ({ params, request }) => {
+  http.put('/api/staff/:staffId', async ({ params, request }) => {
     const { staffId } = params;
     const updates = (await request.json()) as any;
 
@@ -137,7 +135,7 @@ export const staffHandlers = [
   }),
 
   // DELETE /api/staff/:staffId - Delete staff member
-  http.delete(`${BASE_URL}/staff/:staffId`, async ({ params }) => {
+  http.delete('/api/staff/:staffId', async ({ params }) => {
     const { staffId } = params;
 
     // Simulate network delay
@@ -156,7 +154,7 @@ export const staffHandlers = [
   }),
 
   // GET /api/staff/:staffId/activity - Get staff activity log
-  http.get(`${BASE_URL}/staff/:staffId/activity`, ({ params, request }) => {
+  http.get('/api/staff/:staffId/activity', ({ params, request }) => {
     const { staffId } = params;
     const url = new URL(request.url);
     const limit = parseInt(url.searchParams.get('limit') || '10');
@@ -171,7 +169,7 @@ export const staffHandlers = [
   }),
 
   // GET /api/roles/:role/permissions - Get permissions for a role
-  http.get(`${BASE_URL}/roles/:role/permissions`, ({ params }) => {
+  http.get('/api/roles/:role/permissions', ({ params }) => {
     const { role } = params;
     const permissions = getRolePermissions(role as any);
 
@@ -186,7 +184,7 @@ export const staffHandlers = [
   }),
 
   // GET /api/roles/permissions - Get all role permissions
-  http.get(`${BASE_URL}/roles/permissions`, () => {
+  http.get('/api/roles/permissions', () => {
     return HttpResponse.json({
       data: rolePermissionsData,
       success: true,

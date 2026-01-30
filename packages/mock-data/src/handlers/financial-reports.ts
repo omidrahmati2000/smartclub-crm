@@ -2,11 +2,9 @@ import { http, HttpResponse } from 'msw';
 import { generateRevenueReport, generateOccupancyReport } from '../fixtures/financial-reports';
 import { ReportPeriod } from '@smartclub/types';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-
 export const financialReportsHandlers = [
   // GET /api/venues/:venueId/reports/revenue - Get revenue report
-  http.get(`${BASE_URL}/venues/:venueId/reports/revenue`, async ({ params, request }) => {
+  http.get('/api/venues/:venueId/reports/revenue', async ({ params, request }) => {
     const { venueId } = params;
     const url = new URL(request.url);
 
@@ -24,7 +22,7 @@ export const financialReportsHandlers = [
   }),
 
   // GET /api/venues/:venueId/reports/occupancy - Get occupancy report
-  http.get(`${BASE_URL}/venues/:venueId/reports/occupancy`, async ({ params, request }) => {
+  http.get('/api/venues/:venueId/reports/occupancy', async ({ params, request }) => {
     const { venueId } = params;
     const url = new URL(request.url);
 
@@ -42,7 +40,7 @@ export const financialReportsHandlers = [
   }),
 
   // GET /api/venues/:venueId/reports/export - Export report
-  http.get(`${BASE_URL}/venues/:venueId/reports/export`, async ({ params, request }) => {
+  http.get('/api/venues/:venueId/reports/export', async ({ params, request }) => {
     const { venueId } = params;
     const url = new URL(request.url);
 
