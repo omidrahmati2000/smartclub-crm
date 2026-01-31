@@ -1,50 +1,49 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { initMSW } from '@/lib/msw';
 
-let mswPromise: Promise<void> | null = null;
-
-function initializeMSW(): Promise<void> {
-  if (mswPromise) {
-    return mswPromise;
-  }
-
-  mswPromise = (async () => {
-    try {
-      // Only initialize on browser
-      if (typeof window === 'undefined') return;
-
-      const { worker } = await import('@smartclub/mock-data/browser');
-
-      console.log('[MSW] Initializing...');
-
-      // Start the worker
-      await worker.start({
-        onUnhandledRequest: 'bypass',
-        quiet: false,
-      });
-
-      console.log('[MSW] ✓ Started');
-    } catch (error: any) {
-      // Don't fail the app if MSW fails to start
-      if (!error?.message?.includes('already listening')) {
-        console.warn('[MSW] Failed to start:', error?.message || error);
-      }
-    }
-  })();
-
-  return mswPromise;
-}
-
+/**
+ * MSWProvider — the SINGLE entry point for MSW initialization.
+ *
+ * This provider MUST wrap the entire app (see src/providers/index.tsx).
+ * It blocks rendering (`return null`) until MSW is fully started so that
+ * no API call can fire before MSW is ready to intercept it.
+ *
+ * IMPORTANT:
+ * - Do NOT add a second MSW init path (e.g. inside apiClient). Having
+ *   multiple init paths causes race conditions where requests fire before
+ *   MSW is ready, resulting in 404s or HTML-instead-of-JSON responses.
+ * - The singleton initMSW() in src/lib/msw.ts guarantees only one
+ *   worker.start() call ever happens.
+ */
 export function MSWProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+  const [ready, setReady] = useState(false);
 
-    // Initialize MSW on component mount
-    initializeMSW().catch(() => {
-      // Silently fail
-    });
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      setReady(true);
+      return;
+    }
+
+    if (process.env.NODE_ENV !== 'development') {
+      setReady(true);
+      return;
+    }
+
+    initMSW()
+      .then(() => setReady(true))
+      .catch((error) => {
+        console.error('[MSW] Failed to initialize:', error);
+        // Still render the app - some features may work without MSW
+        setReady(true);
+      });
   }, []);
+
+  // Block rendering until MSW is ready in development
+  if (!ready) {
+    return null;
+  }
 
   return <>{children}</>;
 }

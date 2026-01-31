@@ -11,6 +11,7 @@ import { hasPermission } from '@smartclub/types';
 import { CustomerFilters } from './customer-filters';
 import { CustomersTable } from './customers-table';
 import { CustomerProfileModal } from './customer-profile-modal';
+import { apiClient } from '@/lib/api-client';
 
 export function CustomersContent() {
   const { data: session } = useSession();
@@ -40,17 +41,15 @@ export function CustomersContent() {
     setIsLoading(true);
     try {
       // Fetch customers list
-      const customersResponse = await fetch(`/api/venues/${venueId}/customers`);
-      const customersData = await customersResponse.json();
-      if (customersData.success) {
-        setCustomers(customersData.data);
+      const customersResult = await apiClient.get(`/venues/${venueId}/customers`);
+      if (customersResult.success && customersResult.data) {
+        setCustomers(customersResult.data);
       }
 
       // Fetch available tags
-      const tagsResponse = await fetch(`/api/venues/${venueId}/customer-tags`);
-      const tagsData = await tagsResponse.json();
-      if (tagsData.success) {
-        setAvailableTags(tagsData.data);
+      const tagsResult = await apiClient.get(`/venues/${venueId}/customer-tags`);
+      if (tagsResult.success && tagsResult.data) {
+        setAvailableTags(tagsResult.data);
       }
     } catch (error) {
       console.error('Failed to fetch customers data:', error);
@@ -102,10 +101,9 @@ export function CustomersContent() {
 
   const handleViewProfile = async (customerId: string) => {
     try {
-      const response = await fetch(`/api/customers/${customerId}`);
-      const data = await response.json();
-      if (data.success) {
-        setSelectedCustomer(data.data);
+      const result = await apiClient.get(`/customers/${customerId}`);
+      if (result.success && result.data) {
+        setSelectedCustomer(result.data);
       }
     } catch (error) {
       console.error('Failed to fetch customer profile:', error);
@@ -116,6 +114,7 @@ export function CustomersContent() {
     if (!session?.user?.venueId) return;
 
     try {
+      // Note: For blob responses, we still need to use fetch directly
       const response = await fetch(`/api/venues/${session.user.venueId}/customers/export`);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
@@ -159,7 +158,7 @@ export function CustomersContent() {
   if (!canView) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-muted-foreground">شما دسترسی لازم برای مشاهده این صفحه را ندارید</p>
+        <p className="text-muted-foreground">{t('noPermission')}</p>
       </div>
     );
   }
@@ -177,7 +176,7 @@ export function CustomersContent() {
       {/* Filters */}
       <Card>
         <CardHeader>
-          <CardTitle>فیلترها</CardTitle>
+          <CardTitle>{t('filters')}</CardTitle>
         </CardHeader>
         <CardContent>
           <CustomerFilters
