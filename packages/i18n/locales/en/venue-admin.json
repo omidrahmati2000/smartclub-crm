@@ -1,4 +1,76 @@
 {
+  "tournaments": {
+    "title": "Tournaments",
+    "description": "Manage tournaments and competitions",
+    "createTournament": "Create Tournament",
+    "noTournaments": "No tournaments found",
+    "active": "Active",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "format": "Format",
+    "participants": "Participants",
+    "startDate": "Start Date",
+    "status": "Status",
+    "viewProfile": "View Details",
+    "back": "Back",
+    "create": {
+      "title": "Create New Tournament",
+      "steps": {
+        "basic": "Basic Info",
+        "format": "Format",
+        "schedule": "Schedule",
+        "registration": "Registration"
+      },
+      "fields": {
+        "name": "Tournament Name",
+        "sport": "Sport",
+        "description": "Description",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "assets": "Assets",
+        "entryFee": "Entry Fee (IRT)",
+        "maxParticipants": "Max Participants",
+        "registrationDeadline": "Registration Deadline"
+      },
+      "formats": {
+        "singleTitle": "Single Elimination",
+        "singleDesc": "Standard knockout bracket.",
+        "doubleTitle": "Double Elimination",
+        "doubleDesc": "Players get a second chance.",
+        "roundTitle": "Round Robin",
+        "roundDesc": "Everyone plays everyone.",
+        "americanoTitle": "Americano",
+        "americanoDesc": "Timed matches with rotating partners.",
+        "mexicanoTitle": "Mexicano",
+        "mexicanoDesc": "Similar to Americano but power-balanced."
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "back": "Back",
+        "next": "Next",
+        "create": "Create Tournament"
+      }
+    },
+    "detail": {
+      "tabs": {
+        "overview": "Overview",
+        "participants": "Participants",
+        "matches": "Brackets & Matches",
+        "standings": "Standings",
+        "settings": "Settings"
+      },
+      "kpis": {
+        "participants": "Participants",
+        "progress": "Progress",
+        "activeMatches": "Active Matches",
+        "matchesPlayed": "Matches Played"
+      },
+      "courtOverview": "Court Overview",
+      "quickRankings": "Quick Rankings",
+      "startNextRound": "Start Next Round",
+      "finishTournament": "Finish Tournament"
+    }
+  },
   "nav": {
     "dashboard": "Dashboard",
     "calendar": "Calendar",
@@ -9,11 +81,13 @@
     "finance": "Finance",
     "pricing": "Pricing",
     "reports": "Reports",
+    "tournaments": "Tournaments",
     "settings": "Settings",
     "groups": {
       "overview": "Overview",
       "operations": "Operations",
       "management": "Management",
+      "competitions": "Competitions",
       "system": "System"
     },
     "collapse": "Collapse sidebar",
@@ -233,7 +307,6 @@
     "noPermission": "You do not have permission to view this page",
     "filters": "Filters",
     "showingResults": "Showing {{count}} customers",
-
     "status": {
       "all": "All",
       "ACTIVE": "Active",
@@ -243,14 +316,12 @@
       "BLACKLISTED": "Blacklisted",
       "INACTIVE": "Inactive"
     },
-
     "sort": {
       "name": "Name",
       "totalSpent": "Total Spent",
       "totalBookings": "Total Bookings",
       "lastVisit": "Last Visit"
     },
-
     "table": {
       "name": "Name",
       "email": "Email",
@@ -262,7 +333,6 @@
       "lastVisit": "Last Visit",
       "actions": "Actions"
     },
-
     "actions": {
       "viewProfile": "View Profile",
       "addTag": "Add Tag",
@@ -272,7 +342,6 @@
       "removeFromBlacklist": "Remove from Blacklist",
       "makeVIP": "Make VIP"
     },
-
     "profile": {
       "title": "Customer Profile",
       "customerInfo": "Customer Information",
@@ -287,7 +356,6 @@
       "notePlaceholder": "Write your note here...",
       "createdBy": "by {{name}}",
       "createdAt": "on {{date}}",
-
       "stats": {
         "totalBookings": "Total Bookings",
         "completedBookings": "Completed Bookings",
@@ -302,7 +370,6 @@
         "preferredTimeSlots": "Preferred Time Slots"
       }
     },
-
     "tags": {
       "title": "Tags",
       "add": "Add Tag",
@@ -312,7 +379,6 @@
       "tagAdded": "Tag added",
       "tagRemoved": "Tag removed"
     },
-
     "statusChange": {
       "title": "Change Customer Status",
       "currentStatus": "Current Status",
@@ -344,7 +410,6 @@
     "filterByRole": "Filter by role",
     "filterByStatus": "Filter by status",
     "sortBy": "Sort by",
-
     "table": {
       "name": "Name",
       "email": "Email",
@@ -354,7 +419,6 @@
       "hireDate": "Hire Date",
       "actions": "Actions"
     },
-
     "roles": {
       "all": "All Roles",
       "OWNER": "Owner",
@@ -362,7 +426,6 @@
       "RECEPTIONIST": "Receptionist",
       "CASHIER": "Cashier"
     },
-
     "status": {
       "all": "All",
       "ACTIVE": "Active",
@@ -370,13 +433,11 @@
       "INVITED": "Invited",
       "SUSPENDED": "Suspended"
     },
-
     "sort": {
       "name": "Name",
       "role": "Role",
       "hireDate": "Hire Date"
     },
-
     "actions": {
       "edit": "Edit",
       "delete": "Delete",
@@ -388,7 +449,6 @@
       "confirmDelete": "Are you sure you want to delete this staff member?",
       "deleteWarning": "This action cannot be undone."
     },
-
     "form": {
       "title": "Staff Member Information",
       "name": "Full Name",
@@ -410,7 +470,6 @@
       "updated": "Staff member updated successfully",
       "deleted": "Staff member deleted"
     },
-
     "permissions": {
       "title": "Role Permissions",
       "description": "View permissions for this role",
@@ -423,7 +482,6 @@
       "limitedAccess": "Limited Access",
       "noAccess": "No Access"
     },
-
     "activity": {
       "title": "Activity Log",
       "description": "Recent activities by this staff member",
@@ -434,7 +492,6 @@
       "timestamp": "Time",
       "loadMore": "Load More"
     },
-
     "roleDescriptions": {
       "OWNER": "Full access to all sections including venue deletion and staff management",
       "MANAGER": "Access to most sections except venue deletion and adding/removing staff",
@@ -445,12 +502,10 @@
   "finance": {
     "title": "Financial Reports",
     "description": "Revenue and Occupancy Reports",
-
     "tabs": {
       "revenue": "Revenue",
       "occupancy": "Occupancy"
     },
-
     "period": {
       "label": "Period",
       "TODAY": "Today",
@@ -464,7 +519,6 @@
       "THIS_YEAR": "This Year",
       "CUSTOM": "Custom"
     },
-
     "summary": {
       "totalRevenue": "Total Revenue",
       "totalBookings": "Total Bookings",
@@ -480,7 +534,6 @@
       "lowestOccupancy": "Lowest Occupancy",
       "lowestOccupancyTime": "Lowest Time"
     },
-
     "revenue": {
       "title": "Revenue Report",
       "byAssetType": "Revenue by Asset Type",
@@ -502,7 +555,6 @@
       "card": "Card",
       "cash": "Cash"
     },
-
     "cancellation": {
       "title": "Cancellation Report",
       "totalCancellations": "Total Cancellations",
@@ -514,7 +566,6 @@
       "count": "Count",
       "noData": "No cancellation data available"
     },
-
     "occupancy": {
       "title": "Occupancy Report",
       "byAsset": "Occupancy by Asset",
@@ -530,7 +581,6 @@
       "date": "Date",
       "noData": "No data available"
     },
-
     "export": {
       "title": "Export Report",
       "exportCSV": "Export CSV",
@@ -542,7 +592,6 @@
       "comingSoon": "Coming Soon",
       "pdfComingSoon": "PDF export will be available soon"
     },
-
     "chart": {
       "revenue": "Revenue",
       "bookings": "Bookings",
@@ -566,7 +615,6 @@
     "filterByType": "Filter by type",
     "filterByStatus": "Filter by status",
     "sortBy": "Sort by",
-
     "table": {
       "name": "Rule Name",
       "type": "Type",
@@ -576,7 +624,6 @@
       "validPeriod": "Valid Period",
       "actions": "Actions"
     },
-
     "types": {
       "all": "All Types",
       "PEAK_HOURS": "Peak Hours",
@@ -586,7 +633,6 @@
       "PROMOTIONAL": "Promotional",
       "EARLY_BIRD": "Early Bird"
     },
-
     "status": {
       "all": "All",
       "ACTIVE": "Active",
@@ -594,7 +640,6 @@
       "SCHEDULED": "Scheduled",
       "EXPIRED": "Expired"
     },
-
     "adjustmentTypes": {
       "PERCENTAGE_INCREASE": "Percentage Increase",
       "PERCENTAGE_DECREASE": "Percentage Decrease",
@@ -602,14 +647,12 @@
       "FIXED_DECREASE": "Fixed Decrease",
       "OVERRIDE": "Set Price"
     },
-
     "sort": {
       "name": "Name",
       "type": "Type",
       "priority": "Priority",
       "createdAt": "Created Date"
     },
-
     "actions": {
       "edit": "Edit",
       "delete": "Delete",
@@ -620,7 +663,6 @@
       "confirmDelete": "Are you sure you want to delete this rule?",
       "deleteWarning": "This action cannot be undone."
     },
-
     "form": {
       "title": "Pricing Rule",
       "basicInfo": "Basic Information",
@@ -632,13 +674,11 @@
       "selectType": "Select type",
       "priority": "Priority",
       "priorityHelp": "Rules with higher priority are applied first",
-
       "targets": "Targeting",
       "targetAssets": "Target Assets",
       "allAssets": "All Assets",
       "specificAssets": "Specific Assets",
       "selectAssets": "Select assets",
-
       "conditions": "Conditions",
       "timeSlots": "Time Slots",
       "startTime": "Start Time",
@@ -658,7 +698,6 @@
       "bookingWindow": "Booking Window",
       "minHoursBefore": "Minimum Hours Before",
       "maxHoursBefore": "Maximum Hours Before",
-
       "adjustment": "Price Adjustment",
       "adjustmentType": "Adjustment Type",
       "selectAdjustmentType": "Select type",
@@ -666,12 +705,10 @@
       "valuePercentage": "Value (Percentage)",
       "valueAmount": "Value (Amount)",
       "overridePrice": "New Price",
-
       "validity": "Validity Period",
       "validFrom": "Valid From",
       "validUntil": "Valid Until",
       "validUntilOptional": "Valid Until (Optional)",
-
       "submit": "Save Rule",
       "cancel": "Cancel",
       "creating": "Creating...",
@@ -683,7 +720,6 @@
       "activated": "Rule activated",
       "deactivated": "Rule deactivated"
     },
-
     "preview": {
       "title": "Price Preview",
       "basePrice": "Base Price",

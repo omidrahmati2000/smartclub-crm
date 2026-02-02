@@ -1,0 +1,71 @@
+{
+    "discovery": {
+        "title": "Tournaments",
+        "subtitle": "Find the best Padel and Tennis competitions in your city.",
+        "search": "Search tournaments...",
+        "all": "All Tournaments",
+        "padel": "Padel",
+        "tennis": "Tennis",
+        "football": "Football",
+        "joined": "joined",
+        "joinNow": "Join Now",
+        "currency": "IRT",
+        "free": "Free"
+    },
+    "detail": {
+        "back": "Back to list",
+        "overview": "Overview",
+        "rules": "Tournament Rules",
+        "location": "Location",
+        "participants": "Participants",
+        "brackets": "Brackets / Live",
+        "noStartedTitle": "Tournament hasn't started yet",
+        "noStartedDesc": "Brackets and live results will appear here once the games begin.",
+        "entryFee": "Entry Fee",
+        "prizePool": "Prize Pool",
+        "deadline": "Registration Deadline",
+        "registerNow": "Register Now",
+        "invitePartner": "Invite Partner",
+        "needPartner": "Need a Partner?",
+        "needPartnerDesc": "You can register alone and we will find a partner for you based on your skill level.",
+        "findOpenTeam": "Find an open team",
+        "glory": "Glory & Trophy",
+        "participant": "Participant",
+        "noParticipants": "No participants yet. Be the first to join!"
+    },
+    "registration": {
+        "title": "Register for {name}",
+        "description": "Complete the form below to secure your spot in the competition.",
+        "typeLabel": "How would you like to register?",
+        "individual": "Individual",
+        "individualDesc": "We'll find you a partner",
+        "pair": "As a Pair",
+        "pairDesc": "Register with your partner",
+        "fullName": "Full Name",
+        "phone": "Phone Number",
+        "partnerDetails": "Partner Details",
+        "partnerName": "Partner's Name",
+        "partnerPhone": "Partner's Phone",
+        "fee": "Entry Fee",
+        "secured": "Secured Payment",
+        "submit": "Register & Pay",
+        "successTitle": "Registration Successful!",
+        "successDesc": "We've received your registration for {name}. A confirmation SMS has been sent.",
+        "awesome": "Awesome!"
+    },
+    "status": {
+        "draft": "Draft",
+        "registration_open": "Registration Open",
+        "registration_closed": "Registration Closed",
+        "in_progress": "In Progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+    },
+    "formats": {
+        "single_elimination": "Single Elimination",
+        "double_elimination": "Double Elimination",
+        "round_robin": "Round Robin",
+        "americano": "Americano",
+        "mexicano": "Mexicano"
+    }
+}

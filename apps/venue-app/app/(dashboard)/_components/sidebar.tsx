@@ -14,6 +14,7 @@ import {
   TrendingUp,
   FileText,
   Settings,
+  Trophy,
 } from 'lucide-react'
 import { Permission } from '@smartclub/types'
 import type { User } from '@smartclub/types'
@@ -115,6 +116,17 @@ export function Sidebar() {
           label: t('nav.reports'),
           icon: FileText,
           permission: Permission.REPORTS_VIEW,
+        },
+      ],
+    },
+    {
+      label: t('nav.groups.competitions'),
+      items: [
+        {
+          href: '/tournaments',
+          label: t('nav.tournaments'),
+          icon: Trophy,
+          permission: Permission.TOURNAMENT_VIEW,
         },
       ],
     },

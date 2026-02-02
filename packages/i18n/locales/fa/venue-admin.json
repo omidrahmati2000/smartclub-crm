@@ -1,4 +1,76 @@
 {
+  "tournaments": {
+    "title": "تورنومنت‌ها",
+    "description": "مدیریت تورنومنت‌ها و رقابت‌ها",
+    "createTournament": "ایجاد تورنومنت",
+    "noTournaments": "هیچ تورنومنتی یافت نشد",
+    "active": "فعال",
+    "upcoming": "پیش‌رو",
+    "past": "گذشته",
+    "format": "فرمت",
+    "participants": "شرکت‌کنندگان",
+    "startDate": "تاریخ شروع",
+    "status": "وضعیت",
+    "viewProfile": "مشاهده جزئیات",
+    "back": "بازگشت",
+    "create": {
+      "title": "ایجاد تورنومنت جدید",
+      "steps": {
+        "basic": "اطلاعات پایه",
+        "format": "فرمت",
+        "schedule": "زمان‌بندی",
+        "registration": "ثبت‌نام"
+      },
+      "fields": {
+        "name": "نام تورنومنت",
+        "sport": "ورزش",
+        "description": "توضیحات",
+        "startDate": "تاریخ شروع",
+        "endDate": "تاریخ پایان",
+        "assets": "زمین‌ها",
+        "entryFee": "هزینه ورودی (تومان)",
+        "maxParticipants": "حداکثر نفرات",
+        "registrationDeadline": "مهلت ثبت‌نام"
+      },
+      "formats": {
+        "singleTitle": "تک‌حذفی",
+        "singleDesc": "جدول حذفی استاندارد",
+        "doubleTitle": "دوبار حذفی",
+        "doubleDesc": "شانس مجدد برای بازنده‌ها",
+        "roundTitle": "دوره‌ای",
+        "roundDesc": "همه با هم بازی می‌کنند",
+        "americanoTitle": "آمریکانو",
+        "americanoDesc": "بازی‌های زمان‌دار با چرخش یار",
+        "mexicanoTitle": "مکزیکانو",
+        "mexicanoDesc": "مشابه آمریکانو اما با تراز قدرت"
+      },
+      "actions": {
+        "cancel": "لغو",
+        "back": "قبلی",
+        "next": "بعدی",
+        "create": "ایجاد تورنومنت"
+      }
+    },
+    "detail": {
+      "tabs": {
+        "overview": "پیش‌نسخه",
+        "participants": "شرکت‌کنندگان",
+        "matches": "جدول و مسابقات",
+        "standings": "رده‌بندی",
+        "settings": "تنظیمات"
+      },
+      "kpis": {
+        "participants": "شرکت‌کنندگان",
+        "progress": "پیشرفت",
+        "activeMatches": "بازی‌های زنده",
+        "matchesPlayed": "بازی‌های انجام شده"
+      },
+      "courtOverview": "نمای زمین‌ها",
+      "quickRankings": "رده‌بندی سریع",
+      "startNextRound": "شروع راند بعدی",
+      "finishTournament": "اتمام تورنومنت"
+    }
+  },
   "nav": {
     "dashboard": "داشبورد",
     "calendar": "تقویم",
@@ -9,11 +81,13 @@
     "finance": "مالی",
     "pricing": "قیمت‌گذاری",
     "reports": "گزارشات",
+    "tournaments": "تورنومنت‌ها",
     "settings": "تنظیمات",
     "groups": {
       "overview": "نمای کلی",
       "operations": "عملیات",
       "management": "مدیریت",
+      "competitions": "رقابت‌ها",
       "system": "سیستم"
     },
     "collapse": "بستن نوار کناری",

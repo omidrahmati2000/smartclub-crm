@@ -862,5 +862,141 @@ import {
 
 ---
 
-*Last Updated: 2026-01-30*
-*Version: 1.1.0*
+*Last Updated: 2026-02-02*
+*Version: 1.2.0*
+
+---
+
+## Tournament Models
+
+### Tournament
+```typescript
+interface Tournament {
+  id: string;
+  venueId: string;
+  name: string;
+  description?: string;
+  sportType: SportType; // Padel is key here
+  type: TournamentType;
+  status: TournamentStatus;
+  startDate: string;
+  endDate: string;
+  
+  // Configuration
+  minParticipants: number;
+  maxParticipants: number;
+  config: TournamentConfig; // Rules, variations, point systems
+  
+  // Media
+  logoUrl?: string;
+  bannerUrl?: string;
+  
+  // Relations
+  organizerId: string; // User ID (venue staff)
+  participants: TournamentParticipant[];
+  
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Tournament Participant (Team/Player)
+```typescript
+interface TournamentParticipant {
+  id: string;
+  tournamentId: string;
+  name: string; // Team name or Player name
+  avatarUrl?: string;
+  type: 'individual' | 'team';
+  memberIds: string[]; // List of User IDs
+  
+  // Stats in this tournament
+  matchesPlayed: number;
+  matchesWon: number;
+  points: number;
+  rank?: number;
+  
+  status: 'registered' | 'confirmed' | 'disqualified';
+  createdAt: string;
+}
+```
+
+### Tournament Match
+```typescript
+interface TournamentMatch {
+  id: string;
+  tournamentId: string;
+  bracketId?: string; // Null if Round Robin / League
+  round: number;
+  
+  // Participants
+  teamOneId?: string; // Nullable if TBD (waiting for previous match)
+  teamTwoId?: string;
+  
+  // Schedule
+  courtId?: string; // Asset ID (where the match is played) - THIS LINKS TO VENUE
+  startTime: string;
+  endTime?: string;
+  
+  // Results
+  score: MatchScore; // Detailed score object
+  winnerId?: string;
+  status: MatchStatus;
+  
+  refereeId?: string; // Optional referee
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Bracket
+```typescript
+interface Bracket {
+  id: string;
+  tournamentId: string;
+  round: number;
+  position: number; // Position in the bracket tree
+  matchId?: string;
+  nextMatchId?: string; // Where the winner goes
+  loserMatchId?: string; // Where the loser goes (double elimination)
+}
+```
+
+### Tournament Enums
+
+#### TournamentType
+```typescript
+enum TournamentType {
+  SINGLE_ELIMINATION = 'single_elimination',
+  DOUBLE_ELIMINATION = 'double_elimination',
+  ROUND_ROBIN = 'round_robin',
+  LEAGUE = 'league',
+  SWISS = 'swiss',
+  AMERICANO = 'americano', // Rotate partners/opponents (Padel)
+  MEXICANO = 'mexicano',   // Rotate based on points (Padel)
+  MULTI_STAGE = 'multi_stage', // Groups -> Knockout
+}
+```
+
+#### TournamentStatus
+```typescript
+enum TournamentStatus {
+  DRAFT = 'draft',
+  REGISTRATION_OPEN = 'registration_open',
+  REGISTRATION_CLOSED = 'registration_closed',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled',
+}
+```
+
+#### MatchStatus
+```typescript
+enum MatchStatus {
+  SCHEDULED = 'scheduled',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled',
+  WALKOVER = 'walkover',
+}
+```

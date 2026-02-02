@@ -1,0 +1,410 @@
+'use client'
+
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { useParams } from 'next/navigation'
+import {
+    Trophy,
+    Users,
+    Settings,
+    Calendar,
+    BarChart,
+    ChevronLeft,
+    LayoutGrid,
+    PlayCircle
+} from 'lucide-react'
+import {
+    Button,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+    Badge,
+    Separator,
+    Label,
+    Input
+} from '@smartclub/ui'
+import Link from 'next/link'
+
+// Components
+import { ParticipantList } from '../_components/participant-list'
+import { BracketView } from '../_components/bracket-view'
+import { AmericanoGrid } from '../_components/americano-grid'
+import { ScoreEntryDialog } from '../_components/score-entry-dialog'
+import { Leaderboard } from '../_components/leaderboard'
+
+import { useEffect } from 'react'
+import { localizedFetch } from '@smartclub/utils'
+
+export default function TournamentDetailPage() {
+    const { id } = useParams()
+    const t = useTranslations('venue-admin.tournaments')
+
+    const [tournament, setTournament] = useState<any>(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [isScoreModalOpen, setIsScoreModalOpen] = useState(false)
+    const [selectedMatch, setSelectedMatch] = useState<any>(null)
+
+    useEffect(() => {
+        const fetchTournament = async () => {
+            try {
+                const res = await localizedFetch(`/api/tournaments/${id}`)
+                const result = await res.json()
+                if (result.success) {
+                    setTournament(result.data)
+                }
+            } catch (error) {
+                console.error('Failed to fetch tournament:', error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        if (id) fetchTournament()
+    }, [id])
+
+    if (isLoading) {
+        return (
+            <div className="flex flex-col gap-8 animate-pulse">
+                <div className="h-12 w-1/3 bg-muted rounded" />
+                <div className="grid gap-6 md:grid-cols-4">
+                    {[1, 2, 3, 4].map(i => <div key={i} className="h-24 bg-muted rounded" />)}
+                </div>
+                <div className="h-64 bg-muted rounded" />
+            </div>
+        )
+    }
+
+    if (!tournament) return <div>Tournament not found</div>
+
+    // Derive calculated props
+    const participantsCount = tournament.participants?.length || 0
+    const stage = tournament.stages?.[0]
+    const rounds = stage?.rounds || []
+
+    // Convert TournamentMatch format to component formats
+    const bracketRounds = rounds.map((r: any) => ({
+        number: r.roundNumber,
+        name: r.name,
+        matches: r.matches.map((m: any) => ({
+            id: m.id,
+            round: r.roundNumber,
+            p1: m.participant1Id ? {
+                id: m.participant1Id,
+                name: tournament.participants.find((p: any) => p.id === m.participant1Id)?.name || 'Unknown',
+                score: m.score1
+            } : undefined,
+            p2: m.participant2Id ? {
+                id: m.participant2Id,
+                name: tournament.participants.find((p: any) => p.id === m.participant2Id)?.name || 'Unknown',
+                score: m.score2
+            } : undefined,
+            status: m.status,
+            winnerId: m.winnerId
+        }))
+    }))
+
+    const americanoMatches = rounds.flatMap((r: any) => r.matches.map((m: any) => ({
+        round: r.roundNumber,
+        court: m.assetId || 'Court',
+        team1: m.team1ParticipantIds?.map((pid: string) => tournament.participants.find((p: any) => p.id === pid)?.name) || [],
+        team2: m.team2ParticipantIds?.map((pid: string) => tournament.participants.find((p: any) => p.id === pid)?.name) || [],
+        score1: m.score1,
+        score2: m.score2,
+        status: m.status === 'completed' ? 'completed' : 'pending'
+    })))
+
+    const standings = stage?.standings?.map((s: any) => ({
+        ...s,
+        name: tournament.participants.find((p: any) => p.id === s.participantId)?.name || 'Unknown'
+    })) || []
+
+    const completedMatches = rounds.reduce((acc: number, r: any) => acc + r.matches.filter((m: any) => m.status === 'completed').length, 0)
+    const totalMatches = rounds.reduce((acc: number, r: any) => acc + r.matches.length, 0)
+    const activeMatches = rounds.reduce((acc: number, r: any) => acc + r.matches.filter((m: any) => m.status === 'in_progress').length, 0)
+
+    const progress = totalMatches > 0 ? (completedMatches / totalMatches) * 100 : 0
+
+    const handleMatchClick = (match: any) => {
+        setSelectedMatch(match)
+        setIsScoreModalOpen(true)
+    }
+
+    return (
+        <div className="flex flex-col gap-6">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                    <Button variant="outline" size="icon" asChild>
+                        <Link href="/tournaments">
+                            <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+                        </Link>
+                    </Button>
+                    <div>
+                        <div className="flex items-center gap-2">
+                            <h1 className="text-3xl font-bold tracking-tight">{tournament.name}</h1>
+                            <Badge variant={tournament.status === 'in_progress' ? 'default' : 'secondary'}>
+                                {t(`status.${tournament.status.toLowerCase()}` as any) || tournament.status}
+                            </Badge>
+                        </div>
+                        <p className="text-muted-foreground">{tournament.sportType} • {t(`formats.${tournament.format.toLowerCase()}` as any) || tournament.format} • {new Date(tournament.startDate).toLocaleDateString()}</p>
+                    </div>
+                </div>
+                <div className="flex gap-2">
+                    <Button variant="outline">
+                        <PlayCircle className="me-2 h-4 w-4" />
+                        {t('detail.startNextRound')}
+                    </Button>
+                    <Button>
+                        <Trophy className="me-2 h-4 w-4" />
+                        {t('detail.finishTournament')}
+                    </Button>
+                </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-4">
+                {/* Same KPI cards as before */}
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">{t('detail.kpis.participants')}</CardTitle>
+                        <Users className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">{participantsCount} / {tournament.maxParticipants}</div>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">{t('detail.kpis.progress')}</CardTitle>
+                        <PlayCircle className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">{Math.round(progress)}%</div>
+                        <div className="mt-2 h-2 w-full rounded-full bg-secondary overflow-hidden">
+                            <div className="h-full bg-primary" style={{ width: `${progress}%` }} />
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">{t('detail.kpis.activeMatches')}</CardTitle>
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">{activeMatches}</div>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">{t('detail.kpis.matchesPlayed')}</CardTitle>
+                        <BarChart className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">{completedMatches} / {totalMatches}</div>
+                    </CardContent>
+                </Card>
+            </div>
+
+            <Tabs defaultValue="matches" className="w-full">
+                <TabsList className="bg-muted/50 p-1">
+                    <TabsTrigger value="overview" className="gap-2">
+                        <LayoutGrid className="h-4 w-4" />
+                        {t('detail.tabs.overview')}
+                    </TabsTrigger>
+                    <TabsTrigger value="participants" className="gap-2">
+                        <Users className="h-4 w-4" />
+                        {t('detail.tabs.participants')}
+                    </TabsTrigger>
+                    <TabsTrigger value="matches" className="gap-2">
+                        <Calendar className="h-4 w-4" />
+                        {t('detail.tabs.matches')}
+                    </TabsTrigger>
+                    <TabsTrigger value="standings" className="gap-2">
+                        <Trophy className="h-4 w-4" />
+                        {t('detail.tabs.standings')}
+                    </TabsTrigger>
+                    <TabsTrigger value="settings" className="gap-2">
+                        <Settings className="h-4 w-4" />
+                        {t('detail.tabs.settings')}
+                    </TabsTrigger>
+                </TabsList>
+
+                <Separator className="my-6" />
+
+                <TabsContent value="overview">
+                    <div className="grid gap-6 md:grid-cols-3">
+                        <Card className="md:col-span-2">
+                            <CardHeader>
+                                <CardTitle>{t('detail.courtOverview')}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="border rounded-lg p-4 bg-primary/5 border-primary">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <span className="font-bold">Court 1</span>
+                                            <Badge>Live</Badge>
+                                        </div>
+                                        <p className="text-sm font-semibold">Ali + Hossein vs Sara + Mina</p>
+                                        <p className="text-xs text-muted-foreground mt-1">Starting soon...</p>
+                                    </div>
+                                    <div className="border rounded-lg p-4 bg-muted/50">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <span className="font-bold">Court 2</span>
+                                            <Badge variant="outline">Empty</Badge>
+                                        </div>
+                                        <p className="text-sm text-muted-foreground italic">No active match scheduled.</p>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>{t('detail.quickRankings')}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    {standings.slice(0, 5).map((s: any, i: number) => (
+                                        <div key={s.participantId} className="flex items-center justify-between border-b pb-2">
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-xs font-bold text-muted-foreground">{i + 1}</span>
+                                                <span className="text-sm font-medium">{s.name}</span>
+                                            </div>
+                                            <span className="text-sm font-mono font-bold">{s.totalPoints} pts</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </TabsContent>
+
+                <TabsContent value="participants">
+                    <Card>
+                        <CardHeader className="flex flex-row items-center justify-between">
+                            <div>
+                                <CardTitle>Participants Management</CardTitle>
+                                <CardDescription>Manage players for this tournament.</CardDescription>
+                            </div>
+                            <Button size="sm">Add Player</Button>
+                        </CardHeader>
+                        <CardContent>
+                            <ParticipantList
+                                participants={tournament.participants || []}
+                                onRemove={(id) => console.log('Remove', id)}
+                                onUpdateStatus={(id, status) => console.log('Update', id, status)}
+                            />
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+
+                <TabsContent value="matches">
+                    <div className="space-y-6">
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between">
+                                <div>
+                                    <CardTitle>Matches & Schedule</CardTitle>
+                                    <CardDescription>View and manage all matches in the current stage.</CardDescription>
+                                </div>
+                                <div className="flex gap-2">
+                                    <Button variant="outline" size="sm">Export Schedule</Button>
+                                    <Button size="sm">Auto-Schedule</Button>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                {tournament.format === 'AMERICANO' ? (
+                                    <AmericanoGrid
+                                        matches={americanoMatches}
+                                        onEntryScore={(idx) => handleMatchClick(americanoMatches[idx])}
+                                    />
+                                ) : (
+                                    <BracketView
+                                        rounds={bracketRounds}
+                                        onMatchClick={(id) => handleMatchClick({ id, team1: 'TBD', team2: 'TBD' })}
+                                    />
+                                )}
+                            </CardContent>
+                        </Card>
+                    </div>
+                </TabsContent>
+
+                <TabsContent value="standings">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>{t('detail.tabs.standings')}</CardTitle>
+                            <CardDescription>Live standings based on points earned and point difference.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Leaderboard standings={standings} />
+                            <div className="mt-4 flex justify-end">
+                                <Button variant="outline" size="sm">Download PDF</Button>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+
+                <TabsContent value="settings">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Tournament Settings</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            <div className="grid gap-4 md:grid-cols-2">
+                                <div className="space-y-2">
+                                    <Label>Match Duration (minutes)</Label>
+                                    <Input type="number" defaultValue={20} />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Rest Duration (minutes)</Label>
+                                    <Input type="number" defaultValue={5} />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Courts to Use</Label>
+                                    <div className="flex gap-2">
+                                        <Badge>Court 1</Badge>
+                                        <Badge>Court 2</Badge>
+                                    </div>
+                                </div>
+                            </div>
+                            <Button>Save Settings</Button>
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+            </Tabs>
+
+            <ScoreEntryDialog
+                isOpen={isScoreModalOpen}
+                onClose={() => setIsScoreModalOpen(false)}
+                onSave={async (s1, s2) => {
+                    try {
+                        const res = await localizedFetch(`/api/tournaments/${id}/matches/${selectedMatch.id}`, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ score1: s1, score2: s2 })
+                        })
+                        const result = await res.json()
+                        if (result.success) {
+                            // Optimistically update or refetch
+                            // For simplicity, we refetch to get updated standings/brackets
+                            const tournamentRes = await localizedFetch(`/api/tournaments/${id}`)
+                            const tournamentResult = await tournamentRes.json()
+                            if (tournamentResult.success) {
+                                setTournament(tournamentResult.data)
+                            }
+                            setIsScoreModalOpen(false)
+                        }
+                    } catch (error) {
+                        console.error('Failed to update score:', error)
+                    }
+                }}
+                team1Name={Array.isArray(selectedMatch?.team1) ? selectedMatch.team1.join(' / ') : selectedMatch?.team1 || selectedMatch?.p1?.name || 'Team 1'}
+                team2Name={Array.isArray(selectedMatch?.team2) ? selectedMatch.team2.join(' / ') : selectedMatch?.team2 || selectedMatch?.p2?.name || 'Team 2'}
+                initialScore1={selectedMatch?.score1 || selectedMatch?.p1?.score}
+                initialScore2={selectedMatch?.score2 || selectedMatch?.p2?.score}
+                matchId={selectedMatch?.id}
+            />
+        </div>
+    )
+}

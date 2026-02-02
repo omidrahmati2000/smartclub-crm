@@ -13,6 +13,8 @@ import { taxSettingsHandlers } from './tax-settings';
 import { complianceHandlers } from './compliance';
 import { paymentSettingsHandlers } from './payment-settings';
 
+import { tournamentHandlers } from './tournaments';
+
 export const handlers = [
   ...authHandlers,
   ...venueHandlers,
@@ -28,4 +30,5 @@ export const handlers = [
   ...taxSettingsHandlers,
   ...complianceHandlers,
   ...paymentSettingsHandlers,
+  ...tournamentHandlers,
 ];

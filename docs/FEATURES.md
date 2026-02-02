@@ -296,6 +296,8 @@
 - [ ] Swiss System (matched by record, minimized repeats)
 - [ ] Multi-Stage (groups → knockout with auto-advancement)
 - [ ] Set-based scoring (volleyball, tennis style)
+- [ ] Americano (Padel specific: rotate partners/opponents)
+- [ ] Mexicano (Padel specific: rotate based on performance)
 
 ### 7.3 Participant Management `P1`
 - [ ] Add players/teams manually

@@ -5,4 +5,6 @@ export enum TournamentFormat {
   SWISS = 'swiss',
   MULTI_STAGE = 'multi_stage',
   LEAGUE = 'league',
+  AMERICANO = 'americano',
+  MEXICANO = 'mexicano',
 }

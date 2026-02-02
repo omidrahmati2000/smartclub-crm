@@ -35,6 +35,7 @@ export const venueRolePermissions: Record<VenueRole, PermissionKey[]> = {
     Permission.CALENDAR_MANAGE,
     Permission.ASSET_VIEW,
     Permission.CUSTOMER_VIEW,
+    Permission.TOURNAMENT_VIEW,
   ],
   [VenueRole.CASHIER]: [
     Permission.VENUE_VIEW,
@@ -43,6 +44,7 @@ export const venueRolePermissions: Record<VenueRole, PermissionKey[]> = {
     Permission.CALENDAR_VIEW,
     Permission.CUSTOMER_VIEW,
     Permission.FINANCE_VIEW,
+    Permission.TOURNAMENT_VIEW,
   ],
 };
 

@@ -7,7 +7,7 @@ export interface Tournament {
   name: string;
   description: string;
   sportType: SportType;
-  format: TournamentFormat;
+  format: TournamentFormat; // Base format or 'MULTI_STAGE'
   status: TournamentStatus;
   startDate: string;
   endDate: string;
@@ -19,10 +19,40 @@ export interface Tournament {
   rules?: string;
   imageUrl?: string;
   participants: TournamentParticipant[];
-  rounds: TournamentRound[];
-  standings: TournamentStanding[];
+  stages: TournamentStage[];
   createdAt: string;
   updatedAt: string;
+
+  // Settings
+  settings: {
+    pointsPerMatch?: number;
+    matchDurationMin?: number;
+    restDurationMin?: number;
+    courts?: string[]; // Asset IDs
+    automatedScheduling?: boolean;
+    americanoPoints?: number; // Target points for Americano (e.g., 24 or 32)
+  };
+}
+
+export interface TournamentStage {
+  id: string;
+  tournamentId: string;
+  name: string;
+  order: number;
+  type: TournamentFormat;
+  status: TournamentStatus;
+  groups?: TournamentGroup[];
+  rounds: TournamentRound[];
+  standings: TournamentStanding[];
+}
+
+export interface TournamentGroup {
+  id: string;
+  stageId: string;
+  name: string; // Group A, Group B, etc.
+  participantIds: string[];
+  rounds: TournamentRound[];
+  standings: TournamentStanding[];
 }
 
 export enum TournamentStatus {
@@ -38,15 +68,22 @@ export interface TournamentParticipant {
   id: string;
   tournamentId: string;
   userId?: string;
-  teamId?: string;
+  teamId?: string; // For doubles/team tournaments
   name: string;
   seed?: number;
   registeredAt: string;
+  paymentStatus: 'pending' | 'paid';
+  stats?: {
+    rank?: number;
+    points?: number;
+    played?: number;
+  };
 }
 
 export interface TournamentRound {
   id: string;
-  tournamentId: string;
+  stageId: string;
+  groupId?: string;
   roundNumber: number;
   name: string;
   matches: TournamentMatch[];
@@ -55,8 +92,12 @@ export interface TournamentRound {
 export interface TournamentMatch {
   id: string;
   roundId: string;
-  participant1Id?: string;
+  participant1Id?: string; // For Americano, these could change per match
   participant2Id?: string;
+  // Doubles support
+  team1ParticipantIds?: string[];
+  team2ParticipantIds?: string[];
+
   score1?: number;
   score2?: number;
   sets?: MatchSet[];
@@ -64,6 +105,7 @@ export interface TournamentMatch {
   scheduledTime?: string;
   assetId?: string;
   status: 'scheduled' | 'in_progress' | 'completed' | 'bye';
+  refereeId?: string;
 }
 
 export interface MatchSet {
@@ -77,6 +119,7 @@ export interface MatchSet {
 export interface TournamentStanding {
   participantId: string;
   rank: number;
+  played: number;
   wins: number;
   losses: number;
   draws: number;
@@ -84,3 +127,4 @@ export interface TournamentStanding {
   pointsAgainst: number;
   totalPoints: number;
 }
+

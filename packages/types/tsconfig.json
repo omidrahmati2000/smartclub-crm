@@ -1,8 +1,10 @@
 {
-  "extends": "@smartclub/config/typescript/library.json",
+  "extends": "../config/typescript/library.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
