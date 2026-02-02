@@ -10,11 +10,20 @@ import {
   Package,
   Users,
   UserCog,
-  Wallet,
+  Banknote,
   TrendingUp,
   FileText,
   Settings,
   Trophy,
+  ShoppingBag,
+  CreditCard,
+  Car,
+  GraduationCap,
+  Crown,
+  Sparkles,
+  Monitor,
+  Percent,
+  Cpu,
 } from 'lucide-react'
 import { Permission } from '@smartclub/types'
 import type { User } from '@smartclub/types'
@@ -77,16 +86,20 @@ export function Sidebar() {
           permission: Permission.BOOKING_VIEW,
         },
         {
+          href: '/shop',
+          label: t('nav.shop'),
+          icon: ShoppingBag,
+        },
+        {
+          href: '/valet',
+          label: t('nav.valet'),
+          icon: Car,
+        },
+        {
           href: '/assets',
           label: t('nav.assets'),
           icon: Package,
           permission: Permission.ASSET_VIEW,
-        },
-        {
-          href: '/customers',
-          label: t('nav.customers'),
-          icon: Users,
-          permission: Permission.CUSTOMER_VIEW,
         },
       ],
     },
@@ -94,28 +107,32 @@ export function Sidebar() {
       label: t('nav.groups.management'),
       items: [
         {
+          href: '/customers',
+          label: t('nav.customers'),
+          icon: Users,
+          permission: Permission.CUSTOMER_VIEW,
+        },
+        {
+          href: '/memberships',
+          label: t('nav.memberships'),
+          icon: Crown,
+          // permission: Permission.MEMBERSHIP_VIEW,
+        },
+        {
+          href: '/wallet',
+          label: t('nav.wallet'),
+          icon: CreditCard,
+        },
+        {
+          href: '/marketing',
+          label: t('nav.marketing'),
+          icon: Percent,
+        },
+        {
           href: '/staff',
           label: t('nav.staff'),
           icon: UserCog,
           permission: Permission.STAFF_VIEW,
-        },
-        {
-          href: '/finance',
-          label: t('nav.finance'),
-          icon: Wallet,
-          permission: Permission.FINANCE_VIEW,
-        },
-        {
-          href: '/pricing',
-          label: t('nav.pricing'),
-          icon: TrendingUp,
-          permission: Permission.PRICING_VIEW,
-        },
-        {
-          href: '/reports',
-          label: t('nav.reports'),
-          icon: FileText,
-          permission: Permission.REPORTS_VIEW,
         },
       ],
     },
@@ -128,11 +145,50 @@ export function Sidebar() {
           icon: Trophy,
           permission: Permission.TOURNAMENT_VIEW,
         },
+        {
+          href: '/scoreboard',
+          label: t('nav.scoreboard'),
+          icon: Monitor,
+        },
+        {
+          href: '/coaches',
+          label: t('nav.coaches'),
+          icon: GraduationCap,
+          // permission: Permission.COACH_VIEW,
+        },
+        {
+          href: '/social',
+          label: t('nav.social'),
+          icon: Sparkles,
+        },
       ],
     },
     {
       label: t('nav.groups.system'),
       items: [
+        {
+          href: '/automation',
+          label: t('nav.automation'),
+          icon: Cpu,
+        },
+        {
+          href: '/finance',
+          label: t('nav.finance'),
+          icon: Banknote,
+          permission: Permission.FINANCE_VIEW,
+        },
+        {
+          href: '/reports',
+          label: t('nav.reports'),
+          icon: FileText,
+          permission: Permission.REPORTS_VIEW,
+        },
+        {
+          href: '/pricing',
+          label: t('nav.pricing'),
+          icon: TrendingUp,
+          permission: Permission.PRICING_VIEW,
+        },
         {
           href: '/settings',
           label: t('nav.settings'),

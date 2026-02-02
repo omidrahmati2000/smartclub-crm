@@ -174,4 +174,27 @@ Plus international examples from:
 
 ---
 
+
+---
+
+## 🔮 Future Capabilities (Coming from Enterprise Ecosystem)
+
+We are actively integrating advanced modules from our enterprise-grade projects (`smart-club`, `smartpadel`):
+
+### 🏆 Advanced Tournaments
+- **Formats**: Americano, Mexicano, Round Robin, Double Elimination.
+- **Management**: Automated Bracket generation, Live Scoring, Seeding.
+
+### 🏪 Operations & POS
+- **Cafe & Retail**: Full Point-of-Sale for drinks, food, and equipment.
+- **Services**: Valet Parking management, Rental Locker systems.
+- **Smart Court**: Lighting automation and automated access gates.
+
+### 🤝 Engagement
+- **Social**: Partner matching, Friend feeds.
+- **Gamification**: Player levels, Badges, Leaderboards.
+- **Wallet**: Prepaid credit system for seamless payments.
+
+---
+
 **Note**: This is a demonstration platform. Backend API will be developed based on this frontend architecture. All mock data can be easily swapped with real API endpoints.
