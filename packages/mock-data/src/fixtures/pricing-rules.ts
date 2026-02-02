@@ -9,8 +9,8 @@ export const mockPricingRules: PricingRule[] = [
   {
     id: 'pricing-1',
     venueId: 'venue-1',
-    name: 'قیمت‌گذاری ساعات اوج',
-    description: 'افزایش قیمت در ساعات شلوغی (17-22)',
+    name: 'Peak Hours Pricing',
+    description: 'Premium pricing during busy hours (17:00-22:00)',
     type: PricingRuleType.PEAK_HOURS,
     status: PricingRuleStatus.ACTIVE,
     priority: 1,
@@ -33,8 +33,8 @@ export const mockPricingRules: PricingRule[] = [
   {
     id: 'pricing-2',
     venueId: 'venue-1',
-    name: 'تخفیف صبح‌های هفته',
-    description: 'تخفیف برای رزرو در صبح روزهای شنبه تا چهارشنبه',
+    name: 'Weekday Morning Discount',
+    description: 'Discount for bookings on weekday mornings (08:00-12:00)',
     type: PricingRuleType.PEAK_HOURS,
     status: PricingRuleStatus.ACTIVE,
     priority: 2,
@@ -43,7 +43,7 @@ export const mockPricingRules: PricingRule[] = [
       timeSlots: [
         { startTime: '08:00', endTime: '12:00' },
       ],
-      daysOfWeek: [6, 0, 1, 2], // Sat, Sun, Mon, Tue
+      daysOfWeek: [0, 1, 2, 3], // Sun, Mon, Tue, Wed
     },
     adjustment: {
       type: AdjustmentType.PERCENTAGE_DECREASE,
@@ -57,8 +57,8 @@ export const mockPricingRules: PricingRule[] = [
   {
     id: 'pricing-3',
     venueId: 'venue-1',
-    name: 'قیمت‌گذاری روز جمعه',
-    description: 'افزایش قیمت در روز جمعه',
+    name: 'Friday Premium Pricing',
+    description: 'Premium pricing on Fridays',
     type: PricingRuleType.DAY_OF_WEEK,
     status: PricingRuleStatus.ACTIVE,
     priority: 1,
@@ -78,24 +78,24 @@ export const mockPricingRules: PricingRule[] = [
   {
     id: 'pricing-4',
     venueId: 'venue-1',
-    name: 'تخفیف نوروز 1404',
-    description: 'کمپین تخفیف ویژه نوروز',
+    name: 'Ramadan Special Offer',
+    description: 'Special discount campaign for Ramadan',
     type: PricingRuleType.SPECIAL_DATE,
     status: PricingRuleStatus.SCHEDULED,
     priority: 5,
     targetAssets: [],
     conditions: {
       dateRange: {
-        start: new Date('2025-03-20').toISOString().split('T')[0],
-        end: new Date('2025-04-03').toISOString().split('T')[0],
+        start: new Date('2025-03-01').toISOString().split('T')[0],
+        end: new Date('2025-03-30').toISOString().split('T')[0],
       },
     },
     adjustment: {
       type: AdjustmentType.PERCENTAGE_DECREASE,
       value: 20, // -20%
     },
-    validFrom: new Date('2025-03-20').toISOString(),
-    validUntil: new Date('2025-04-03').toISOString(),
+    validFrom: new Date('2025-03-01').toISOString(),
+    validUntil: new Date('2025-03-30').toISOString(),
     createdAt: new Date('2025-01-15').toISOString(),
     updatedAt: new Date('2025-01-15').toISOString(),
     createdBy: 'user-owner-1',
@@ -103,8 +103,8 @@ export const mockPricingRules: PricingRule[] = [
   {
     id: 'pricing-5',
     venueId: 'venue-1',
-    name: 'تخفیف لحظه آخری',
-    description: 'تخفیف برای رزروهای کمتر از 2 ساعت مانده',
+    name: 'Last Minute Discount',
+    description: 'Discount for bookings less than 2 hours in advance',
     type: PricingRuleType.LAST_MINUTE,
     status: PricingRuleStatus.ACTIVE,
     priority: 10,
@@ -126,8 +126,8 @@ export const mockPricingRules: PricingRule[] = [
   {
     id: 'pricing-6',
     venueId: 'venue-1',
-    name: 'تخفیف رزرو زودهنگام',
-    description: 'تخفیف برای رزروهای بیش از 7 روز قبل',
+    name: 'Early Bird Discount',
+    description: 'Discount for bookings made 7+ days in advance',
     type: PricingRuleType.EARLY_BIRD,
     status: PricingRuleStatus.ACTIVE,
     priority: 3,
@@ -149,8 +149,8 @@ export const mockPricingRules: PricingRule[] = [
   {
     id: 'pricing-7',
     venueId: 'venue-1',
-    name: 'کمپین افتتاحیه زمین جدید',
-    description: 'تخفیف ویژه افتتاحیه',
+    name: 'New Court Grand Opening',
+    description: 'Special discount for new court launch',
     type: PricingRuleType.PROMOTIONAL,
     status: PricingRuleStatus.INACTIVE,
     priority: 8,

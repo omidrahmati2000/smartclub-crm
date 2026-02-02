@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import type { Booking } from '@smartclub/types';
 import { BookingStatus } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 // Query keys for better cache management
 export const bookingKeys = {
@@ -16,12 +17,13 @@ export const bookingKeys = {
  * Fetch all bookings for a venue
  */
 async function fetchBookings(venueId: string): Promise<Booking[]> {
-  const response = await fetch(`/api/venues/${venueId}/bookings`);
-  const data = await response.json();
-  if (!data.success) {
-    throw new Error(data.message || 'Failed to fetch bookings');
+  const result = await apiClient.get<Booking[]>(`/venues/${venueId}/bookings`);
+
+  if (!result.success || !result.data) {
+    throw new Error(result.message || result.error || 'Failed to fetch bookings');
   }
-  return data.data;
+
+  return result.data;
 }
 
 /**
@@ -54,9 +56,24 @@ export function useUpdateBookingStatus() {
       bookingId: string;
       status: BookingStatus;
     }) => {
-      // TODO: Replace with actual API call
-      console.log('Update booking status:', bookingId, status);
-      return { success: true };
+      const actionMap: Record<string, string> = {
+        [BookingStatus.CHECKED_IN]: 'check-in',
+        [BookingStatus.CANCELLED]: 'cancel',
+        [BookingStatus.NO_SHOW]: 'no-show',
+        [BookingStatus.COMPLETED]: 'complete',
+      };
+      const action = actionMap[status];
+      if (!action) {
+        throw new Error(`Unsupported status transition: ${status}`);
+      }
+
+      const result = await apiClient.patch(`/bookings/${bookingId}/${action}`);
+
+      if (!result.success) {
+        throw new Error(result.message || result.error || 'Failed to update booking status');
+      }
+
+      return result;
     },
     onMutate: async ({ bookingId, status }) => {
       // Cancel outgoing refetches
@@ -109,10 +126,14 @@ export function useCreateBooking() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: any) => {
-      // TODO: Replace with actual API call
-      console.log('Create booking:', data);
-      return { success: true };
+    mutationFn: async (data: Record<string, unknown>) => {
+      const result = await apiClient.post('/bookings', data);
+
+      if (!result.success) {
+        throw new Error(result.message || result.error || 'Failed to create booking');
+      }
+
+      return result;
     },
     onSuccess: () => {
       // Invalidate and refetch bookings after creation

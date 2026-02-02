@@ -25,22 +25,11 @@ import {
 } from '@smartclub/ui/select';
 import type { Asset } from '@smartclub/types';
 
-const bookingSchema = z.object({
-  assetId: z.string().min(1, 'امکانات را انتخاب کنید'),
-  customerName: z.string().min(2, 'نام مشتری الزامی است'),
-  date: z.string().min(1, 'تاریخ الزامی است'),
-  startTime: z.string().min(1, 'زمان شروع الزامی است'),
-  endTime: z.string().min(1, 'زمان پایان الزامی است'),
-  customerPhone: z.string().optional(),
-});
-
-type BookingFormData = z.infer<typeof bookingSchema>;
-
 interface CreateBookingDialogProps {
   open: boolean;
   onClose: () => void;
   assets: Asset[];
-  onSubmit: (data: BookingFormData) => Promise<void>;
+  onSubmit: (data: any) => Promise<void>;
 }
 
 export function CreateBookingDialog({
@@ -52,6 +41,17 @@ export function CreateBookingDialog({
   const t = useTranslations('venue-admin.bookings');
   const tc = useTranslations('venue-admin.common');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const bookingSchema = z.object({
+    assetId: z.string().min(1, t('validation.assetRequired')),
+    customerName: z.string().min(2, t('validation.customerNameRequired')),
+    date: z.string().min(1, t('validation.dateRequired')),
+    startTime: z.string().min(1, t('validation.startTimeRequired')),
+    endTime: z.string().min(1, t('validation.endTimeRequired')),
+    customerPhone: z.string().optional(),
+  });
+
+  type BookingFormData = z.infer<typeof bookingSchema>;
 
   const {
     register,
@@ -93,7 +93,7 @@ export function CreateBookingDialog({
         <DialogHeader>
           <DialogTitle>{t('createWalkIn')}</DialogTitle>
           <DialogDescription>
-            ایجاد رزرو حضوری برای مشتری در محل
+            {t('createWalkInDescription')}
           </DialogDescription>
         </DialogHeader>
 
@@ -106,7 +106,7 @@ export function CreateBookingDialog({
               onValueChange={(value) => setValue('assetId', value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="امکانات را انتخاب کنید" />
+                <SelectValue placeholder={t('placeholders.selectAsset')} />
               </SelectTrigger>
               <SelectContent>
                 {assets.map((asset) => (
@@ -129,7 +129,7 @@ export function CreateBookingDialog({
             <Input
               id="customerName"
               {...register('customerName')}
-              placeholder="نام مشتری"
+              placeholder={t('placeholders.customerName')}
             />
             {errors.customerName && (
               <p className="text-sm text-destructive">
@@ -140,11 +140,11 @@ export function CreateBookingDialog({
 
           {/* Customer Phone */}
           <div className="space-y-2">
-            <Label htmlFor="customerPhone">تلفن (اختیاری)</Label>
+            <Label htmlFor="customerPhone">{t('phone')}</Label>
             <Input
               id="customerPhone"
               {...register('customerPhone')}
-              placeholder="09121234567"
+              placeholder={t('placeholders.customerPhone')}
               dir="ltr"
             />
           </div>
@@ -165,7 +165,7 @@ export function CreateBookingDialog({
           {/* Time Range */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="startTime">زمان شروع</Label>
+              <Label htmlFor="startTime">{t('startTime')}</Label>
               <Input
                 id="startTime"
                 type="time"
@@ -178,7 +178,7 @@ export function CreateBookingDialog({
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="endTime">زمان پایان</Label>
+              <Label htmlFor="endTime">{t('endTime')}</Label>
               <Input
                 id="endTime"
                 type="time"
@@ -202,7 +202,7 @@ export function CreateBookingDialog({
               {tc('cancel')}
             </Button>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'در حال ایجاد...' : tc('create')}
+              {isSubmitting ? tc('creating') : tc('create')}
             </Button>
           </DialogFooter>
         </form>

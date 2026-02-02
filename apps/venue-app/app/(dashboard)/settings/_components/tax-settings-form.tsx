@@ -30,6 +30,7 @@ import { Receipt, Info, AlertTriangle } from 'lucide-react';
 import type { Venue, VenueTaxSettings, CountryTaxConfig } from '@smartclub/types';
 import { TaxType, TaxDisplayMode, TAX_TYPE_LABELS, TAX_ID_LABELS, getCountryTaxConfig } from '@smartclub/types';
 import { TaxRateInput } from '@smartclub/ui';
+import { apiClient } from '@/lib/api-client';
 
 const taxSettingsSchema = z.object({
   taxEnabled: z.boolean(),
@@ -87,9 +88,8 @@ export function TaxSettingsForm() {
   const fetchVenue = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}`);
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.get(`/venues/${venueId}`);
+      if (result.success && result.data) {
         const v: Venue = result.data;
         setVenue(v);
 
@@ -99,8 +99,7 @@ export function TaxSettingsForm() {
         setCountryTaxConfig(taxConfig);
 
         // Fetch existing tax settings
-        const taxResponse = await fetch(`/api/venues/${venueId}/tax-settings`);
-        const taxResult = await taxResponse.json();
+        const taxResult = await apiClient.get(`/venues/${venueId}/tax-settings`);
 
         if (taxResult.success && taxResult.data) {
           const taxSettings: VenueTaxSettings = taxResult.data;
@@ -141,13 +140,7 @@ export function TaxSettingsForm() {
     setErrorMessage('');
 
     try {
-      const response = await fetch(`/api/venues/${session.user.venueId}/tax-settings`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
+      const result = await apiClient.put(`/venues/${session.user.venueId}/tax-settings`, data);
 
       if (result.success) {
         setSuccessMessage(ts('saved'));

@@ -37,3 +37,13 @@ export {
   TAX_TYPE_LABELS,
   TAX_ID_LABELS,
 } from './tax-type';
+
+export {
+  PaymentGateway,
+  PAYMENT_GATEWAY_CONFIGS,
+  getPaymentGatewayConfig,
+  getGatewaysByRegion,
+  getGatewaysByCurrency,
+  gatewaySupports,
+} from './payment-gateway';
+export type { PaymentGatewayConfig } from './payment-gateway';

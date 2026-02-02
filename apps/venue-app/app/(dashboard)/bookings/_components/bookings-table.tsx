@@ -86,7 +86,7 @@ export function BookingsTable({
   if (bookings.length === 0) {
     return (
       <div className="flex items-center justify-center h-64 text-muted-foreground">
-        رزروی یافت نشد
+        {t('noBookingsFound')}
       </div>
     );
   }

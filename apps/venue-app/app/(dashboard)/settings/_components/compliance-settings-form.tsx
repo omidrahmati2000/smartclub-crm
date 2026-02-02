@@ -29,6 +29,7 @@ import {
 import { Shield, Info, AlertTriangle, FileText, UserCheck } from 'lucide-react';
 import type { Venue, VenueComplianceSettings } from '@smartclub/types';
 import { isGDPRRequired, Country } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 const complianceSchema = z.object({
   gdprEnabled: z.boolean(),
@@ -90,9 +91,8 @@ export function ComplianceSettingsForm() {
   const fetchVenue = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}`);
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.get(`/venues/${venueId}`);
+      if (result.success && result.data) {
         const v: Venue = result.data;
         setVenue(v);
 
@@ -102,8 +102,7 @@ export function ComplianceSettingsForm() {
         setIsEUVenue(gdprRequired);
 
         // Fetch existing compliance settings
-        const complianceResponse = await fetch(`/api/venues/${venueId}/compliance`);
-        const complianceResult = await complianceResponse.json();
+        const complianceResult = await apiClient.get(`/venues/${venueId}/compliance`);
 
         if (complianceResult.success && complianceResult.data) {
           const compliance: VenueComplianceSettings = complianceResult.data;
@@ -171,13 +170,7 @@ export function ComplianceSettingsForm() {
         minimumBookingAge: data.minimumBookingAge || undefined,
       };
 
-      const response = await fetch(`/api/venues/${session.user.venueId}/compliance`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
+      const result = await apiClient.put(`/venues/${session.user.venueId}/compliance`, payload);
 
       if (result.success) {
         setSuccessMessage(ts('saved'));

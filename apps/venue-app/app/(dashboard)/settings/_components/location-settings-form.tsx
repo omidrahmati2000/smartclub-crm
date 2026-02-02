@@ -18,6 +18,7 @@ import { Input } from '@smartclub/ui/input';
 import { Label } from '@smartclub/ui/label';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import { Alert, AlertDescription } from '@smartclub/ui/alert';
+import { apiClient } from '@/lib/api-client';
 import {
   Select,
   SelectContent,
@@ -99,9 +100,8 @@ export function LocationSettingsForm() {
 
   const fetchCountries = async () => {
     try {
-      const response = await fetch('/api/countries');
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.get<CountryInfo[]>('/countries');
+      if (result.success && result.data) {
         setCountries(result.data);
       }
     } catch (error) {
@@ -111,9 +111,8 @@ export function LocationSettingsForm() {
 
   const fetchStates = async (countryCode: string) => {
     try {
-      const response = await fetch(`/api/countries/${countryCode}/states`);
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.get<StateProvince[]>(`/countries/${countryCode}/states`);
+      if (result.success && result.data) {
         setStates(result.data);
       }
     } catch (error) {
@@ -125,9 +124,8 @@ export function LocationSettingsForm() {
   const fetchVenue = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}`);
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.get<Venue>(`/venues/${venueId}`);
+      if (result.success && result.data) {
         const v: Venue = result.data;
         setVenue(v);
         reset({
@@ -178,15 +176,12 @@ export function LocationSettingsForm() {
         },
       };
 
-      const response = await fetch(`/api/venues/${session.user.venueId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatePayload),
-      });
+      const result = await apiClient.put<Venue>(
+        `/venues/${session.user.venueId}`,
+        updatePayload
+      );
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (result.success && result.data) {
         setSuccessMessage(ts('saved'));
         setVenue(result.data);
         setTimeout(() => setSuccessMessage(''), 3000);

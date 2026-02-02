@@ -21,23 +21,24 @@ import { Switch } from '@smartclub/ui/switch';
 import { Separator } from '@smartclub/ui/separator';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import type { WhiteLabelSettings } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 const whiteLabelSchema = z.object({
   enabled: z.boolean(),
   subdomain: z
     .string()
-    .min(3, 'ساب‌دامین باید حداقل 3 کاراکتر باشد')
-    .regex(/^[a-z0-9-]+$/, 'فقط حروف کوچک، اعداد و خط تیره مجاز است'),
+    .min(3, 'Subdomain must be at least 3 characters')
+    .regex(/^[a-z0-9-]+$/, 'Only lowercase letters, numbers and hyphens allowed'),
   customDomain: z.string().optional().or(z.literal('')),
-  logoUrl: z.string().url('آدرس URL معتبر نیست').optional().or(z.literal('')),
-  faviconUrl: z.string().url('آدرس URL معتبر نیست').optional().or(z.literal('')),
-  primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'رنگ معتبر نیست'),
-  secondaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'رنگ معتبر نیست'),
+  logoUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
+  faviconUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
+  primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format'),
+  secondaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format'),
   metaTitle: z.string().optional(),
   metaDescription: z.string().optional(),
   metaKeywords: z.string().optional(),
-  instagramUrl: z.string().url('آدرس URL معتبر نیست').optional().or(z.literal('')),
-  telegramUrl: z.string().url('آدرس URL معتبر نیست').optional().or(z.literal('')),
+  instagramUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
+  telegramUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
   whatsappNumber: z.string().optional(),
 });
 
@@ -90,9 +91,8 @@ export function WhiteLabelSettingsForm() {
   const fetchWhiteLabelSettings = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}/settings`);
-      const result = await response.json();
-      if (result.success && result.data.whiteLabelSettings) {
+      const result = await apiClient.get(`/venues/${venueId}/settings`);
+      if (result.success && result.data?.whiteLabelSettings) {
         const settings: WhiteLabelSettings = result.data.whiteLabelSettings;
         reset(settings);
       }
@@ -112,15 +112,7 @@ export function WhiteLabelSettingsForm() {
     setErrorMessage('');
 
     try {
-      const response = await fetch(`/api/venues/${session.user.venueId}/settings`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ whiteLabelSettings: data }),
-      });
-
-      const result = await response.json();
+      const result = await apiClient.put(`/venues/${session.user.venueId}/settings`, { whiteLabelSettings: data });
 
       if (result.success) {
         setSuccessMessage(ts('saved'));
@@ -318,7 +310,7 @@ export function WhiteLabelSettingsForm() {
                   <Input
                     id="metaTitle"
                     {...register('metaTitle')}
-                    placeholder="عنوان متا سایت"
+                    placeholder={t('placeholders.metaTitle')}
                     disabled={isSubmitting}
                   />
                 </div>
@@ -328,7 +320,7 @@ export function WhiteLabelSettingsForm() {
                   <Textarea
                     id="metaDescription"
                     {...register('metaDescription')}
-                    placeholder="توضیحات متا سایت"
+                    placeholder={t('placeholders.metaDescription')}
                     rows={3}
                     disabled={isSubmitting}
                   />
@@ -339,7 +331,7 @@ export function WhiteLabelSettingsForm() {
                   <Input
                     id="metaKeywords"
                     {...register('metaKeywords')}
-                    placeholder="کلمات کلیدی، با کاما جدا شده"
+                    placeholder={t('placeholders.metaKeywords')}
                     disabled={isSubmitting}
                   />
                 </div>

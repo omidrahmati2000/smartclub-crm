@@ -10,7 +10,7 @@ import {
 } from '@smartclub/types';
 
 export const mockVenueSettings: Record<string, VenueSettings> = {
-  // Padel Tehran settings
+  // Dubai Sports Hub settings
   'venue-1': {
     id: 'settings-1',
     venueId: 'venue-1',
@@ -23,7 +23,7 @@ export const mockVenueSettings: Record<string, VenueSettings> = {
       freeCancellationHours: 24,
       cancellationFeePercentage: 0,
       noShowPenaltyEnabled: true,
-      noShowPenaltyAmount: 100000,
+      noShowPenaltyAmount: 100,
       minParticipants: 2,
       maxParticipants: 4,
       allowRecurringBookings: true,
@@ -32,16 +32,16 @@ export const mockVenueSettings: Record<string, VenueSettings> = {
     },
     whiteLabelSettings: {
       enabled: true,
-      subdomain: 'padel-tehran',
-      primaryColor: '#10b981',
-      secondaryColor: '#059669',
-      logoUrl: 'https://via.placeholder.com/200x80?text=Padel+Tehran',
-      metaTitle: 'پادل تهران - بهترین زمین‌های پادل در تهران',
-      metaDescription: 'رزرو آنلاین زمین پادل در تهران با بهترین امکانات',
-      metaKeywords: 'پادل، رزرو زمین پادل، پادل تهران',
-      instagramUrl: 'https://instagram.com/padeltehran',
-      telegramUrl: 'https://t.me/padeltehran',
-      whatsappNumber: '+989121234567',
+      subdomain: 'dubai-sports-hub',
+      primaryColor: '#ca8a04',
+      secondaryColor: '#a16207',
+      logoUrl: 'https://via.placeholder.com/200x80?text=Dubai+Sports+Hub',
+      metaTitle: 'Dubai Sports Hub - Premier Sports Complex in Downtown Dubai',
+      metaDescription: 'Book online padel courts in Dubai with world-class facilities',
+      metaKeywords: 'padel, sports booking, Dubai sports, padel courts Dubai',
+      instagramUrl: 'https://instagram.com/dubaisportshub',
+      telegramUrl: 'https://t.me/dubaisportshub',
+      whatsappNumber: '+971501234567',
     },
     notificationPreferences: {
       emailNotificationsEnabled: true,

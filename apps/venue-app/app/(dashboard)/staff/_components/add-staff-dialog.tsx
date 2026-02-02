@@ -34,6 +34,7 @@ import {
 import { useToast } from '@smartclub/ui/use-toast';
 import { VenueRole, type StaffMember, type CreateStaffDTO } from '@smartclub/types';
 import { Loader2 } from 'lucide-react';
+import { apiClient } from '@/lib/api-client';
 
 interface AddStaffDialogProps {
   open: boolean;
@@ -79,23 +80,17 @@ export function AddStaffDialog({ open, onClose, onSuccess, venueId }: AddStaffDi
         notes: values.notes,
       };
 
-      const response = await fetch(`/api/venues/${venueId}/staff`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dto),
-      });
+      const result = await apiClient.post(`/venues/${venueId}/staff`, dto);
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (result.success && result.data) {
         toast({
           title: t('form.created'),
           variant: 'default',
         });
-        onSuccess(data.data);
+        onSuccess(result.data);
         form.reset();
       } else {
-        throw new Error(data.error || 'Failed to create staff member');
+        throw new Error(result.error || 'Failed to create staff member');
       }
     } catch (error) {
       toast({

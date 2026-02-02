@@ -27,6 +27,7 @@ import {
 import { Separator } from '@smartclub/ui/separator';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import { CancellationPolicy, type BookingRules } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 const bookingRulesSchema = z.object({
   minBookingDuration: z.number().min(15),
@@ -95,9 +96,8 @@ export function BookingRulesForm() {
   const fetchBookingRules = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}/settings`);
-      const result = await response.json();
-      if (result.success && result.data.bookingRules) {
+      const result = await apiClient.get(`/venues/${venueId}/settings`);
+      if (result.success && result.data?.bookingRules) {
         const rules: BookingRules = result.data.bookingRules;
         reset(rules);
       }
@@ -117,15 +117,7 @@ export function BookingRulesForm() {
     setErrorMessage('');
 
     try {
-      const response = await fetch(`/api/venues/${session.user.venueId}/settings`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ bookingRules: data }),
-      });
-
-      const result = await response.json();
+      const result = await apiClient.put(`/venues/${session.user.venueId}/settings`, { bookingRules: data });
 
       if (result.success) {
         setSuccessMessage(ts('saved'));

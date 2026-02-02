@@ -5,6 +5,19 @@ import {
   BookingSource,
 } from '@smartclub/types';
 
+/**
+ * Revenue calculation basis (AED):
+ * - Padel Court:   120 AED/slot  (avg with peak: ~135 AED)
+ * - Tennis Court:   100 AED/slot  (avg with peak: ~112 AED)
+ * - PS5 Station:    80 AED/hour  (avg session 1.5h = 120 AED)
+ * - Billiards:      60 AED/hour  (avg session 1.5h = 90 AED)
+ * - Swimming:       35 AED/session
+ *
+ * Average booking value across all assets: ~105 AED
+ * Daily bookings: 8-22 (weekdays low, weekends high)
+ * Daily revenue range: ~840 - 2,310 AED
+ */
+
 // Helper to generate daily revenue for a period
 function generateDailyRevenue(days: number) {
   const daily = [];
@@ -14,12 +27,20 @@ function generateDailyRevenue(days: number) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
 
-    const bookings = Math.floor(Math.random() * 15) + 5;
-    const revenue = bookings * (Math.random() * 150000 + 200000);
+    const dayOfWeek = date.getDay();
+    // Thu/Fri (weekend in UAE) have more bookings
+    const isWeekend = dayOfWeek === 4 || dayOfWeek === 5;
+    const minBookings = isWeekend ? 14 : 8;
+    const maxBookings = isWeekend ? 22 : 16;
+
+    const bookings = Math.floor(Math.random() * (maxBookings - minBookings + 1)) + minBookings;
+    // Average booking value ~105 AED, with some variance
+    const avgValue = 95 + Math.random() * 20; // 95-115 AED
+    const revenue = bookings * avgValue;
 
     daily.push({
       date: date.toISOString().split('T')[0],
-      revenue: Math.floor(revenue),
+      revenue: Math.round(revenue * 100) / 100,
       bookings,
       completedBookings: Math.floor(bookings * 0.9),
       cancelledBookings: Math.floor(bookings * 0.1),
@@ -41,96 +62,105 @@ export function generateRevenueReport(
   const completedBookings = daily.reduce((sum, d) => sum + d.completedBookings, 0);
   const cancelledBookings = daily.reduce((sum, d) => sum + d.cancelledBookings, 0);
 
+  const averageBookingValue = Math.round((totalRevenue / totalBookings) * 100) / 100;
+
   return {
     venueId,
     period,
     startDate: daily[0].date,
     endDate: daily[daily.length - 1].date,
     summary: {
-      totalRevenue,
+      totalRevenue: Math.round(totalRevenue * 100) / 100,
       totalBookings,
       completedBookings,
       cancelledBookings,
-      averageBookingValue: Math.floor(totalRevenue / totalBookings),
-      currency: 'IRR',
-      growthPercentage: Math.random() * 20 - 5, // -5% to +15%
+      averageBookingValue,
+      currency: 'AED',
+      growthPercentage: Math.round((Math.random() * 20 - 5) * 100) / 100, // -5% to +15%
     },
     byAssetType: [
       {
         assetType: 'PADEL',
-        assetTypeName: 'پادل',
-        revenue: Math.floor(totalRevenue * 0.45),
+        assetTypeName: 'Padel',
+        revenue: Math.round(totalRevenue * 0.45 * 100) / 100,
         bookings: Math.floor(totalBookings * 0.4),
         percentage: 45,
-        averageValue: 350000,
+        averageValue: 135, // 120 AED base + peak hours avg
       },
       {
         assetType: 'TENNIS',
-        assetTypeName: 'تنیس',
-        revenue: Math.floor(totalRevenue * 0.30),
-        bookings: Math.floor(totalBookings * 0.35),
-        percentage: 30,
-        averageValue: 280000,
+        assetTypeName: 'Tennis',
+        revenue: Math.round(totalRevenue * 0.25 * 100) / 100,
+        bookings: Math.floor(totalBookings * 0.25),
+        percentage: 25,
+        averageValue: 112, // 100 AED base + peak hours avg
       },
       {
         assetType: 'PS5',
-        assetTypeName: 'پلی‌استیشن 5',
-        revenue: Math.floor(totalRevenue * 0.15),
-        bookings: Math.floor(totalBookings * 0.15),
-        percentage: 15,
-        averageValue: 200000,
+        assetTypeName: 'PlayStation 5',
+        revenue: Math.round(totalRevenue * 0.18 * 100) / 100,
+        bookings: Math.floor(totalBookings * 0.2),
+        percentage: 18,
+        averageValue: 120, // 80/hr × 1.5h avg session
       },
       {
         assetType: 'BILLIARDS',
-        assetTypeName: 'بیلیارد',
-        revenue: Math.floor(totalRevenue * 0.10),
-        bookings: Math.floor(totalBookings * 0.10),
-        percentage: 10,
-        averageValue: 180000,
+        assetTypeName: 'Billiards',
+        revenue: Math.round(totalRevenue * 0.12 * 100) / 100,
+        bookings: Math.floor(totalBookings * 0.15),
+        percentage: 12,
+        averageValue: 90, // 60/hr × 1.5h avg session
       },
     ],
     bySource: [
       {
         source: BookingSource.ONLINE,
-        sourceName: 'رزرو آنلاین',
-        revenue: Math.floor(totalRevenue * 0.65),
+        sourceName: 'Online Booking',
+        revenue: Math.round(totalRevenue * 0.65 * 100) / 100,
         bookings: Math.floor(totalBookings * 0.70),
         percentage: 65,
       },
       {
         source: BookingSource.WALK_IN,
-        sourceName: 'حضوری',
-        revenue: Math.floor(totalRevenue * 0.25),
+        sourceName: 'Walk-in',
+        revenue: Math.round(totalRevenue * 0.25 * 100) / 100,
         bookings: Math.floor(totalBookings * 0.20),
         percentage: 25,
       },
       {
         source: BookingSource.PHONE,
-        sourceName: 'تلفنی',
-        revenue: Math.floor(totalRevenue * 0.10),
+        sourceName: 'Phone',
+        revenue: Math.round(totalRevenue * 0.10 * 100) / 100,
         bookings: Math.floor(totalBookings * 0.10),
         percentage: 10,
       },
     ],
     byPaymentMethod: [
       {
-        method: 'WALLET',
-        methodName: 'کیف پول',
-        revenue: Math.floor(totalRevenue * 0.55),
-        bookings: Math.floor(totalBookings * 0.60),
-        percentage: 55,
+        method: 'ONLINE',
+        methodName: 'Online Payment',
+        revenue: Math.round(totalRevenue * 0.45 * 100) / 100,
+        bookings: Math.floor(totalBookings * 0.45),
+        percentage: 45,
       },
       {
-        method: 'CARD',
-        methodName: 'کارت بانکی',
-        revenue: Math.floor(totalRevenue * 0.30),
+        method: 'CARD_ON_SITE',
+        methodName: 'Card on Site',
+        revenue: Math.round(totalRevenue * 0.25 * 100) / 100,
         bookings: Math.floor(totalBookings * 0.25),
-        percentage: 30,
+        percentage: 25,
+      },
+      {
+        method: 'WALLET',
+        methodName: 'Wallet',
+        revenue: Math.round(totalRevenue * 0.15 * 100) / 100,
+        bookings: Math.floor(totalBookings * 0.15),
+        percentage: 15,
       },
       {
         method: 'CASH',
-        methodName: 'نقدی',
-        revenue: Math.floor(totalRevenue * 0.15),
+        methodName: 'Cash',
+        revenue: Math.round(totalRevenue * 0.15 * 100) / 100,
         bookings: Math.floor(totalBookings * 0.15),
         percentage: 15,
       },
@@ -138,27 +168,27 @@ export function generateRevenueReport(
     daily,
     cancellations: {
       totalCancellations: cancelledBookings,
-      cancellationRate: (cancelledBookings / totalBookings) * 100,
-      totalRefunds: Math.floor(totalRevenue * 0.08),
-      lostRevenue: Math.floor(totalRevenue * 0.12),
+      cancellationRate: Math.round((cancelledBookings / totalBookings) * 10000) / 100,
+      totalRefunds: Math.round(totalRevenue * 0.08 * 100) / 100,
+      lostRevenue: Math.round(totalRevenue * 0.12 * 100) / 100,
       cancellationsByReason: [
         {
-          reason: 'درخواست مشتری',
+          reason: 'Customer Request',
           count: Math.floor(cancelledBookings * 0.50),
           percentage: 50,
         },
         {
-          reason: 'شرایط آب و هوایی',
+          reason: 'Weather Conditions',
           count: Math.floor(cancelledBookings * 0.20),
           percentage: 20,
         },
         {
-          reason: 'بیماری',
+          reason: 'Illness',
           count: Math.floor(cancelledBookings * 0.15),
           percentage: 15,
         },
         {
-          reason: 'دیگر',
+          reason: 'Other',
           count: Math.floor(cancelledBookings * 0.15),
           percentage: 15,
         },
@@ -227,32 +257,32 @@ export function generateOccupancyReport(
     byAsset: [
       {
         assetId: 'asset-1',
-        assetName: 'زمین پادل 1',
-        assetType: 'پادل',
+        assetName: 'Padel Court 1',
+        assetType: 'Padel',
         occupancyRate: 75,
         totalSlots: Math.floor(totalAvailableSlots / 4),
         bookedSlots: Math.floor((totalAvailableSlots / 4) * 0.75),
       },
       {
         assetId: 'asset-2',
-        assetName: 'زمین پادل 2',
-        assetType: 'پادل',
+        assetName: 'PS5 Station 1',
+        assetType: 'PlayStation 5',
         occupancyRate: 72,
         totalSlots: Math.floor(totalAvailableSlots / 4),
         bookedSlots: Math.floor((totalAvailableSlots / 4) * 0.72),
       },
       {
         assetId: 'asset-3',
-        assetName: 'پلی‌استیشن 5',
-        assetType: 'PS5',
+        assetName: 'Morning Swimming Session',
+        assetType: 'Swimming',
         occupancyRate: 65,
         totalSlots: Math.floor(totalAvailableSlots / 4),
         bookedSlots: Math.floor((totalAvailableSlots / 4) * 0.65),
       },
       {
         assetId: 'asset-4',
-        assetName: 'میز بیلیارد',
-        assetType: 'بیلیارد',
+        assetName: 'Billiard Table 1',
+        assetType: 'Billiards',
         occupancyRate: 58,
         totalSlots: Math.floor(totalAvailableSlots / 4),
         bookedSlots: Math.floor((totalAvailableSlots / 4) * 0.58),
@@ -271,13 +301,13 @@ export function generateOccupancyReport(
       };
     }),
     byDayOfWeek: [
-      { dayOfWeek: 6, dayName: 'شنبه', occupancyRate: 65, bookings: 45 },
-      { dayOfWeek: 0, dayName: 'یکشنبه', occupancyRate: 62, bookings: 42 },
-      { dayOfWeek: 1, dayName: 'دوشنبه', occupancyRate: 58, bookings: 38 },
-      { dayOfWeek: 2, dayName: 'سه‌شنبه', occupancyRate: 60, bookings: 40 },
-      { dayOfWeek: 3, dayName: 'چهارشنبه', occupancyRate: 70, bookings: 50 },
-      { dayOfWeek: 4, dayName: 'پنج‌شنبه', occupancyRate: 85, bookings: 65 },
-      { dayOfWeek: 5, dayName: 'جمعه', occupancyRate: 90, bookings: 70 },
+      { dayOfWeek: 0, dayName: 'Sunday', occupancyRate: 62, bookings: 42 },
+      { dayOfWeek: 1, dayName: 'Monday', occupancyRate: 58, bookings: 38 },
+      { dayOfWeek: 2, dayName: 'Tuesday', occupancyRate: 60, bookings: 40 },
+      { dayOfWeek: 3, dayName: 'Wednesday', occupancyRate: 70, bookings: 50 },
+      { dayOfWeek: 4, dayName: 'Thursday', occupancyRate: 85, bookings: 65 },
+      { dayOfWeek: 5, dayName: 'Friday', occupancyRate: 90, bookings: 70 },
+      { dayOfWeek: 6, dayName: 'Saturday', occupancyRate: 65, bookings: 45 },
     ],
     heatmap: {
       data: heatmapData,

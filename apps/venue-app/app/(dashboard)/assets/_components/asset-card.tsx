@@ -102,11 +102,11 @@ export function AssetCard({
 
         {(asset.minDuration || asset.maxDuration) && (
           <div className="text-sm">
-            <span className="text-muted-foreground">مدت زمان: </span>
+            <span className="text-muted-foreground">{t('duration')}: </span>
             <span className="font-medium">
-              {asset.minDuration && `حداقل ${asset.minDuration} دقیقه`}
+              {asset.minDuration && t('minMinutes', { count: asset.minDuration })}
               {asset.minDuration && asset.maxDuration && ' - '}
-              {asset.maxDuration && `حداکثر ${asset.maxDuration} دقیقه`}
+              {asset.maxDuration && t('maxMinutes', { count: asset.maxDuration })}
             </span>
           </div>
         )}
@@ -114,7 +114,7 @@ export function AssetCard({
         {asset.slotDuration && (
           <div className="text-sm">
             <span className="text-muted-foreground">{t('slotDuration')}: </span>
-            <span className="font-medium">{asset.slotDuration} دقیقه</span>
+            <span className="font-medium">{t('minutes', { count: asset.slotDuration })}</span>
           </div>
         )}
       </CardContent>
@@ -127,7 +127,7 @@ export function AssetCard({
           className="flex-1"
         >
           <Power className="me-2 h-4 w-4" />
-          {asset.isActive ? 'غیرفعال' : 'فعال'}
+          {asset.isActive ? t('deactivate') : t('activate')}
         </Button>
         {canEdit && (
           <Button

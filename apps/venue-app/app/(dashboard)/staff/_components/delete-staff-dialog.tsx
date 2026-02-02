@@ -15,6 +15,7 @@ import {
 import { useToast } from '@smartclub/ui/use-toast';
 import { Loader2 } from 'lucide-react';
 import type { StaffMember } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 interface DeleteStaffDialogProps {
   open: boolean;
@@ -31,20 +32,16 @@ export function DeleteStaffDialog({ open, onClose, onSuccess, staff }: DeleteSta
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      const response = await fetch(`/api/staff/${staff.id}`, {
-        method: 'DELETE',
-      });
+      const result = await apiClient.delete(`/staff/${staff.id}`);
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (result.success) {
         toast({
           title: t('form.deleted'),
           variant: 'default',
         });
         onSuccess(staff.id);
       } else {
-        throw new Error(data.error || 'Failed to delete staff member');
+        throw new Error(result.error || 'Failed to delete staff member');
       }
     } catch (error) {
       toast({

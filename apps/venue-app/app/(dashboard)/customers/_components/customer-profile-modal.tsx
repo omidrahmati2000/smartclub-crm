@@ -21,6 +21,7 @@ import { CustomerStats } from './customer-stats';
 import { AddNoteDialog } from './add-note-dialog';
 import { ChangeStatusDialog } from './change-status-dialog';
 import { Mail, Phone, Calendar, Tag as TagIcon, Plus, X } from 'lucide-react';
+import { apiClient } from '@/lib/api-client';
 
 interface CustomerProfileModalProps {
   customer: CustomerProfile;
@@ -76,14 +77,9 @@ export function CustomerProfileModal({
 
   const handleAddTag = async (tagId: string) => {
     try {
-      const response = await fetch(`/api/customers/${customer.id}/tags`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tagId }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        onUpdate(data.data);
+      const result = await apiClient.post(`/customers/${customer.id}/tags`, { tagId });
+      if (result.success && result.data) {
+        onUpdate(result.data);
       }
     } catch (error) {
       console.error('Failed to add tag:', error);
@@ -92,12 +88,9 @@ export function CustomerProfileModal({
 
   const handleRemoveTag = async (tagId: string) => {
     try {
-      const response = await fetch(`/api/customers/${customer.id}/tags/${tagId}`, {
-        method: 'DELETE',
-      });
-      const data = await response.json();
-      if (data.success) {
-        onUpdate(data.data);
+      const result = await apiClient.delete(`/customers/${customer.id}/tags/${tagId}`);
+      if (result.success && result.data) {
+        onUpdate(result.data);
       }
     } catch (error) {
       console.error('Failed to remove tag:', error);
@@ -106,14 +99,9 @@ export function CustomerProfileModal({
 
   const handleAddNote = async (content: string) => {
     try {
-      const response = await fetch(`/api/customers/${customer.id}/notes`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        onUpdate(data.data);
+      const result = await apiClient.post(`/customers/${customer.id}/notes`, { content });
+      if (result.success && result.data) {
+        onUpdate(result.data);
         setIsAddNoteOpen(false);
       }
     } catch (error) {
@@ -124,14 +112,9 @@ export function CustomerProfileModal({
 
   const handleChangeStatus = async (newStatus: CustomerStatus) => {
     try {
-      const response = await fetch(`/api/customers/${customer.id}/status`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        onUpdate(data.data);
+      const result = await apiClient.patch(`/customers/${customer.id}/status`, { status: newStatus });
+      if (result.success && result.data) {
+        onUpdate(result.data);
         setIsChangeStatusOpen(false);
       }
     } catch (error) {

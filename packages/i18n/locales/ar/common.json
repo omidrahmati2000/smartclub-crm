@@ -30,6 +30,10 @@
   },
   "common": {
     "loading": "جارٍ التحميل...",
+    "saving": "جارٍ الحفظ...",
+    "creating": "جارٍ الإنشاء...",
+    "updating": "جارٍ التحديث...",
+    "deleting": "جارٍ الحذف...",
     "error": "حدث خطأ",
     "retry": "إعادة المحاولة",
     "save": "حفظ",
@@ -51,7 +55,13 @@
     "none": "لا شيء",
     "noResults": "لم يتم العثور على نتائج",
     "showMore": "عرض المزيد",
-    "showLess": "عرض أقل"
+    "showLess": "عرض أقل",
+    "logout": "تسجيل الخروج",
+    "optional": "اختياري",
+    "units": {
+      "currency": "درهم",
+      "minutes": "دقائق"
+    }
   },
   "auth": {
     "login": "تسجيل الدخول",
@@ -107,14 +117,15 @@
     "basketball": "كرة السلة",
     "volleyball": "كرة الطائرة",
     "badminton": "ريشة طائرة",
-    "tableTennis": "تنس الطاولة",
+    "table_tennis": "تنس الطاولة",
     "squash": "سكواش",
     "swimming": "سباحة",
     "billiards": "بلياردو",
     "bowling": "بولينج",
     "gaming": "ألعاب فيديو",
     "vr": "الواقع الافتراضي",
-    "escapeRoom": "غرفة الهروب",
-    "boardGames": "ألعاب الطاولة"
+    "escape_room": "غرفة الهروب",
+    "board_games": "ألعاب الطاولة",
+    "other": "أخرى"
   }
 }

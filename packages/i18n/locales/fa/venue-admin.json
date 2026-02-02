@@ -9,7 +9,34 @@
     "finance": "مالی",
     "pricing": "قیمت‌گذاری",
     "reports": "گزارشات",
-    "settings": "تنظیمات"
+    "settings": "تنظیمات",
+    "groups": {
+      "overview": "نمای کلی",
+      "operations": "عملیات",
+      "management": "مدیریت",
+      "system": "سیستم"
+    },
+    "collapse": "بستن نوار کناری",
+    "expand": "باز کردن نوار کناری",
+    "menu": "منو"
+  },
+  "header": {
+    "search": "جستجو...",
+    "searchPlaceholder": "دستور یا عبارت مورد نظر را وارد کنید...",
+    "notifications": "اعلان‌ها",
+    "profile": "پروفایل",
+    "logout": "خروج"
+  },
+  "commandPalette": {
+    "title": "پنل دستورات",
+    "placeholder": "دستور یا عبارت مورد نظر را وارد کنید...",
+    "noResults": "نتیجه‌ای یافت نشد.",
+    "pages": "صفحات",
+    "actions": "دسترسی سریع",
+    "recent": "اخیر",
+    "newBooking": "رزرو جدید",
+    "newCustomer": "مشتری جدید",
+    "newAsset": "امکانات جدید"
   },
   "dashboard": {
     "title": "داشبورد",
@@ -25,7 +52,9 @@
     "createBooking": "ایجاد رزرو حضوری",
     "viewCalendar": "مشاهده تقویم",
     "viewAllBookings": "مشاهده همه رزروها",
-    "noBookings": "هیچ رزروی یافت نشد"
+    "noBookings": "هیچ رزروی یافت نشد",
+    "errorLoadingData": "خطا در بارگذاری داده‌ها",
+    "comparedToYesterday": "نسبت به دیروز"
   },
   "calendar": {
     "title": "تقویم",
@@ -41,10 +70,41 @@
     "nextMonth": "ماه بعد",
     "filterByAsset": "فیلتر بر اساس امکانات",
     "allAssets": "همه امکانات",
-    "noBookingsForDate": "رزروی برای این تاریخ وجود ندارد"
+    "noBookingsForDate": "رزروی برای این تاریخ وجود ندارد",
+    "noAssets": "امکاناتی یافت نشد",
+    "time": "زمان",
+    "assets": "امکانات",
+    "customer": "مشتری",
+    "more": "دیگر",
+    "bookings": "رزرو",
+    "slotsSelected": "بازه انتخاب شده",
+    "duration": "مدت زمان",
+    "createBooking": "ایجاد رزرو",
+    "clear": "پاک کردن",
+    "selectContinuousSlots": "بازه‌های پیوسته روی یک امکانات و تاریخ انتخاب کنید",
+    "weekdays": {
+      "saturday": "شنبه",
+      "sunday": "یک‌شنبه",
+      "monday": "دوشنبه",
+      "tuesday": "سه‌شنبه",
+      "wednesday": "چهارشنبه",
+      "thursday": "پنج‌شنبه",
+      "friday": "جمعه"
+    },
+    "statusLegend": {
+      "pending": "در انتظار",
+      "confirmed": "تأیید شده",
+      "checkedIn": "حاضر شده",
+      "completed": "تکمیل شده",
+      "cancelled": "لغو شده",
+      "noShow": "عدم حضور"
+    }
   },
   "bookings": {
     "title": "رزروها",
+    "description": "مدیریت رزروها",
+    "noBookings": "رزروی یافت نشد",
+    "showingResults": "نمایش {count} رزرو",
     "all": "همه",
     "pending": "در انتظار",
     "confirmed": "تأیید شده",
@@ -59,11 +119,16 @@
     "status": "وضعیت",
     "amount": "مبلغ",
     "actions": "عملیات",
+    "subtitle": "مدیریت رزروها ({{count}} رزرو)",
+    "filters": "فیلترها",
+    "time": "زمان",
+    "date": "تاریخ",
     "searchByCustomer": "جستجو بر اساس نام مشتری",
     "filterByStatus": "فیلتر بر اساس وضعیت",
     "filterByAsset": "فیلتر بر اساس امکانات",
     "filterByDate": "فیلتر بر اساس تاریخ",
     "createWalkIn": "ایجاد رزرو حضوری",
+    "createWalkInDescription": "ایجاد رزرو حضوری برای مشتری در محل",
     "exportCSV": "خروجی CSV",
     "view": "مشاهده",
     "edit": "ویرایش",
@@ -75,16 +140,38 @@
     "customerInfo": "اطلاعات مشتری",
     "paymentInfo": "اطلاعات پرداخت",
     "participants": "شرکت‌کنندگان",
+    "host": "میزبان",
+    "bookingId": "شناسه رزرو: {{id}}",
     "duration": "مدت",
     "minutes": "دقیقه",
     "paymentMethod": "روش پرداخت",
-    "paymentStatus": "وضعیت پرداخت"
+    "paymentStatus": "وضعیت پرداخت",
+    "placeholders": {
+      "selectAsset": "امکانات را انتخاب کنید",
+      "customerName": "نام مشتری",
+      "customerPhone": "09121234567",
+      "startTime": "زمان شروع",
+      "endTime": "زمان پایان"
+    },
+    "phone": "تلفن (اختیاری)",
+    "startTime": "زمان شروع",
+    "endTime": "زمان پایان",
+    "noBookingsFound": "رزروی یافت نشد",
+    "validation": {
+      "assetRequired": "امکانات را انتخاب کنید",
+      "customerNameRequired": "نام مشتری الزامی است",
+      "dateRequired": "تاریخ الزامی است",
+      "startTimeRequired": "زمان شروع الزامی است",
+      "endTimeRequired": "زمان پایان الزامی است"
+    }
   },
   "assets": {
     "title": "امکانات",
     "description": "مدیریت امکانات و منابع مجموعه",
     "createAsset": "ایجاد امکانات",
+    "createAssetDescription": "افزودن امکانات جدید به مجموعه",
     "editAsset": "ویرایش امکانات",
+    "editAssetDescription": "ویرایش اطلاعات امکانات",
     "deleteAsset": "حذف امکانات",
     "noAssets": "هیچ امکاناتی یافت نشد",
     "createFirstAsset": "ایجاد اولین امکانات",
@@ -108,8 +195,32 @@
     "durationBased": "مدت‌محور",
     "capacityBased": "ظرفیت‌محور",
     "openSession": "جلسه آزاد",
+    "duration": "مدت زمان",
+    "minMinutes": "حداقل {count} دقیقه",
+    "maxMinutes": "حداکثر {count} دقیقه",
+    "minutes": "{count} دقیقه",
+    "deactivate": "غیرفعال",
+    "activate": "فعال",
     "confirmDelete": "آیا از حذف این امکانات اطمینان دارید؟",
-    "deleteWarning": "این عمل غیرقابل بازگشت است."
+    "deleteWarning": "این عمل غیرقابل بازگشت است.",
+    "validation": {
+      "nameRequired": "نام امکانات الزامی است",
+      "typeRequired": "نوع را انتخاب کنید",
+      "bookingTypeRequired": "نوع رزرو را انتخاب کنید"
+    },
+    "placeholders": {
+      "name": "نام امکانات",
+      "selectType": "نوع ورزش را انتخاب کنید",
+      "selectBookingType": "نوع رزرو را انتخاب کنید",
+      "pricePerSlot": "350000",
+      "slotDuration": "90",
+      "pricePerHour": "150000",
+      "minDuration": "30",
+      "maxDuration": "240",
+      "pricePerSession": "80000",
+      "capacity": "30",
+      "pricePerMinute": "5000"
+    }
   },
   "customers": {
     "title": "مشتریان",
@@ -119,8 +230,9 @@
     "sortBy": "مرتب‌سازی بر اساس",
     "exportCSV": "خروجی CSV",
     "noCustomers": "هیچ مشتری‌ای یافت نشد",
+    "noPermission": "شما دسترسی لازم برای مشاهده این صفحه را ندارید",
+    "filters": "فیلترها",
     "showingResults": "نمایش {{count}} مشتری",
-
     "status": {
       "all": "همه",
       "ACTIVE": "فعال",
@@ -130,14 +242,12 @@
       "BLACKLISTED": "لیست سیاه",
       "INACTIVE": "غیرفعال"
     },
-
     "sort": {
       "name": "نام",
       "totalSpent": "مجموع خرج",
       "totalBookings": "تعداد رزروها",
       "lastVisit": "آخرین بازدید"
     },
-
     "table": {
       "name": "نام",
       "email": "ایمیل",
@@ -149,7 +259,6 @@
       "lastVisit": "آخرین بازدید",
       "actions": "عملیات"
     },
-
     "actions": {
       "viewProfile": "مشاهده پروفایل",
       "addTag": "افزودن برچسب",
@@ -159,7 +268,7 @@
       "removeFromBlacklist": "حذف از لیست سیاه",
       "makeVIP": "تبدیل به VIP"
     },
-
+    "preferences": "تنظیمات ترجیحی",
     "profile": {
       "title": "پروفایل مشتری",
       "customerInfo": "اطلاعات مشتری",
@@ -174,7 +283,6 @@
       "notePlaceholder": "یادداشت خود را بنویسید...",
       "createdBy": "توسط {{name}}",
       "createdAt": "در تاریخ {{date}}",
-
       "stats": {
         "totalBookings": "کل رزروها",
         "completedBookings": "رزروهای تکمیل شده",
@@ -189,7 +297,6 @@
         "preferredTimeSlots": "زمان‌های ترجیحی"
       }
     },
-
     "tags": {
       "title": "برچسب‌ها",
       "add": "افزودن برچسب",
@@ -199,7 +306,6 @@
       "tagAdded": "برچسب اضافه شد",
       "tagRemoved": "برچسب حذف شد"
     },
-
     "statusChange": {
       "title": "تغییر وضعیت مشتری",
       "currentStatus": "وضعیت فعلی",
@@ -213,6 +319,8 @@
   "staff": {
     "title": "کارکنان",
     "description": "مدیریت کارکنان و دسترسی‌ها",
+    "noPermission": "شما دسترسی لازم برای مشاهده این صفحه را ندارید",
+    "filters": "فیلترها",
     "addStaff": "افزودن کارمند",
     "inviteStaff": "دعوت کارمند",
     "editStaff": "ویرایش کارمند",
@@ -228,7 +336,6 @@
     "manager": "مدیر",
     "receptionist": "پذیرش",
     "cashier": "صندوقدار",
-
     "table": {
       "name": "نام",
       "email": "ایمیل",
@@ -238,7 +345,6 @@
       "hireDate": "تاریخ استخدام",
       "actions": "عملیات"
     },
-
     "roles": {
       "all": "همه نقش‌ها",
       "OWNER": "مالک",
@@ -246,7 +352,6 @@
       "RECEPTIONIST": "پذیرش",
       "CASHIER": "صندوقدار"
     },
-
     "status": {
       "all": "همه",
       "ACTIVE": "فعال",
@@ -254,13 +359,11 @@
       "INVITED": "دعوت شده",
       "SUSPENDED": "تعلیق شده"
     },
-
     "sort": {
       "name": "نام",
       "role": "نقش",
       "hireDate": "تاریخ استخدام"
     },
-
     "actions": {
       "edit": "ویرایش",
       "delete": "حذف",
@@ -272,7 +375,6 @@
       "confirmDelete": "آیا از حذف این کارمند اطمینان دارید؟",
       "deleteWarning": "این عمل غیرقابل بازگشت است."
     },
-
     "form": {
       "title": "اطلاعات کارمند",
       "name": "نام و نام خانوادگی",
@@ -294,7 +396,6 @@
       "updated": "کارمند با موفقیت ویرایش شد",
       "deleted": "کارمند حذف شد"
     },
-
     "permissions": {
       "title": "دسترسی‌های نقش",
       "description": "دسترسی‌های این نقش را مشاهده کنید",
@@ -307,7 +408,6 @@
       "limitedAccess": "دسترسی محدود",
       "noAccess": "بدون دسترسی"
     },
-
     "activity": {
       "title": "لاگ فعالیت",
       "description": "فعالیت‌های اخیر این کارمند",
@@ -318,7 +418,6 @@
       "timestamp": "زمان",
       "loadMore": "بارگذاری بیشتر"
     },
-
     "roleDescriptions": {
       "OWNER": "دسترسی کامل به همه بخش‌ها شامل حذف مجموعه و مدیریت کارکنان",
       "MANAGER": "دسترسی به اکثر بخش‌ها به جز حذف مجموعه و افزودن/حذف کارکنان",
@@ -329,12 +428,10 @@
   "finance": {
     "title": "گزارشات مالی",
     "description": "گزارش‌های درآمد و اشغال",
-
     "tabs": {
       "revenue": "درآمد",
       "occupancy": "اشغال"
     },
-
     "period": {
       "label": "بازه زمانی",
       "TODAY": "امروز",
@@ -348,7 +445,6 @@
       "THIS_YEAR": "امسال",
       "CUSTOM": "سفارشی"
     },
-
     "summary": {
       "totalRevenue": "مجموع درآمد",
       "totalBookings": "تعداد رزروها",
@@ -364,7 +460,6 @@
       "lowestOccupancy": "کمترین اشغال",
       "lowestOccupancyTime": "کم‌ترین ساعت"
     },
-
     "revenue": {
       "title": "گزارش درآمد",
       "byAssetType": "درآمد بر اساس نوع امکانات",
@@ -386,7 +481,6 @@
       "card": "کارت بانکی",
       "cash": "نقدی"
     },
-
     "cancellation": {
       "title": "گزارش لغو رزرو",
       "totalCancellations": "کل لغوها",
@@ -395,9 +489,9 @@
       "lostRevenue": "درآمد از دست رفته",
       "byReason": "لغوها بر اساس دلیل",
       "reason": "دلیل",
-      "count": "تعداد"
+      "count": "تعداد",
+      "noData": "داده لغو رزرو موجود نیست"
     },
-
     "occupancy": {
       "title": "گزارش اشغال",
       "byAsset": "اشغال بر اساس امکانات",
@@ -413,16 +507,17 @@
       "date": "تاریخ",
       "noData": "داده‌ای برای نمایش وجود ندارد"
     },
-
     "export": {
       "title": "خروجی گزارش",
       "exportCSV": "خروجی CSV",
       "exportPDF": "خروجی PDF",
       "exporting": "در حال تهیه خروجی...",
       "success": "گزارش با موفقیت دانلود شد",
-      "error": "خطا در دانلود گزارش"
+      "error": "خطا در دانلود گزارش",
+      "downloadStarted": "دانلود گزارش شما شروع شد",
+      "comingSoon": "به‌زودی",
+      "pdfComingSoon": "خروجی PDF به‌زودی در دسترس خواهد بود"
     },
-
     "chart": {
       "revenue": "درآمد",
       "bookings": "رزروها",
@@ -435,6 +530,7 @@
   "pricing": {
     "title": "قیمت‌گذاری پویا",
     "description": "مدیریت قوانین قیمت‌گذاری",
+    "noPermission": "شما دسترسی لازم برای مشاهده این صفحه را ندارید",
     "addRule": "افزودن قانون",
     "editRule": "ویرایش قانون",
     "deleteRule": "حذف قانون",
@@ -445,7 +541,6 @@
     "filterByType": "فیلتر بر اساس نوع",
     "filterByStatus": "فیلتر بر اساس وضعیت",
     "sortBy": "مرتب‌سازی",
-
     "table": {
       "name": "نام قانون",
       "type": "نوع",
@@ -455,7 +550,6 @@
       "validPeriod": "دوره اعتبار",
       "actions": "عملیات"
     },
-
     "types": {
       "all": "همه انواع",
       "PEAK_HOURS": "ساعات اوج",
@@ -465,7 +559,6 @@
       "PROMOTIONAL": "تبلیغاتی",
       "EARLY_BIRD": "رزرو زودهنگام"
     },
-
     "status": {
       "all": "همه",
       "ACTIVE": "فعال",
@@ -473,7 +566,6 @@
       "SCHEDULED": "زمان‌بندی شده",
       "EXPIRED": "منقضی شده"
     },
-
     "adjustmentTypes": {
       "PERCENTAGE_INCREASE": "افزایش درصدی",
       "PERCENTAGE_DECREASE": "کاهش درصدی",
@@ -481,14 +573,12 @@
       "FIXED_DECREASE": "کاهش ثابت",
       "OVERRIDE": "تعیین قیمت"
     },
-
     "sort": {
       "name": "نام",
       "type": "نوع",
       "priority": "اولویت",
       "createdAt": "تاریخ ایجاد"
     },
-
     "actions": {
       "edit": "ویرایش",
       "delete": "حذف",
@@ -499,7 +589,6 @@
       "confirmDelete": "آیا از حذف این قانون اطمینان دارید؟",
       "deleteWarning": "این عمل غیرقابل بازگشت است."
     },
-
     "form": {
       "title": "قانون قیمت‌گذاری",
       "basicInfo": "اطلاعات پایه",
@@ -511,13 +600,11 @@
       "selectType": "نوع را انتخاب کنید",
       "priority": "اولویت",
       "priorityHelp": "قوانین با اولویت بالاتر اول اعمال می‌شوند",
-
       "targets": "هدف‌گیری",
       "targetAssets": "امکانات هدف",
       "allAssets": "همه امکانات",
       "specificAssets": "امکانات خاص",
       "selectAssets": "امکانات را انتخاب کنید",
-
       "conditions": "شرایط",
       "timeSlots": "بازه‌های زمانی",
       "startTime": "ساعت شروع",
@@ -537,7 +624,6 @@
       "bookingWindow": "پنجره رزرو",
       "minHoursBefore": "حداقل ساعت قبل",
       "maxHoursBefore": "حداکثر ساعت قبل",
-
       "adjustment": "تنظیم قیمت",
       "adjustmentType": "نوع تنظیم",
       "selectAdjustmentType": "نوع را انتخاب کنید",
@@ -545,23 +631,21 @@
       "valuePercentage": "مقدار (درصد)",
       "valueAmount": "مقدار (ریال)",
       "overridePrice": "قیمت جدید",
-
       "validity": "دوره اعتبار",
       "validFrom": "معتبر از",
       "validUntil": "معتبر تا",
       "validUntilOptional": "معتبر تا (اختیاری)",
-
       "submit": "ذخیره قانون",
       "cancel": "لغو",
       "creating": "در حال ایجاد...",
       "updating": "در حال ویرایش...",
+      "deleting": "در حال حذف...",
       "created": "قانون با موفقیت ایجاد شد",
       "updated": "قانون با موفقیت ویرایش شد",
       "deleted": "قانون حذف شد",
       "activated": "قانون فعال شد",
       "deactivated": "قانون غیرفعال شد"
     },
-
     "preview": {
       "title": "پیش‌نمایش قیمت",
       "basePrice": "قیمت پایه",
@@ -574,12 +658,56 @@
   },
   "reports": {
     "title": "گزارشات",
+    "description": "گزارشات جامع عملکرد مجموعه",
+    "performance": "عملکرد",
     "revenue": "درآمد",
     "occupancy": "نرخ اشغال",
     "bookings": "رزروها",
     "customers": "مشتریان",
     "export": "خروجی",
-    "dateRange": "بازه زمانی"
+    "dateRange": "بازه زمانی",
+    "totalRevenue": "مجموع درآمد",
+    "avgOccupancy": "میانگین اشغال",
+    "peakHour": "ساعت اوج",
+    "bestAsset": "بهترین امکانات",
+    "vsLastMonth": "+{{percent}}٪ نسبت به ماه قبل",
+    "improvement": "+{{percent}}٪ بهبود",
+    "highestDemand": "بیشترین تقاضا",
+    "highestRevenue": "بیشترین درآمد",
+    "monthlyRevenueBookings": "درآمد و رزرو ماهانه",
+    "occupancyByHour": "نرخ اشغال بر اساس ساعت",
+    "assetPerformance": "عملکرد امکانات",
+    "weeklyComparison": "مقایسه هفتگی با ماه قبل",
+    "occupied": "{{percent}}٪ اشغال شده",
+    "revenueKAed": "درآمد (هزار AED)",
+    "thisMonth": "این ماه",
+    "lastMonth": "ماه قبل",
+    "periods": {
+      "today": "امروز",
+      "last7days": "۷ روز گذشته",
+      "last30days": "۳۰ روز گذشته",
+      "thisMonth": "این ماه",
+      "lastMonth": "ماه گذشته",
+      "thisYear": "امسال"
+    },
+    "totalBookings": "کل رزروها",
+    "vsLastPeriod": "+{percent}٪ نسبت به دوره قبل",
+    "completed": "تکمیل شده",
+    "cancelled": "لغو شده",
+    "noShow": "عدم حضور",
+    "bookingsByDay": "رزرو بر اساس روز هفته",
+    "bookingStatus": "وضعیت رزروها",
+    "bookingsByAsset": "رزرو بر اساس امکانات",
+    "dailyTrend": "روند روزانه رزروها",
+    "totalCustomers": "کل مشتریان",
+    "newCustomers": "مشتریان جدید",
+    "activeCustomers": "مشتریان فعال",
+    "avgBookingsPerCustomer": "میانگین رزرو/مشتری",
+    "customersByType": "مشتریان بر اساس نوع",
+    "newCustomersTrend": "روند مشتریان جدید",
+    "topCustomers": "برترین مشتریان",
+    "bookingsCount": "{count} رزرو",
+    "retentionRate": "نرخ نگهداشت مشتری"
   },
   "settings": {
     "title": "تنظیمات",
@@ -591,6 +719,7 @@
       "notifications": "اعلان‌ها",
       "location": "مکان و منطقه",
       "tax": "تنظیمات مالیات",
+      "payment": "تنظیمات پرداخت",
       "compliance": "انطباق و GDPR"
     },
     "profile": {
@@ -607,7 +736,13 @@
       "coverImage": "تصویر کاور",
       "gallery": "گالری تصاویر",
       "amenities": "امکانات رفاهی",
-      "sportTypes": "نوع فعالیت‌ها"
+      "sportTypes": "نوع فعالیت‌ها",
+      "placeholders": {
+        "venueName": "نام مجموعه",
+        "venueDescription": "توضیحات کوتاه",
+        "address": "آدرس کامل",
+        "city": "شهر"
+      }
     },
     "hours": {
       "title": "ساعات کاری",
@@ -672,7 +807,12 @@
       "social": "شبکه‌های اجتماعی",
       "instagramUrl": "اینستاگرام",
       "telegramUrl": "تلگرام",
-      "whatsappNumber": "واتساپ"
+      "whatsappNumber": "واتساپ",
+      "placeholders": {
+        "metaTitle": "عنوان متا سایت",
+        "metaDescription": "توضیحات متا سایت",
+        "metaKeywords": "کلمات کلیدی، با کاما جدا شده"
+      }
     },
     "notifications": {
       "title": "تنظیمات اعلان‌ها",
@@ -691,6 +831,64 @@
       "reminderHoursBefore": "چند ساعت قبل یادآوری ارسال شود",
       "marketing": "بازاریابی",
       "sendPromotionalEmails": "ارسال ایمیل‌های تبلیغاتی"
+    },
+    "payment": {
+      "displayCurrency": {
+        "title": "واحد پول نمایشی",
+        "description": "واحد پولی که در سراسر مجموعه به مشتریان نمایش داده می‌شود",
+        "label": "واحد پول",
+        "hint": "این تنظیم بر نمایش قیمت‌ها، فاکتورها و ارتباطات با مشتری تأثیر می‌گذارد"
+      },
+      "gateways": {
+        "title": "درگاه‌های پرداخت",
+        "description": "پیکربندی درگاه‌های پرداخت آنلاین برای دریافت وجه",
+        "currencyChangeWarning": "واحد پول تغییر کرد. فقط درگاه‌هایی که از واحد پول جدید پشتیبانی می‌کنند نمایش داده می‌شوند.",
+        "supportedCurrencies": "واحدهای پول پشتیبانی شده",
+        "configure": "پیکربندی",
+        "hideConfig": "بستن تنظیمات",
+        "testMode": "حالت تست (Sandbox)",
+        "testModeHint": "برای توسعه و تست از کلیدهای آزمایشی استفاده کنید",
+        "testConnection": "تست اتصال",
+        "viewDocs": "مشاهده مستندات",
+        "noCompatibleGateways": "هیچ درگاه پرداختی از واحد پول انتخابی پشتیبانی نمی‌کند",
+        "regions": {
+          "global": "درگاه‌های جهانی",
+          "middle_east": "خاورمیانه",
+          "asia": "آسیا و اقیانوسیه",
+          "europe": "اروپا",
+          "americas": "آمریکا",
+          "africa": "آفریقا",
+          "iran": "ایران"
+        },
+        "fields": {
+          "apiKey": "کلید API",
+          "secretKey": "کلید محرمانه",
+          "webhookUrl": "آدرس Webhook",
+          "webhookHint": "این آدرس را کپی کرده و در پنل درگاه پرداخت خود تنظیم کنید"
+        }
+      },
+      "localMethods": {
+        "title": "روش‌های پرداخت محلی",
+        "description": "فعال‌سازی پرداخت حضوری و روش‌های جایگزین",
+        "cash": "پذیرش پرداخت نقدی",
+        "cardOnSite": "پذیرش کارت در محل (دستگاه POS)",
+        "wallet": "فعال‌سازی کیف پول مشتری (موجودی پیش‌پرداخت)"
+      }
+    },
+    "validation": {
+      "venueNameRequired": "نام مجموعه الزامی است",
+      "descriptionMinLength": "توضیحات باید حداقل 10 کاراکتر باشد",
+      "addressRequired": "آدرس الزامی است",
+      "cityRequired": "شهر الزامی است",
+      "invalidPhone": "شماره تلفن معتبر نیست",
+      "invalidEmail": "ایمیل معتبر نیست",
+      "invalidWebsite": "آدرس وب‌سایت معتبر نیست",
+      "subdomainMinLength": "ساب‌دامین باید حداقل 3 کاراکتر باشد",
+      "subdomainFormat": "فقط حروف کوچک، اعداد و خط تیره مجاز است",
+      "invalidUrl": "آدرس URL معتبر نیست",
+      "invalidColor": "فرمت رنگ نامعتبر است",
+      "countryRequired": "انتخاب کشور الزامی است",
+      "timezoneRequired": "انتخاب منطقه زمانی الزامی است"
     },
     "saveChanges": "ذخیره تغییرات",
     "saving": "در حال ذخیره...",

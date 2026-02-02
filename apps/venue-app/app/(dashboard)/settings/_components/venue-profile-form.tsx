@@ -19,15 +19,18 @@ import { Label } from '@smartclub/ui/label';
 import { Textarea } from '@smartclub/ui/textarea';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import type { Venue } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
+// Validation messages are defined as constants to keep Zod schemas static.
+// They use English by default; runtime translations are shown in the UI layer.
 const venueProfileSchema = z.object({
-  name: z.string().min(2, 'نام مجموعه الزامی است'),
-  description: z.string().min(10, 'توضیحات باید حداقل 10 کاراکتر باشد'),
-  address: z.string().min(5, 'آدرس الزامی است'),
-  city: z.string().min(2, 'شهر الزامی است'),
-  phone: z.string().min(10, 'شماره تلفن معتبر نیست'),
-  email: z.string().email('ایمیل معتبر نیست').optional().or(z.literal('')),
-  website: z.string().url('آدرس وب‌سایت معتبر نیست').optional().or(z.literal('')),
+  name: z.string().min(2, 'Venue name is required'),
+  description: z.string().min(10, 'Description must be at least 10 characters'),
+  address: z.string().min(5, 'Address is required'),
+  city: z.string().min(2, 'City is required'),
+  phone: z.string().min(10, 'Invalid phone number'),
+  email: z.string().email('Invalid email address').optional().or(z.literal('')),
+  website: z.string().url('Invalid website URL').optional().or(z.literal('')),
   logoUrl: z.string().optional(),
   coverImageUrl: z.string().optional(),
 });
@@ -39,6 +42,7 @@ export function VenueProfileForm() {
   const t = useTranslations('venue-admin.settings.profile');
   const tc = useTranslations('venue-admin.common');
   const ts = useTranslations('venue-admin.settings');
+  const tcommon = useTranslations('common.common');
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -62,9 +66,8 @@ export function VenueProfileForm() {
   const fetchVenueProfile = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}`);
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.get(`/venues/${venueId}`);
+      if (result.success && result.data) {
         const venue: Venue = result.data;
         reset({
           name: venue.name,
@@ -94,15 +97,7 @@ export function VenueProfileForm() {
     setErrorMessage('');
 
     try {
-      const response = await fetch(`/api/venues/${session.user.venueId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
+      const result = await apiClient.put(`/venues/${session.user.venueId}`, data);
 
       if (result.success) {
         setSuccessMessage(ts('saved'));
@@ -148,7 +143,7 @@ export function VenueProfileForm() {
             <Input
               id="name"
               {...register('name')}
-              placeholder="نام مجموعه"
+              placeholder={t('placeholders.venueName')}
               disabled={isSubmitting}
             />
             {errors.name && (
@@ -162,7 +157,7 @@ export function VenueProfileForm() {
             <Textarea
               id="description"
               {...register('description')}
-              placeholder="توضیحات کوتاه درباره مجموعه"
+              placeholder={t('placeholders.venueDescription')}
               rows={4}
               disabled={isSubmitting}
             />
@@ -180,7 +175,7 @@ export function VenueProfileForm() {
               <Input
                 id="address"
                 {...register('address')}
-                placeholder="آدرس کامل"
+                placeholder={t('placeholders.address')}
                 disabled={isSubmitting}
               />
               {errors.address && (
@@ -194,7 +189,7 @@ export function VenueProfileForm() {
               <Input
                 id="city"
                 {...register('city')}
-                placeholder="شهر"
+                placeholder={t('placeholders.city')}
                 disabled={isSubmitting}
               />
               {errors.city && (
@@ -219,7 +214,7 @@ export function VenueProfileForm() {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">{t('email')} (اختیاری)</Label>
+              <Label htmlFor="email">{t('email')} ({tcommon('optional')})</Label>
               <Input
                 id="email"
                 type="email"
@@ -236,7 +231,7 @@ export function VenueProfileForm() {
 
           {/* Website */}
           <div className="space-y-2">
-            <Label htmlFor="website">{t('website')} (اختیاری)</Label>
+            <Label htmlFor="website">{t('website')} ({tcommon('optional')})</Label>
             <Input
               id="website"
               type="url"
@@ -254,7 +249,7 @@ export function VenueProfileForm() {
 
           {/* Logo URL */}
           <div className="space-y-2">
-            <Label htmlFor="logoUrl">{t('logo')} (اختیاری)</Label>
+            <Label htmlFor="logoUrl">{t('logo')} ({tcommon('optional')})</Label>
             <Input
               id="logoUrl"
               type="url"
@@ -267,7 +262,7 @@ export function VenueProfileForm() {
 
           {/* Cover Image URL */}
           <div className="space-y-2">
-            <Label htmlFor="coverImageUrl">{t('coverImage')} (اختیاری)</Label>
+            <Label htmlFor="coverImageUrl">{t('coverImage')} ({tcommon('optional')})</Label>
             <Input
               id="coverImageUrl"
               type="url"

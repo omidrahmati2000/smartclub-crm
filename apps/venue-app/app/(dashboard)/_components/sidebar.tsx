@@ -1,7 +1,8 @@
-'use client';
+'use client'
 
-import { useTranslations } from 'next-intl';
-import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl'
+import { useSession } from 'next-auth/react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import {
   LayoutDashboard,
   Calendar,
@@ -13,118 +14,198 @@ import {
   TrendingUp,
   FileText,
   Settings,
-} from 'lucide-react';
-import { Permission } from '@smartclub/types';
-import type { User } from '@smartclub/types';
-import { hasPermission } from '@smartclub/types';
-import { NavItem } from './nav-item';
-import { UserMenu } from './user-menu';
+} from 'lucide-react'
+import { Permission } from '@smartclub/types'
+import type { User } from '@smartclub/types'
+import { hasPermission } from '@smartclub/types'
+import { Button } from '@smartclub/ui/button'
+import { ScrollArea } from '@smartclub/ui/scroll-area'
+import { Separator } from '@smartclub/ui/separator'
+import { NavGroup } from './nav-group'
+import { UserMenu } from './user-menu'
+import { useSidebarCollapsed } from '../_hooks/use-sidebar'
+import { cn } from '@smartclub/utils'
 
-import type { PermissionKey } from '@smartclub/types';
+import type { PermissionKey } from '@smartclub/types'
 
 interface NavItemType {
-  href: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-  permission?: PermissionKey;
+  href: string
+  label: string
+  icon: React.ComponentType<{ className?: string }>
+  permission?: PermissionKey
+  badge?: number
+}
+
+interface NavGroupType {
+  label: string
+  items: NavItemType[]
 }
 
 export function Sidebar() {
-  const t = useTranslations('venue-admin.nav');
-  const { data: session } = useSession();
+  const t = useTranslations('venue-admin')
+  const { data: session } = useSession()
+  const { isCollapsed, toggle } = useSidebarCollapsed()
 
-  const user = session?.user as User | undefined;
+  const user = session?.user as User | undefined
 
-  const navItems: NavItemType[] = [
+  // Define navigation groups
+  const navGroups: NavGroupType[] = [
     {
-      href: '/overview',
-      label: t('dashboard'),
-      icon: LayoutDashboard,
+      label: t('nav.groups.overview'),
+      items: [
+        {
+          href: '/overview',
+          label: t('nav.dashboard'),
+          icon: LayoutDashboard,
+        },
+        {
+          href: '/calendar',
+          label: t('nav.calendar'),
+          icon: Calendar,
+          permission: Permission.CALENDAR_VIEW,
+        },
+      ],
     },
     {
-      href: '/calendar',
-      label: t('calendar'),
-      icon: Calendar,
-      permission: Permission.CALENDAR_VIEW,
+      label: t('nav.groups.operations'),
+      items: [
+        {
+          href: '/bookings',
+          label: t('nav.bookings'),
+          icon: BookOpen,
+          permission: Permission.BOOKING_VIEW,
+        },
+        {
+          href: '/assets',
+          label: t('nav.assets'),
+          icon: Package,
+          permission: Permission.ASSET_VIEW,
+        },
+        {
+          href: '/customers',
+          label: t('nav.customers'),
+          icon: Users,
+          permission: Permission.CUSTOMER_VIEW,
+        },
+      ],
     },
     {
-      href: '/bookings',
-      label: t('bookings'),
-      icon: BookOpen,
-      permission: Permission.BOOKING_VIEW,
+      label: t('nav.groups.management'),
+      items: [
+        {
+          href: '/staff',
+          label: t('nav.staff'),
+          icon: UserCog,
+          permission: Permission.STAFF_VIEW,
+        },
+        {
+          href: '/finance',
+          label: t('nav.finance'),
+          icon: Wallet,
+          permission: Permission.FINANCE_VIEW,
+        },
+        {
+          href: '/pricing',
+          label: t('nav.pricing'),
+          icon: TrendingUp,
+          permission: Permission.PRICING_VIEW,
+        },
+        {
+          href: '/reports',
+          label: t('nav.reports'),
+          icon: FileText,
+          permission: Permission.REPORTS_VIEW,
+        },
+      ],
     },
     {
-      href: '/assets',
-      label: t('assets'),
-      icon: Package,
-      permission: Permission.ASSET_VIEW,
+      label: t('nav.groups.system'),
+      items: [
+        {
+          href: '/settings',
+          label: t('nav.settings'),
+          icon: Settings,
+          permission: Permission.VENUE_SETTINGS,
+        },
+      ],
     },
-    {
-      href: '/customers',
-      label: t('customers'),
-      icon: Users,
-      permission: Permission.CUSTOMER_VIEW,
-    },
-    {
-      href: '/staff',
-      label: t('staff'),
-      icon: UserCog,
-      permission: Permission.STAFF_VIEW,
-    },
-    {
-      href: '/finance',
-      label: t('finance'),
-      icon: Wallet,
-      permission: Permission.FINANCE_VIEW,
-    },
-    {
-      href: '/pricing',
-      label: t('pricing'),
-      icon: TrendingUp,
-      permission: Permission.PRICING_VIEW,
-    },
-    {
-      href: '/reports',
-      label: t('reports'),
-      icon: FileText,
-      permission: Permission.REPORTS_VIEW,
-    },
-    {
-      href: '/settings',
-      label: t('settings'),
-      icon: Settings,
-      permission: Permission.VENUE_SETTINGS,
-    },
-  ];
+  ]
 
-  // Filter nav items based on user permissions
-  const visibleNavItems = navItems.filter((item) => {
-    if (!item.permission) return true;
-    if (!user) return false;
-    return hasPermission(user, item.permission);
-  });
+  // Filter groups and items based on permissions
+  const visibleGroups = navGroups
+    .map((group) => ({
+      ...group,
+      items: group.items.filter((item) => {
+        if (!item.permission) return true
+        if (!user) return false
+        return hasPermission(user, item.permission)
+      }),
+    }))
+    .filter((group) => group.items.length > 0)
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-e bg-background">
+    <aside
+      className={cn(
+        'hidden h-screen flex-col border-e bg-background transition-all duration-300 md:flex',
+        isCollapsed ? 'w-16' : 'w-64'
+      )}
+    >
       {/* Logo */}
-      <div className="flex h-16 items-center border-b px-6">
-        <h1 className="text-xl font-bold">{'\u0627\u0633\u0645\u0627\u0631\u062A\u200C\u06A9\u0644\u0627\u0628'}</h1>
+      <div className="flex h-16 items-center justify-between border-b px-4">
+        {!isCollapsed && (
+          <div className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+              <span className="text-sm font-bold text-primary-foreground">
+                S
+              </span>
+            </div>
+            <span className="text-lg font-semibold">SmartClub</span>
+          </div>
+        )}
+
+        {isCollapsed && (
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+            <span className="text-sm font-bold text-primary-foreground">S</span>
+          </div>
+        )}
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggle}
+          className={cn('h-8 w-8', isCollapsed && 'mx-auto')}
+          aria-label={isCollapsed ? t('nav.expand') : t('nav.collapse')}
+        >
+          {isCollapsed ? (
+            <ChevronRight className="h-4 w-4" />
+          ) : (
+            <ChevronLeft className="h-4 w-4" />
+          )}
+        </Button>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1 overflow-y-auto p-4">
-        {visibleNavItems.map((item) => (
-          <NavItem
-            key={item.href}
-            href={item.href}
-            label={item.label}
-            icon={item.icon}
-          />
-        ))}
-      </nav>
+      <ScrollArea className="flex-1 px-3 py-4">
+        <nav className="space-y-4">
+          {visibleGroups.map((group, index) => (
+            <div key={group.label}>
+              <NavGroup
+                label={group.label}
+                items={group.items}
+                isCollapsed={isCollapsed}
+              />
+              {index < visibleGroups.length - 1 && (
+                <Separator className="my-4" />
+              )}
+            </div>
+          ))}
+        </nav>
+      </ScrollArea>
 
       {/* User Menu */}
-      <UserMenu />
+      <div className="border-t">
+        <UserMenu isCollapsed={isCollapsed} />
+      </div>
     </aside>
-  );
+  )
 }

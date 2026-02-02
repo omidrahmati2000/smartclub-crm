@@ -1,18 +1,51 @@
-import { Sidebar } from './_components/sidebar';
+'use client'
+
+import { useState } from 'react'
+import { Sidebar } from './_components/sidebar'
+import { Header } from './_components/header'
+import { MobileSidebar } from './_components/mobile-sidebar'
+import { CommandPalette } from './_components/command-palette'
+import { useCommandPalette } from './_hooks/use-command-palette'
 
 interface DashboardLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
-export default function DashboardLayout({
-  children,
-}: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { open: commandPaletteOpen, setOpen: setCommandPaletteOpen } =
+    useCommandPalette()
+
   return (
     <div className="flex min-h-screen">
+      {/* Desktop Sidebar - hidden on mobile */}
       <Sidebar />
-      <main className="flex-1 overflow-auto bg-muted/10">
-        <div className="container mx-auto p-6 md:p-8">{children}</div>
-      </main>
+
+      {/* Mobile Sidebar */}
+      <MobileSidebar
+        open={mobileMenuOpen}
+        onOpenChange={setMobileMenuOpen}
+      />
+
+      {/* Main Content */}
+      <div className="flex flex-1 flex-col">
+        {/* Header */}
+        <Header
+          onMenuClick={() => setMobileMenuOpen(true)}
+          onSearchClick={() => setCommandPaletteOpen(true)}
+        />
+
+        {/* Page Content */}
+        <main className="flex-1 overflow-auto bg-muted/10">
+          <div className="container mx-auto p-4 sm:p-6 md:p-8">{children}</div>
+        </main>
+      </div>
+
+      {/* Command Palette */}
+      <CommandPalette
+        open={commandPaletteOpen}
+        onOpenChange={setCommandPaletteOpen}
+      />
     </div>
-  );
+  )
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Card } from '@smartclub/ui/card';
 import {
   BarChart,
@@ -15,85 +16,81 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
+import { formatCurrency } from '@smartclub/utils';
 import type { ReportPeriod } from './period-selector';
 
 interface CustomersReportProps {
   period: ReportPeriod;
 }
 
-// Mock data
 const customersByType = [
-  { name: 'عادی', value: 245, color: '#3b82f6' },
+  { name: 'Regular', value: 245, color: '#3b82f6' },
   { name: 'VIP', value: 42, color: '#8b5cf6' },
-  { name: 'غیرفعال', value: 38, color: '#94a3b8' },
-  { name: 'مسدود', value: 5, color: '#ef4444' },
+  { name: 'Inactive', value: 38, color: '#94a3b8' },
+  { name: 'Blocked', value: 5, color: '#ef4444' },
 ];
 
 const newCustomersTrend = [
-  { date: 'فروردین', customers: 28 },
-  { date: 'اردیبهشت', customers: 35 },
-  { date: 'خرداد', customers: 42 },
-  { date: 'تیر', customers: 38 },
-  { date: 'مرداد', customers: 52 },
-  { date: 'شهریور', customers: 48 },
+  { date: 'Aug', customers: 28 },
+  { date: 'Sep', customers: 35 },
+  { date: 'Oct', customers: 42 },
+  { date: 'Nov', customers: 38 },
+  { date: 'Dec', customers: 52 },
+  { date: 'Jan', customers: 48 },
 ];
 
 const topCustomers = [
-  { name: 'علی احمدی', bookings: 24, spent: 12500000 },
-  { name: 'مریم رضایی', bookings: 18, spent: 9800000 },
-  { name: 'محمد کریمی', bookings: 15, spent: 8200000 },
-  { name: 'سارا محمدی', bookings: 12, spent: 6500000 },
-  { name: 'رضا نوری', bookings: 10, spent: 5400000 },
+  { name: 'Ahmed Al Sharif', bookings: 24, spent: 12500 },
+  { name: 'Sara Abdullah', bookings: 18, spent: 9800 },
+  { name: 'Rashid Kareem', bookings: 15, spent: 8200 },
+  { name: 'Mariam Hassan', bookings: 12, spent: 6500 },
+  { name: 'Hussein Al Rashid', bookings: 10, spent: 5400 },
 ];
 
 const retentionData = [
-  { month: 'ماه ۱', rate: 100 },
-  { month: 'ماه ۲', rate: 72 },
-  { month: 'ماه ۳', rate: 58 },
-  { month: 'ماه ۴', rate: 48 },
-  { month: 'ماه ۵', rate: 42 },
-  { month: 'ماه ۶', rate: 38 },
+  { month: 'Month 1', rate: 100 },
+  { month: 'Month 2', rate: 72 },
+  { month: 'Month 3', rate: 58 },
+  { month: 'Month 4', rate: 48 },
+  { month: 'Month 5', rate: 42 },
+  { month: 'Month 6', rate: 38 },
 ];
 
 export function CustomersReport({ period }: CustomersReportProps) {
+  const t = useTranslations('venue-admin.reports');
   const totalCustomers = 330;
   const newCustomers = 48;
   const activeCustomers = 287;
   const avgBookingsPerCustomer = 3.2;
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('fa-IR').format(value) + ' تومان';
-  };
 
   return (
     <div className="space-y-6">
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">کل مشتریان</p>
+          <p className="text-sm text-muted-foreground">{t('totalCustomers')}</p>
           <p className="text-2xl font-bold">{totalCustomers}</p>
         </Card>
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">مشتریان جدید</p>
+          <p className="text-sm text-muted-foreground">{t('newCustomers')}</p>
           <p className="text-2xl font-bold text-green-600">{newCustomers}</p>
-          <p className="text-xs text-green-600">+۱۵٪ نسبت به ماه قبل</p>
+          <p className="text-xs text-green-600">{t('vsLastPeriod', { percent: 15 })}</p>
         </Card>
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">مشتریان فعال</p>
+          <p className="text-sm text-muted-foreground">{t('activeCustomers')}</p>
           <p className="text-2xl font-bold text-blue-600">{activeCustomers}</p>
-          <p className="text-xs text-muted-foreground">{Math.round((activeCustomers / totalCustomers) * 100)}٪</p>
+          <p className="text-xs text-muted-foreground">{Math.round((activeCustomers / totalCustomers) * 100)}%</p>
         </Card>
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">میانگین رزرو/مشتری</p>
+          <p className="text-sm text-muted-foreground">{t('avgBookingsPerCustomer')}</p>
           <p className="text-2xl font-bold">{avgBookingsPerCustomer}</p>
         </Card>
       </div>
 
       {/* Charts Row 1 */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Customers by Type */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">مشتریان بر اساس نوع</h3>
+          <h3 className="mb-4 font-semibold">{t('customersByType')}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
@@ -115,9 +112,8 @@ export function CustomersReport({ period }: CustomersReportProps) {
           </ResponsiveContainer>
         </Card>
 
-        {/* New Customers Trend */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">روند مشتریان جدید</h3>
+          <h3 className="mb-4 font-semibold">{t('newCustomersTrend')}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <AreaChart data={newCustomersTrend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -138,9 +134,8 @@ export function CustomersReport({ period }: CustomersReportProps) {
 
       {/* Charts Row 2 */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Top Customers Table */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">برترین مشتریان</h3>
+          <h3 className="mb-4 font-semibold">{t('topCustomers')}</h3>
           <div className="space-y-3">
             {topCustomers.map((customer, index) => (
               <div
@@ -154,21 +149,20 @@ export function CustomersReport({ period }: CustomersReportProps) {
                   <div>
                     <p className="font-medium">{customer.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {customer.bookings} رزرو
+                      {t('bookingsCount', { count: customer.bookings })}
                     </p>
                   </div>
                 </div>
                 <p className="text-sm font-medium text-green-600">
-                  {formatPrice(customer.spent)}
+                  {formatCurrency(customer.spent, 'AED')}
                 </p>
               </div>
             ))}
           </div>
         </Card>
 
-        {/* Retention Rate */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">نرخ نگهداشت مشتری</h3>
+          <h3 className="mb-4 font-semibold">{t('retentionRate')}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <AreaChart data={retentionData}>
               <CartesianGrid strokeDasharray="3 3" />

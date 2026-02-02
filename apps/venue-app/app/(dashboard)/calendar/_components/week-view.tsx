@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { Booking, Asset } from '@smartclub/types';
 import { cn } from '@smartclub/utils';
 import { BookingStatus } from '@smartclub/types';
@@ -24,6 +24,8 @@ const statusColors: Record<string, string> = {
 
 export function WeekView({ startDate, assets, bookings, onBookingClick }: WeekViewProps) {
   const locale = useLocale();
+  const t = useTranslations('venue-admin.calendar');
+
   // Generate week days
   const weekDays = useMemo(() => {
     const days: Date[] = [];
@@ -43,14 +45,11 @@ export function WeekView({ startDate, assets, bookings, onBookingClick }: WeekVi
 
   // Get day name
   const getDayName = (date: Date) => {
-    const dayNames = locale === 'fa'
-      ? ['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه']
-      : ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-
     const dayIndex = date.getDay();
     // Adjust for Persian week starting Saturday
     const adjustedIndex = dayIndex === 6 ? 0 : dayIndex + 1;
-    return dayNames[adjustedIndex];
+    const dayKeys = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'] as const;
+    return t(`weekdays.${dayKeys[adjustedIndex]}`);
   };
 
   // Get bookings for a specific date
@@ -74,7 +73,7 @@ export function WeekView({ startDate, assets, bookings, onBookingClick }: WeekVi
   if (assets.length === 0) {
     return (
       <div className="flex items-center justify-center h-64 text-muted-foreground">
-        امکاناتی یافت نشد
+        {t('noAssets')}
       </div>
     );
   }
@@ -84,7 +83,7 @@ export function WeekView({ startDate, assets, bookings, onBookingClick }: WeekVi
       <div className="min-w-[900px]">
         {/* Header with day names */}
         <div className="grid grid-cols-8 border-b bg-muted/50">
-          <div className="p-3 text-xs font-medium border-e">امکانات</div>
+          <div className="p-3 text-xs font-medium border-e">{t('assets')}</div>
           {weekDays.map((day, index) => (
             <div
               key={index}
@@ -138,7 +137,7 @@ export function WeekView({ startDate, assets, bookings, onBookingClick }: WeekVi
                     ))}
                     {dayBookings.length > 4 && (
                       <div className="text-xs text-muted-foreground text-center">
-                        +{dayBookings.length - 4} دیگر
+                        +{dayBookings.length - 4} {t('more')}
                       </div>
                     )}
                   </div>

@@ -16,7 +16,16 @@ export interface Booking {
   endTime: string; // HH:mm format
   duration: number; // minutes
   participants: BookingParticipant[];
-  totalPrice: number;
+
+  // Price breakdown
+  subtotal: number; // Base price before tax/fees
+  taxRate?: number; // Tax percentage (e.g. 5 for UAE VAT)
+  taxAmount?: number; // Calculated tax amount
+  serviceFee?: number; // Platform service fee
+  discount?: number; // Discount amount (from pricing rules, promo codes, etc.)
+  discountLabel?: string; // e.g. "Early Bird -10%", "Promo: SUMMER20"
+  totalPrice: number; // Final amount charged = subtotal - discount + taxAmount + serviceFee
+
   currency: string;
   paymentMethod?: string;
   paymentStatus: PaymentStatus;

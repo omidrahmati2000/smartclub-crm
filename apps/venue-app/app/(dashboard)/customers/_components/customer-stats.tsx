@@ -144,7 +144,7 @@ export function CustomerStats({ customer }: CustomerStatsProps) {
         customer.stats.preferredTimeSlots.length > 0) && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm font-medium">تنظیمات ترجیحی</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('preferences')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {customer.stats.favoriteAssets.length > 0 && (

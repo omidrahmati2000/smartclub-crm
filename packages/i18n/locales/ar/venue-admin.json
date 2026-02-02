@@ -9,7 +9,34 @@
     "finance": "المالية",
     "pricing": "التسعير",
     "reports": "التقارير",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "groups": {
+      "overview": "نظرة عامة",
+      "operations": "العمليات",
+      "management": "الإدارة",
+      "system": "النظام"
+    },
+    "collapse": "إغلاق الشريط الجانبي",
+    "expand": "فتح الشريط الجانبي",
+    "menu": "القائمة"
+  },
+  "header": {
+    "search": "بحث...",
+    "searchPlaceholder": "اكتب أمراً أو ابحث...",
+    "notifications": "الإشعارات",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج"
+  },
+  "commandPalette": {
+    "title": "لوحة الأوامر",
+    "placeholder": "اكتب أمراً أو ابحث...",
+    "noResults": "لم يتم العثور على نتائج.",
+    "pages": "الصفحات",
+    "actions": "الوصول السريع",
+    "recent": "الأخيرة",
+    "newBooking": "حجز جديد",
+    "newCustomer": "عميل جديد",
+    "newAsset": "مرفق جديد"
   },
   "dashboard": {
     "title": "لوحة التحكم",
@@ -25,7 +52,9 @@
     "createBooking": "إنشاء حجز حضوري",
     "viewCalendar": "عرض التقويم",
     "viewAllBookings": "عرض جميع الحجوزات",
-    "noBookings": "لا توجد حجوزات"
+    "noBookings": "لا توجد حجوزات",
+    "errorLoadingData": "خطأ في تحميل البيانات",
+    "comparedToYesterday": "مقارنة بالأمس"
   },
   "calendar": {
     "title": "التقويم",
@@ -41,10 +70,41 @@
     "nextMonth": "الشهر التالي",
     "filterByAsset": "تصفية حسب المرفق",
     "allAssets": "جميع المرافق",
-    "noBookingsForDate": "لا توجد حجوزات لهذا التاريخ"
+    "noBookingsForDate": "لا توجد حجوزات لهذا التاريخ",
+    "noAssets": "لا توجد مرافق",
+    "time": "الوقت",
+    "assets": "المرافق",
+    "customer": "العميل",
+    "more": "المزيد",
+    "bookings": "حجوزات",
+    "slotsSelected": "فترات محددة",
+    "duration": "المدة",
+    "createBooking": "إنشاء حجز",
+    "clear": "مسح",
+    "selectContinuousSlots": "حدد فترات متتالية على نفس المرفق والتاريخ",
+    "weekdays": {
+      "saturday": "السبت",
+      "sunday": "الأحد",
+      "monday": "الاثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة"
+    },
+    "statusLegend": {
+      "pending": "قيد الانتظار",
+      "confirmed": "مؤكد",
+      "checkedIn": "تم الحضور",
+      "completed": "مكتمل",
+      "cancelled": "ملغي",
+      "noShow": "عدم الحضور"
+    }
   },
   "bookings": {
     "title": "الحجوزات",
+    "description": "إدارة الحجوزات",
+    "noBookings": "لا توجد حجوزات",
+    "showingResults": "عرض {count} حجز",
     "all": "الكل",
     "pending": "معلق",
     "confirmed": "مؤكد",
@@ -59,11 +119,16 @@
     "status": "الحالة",
     "amount": "المبلغ",
     "actions": "الإجراءات",
+    "subtitle": "إدارة الحجوزات ({{count}} حجز)",
+    "filters": "التصفية",
+    "time": "الوقت",
+    "date": "التاريخ",
     "searchByCustomer": "البحث باسم العميل",
     "filterByStatus": "تصفية حسب الحالة",
     "filterByAsset": "تصفية حسب المرفق",
     "filterByDate": "تصفية حسب التاريخ",
     "createWalkIn": "إنشاء حجز حضوري",
+    "createWalkInDescription": "إنشاء حجز في الموقع للعميل",
     "exportCSV": "تصدير CSV",
     "view": "عرض",
     "edit": "تعديل",
@@ -75,16 +140,38 @@
     "customerInfo": "معلومات العميل",
     "paymentInfo": "معلومات الدفع",
     "participants": "المشاركون",
+    "host": "المضيف",
+    "bookingId": "رقم الحجز: {{id}}",
     "duration": "المدة",
     "minutes": "دقيقة",
     "paymentMethod": "طريقة الدفع",
-    "paymentStatus": "حالة الدفع"
+    "paymentStatus": "حالة الدفع",
+    "placeholders": {
+      "selectAsset": "اختر المرفق",
+      "customerName": "اسم العميل",
+      "customerPhone": "09121234567",
+      "startTime": "وقت البداية",
+      "endTime": "وقت النهاية"
+    },
+    "phone": "الهاتف (اختياري)",
+    "startTime": "وقت البداية",
+    "endTime": "وقت النهاية",
+    "noBookingsFound": "لا توجد حجوزات",
+    "validation": {
+      "assetRequired": "يرجى اختيار المرفق",
+      "customerNameRequired": "اسم العميل مطلوب",
+      "dateRequired": "التاريخ مطلوب",
+      "startTimeRequired": "وقت البداية مطلوب",
+      "endTimeRequired": "وقت النهاية مطلوب"
+    }
   },
   "assets": {
     "title": "المرافق",
     "description": "إدارة مرافق وموارد المركز",
     "createAsset": "إضافة مرفق",
+    "createAssetDescription": "إضافة مرفق جديد للمركز",
     "editAsset": "تعديل المرفق",
+    "editAssetDescription": "تعديل معلومات المرفق",
     "deleteAsset": "حذف المرفق",
     "noAssets": "لا توجد مرافق",
     "createFirstAsset": "أضف أول مرفق",
@@ -108,8 +195,32 @@
     "durationBased": "بالمدة",
     "capacityBased": "بالسعة",
     "openSession": "جلسة مفتوحة",
+    "duration": "المدة",
+    "minMinutes": "الحد الأدنى {count} دقيقة",
+    "maxMinutes": "الحد الأقصى {count} دقيقة",
+    "minutes": "{count} دقيقة",
+    "deactivate": "تعطيل",
+    "activate": "تفعيل",
     "confirmDelete": "هل أنت متأكد من حذف هذا المرفق؟",
-    "deleteWarning": "هذا الإجراء لا يمكن التراجع عنه."
+    "deleteWarning": "هذا الإجراء لا يمكن التراجع عنه.",
+    "validation": {
+      "nameRequired": "اسم المرفق مطلوب",
+      "typeRequired": "يرجى اختيار النوع",
+      "bookingTypeRequired": "يرجى اختيار نوع الحجز"
+    },
+    "placeholders": {
+      "name": "اسم المرفق",
+      "selectType": "اختر نوع الرياضة",
+      "selectBookingType": "اختر نوع الحجز",
+      "pricePerSlot": "350000",
+      "slotDuration": "90",
+      "pricePerHour": "150000",
+      "minDuration": "30",
+      "maxDuration": "240",
+      "pricePerSession": "80000",
+      "capacity": "30",
+      "pricePerMinute": "5000"
+    }
   },
   "customers": {
     "title": "العملاء",
@@ -119,6 +230,8 @@
     "sortBy": "ترتيب حسب",
     "exportCSV": "تصدير CSV",
     "noCustomers": "لا يوجد عملاء",
+    "noPermission": "ليس لديك صلاحية لعرض هذه الصفحة",
+    "filters": "التصفية",
     "showingResults": "عرض {{count}} عميل",
     "status": {
       "all": "الكل",
@@ -155,6 +268,7 @@
       "removeFromBlacklist": "إزالة من القائمة السوداء",
       "makeVIP": "ترقية إلى VIP"
     },
+    "preferences": "التفضيلات",
     "profile": {
       "title": "الملف الشخصي للعميل",
       "customerInfo": "معلومات العميل",
@@ -205,6 +319,12 @@
   "staff": {
     "title": "الموظفون",
     "description": "إدارة الموظفين والصلاحيات",
+    "owner": "المالك",
+    "manager": "المدير",
+    "receptionist": "موظف الاستقبال",
+    "cashier": "أمين الصندوق",
+    "noPermission": "ليس لديك صلاحية لعرض هذه الصفحة",
+    "filters": "التصفية",
     "addStaff": "إضافة موظف",
     "inviteStaff": "دعوة موظف",
     "editStaff": "تعديل الموظف",
@@ -369,7 +489,8 @@
       "lostRevenue": "الإيرادات المفقودة",
       "byReason": "الإلغاءات حسب السبب",
       "reason": "السبب",
-      "count": "العدد"
+      "count": "العدد",
+      "noData": "لا توجد بيانات إلغاء متاحة"
     },
     "occupancy": {
       "title": "تقرير الإشغال",
@@ -392,7 +513,10 @@
       "exportPDF": "تصدير PDF",
       "exporting": "جارٍ التصدير...",
       "success": "تم تحميل التقرير بنجاح",
-      "error": "خطأ في تحميل التقرير"
+      "error": "خطأ في تحميل التقرير",
+      "downloadStarted": "بدأ تحميل التقرير الخاص بك",
+      "comingSoon": "قريباً",
+      "pdfComingSoon": "سيتوفر تصدير PDF قريباً"
     },
     "chart": {
       "revenue": "الإيرادات",
@@ -406,6 +530,7 @@
   "pricing": {
     "title": "التسعير الديناميكي",
     "description": "إدارة قواعد التسعير",
+    "noPermission": "ليس لديك صلاحية لعرض هذه الصفحة",
     "addRule": "إضافة قاعدة",
     "editRule": "تعديل القاعدة",
     "deleteRule": "حذف القاعدة",
@@ -514,6 +639,7 @@
       "cancel": "إلغاء",
       "creating": "جارٍ الإنشاء...",
       "updating": "جارٍ التعديل...",
+      "deleting": "جارٍ الحذف...",
       "created": "تم إنشاء القاعدة بنجاح",
       "updated": "تم تعديل القاعدة بنجاح",
       "deleted": "تم حذف القاعدة",
@@ -532,12 +658,56 @@
   },
   "reports": {
     "title": "التقارير",
+    "description": "تقارير شاملة لأداء المركز",
+    "performance": "الأداء",
     "revenue": "الإيرادات",
     "occupancy": "الإشغال",
     "bookings": "الحجوزات",
     "customers": "العملاء",
     "export": "تصدير",
-    "dateRange": "الفترة الزمنية"
+    "dateRange": "الفترة الزمنية",
+    "totalRevenue": "إجمالي الإيرادات",
+    "avgOccupancy": "متوسط الإشغال",
+    "peakHour": "ساعة الذروة",
+    "bestAsset": "أفضل مرفق",
+    "vsLastMonth": "+{{percent}}% مقارنة بالشهر الماضي",
+    "improvement": "+{{percent}}% تحسن",
+    "highestDemand": "أعلى طلب",
+    "highestRevenue": "أعلى إيرادات",
+    "monthlyRevenueBookings": "الإيرادات والحجوزات الشهرية",
+    "occupancyByHour": "نسبة الإشغال حسب الساعة",
+    "assetPerformance": "أداء المرافق",
+    "weeklyComparison": "المقارنة الأسبوعية مع الشهر الماضي",
+    "occupied": "{{percent}}% مشغول",
+    "revenueKAed": "الإيرادات (ألف درهم)",
+    "thisMonth": "هذا الشهر",
+    "lastMonth": "الشهر الماضي",
+    "periods": {
+      "today": "اليوم",
+      "last7days": "آخر ٧ أيام",
+      "last30days": "آخر ٣٠ يوم",
+      "thisMonth": "هذا الشهر",
+      "lastMonth": "الشهر الماضي",
+      "thisYear": "هذا العام"
+    },
+    "totalBookings": "إجمالي الحجوزات",
+    "vsLastPeriod": "+{percent}% مقارنة بالفترة السابقة",
+    "completed": "مكتمل",
+    "cancelled": "ملغى",
+    "noShow": "لم يحضر",
+    "bookingsByDay": "الحجوزات حسب يوم الأسبوع",
+    "bookingStatus": "حالة الحجوزات",
+    "bookingsByAsset": "الحجوزات حسب المرفق",
+    "dailyTrend": "اتجاه الحجوزات اليومي",
+    "totalCustomers": "إجمالي العملاء",
+    "newCustomers": "العملاء الجدد",
+    "activeCustomers": "العملاء النشطون",
+    "avgBookingsPerCustomer": "متوسط الحجوزات/العميل",
+    "customersByType": "العملاء حسب النوع",
+    "newCustomersTrend": "اتجاه العملاء الجدد",
+    "topCustomers": "أفضل العملاء",
+    "bookingsCount": "{count} حجز",
+    "retentionRate": "معدل الاحتفاظ بالعملاء"
   },
   "settings": {
     "title": "الإعدادات",
@@ -549,6 +719,7 @@
       "notifications": "الإشعارات",
       "location": "الموقع والمنطقة",
       "tax": "إعدادات الضرائب",
+      "payment": "إعدادات الدفع",
       "compliance": "الامتثال"
     },
     "profile": {
@@ -565,7 +736,13 @@
       "coverImage": "صورة الغلاف",
       "gallery": "معرض الصور",
       "amenities": "المرافق",
-      "sportTypes": "أنواع الأنشطة"
+      "sportTypes": "أنواع الأنشطة",
+      "placeholders": {
+        "venueName": "اسم المركز",
+        "venueDescription": "وصف مختصر",
+        "address": "العنوان الكامل",
+        "city": "المدينة"
+      }
     },
     "hours": {
       "title": "ساعات العمل",
@@ -630,7 +807,12 @@
       "social": "وسائل التواصل الاجتماعي",
       "instagramUrl": "إنستغرام",
       "telegramUrl": "تيليغرام",
-      "whatsappNumber": "واتساب"
+      "whatsappNumber": "واتساب",
+      "placeholders": {
+        "metaTitle": "عنوان ميتا الموقع",
+        "metaDescription": "وصف ميتا الموقع",
+        "metaKeywords": "الكلمات المفتاحية، مفصولة بفاصلة"
+      }
     },
     "notifications": {
       "title": "إعدادات الإشعارات",
@@ -649,6 +831,64 @@
       "reminderHoursBefore": "كم ساعة قبل إرسال التذكير",
       "marketing": "التسويق",
       "sendPromotionalEmails": "إرسال رسائل ترويجية"
+    },
+    "payment": {
+      "displayCurrency": {
+        "title": "عملة العرض",
+        "description": "العملة التي تظهر للعملاء في جميع أنحاء المركز",
+        "label": "العملة",
+        "hint": "يؤثر هذا على عرض الأسعار والفواتير والاتصالات مع العملاء"
+      },
+      "gateways": {
+        "title": "بوابات الدفع",
+        "description": "تكوين معالجات الدفع عبر الإنترنت لقبول المدفوعات",
+        "currencyChangeWarning": "تم تغيير العملة. يتم عرض البوابات المتوافقة مع العملة الجديدة فقط أدناه.",
+        "supportedCurrencies": "العملات المدعومة",
+        "configure": "إعداد",
+        "hideConfig": "إخفاء الإعدادات",
+        "testMode": "وضع الاختبار (Sandbox)",
+        "testModeHint": "استخدم بيانات الاختبار للتطوير والاختبار",
+        "testConnection": "اختبار الاتصال",
+        "viewDocs": "عرض الوثائق",
+        "noCompatibleGateways": "لا توجد بوابات دفع تدعم العملة المحددة",
+        "regions": {
+          "global": "بوابات الدفع العالمية",
+          "middle_east": "الشرق الأوسط",
+          "asia": "آسيا والمحيط الهادئ",
+          "europe": "أوروبا",
+          "americas": "الأمريكيتان",
+          "africa": "أفريقيا",
+          "iran": "إيران"
+        },
+        "fields": {
+          "apiKey": "مفتاح API",
+          "secretKey": "المفتاح السري",
+          "webhookUrl": "عنوان Webhook",
+          "webhookHint": "انسخ هذا العنوان وقم بتكوينه في لوحة تحكم البوابة"
+        }
+      },
+      "localMethods": {
+        "title": "طرق الدفع المحلية",
+        "description": "تفعيل الدفع الحضوري والطرق البديلة",
+        "cash": "قبول الدفع النقدي",
+        "cardOnSite": "قبول الدفع بالبطاقة في الموقع (نقطة بيع)",
+        "wallet": "تفعيل محفظة العميل (رصيد مسبق الدفع)"
+      }
+    },
+    "validation": {
+      "venueNameRequired": "اسم المركز مطلوب",
+      "descriptionMinLength": "الوصف يجب أن يكون 10 أحرف على الأقل",
+      "addressRequired": "العنوان مطلوب",
+      "cityRequired": "المدينة مطلوبة",
+      "invalidPhone": "رقم الهاتف غير صالح",
+      "invalidEmail": "البريد الإلكتروني غير صالح",
+      "invalidWebsite": "عنوان الموقع غير صالح",
+      "subdomainMinLength": "النطاق الفرعي يجب أن يكون 3 أحرف على الأقل",
+      "subdomainFormat": "فقط الأحرف الصغيرة والأرقام والشرطات",
+      "invalidUrl": "عنوان URL غير صالح",
+      "invalidColor": "تنسيق اللون غير صالح",
+      "countryRequired": "اختيار البلد مطلوب",
+      "timezoneRequired": "اختيار المنطقة الزمنية مطلوب"
     },
     "saveChanges": "حفظ التغييرات",
     "saving": "جارٍ الحفظ...",

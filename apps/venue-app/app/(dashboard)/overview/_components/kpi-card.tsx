@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from '@smartclub/ui/card';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { cn } from '@smartclub/utils';
@@ -17,9 +18,12 @@ export function KPICard({
   icon,
   formatValue,
 }: KPICardProps) {
+  const t = useTranslations('venue-admin.dashboard');
   const displayValue = formatValue
     ? formatValue(value)
-    : value.toLocaleString('fa-IR');
+    : typeof value === 'number'
+      ? value.toLocaleString()
+      : value;
 
   const isPositive = change !== undefined && change > 0;
   const isNegative = change !== undefined && change < 0;
@@ -42,9 +46,9 @@ export function KPICard({
                 isNegative && 'text-red-600',
               )}
             >
-              {Math.abs(change)}٪
+              {Math.abs(change)}%
             </span>
-            <span>نسبت به دیروز</span>
+            <span>{t('comparedToYesterday')}</span>
           </div>
         )}
       </CardContent>

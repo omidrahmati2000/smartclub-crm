@@ -26,22 +26,6 @@ import {
 import type { Asset, CreateAssetDTO } from '@smartclub/types';
 import { SportType, BookingType } from '@smartclub/types';
 
-const assetSchema = z.object({
-  name: z.string().min(2, 'نام امکانات الزامی است'),
-  type: z.nativeEnum(SportType, { required_error: 'نوع را انتخاب کنید' }),
-  bookingType: z.nativeEnum(BookingType, { required_error: 'نوع رزرو را انتخاب کنید' }),
-  pricePerSlot: z.number().optional(),
-  pricePerHour: z.number().optional(),
-  pricePerSession: z.number().optional(),
-  pricePerMinute: z.number().optional(),
-  capacity: z.number().optional(),
-  minDuration: z.number().optional(),
-  maxDuration: z.number().optional(),
-  slotDuration: z.number().optional(),
-});
-
-type AssetFormData = z.infer<typeof assetSchema>;
-
 interface AssetFormDialogProps {
   open: boolean;
   onClose: () => void;
@@ -60,7 +44,24 @@ export function AssetFormDialog({
   const t = useTranslations('venue-admin.assets');
   const tc = useTranslations('venue-admin.common');
   const ts = useTranslations('sports');
+  const tcommon = useTranslations('common.common');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const assetSchema = z.object({
+    name: z.string().min(2, t('validation.nameRequired')),
+    type: z.nativeEnum(SportType, { required_error: t('validation.typeRequired') }),
+    bookingType: z.nativeEnum(BookingType, { required_error: t('validation.bookingTypeRequired') }),
+    pricePerSlot: z.number().optional(),
+    pricePerHour: z.number().optional(),
+    pricePerSession: z.number().optional(),
+    pricePerMinute: z.number().optional(),
+    capacity: z.number().optional(),
+    minDuration: z.number().optional(),
+    maxDuration: z.number().optional(),
+    slotDuration: z.number().optional(),
+  });
+
+  type AssetFormData = z.infer<typeof assetSchema>;
 
   const {
     register,
@@ -134,9 +135,7 @@ export function AssetFormDialog({
             {asset ? t('editAsset') : t('createAsset')}
           </DialogTitle>
           <DialogDescription>
-            {asset
-              ? 'ویرایش اطلاعات امکانات'
-              : 'افزودن امکانات جدید به مجموعه'}
+            {asset ? t('editAssetDescription') : t('createAssetDescription')}
           </DialogDescription>
         </DialogHeader>
 
@@ -144,7 +143,7 @@ export function AssetFormDialog({
           {/* Name */}
           <div className="space-y-2">
             <Label htmlFor="name">{t('name')}</Label>
-            <Input id="name" {...register('name')} placeholder="نام امکانات" />
+            <Input id="name" {...register('name')} placeholder={t('placeholders.name')} />
             {errors.name && (
               <p className="text-sm text-destructive">{errors.name.message}</p>
             )}
@@ -158,7 +157,7 @@ export function AssetFormDialog({
               onValueChange={(value) => setValue('type', value as SportType)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="نوع ورزش را انتخاب کنید" />
+                <SelectValue placeholder={t('placeholders.selectType')} />
               </SelectTrigger>
               <SelectContent>
                 {Object.values(SportType).map((type) => (
@@ -181,7 +180,7 @@ export function AssetFormDialog({
               onValueChange={(value) => setValue('bookingType', value as BookingType)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="نوع رزرو را انتخاب کنید" />
+                <SelectValue placeholder={t('placeholders.selectBookingType')} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value={BookingType.SLOT_BASED}>
@@ -210,21 +209,21 @@ export function AssetFormDialog({
             <>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="pricePerSlot">{t('pricePerSlot')} (تومان)</Label>
+                  <Label htmlFor="pricePerSlot">{t('pricePerSlot')} ({tcommon('units.currency')})</Label>
                   <Input
                     id="pricePerSlot"
                     type="number"
                     {...register('pricePerSlot', { valueAsNumber: true })}
-                    placeholder="350000"
+                    placeholder={t('placeholders.pricePerSlot')}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="slotDuration">{t('slotDuration')} (دقیقه)</Label>
+                  <Label htmlFor="slotDuration">{t('slotDuration')} ({tcommon('units.minutes')})</Label>
                   <Input
                     id="slotDuration"
                     type="number"
                     {...register('slotDuration', { valueAsNumber: true })}
-                    placeholder="90"
+                    placeholder={t('placeholders.slotDuration')}
                   />
                 </div>
               </div>
@@ -234,31 +233,31 @@ export function AssetFormDialog({
           {bookingType === BookingType.DURATION_BASED && (
             <>
               <div className="space-y-2">
-                <Label htmlFor="pricePerHour">{t('pricePerHour')} (تومان)</Label>
+                <Label htmlFor="pricePerHour">{t('pricePerHour')} ({tcommon('units.currency')})</Label>
                 <Input
                   id="pricePerHour"
                   type="number"
                   {...register('pricePerHour', { valueAsNumber: true })}
-                  placeholder="150000"
+                  placeholder={t('placeholders.pricePerHour')}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="minDuration">{t('minDuration')} (دقیقه)</Label>
+                  <Label htmlFor="minDuration">{t('minDuration')} ({tcommon('units.minutes')})</Label>
                   <Input
                     id="minDuration"
                     type="number"
                     {...register('minDuration', { valueAsNumber: true })}
-                    placeholder="30"
+                    placeholder={t('placeholders.minDuration')}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="maxDuration">{t('maxDuration')} (دقیقه)</Label>
+                  <Label htmlFor="maxDuration">{t('maxDuration')} ({tcommon('units.minutes')})</Label>
                   <Input
                     id="maxDuration"
                     type="number"
                     {...register('maxDuration', { valueAsNumber: true })}
-                    placeholder="240"
+                    placeholder={t('placeholders.maxDuration')}
                   />
                 </div>
               </div>
@@ -269,12 +268,12 @@ export function AssetFormDialog({
             <>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="pricePerSession">{t('pricePerSession')} (تومان)</Label>
+                  <Label htmlFor="pricePerSession">{t('pricePerSession')} ({tcommon('units.currency')})</Label>
                   <Input
                     id="pricePerSession"
                     type="number"
                     {...register('pricePerSession', { valueAsNumber: true })}
-                    placeholder="80000"
+                    placeholder={t('placeholders.pricePerSession')}
                   />
                 </div>
                 <div className="space-y-2">
@@ -283,7 +282,7 @@ export function AssetFormDialog({
                     id="capacity"
                     type="number"
                     {...register('capacity', { valueAsNumber: true })}
-                    placeholder="30"
+                    placeholder={t('placeholders.minDuration')}
                   />
                 </div>
               </div>
@@ -292,12 +291,12 @@ export function AssetFormDialog({
 
           {bookingType === BookingType.OPEN_SESSION && (
             <div className="space-y-2">
-              <Label htmlFor="pricePerMinute">{t('pricePerMinute')} (تومان)</Label>
+              <Label htmlFor="pricePerMinute">{t('pricePerMinute')} ({tcommon('units.currency')})</Label>
               <Input
                 id="pricePerMinute"
                 type="number"
                 {...register('pricePerMinute', { valueAsNumber: true })}
-                placeholder="5000"
+                placeholder={t('placeholders.pricePerMinute')}
               />
             </div>
           )}
@@ -313,7 +312,7 @@ export function AssetFormDialog({
             </Button>
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting
-                ? 'در حال ذخیره...'
+                ? tc('saving')
                 : asset
                   ? tc('save')
                   : tc('create')}

@@ -34,6 +34,7 @@ import {
 import { useToast } from '@smartclub/ui/use-toast';
 import { VenueRole, StaffStatus, type StaffMember, type UpdateStaffDTO } from '@smartclub/types';
 import { Loader2 } from 'lucide-react';
+import { apiClient } from '@/lib/api-client';
 
 interface EditStaffDialogProps {
   open: boolean;
@@ -90,22 +91,16 @@ export function EditStaffDialog({ open, onClose, onSuccess, staff }: EditStaffDi
         notes: values.notes,
       };
 
-      const response = await fetch(`/api/staff/${staff.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dto),
-      });
+      const result = await apiClient.put(`/staff/${staff.id}`, dto);
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (result.success && result.data) {
         toast({
           title: t('form.updated'),
           variant: 'default',
         });
-        onSuccess(data.data);
+        onSuccess(result.data);
       } else {
-        throw new Error(data.error || 'Failed to update staff member');
+        throw new Error(result.error || 'Failed to update staff member');
       }
     } catch (error) {
       toast({

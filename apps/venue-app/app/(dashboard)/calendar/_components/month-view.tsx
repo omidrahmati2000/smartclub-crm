@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { Booking } from '@smartclub/types';
 import { cn } from '@smartclub/utils';
 import { BookingStatus } from '@smartclub/types';
@@ -24,6 +24,8 @@ const statusColors: Record<string, string> = {
 
 export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }: MonthViewProps) {
   const locale = useLocale();
+  const t = useTranslations('venue-admin.calendar');
+
   // Generate calendar days for the month
   const calendarDays = useMemo(() => {
     const year = currentDate.getFullYear();
@@ -58,9 +60,8 @@ export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }:
   }, [currentDate]);
 
   // Day names
-  const dayNames = locale === 'fa'
-    ? ['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه']
-    : ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+  const dayKeys = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'] as const;
+  const dayNames = dayKeys.map(key => t(`weekdays.${key}`));
 
   // Get bookings for a specific date
   const getBookingsForDate = (date: Date) => {
@@ -153,7 +154,7 @@ export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }:
                 </span>
                 {dayBookings.length > 0 && (
                   <span className="text-xs text-muted-foreground">
-                    {dayBookings.length} رزرو
+                    {dayBookings.length} {t('bookings')}
                   </span>
                 )}
               </div>
@@ -195,7 +196,7 @@ export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }:
                 ))}
                 {dayBookings.length > 2 && (
                   <div className="text-xs text-muted-foreground">
-                    +{dayBookings.length - 2} دیگر
+                    +{dayBookings.length - 2} {t('more')}
                   </div>
                 )}
               </div>
@@ -208,23 +209,23 @@ export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }:
       <div className="flex flex-wrap gap-4 mt-4 text-xs">
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <span>در انتظار</span>
+          <span>{t('statusLegend.pending')}</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded-full bg-blue-500" />
-          <span>تأیید شده</span>
+          <span>{t('statusLegend.confirmed')}</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded-full bg-green-500" />
-          <span>حاضر شده</span>
+          <span>{t('statusLegend.checkedIn')}</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded-full bg-gray-500" />
-          <span>تکمیل شده</span>
+          <span>{t('statusLegend.completed')}</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded-full bg-red-500" />
-          <span>لغو شده</span>
+          <span>{t('statusLegend.cancelled')}</span>
         </div>
       </div>
     </div>

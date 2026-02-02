@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 import { PricingRule, PricePreview } from '@smartclub/types';
 import { useState } from 'react';
 import { AdjustmentDisplay } from './adjustment-display';
+import { formatCurrency, applyAdjustment, getAdjustmentAmount } from '@smartclub/utils';
 
 interface PricePreviewDialogProps {
   rule: PricingRule | null;
@@ -18,39 +19,19 @@ interface PricePreviewDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+// Padel Court 90-min slot price in AED (default preview asset)
+const DEFAULT_BASE_PRICE = 120;
+const CURRENCY = 'AED';
+
 export function PricePreviewDialog({ rule, open, onOpenChange }: PricePreviewDialogProps) {
   const t = useTranslations('venue-admin.pricing');
-  const [basePrice] = useState(100000); // Mock base price
+  const [basePrice] = useState(DEFAULT_BASE_PRICE);
 
   if (!rule) return null;
 
-  // Mock price calculation
   const calculatePreview = (): PricePreview => {
-    let finalPrice = basePrice;
-    let adjustment = 0;
-
-    switch (rule.adjustment.type) {
-      case 'PERCENTAGE_INCREASE':
-        adjustment = basePrice * (rule.adjustment.value / 100);
-        finalPrice = basePrice + adjustment;
-        break;
-      case 'PERCENTAGE_DECREASE':
-        adjustment = -(basePrice * (rule.adjustment.value / 100));
-        finalPrice = basePrice + adjustment;
-        break;
-      case 'FIXED_INCREASE':
-        adjustment = rule.adjustment.value;
-        finalPrice = basePrice + adjustment;
-        break;
-      case 'FIXED_DECREASE':
-        adjustment = -rule.adjustment.value;
-        finalPrice = basePrice + adjustment;
-        break;
-      case 'OVERRIDE':
-        finalPrice = rule.adjustment.overridePrice || basePrice;
-        adjustment = finalPrice - basePrice;
-        break;
-    }
+    const adjustment = getAdjustmentAmount(basePrice, rule.adjustment);
+    const finalPrice = Math.max(0, applyAdjustment(basePrice, rule.adjustment));
 
     return {
       basePrice,
@@ -66,11 +47,12 @@ export function PricePreviewDialog({ rule, open, onOpenChange }: PricePreviewDia
       finalPrice,
       totalAdjustment: adjustment,
       totalAdjustmentPercentage: (adjustment / basePrice) * 100,
-      currency: 'IRR',
+      currency: CURRENCY,
     };
   };
 
   const preview = calculatePreview();
+  const fmt = (amount: number) => formatCurrency(amount, CURRENCY);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -85,12 +67,10 @@ export function PricePreviewDialog({ rule, open, onOpenChange }: PricePreviewDia
             <AdjustmentDisplay adjustment={rule.adjustment} />
           </div>
 
-          
-
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">{t('preview.basePrice')}</span>
-              <span className="font-medium">{preview.basePrice.toLocaleString()} ریال</span>
+              <span className="font-medium">{fmt(preview.basePrice)}</span>
             </div>
 
             <div className="flex items-center justify-between">
@@ -100,16 +80,14 @@ export function PricePreviewDialog({ rule, open, onOpenChange }: PricePreviewDia
                   preview.totalAdjustment >= 0 ? 'text-red-600' : 'text-green-600'
                 }`}
               >
-                {preview.totalAdjustment >= 0 ? '+' : ''}
-                {preview.totalAdjustment.toLocaleString()} ریال
+                {preview.totalAdjustment >= 0 ? '+' : '-'}
+                {fmt(Math.abs(preview.totalAdjustment))}
               </span>
             </div>
 
-            
-
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between border-t pt-2">
               <span className="font-semibold">{t('preview.finalPrice')}</span>
-              <span className="text-xl font-bold">{preview.finalPrice.toLocaleString()} ریال</span>
+              <span className="text-xl font-bold">{fmt(preview.finalPrice)}</span>
             </div>
           </div>
 
@@ -122,8 +100,8 @@ export function PricePreviewDialog({ rule, open, onOpenChange }: PricePreviewDia
                   <span
                     className={appliedRule.adjustment >= 0 ? 'text-red-600' : 'text-green-600'}
                   >
-                    {appliedRule.adjustment >= 0 ? '+' : ''}
-                    {appliedRule.adjustment.toLocaleString()}
+                    {appliedRule.adjustment >= 0 ? '+' : '-'}
+                    {fmt(Math.abs(appliedRule.adjustment))}
                   </span>
                 </li>
               ))}

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import {
   Select,
   SelectContent,
@@ -16,18 +17,20 @@ interface PeriodSelectorProps {
 }
 
 export function PeriodSelector({ value, onChange }: PeriodSelectorProps) {
+  const t = useTranslations('venue-admin.reports.periods');
+
   return (
     <Select value={value} onValueChange={(v) => onChange(v as ReportPeriod)}>
       <SelectTrigger className="w-[180px]">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="today">امروز</SelectItem>
-        <SelectItem value="last7days">۷ روز گذشته</SelectItem>
-        <SelectItem value="last30days">۳۰ روز گذشته</SelectItem>
-        <SelectItem value="thisMonth">این ماه</SelectItem>
-        <SelectItem value="lastMonth">ماه گذشته</SelectItem>
-        <SelectItem value="thisYear">امسال</SelectItem>
+        <SelectItem value="today">{t('today')}</SelectItem>
+        <SelectItem value="last7days">{t('last7days')}</SelectItem>
+        <SelectItem value="last30days">{t('last30days')}</SelectItem>
+        <SelectItem value="thisMonth">{t('thisMonth')}</SelectItem>
+        <SelectItem value="lastMonth">{t('lastMonth')}</SelectItem>
+        <SelectItem value="thisYear">{t('thisYear')}</SelectItem>
       </SelectContent>
     </Select>
   );

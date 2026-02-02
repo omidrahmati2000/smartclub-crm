@@ -19,6 +19,7 @@ import { Label } from '@smartclub/ui/label';
 import { Switch } from '@smartclub/ui/switch';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import type { OperatingHours } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 const operatingHoursSchema = z.object({
   hours: z.array(
@@ -87,9 +88,8 @@ export function OperatingHoursForm() {
   const fetchOperatingHours = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}`);
-      const result = await response.json();
-      if (result.success && result.data.operatingHours) {
+      const result = await apiClient.get(`/venues/${venueId}`);
+      if (result.success && result.data?.operatingHours) {
         const hours = result.data.operatingHours as OperatingHours[];
         if (hours.length > 0) {
           reset({ hours });
@@ -111,18 +111,7 @@ export function OperatingHoursForm() {
     setErrorMessage('');
 
     try {
-      const response = await fetch(
-        `/api/venues/${session.user.venueId}/operating-hours`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data.hours),
-        }
-      );
-
-      const result = await response.json();
+      const result = await apiClient.put(`/venues/${session.user.venueId}/operating-hours`, data.hours);
 
       if (result.success) {
         setSuccessMessage(ts('saved'));

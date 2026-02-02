@@ -20,15 +20,16 @@ import { Switch } from '@smartclub/ui/switch';
 import { Separator } from '@smartclub/ui/separator';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import type { NotificationPreferences } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 const notificationSchema = z.object({
   emailNotificationsEnabled: z.boolean(),
-  notificationEmail: z.string().email('ایمیل معتبر نیست'),
+  notificationEmail: z.string().email('Invalid email address'),
   notifyOnNewBooking: z.boolean(),
   notifyOnCancellation: z.boolean(),
   notifyOnNoShow: z.boolean(),
   smsNotificationsEnabled: z.boolean(),
-  notificationPhone: z.string().min(10, 'شماره تلفن معتبر نیست'),
+  notificationPhone: z.string().min(10, 'Invalid phone number'),
   sendCustomerReminders: z.boolean(),
   reminderHoursBefore: z.number().min(1),
   sendPromotionalEmails: z.boolean(),
@@ -82,9 +83,8 @@ export function NotificationSettingsForm() {
   const fetchNotificationSettings = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}/settings`);
-      const result = await response.json();
-      if (result.success && result.data.notificationPreferences) {
+      const result = await apiClient.get(`/venues/${venueId}/settings`);
+      if (result.success && result.data?.notificationPreferences) {
         const settings: NotificationPreferences = result.data.notificationPreferences;
         reset(settings);
       }
@@ -104,15 +104,7 @@ export function NotificationSettingsForm() {
     setErrorMessage('');
 
     try {
-      const response = await fetch(`/api/venues/${session.user.venueId}/settings`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ notificationPreferences: data }),
-      });
-
-      const result = await response.json();
+      const result = await apiClient.put(`/venues/${session.user.venueId}/settings`, { notificationPreferences: data });
 
       if (result.success) {
         setSuccessMessage(ts('saved'));

@@ -9,7 +9,34 @@
     "finance": "Finance",
     "pricing": "Pricing",
     "reports": "Reports",
-    "settings": "Settings"
+    "settings": "Settings",
+    "groups": {
+      "overview": "Overview",
+      "operations": "Operations",
+      "management": "Management",
+      "system": "System"
+    },
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar",
+    "menu": "Menu"
+  },
+  "header": {
+    "search": "Search...",
+    "searchPlaceholder": "Type a command or search...",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "commandPalette": {
+    "title": "Command Palette",
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found.",
+    "pages": "Pages",
+    "actions": "Quick Actions",
+    "recent": "Recent",
+    "newBooking": "New Booking",
+    "newCustomer": "New Customer",
+    "newAsset": "New Asset"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -25,7 +52,9 @@
     "createBooking": "Create Walk-in Booking",
     "viewCalendar": "View Calendar",
     "viewAllBookings": "View All Bookings",
-    "noBookings": "No bookings found"
+    "noBookings": "No bookings found",
+    "errorLoadingData": "Error loading data",
+    "comparedToYesterday": "compared to yesterday"
   },
   "calendar": {
     "title": "Calendar",
@@ -41,10 +70,41 @@
     "nextMonth": "Next Month",
     "filterByAsset": "Filter by Asset",
     "allAssets": "All Assets",
-    "noBookingsForDate": "No bookings for this date"
+    "noBookingsForDate": "No bookings for this date",
+    "noAssets": "No assets found",
+    "time": "Time",
+    "assets": "Assets",
+    "customer": "Customer",
+    "more": "more",
+    "bookings": "bookings",
+    "slotsSelected": "slots selected",
+    "duration": "Duration",
+    "createBooking": "Create Booking",
+    "clear": "Clear",
+    "selectContinuousSlots": "Select continuous slots on same asset and date",
+    "weekdays": {
+      "saturday": "Sat",
+      "sunday": "Sun",
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri"
+    },
+    "statusLegend": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "checkedIn": "Checked In",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "noShow": "No Show"
+    }
   },
   "bookings": {
     "title": "Bookings",
+    "description": "Manage bookings",
+    "noBookings": "No bookings found",
+    "showingResults": "Showing {{count}} bookings",
     "all": "All",
     "pending": "Pending",
     "confirmed": "Confirmed",
@@ -59,11 +119,16 @@
     "status": "Status",
     "amount": "Amount",
     "actions": "Actions",
+    "subtitle": "Manage bookings ({{count}} bookings)",
+    "filters": "Filters",
+    "time": "Time",
+    "date": "Date",
     "searchByCustomer": "Search by customer name",
     "filterByStatus": "Filter by status",
     "filterByAsset": "Filter by asset",
     "filterByDate": "Filter by date",
     "createWalkIn": "Create Walk-in Booking",
+    "createWalkInDescription": "Create an on-site booking for a customer",
     "exportCSV": "Export CSV",
     "view": "View",
     "edit": "Edit",
@@ -75,16 +140,38 @@
     "customerInfo": "Customer Information",
     "paymentInfo": "Payment Information",
     "participants": "Participants",
+    "host": "Host",
+    "bookingId": "Booking ID: {{id}}",
     "duration": "Duration",
     "minutes": "minutes",
     "paymentMethod": "Payment Method",
-    "paymentStatus": "Payment Status"
+    "paymentStatus": "Payment Status",
+    "placeholders": {
+      "selectAsset": "Select asset",
+      "customerName": "Customer name",
+      "customerPhone": "09121234567",
+      "startTime": "Start time",
+      "endTime": "End time"
+    },
+    "phone": "Phone (Optional)",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "validation": {
+      "assetRequired": "Please select an asset",
+      "customerNameRequired": "Customer name is required",
+      "dateRequired": "Date is required",
+      "startTimeRequired": "Start time is required",
+      "endTimeRequired": "End time is required"
+    },
+    "noBookingsFound": "No bookings found"
   },
   "assets": {
     "title": "Assets",
     "description": "Manage venue assets and resources",
     "createAsset": "Create Asset",
+    "createAssetDescription": "Add new asset to the venue",
     "editAsset": "Edit Asset",
+    "editAssetDescription": "Edit asset information",
     "deleteAsset": "Delete Asset",
     "noAssets": "No assets found",
     "createFirstAsset": "Create First Asset",
@@ -109,7 +196,31 @@
     "capacityBased": "Capacity Based",
     "openSession": "Open Session",
     "confirmDelete": "Are you sure you want to delete this asset?",
-    "deleteWarning": "This action cannot be undone."
+    "deleteWarning": "This action cannot be undone.",
+    "validation": {
+      "nameRequired": "Asset name is required",
+      "typeRequired": "Please select a type",
+      "bookingTypeRequired": "Please select booking type"
+    },
+    "placeholders": {
+      "name": "Asset name",
+      "selectType": "Select sport type",
+      "selectBookingType": "Select booking type",
+      "pricePerSlot": "350000",
+      "slotDuration": "90",
+      "pricePerHour": "150000",
+      "minDuration": "30",
+      "maxDuration": "240",
+      "pricePerSession": "80000",
+      "capacity": "30",
+      "pricePerMinute": "5000"
+    },
+    "duration": "Duration",
+    "minMinutes": "Min {count} min",
+    "maxMinutes": "Max {count} min",
+    "minutes": "{count} min",
+    "deactivate": "Deactivate",
+    "activate": "Activate"
   },
   "customers": {
     "title": "Customers",
@@ -119,6 +230,8 @@
     "sortBy": "Sort by",
     "exportCSV": "Export CSV",
     "noCustomers": "No customers found",
+    "noPermission": "You do not have permission to view this page",
+    "filters": "Filters",
     "showingResults": "Showing {{count}} customers",
 
     "status": {
@@ -208,11 +321,18 @@
       "success": "Customer status changed",
       "blacklistWarning": "Are you sure you want to blacklist this customer?",
       "blacklistReason": "Reason for Blacklisting"
-    }
+    },
+    "preferences": "Preferences"
   },
   "staff": {
     "title": "Staff",
     "description": "Staff Management & Access Control",
+    "owner": "Owner",
+    "manager": "Manager",
+    "receptionist": "Receptionist",
+    "cashier": "Cashier",
+    "noPermission": "You do not have permission to view this page",
+    "filters": "Filters",
     "addStaff": "Add Staff Member",
     "inviteStaff": "Invite Staff Member",
     "editStaff": "Edit Staff Member",
@@ -417,7 +537,10 @@
       "exportPDF": "Export PDF",
       "exporting": "Exporting...",
       "success": "Report downloaded successfully",
-      "error": "Error downloading report"
+      "error": "Error downloading report",
+      "downloadStarted": "Your report download has started",
+      "comingSoon": "Coming Soon",
+      "pdfComingSoon": "PDF export will be available soon"
     },
 
     "chart": {
@@ -432,6 +555,7 @@
   "pricing": {
     "title": "Dynamic Pricing",
     "description": "Manage pricing rules",
+    "noPermission": "You do not have permission to view this page",
     "addRule": "Add Rule",
     "editRule": "Edit Rule",
     "deleteRule": "Delete Rule",
@@ -572,12 +696,56 @@
   },
   "reports": {
     "title": "Reports",
+    "description": "Comprehensive venue performance reports",
+    "performance": "Performance",
     "revenue": "Revenue",
     "occupancy": "Occupancy",
     "bookings": "Bookings",
     "customers": "Customers",
     "export": "Export",
-    "dateRange": "Date Range"
+    "dateRange": "Date Range",
+    "totalRevenue": "Total Revenue",
+    "avgOccupancy": "Avg Occupancy",
+    "peakHour": "Peak Hour",
+    "bestAsset": "Best Asset",
+    "vsLastMonth": "+{{percent}}% vs last month",
+    "improvement": "+{{percent}}% improvement",
+    "highestDemand": "Highest demand",
+    "highestRevenue": "Highest revenue",
+    "monthlyRevenueBookings": "Monthly Revenue & Bookings",
+    "occupancyByHour": "Occupancy Rate by Hour",
+    "assetPerformance": "Asset Performance",
+    "weeklyComparison": "Weekly Comparison vs Last Month",
+    "occupied": "{{percent}}% occupied",
+    "revenueKAed": "Revenue (K AED)",
+    "thisMonth": "This Month",
+    "lastMonth": "Last Month",
+    "periods": {
+      "today": "Today",
+      "last7days": "Last 7 Days",
+      "last30days": "Last 30 Days",
+      "thisMonth": "This Month",
+      "lastMonth": "Last Month",
+      "thisYear": "This Year"
+    },
+    "totalBookings": "Total Bookings",
+    "vsLastPeriod": "+{percent}% vs last period",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "noShow": "No Show",
+    "bookingsByDay": "Bookings by Day of Week",
+    "bookingStatus": "Booking Status",
+    "bookingsByAsset": "Bookings by Asset",
+    "dailyTrend": "Daily Booking Trend",
+    "totalCustomers": "Total Customers",
+    "newCustomers": "New Customers",
+    "activeCustomers": "Active Customers",
+    "avgBookingsPerCustomer": "Avg Bookings/Customer",
+    "customersByType": "Customers by Type",
+    "newCustomersTrend": "New Customers Trend",
+    "topCustomers": "Top Customers",
+    "bookingsCount": "{count} bookings",
+    "retentionRate": "Customer Retention Rate"
   },
   "settings": {
     "title": "Settings",
@@ -589,6 +757,7 @@
       "notifications": "Notifications",
       "location": "Location & Region",
       "tax": "Tax Settings",
+      "payment": "Payment Settings",
       "compliance": "Compliance"
     },
     "profile": {
@@ -605,7 +774,13 @@
       "coverImage": "Cover Image",
       "gallery": "Photo Gallery",
       "amenities": "Amenities",
-      "sportTypes": "Activity Types"
+      "sportTypes": "Activity Types",
+      "placeholders": {
+        "venueName": "Venue name",
+        "venueDescription": "Brief description",
+        "address": "Full address",
+        "city": "City"
+      }
     },
     "hours": {
       "title": "Operating Hours",
@@ -670,7 +845,12 @@
       "social": "Social Media",
       "instagramUrl": "Instagram URL",
       "telegramUrl": "Telegram URL",
-      "whatsappNumber": "WhatsApp Number"
+      "whatsappNumber": "WhatsApp Number",
+      "placeholders": {
+        "metaTitle": "Site meta title",
+        "metaDescription": "Site meta description",
+        "metaKeywords": "Keywords, comma separated"
+      }
     },
     "notifications": {
       "title": "Notification Settings",
@@ -689,6 +869,64 @@
       "reminderHoursBefore": "Send Reminder (hours before)",
       "marketing": "Marketing",
       "sendPromotionalEmails": "Send Promotional Emails"
+    },
+    "payment": {
+      "displayCurrency": {
+        "title": "Display Currency",
+        "description": "Choose the currency displayed to customers throughout your venue",
+        "label": "Currency",
+        "hint": "This affects pricing displays, invoices, and customer communications"
+      },
+      "gateways": {
+        "title": "Payment Gateways",
+        "description": "Configure online payment processors to accept payments",
+        "currencyChangeWarning": "Currency changed. Only gateways compatible with the new currency are shown below.",
+        "supportedCurrencies": "Supported currencies",
+        "configure": "Configure",
+        "hideConfig": "Hide Config",
+        "testMode": "Test Mode (Sandbox)",
+        "testModeHint": "Use test credentials for development and testing",
+        "testConnection": "Test Connection",
+        "viewDocs": "View Documentation",
+        "noCompatibleGateways": "No payment gateways support the selected currency",
+        "regions": {
+          "global": "Global Payment Processors",
+          "middle_east": "Middle East",
+          "asia": "Asia & Pacific",
+          "europe": "Europe",
+          "americas": "Americas",
+          "africa": "Africa",
+          "iran": "Iran"
+        },
+        "fields": {
+          "apiKey": "API Key",
+          "secretKey": "Secret Key",
+          "webhookUrl": "Webhook URL",
+          "webhookHint": "Copy this URL and configure it in your gateway dashboard"
+        }
+      },
+      "localMethods": {
+        "title": "Local Payment Methods",
+        "description": "Enable in-person and alternative payment options",
+        "cash": "Accept Cash Payments",
+        "cardOnSite": "Accept Card Payments On-Site (POS Terminal)",
+        "wallet": "Enable Customer Wallet (Prepaid Balance)"
+      }
+    },
+    "validation": {
+      "venueNameRequired": "Venue name is required",
+      "descriptionMinLength": "Description must be at least 10 characters",
+      "addressRequired": "Address is required",
+      "cityRequired": "City is required",
+      "invalidPhone": "Invalid phone number",
+      "invalidEmail": "Invalid email address",
+      "invalidWebsite": "Invalid website URL",
+      "subdomainMinLength": "Subdomain must be at least 3 characters",
+      "subdomainFormat": "Only lowercase letters, numbers and hyphens allowed",
+      "invalidUrl": "Invalid URL",
+      "invalidColor": "Invalid color format",
+      "countryRequired": "Country is required",
+      "timezoneRequired": "Timezone is required"
     },
     "saveChanges": "Save Changes",
     "saving": "Saving...",

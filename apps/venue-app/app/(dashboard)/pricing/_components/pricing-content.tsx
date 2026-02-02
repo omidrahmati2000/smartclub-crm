@@ -17,6 +17,8 @@ import { AddPricingRuleDialog } from './add-pricing-rule-dialog';
 import { EditPricingRuleDialog } from './edit-pricing-rule-dialog';
 import { DeletePricingRuleDialog } from './delete-pricing-rule-dialog';
 import { PricePreviewDialog } from './price-preview-dialog';
+import { useToast } from '@smartclub/ui/use-toast';
+import { apiClient } from '@/lib/api-client';
 
 interface PricingContentProps {
   venueId: string;
@@ -26,7 +28,7 @@ interface PricingContentProps {
 export function PricingContent({ venueId, canManage }: PricingContentProps) {
   const t = useTranslations('venue-admin.pricing');
   const tc = useTranslations('venue-admin.common');
-  
+  const { toast } = useToast();
 
   const [rules, setRules] = useState<PricingRule[]>([]);
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -47,14 +49,13 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
   const fetchRules = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}/pricing-rules`);
-      const data = await response.json();
-      if (data.success) {
-        setRules(data.data);
+      const result = await apiClient.get(`/venues/${venueId}/pricing-rules`);
+      if (result.success && result.data) {
+        setRules(result.data);
       }
     } catch (error) {
       console.error('Failed to fetch pricing rules:', error);
-      console.log({
+      toast({
         title: tc('error'),
         description: 'Failed to load pricing rules',
         variant: 'destructive',
@@ -67,10 +68,9 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
   // Fetch assets for targeting
   const fetchAssets = async () => {
     try {
-      const response = await fetch(`/api/venues/${venueId}/assets`);
-      const data = await response.json();
-      if (data.success) {
-        setAssets(data.data);
+      const result = await apiClient.get(`/venues/${venueId}/assets`);
+      if (result.success && result.data) {
+        setAssets(result.data);
       }
     } catch (error) {
       console.error('Failed to fetch assets:', error);
@@ -108,23 +108,18 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
   // Handle create rule
   const handleCreateRule = async (data: CreatePricingRuleDTO) => {
     try {
-      const response = await fetch(`/api/venues/${venueId}/pricing-rules`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
+      const result = await apiClient.post(`/venues/${venueId}/pricing-rules`, data);
 
-      if (result.success) {
+      if (result.success && result.data) {
         setRules((prev) => [...prev, result.data]);
-        console.log({
+        toast({
           title: tc('success'),
           description: t('form.created'),
         });
       }
     } catch (error) {
       console.error('Failed to create pricing rule:', error);
-      console.log({
+      toast({
         title: tc('error'),
         description: 'Failed to create pricing rule',
         variant: 'destructive',
@@ -136,23 +131,18 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
   // Handle update rule
   const handleUpdateRule = async (id: string, data: UpdatePricingRuleDTO) => {
     try {
-      const response = await fetch(`/api/pricing-rules/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
+      const result = await apiClient.put(`/pricing-rules/${id}`, data);
 
-      if (result.success) {
+      if (result.success && result.data) {
         setRules((prev) => prev.map((rule) => (rule.id === id ? result.data : rule)));
-        console.log({
+        toast({
           title: tc('success'),
           description: t('form.updated'),
         });
       }
     } catch (error) {
       console.error('Failed to update pricing rule:', error);
-      console.log({
+      toast({
         title: tc('error'),
         description: 'Failed to update pricing rule',
         variant: 'destructive',
@@ -167,14 +157,11 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
 
     setIsDeleting(true);
     try {
-      const response = await fetch(`/api/pricing-rules/${selectedRule.id}`, {
-        method: 'DELETE',
-      });
-      const result = await response.json();
+      const result = await apiClient.delete(`/pricing-rules/${selectedRule.id}`);
 
       if (result.success) {
         setRules((prev) => prev.filter((rule) => rule.id !== selectedRule.id));
-        console.log({
+        toast({
           title: tc('success'),
           description: t('form.deleted'),
         });
@@ -183,7 +170,7 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
       }
     } catch (error) {
       console.error('Failed to delete pricing rule:', error);
-      console.log({
+      toast({
         title: tc('error'),
         description: 'Failed to delete pricing rule',
         variant: 'destructive',
@@ -201,16 +188,11 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
           ? PricingRuleStatus.INACTIVE
           : PricingRuleStatus.ACTIVE;
 
-      const response = await fetch(`/api/pricing-rules/${rule.id}/toggle`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus }),
-      });
-      const result = await response.json();
+      const result = await apiClient.patch(`/pricing-rules/${rule.id}/toggle`, { status: newStatus });
 
-      if (result.success) {
+      if (result.success && result.data) {
         setRules((prev) => prev.map((r) => (r.id === rule.id ? result.data : r)));
-        console.log({
+        toast({
           title: tc('success'),
           description:
             newStatus === PricingRuleStatus.ACTIVE ? t('form.activated') : t('form.deactivated'),
@@ -218,7 +200,7 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
       }
     } catch (error) {
       console.error('Failed to toggle pricing rule:', error);
-      console.log({
+      toast({
         title: tc('error'),
         description: 'Failed to toggle pricing rule',
         variant: 'destructive',

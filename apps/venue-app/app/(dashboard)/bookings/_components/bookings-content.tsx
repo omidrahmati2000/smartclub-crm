@@ -90,8 +90,34 @@ export function BookingsContent() {
   };
 
   const handleExportCSV = () => {
-    // TODO: Implement CSV export
-    console.log('Export to CSV');
+    const headers = [
+      'ID', 'Date', 'Start Time', 'End Time', 'Duration (min)',
+      'Customer', 'Status', 'Total Price', 'Currency',
+      'Payment Method', 'Payment Status',
+    ];
+    const rows = filteredBookings.map((b) => [
+      b.id,
+      b.date,
+      b.startTime,
+      b.endTime,
+      b.duration,
+      b.participants?.[0]?.name || '',
+      b.status,
+      b.totalPrice,
+      b.currency,
+      b.paymentMethod || '',
+      b.paymentStatus,
+    ]);
+    const csv = [headers, ...rows]
+      .map((row) => row.map((cell) => `"${String(cell ?? '').replace(/"/g, '""')}"`).join(','))
+      .join('\n');
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `bookings-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   if (isLoading) {
@@ -111,7 +137,7 @@ export function BookingsContent() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
           <p className="text-muted-foreground">
-            مدیریت رزروها ({filteredBookings.length} رزرو)
+            {t('subtitle', { count: filteredBookings.length })}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -131,7 +157,7 @@ export function BookingsContent() {
       {/* Filters */}
       <Card>
         <CardHeader>
-          <CardTitle>فیلترها</CardTitle>
+          <CardTitle>{t('filters')}</CardTitle>
         </CardHeader>
         <CardContent>
           <BookingFilters

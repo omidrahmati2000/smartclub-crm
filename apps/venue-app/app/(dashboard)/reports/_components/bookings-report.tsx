@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Card } from '@smartclub/ui/card';
 import {
   BarChart,
@@ -21,45 +22,45 @@ interface BookingsReportProps {
   period: ReportPeriod;
 }
 
-// Mock data
 const bookingsByDay = [
-  { day: 'شنبه', bookings: 12 },
-  { day: 'یک‌شنبه', bookings: 19 },
-  { day: 'دوشنبه', bookings: 15 },
-  { day: 'سه‌شنبه', bookings: 22 },
-  { day: 'چهارشنبه', bookings: 18 },
-  { day: 'پنج‌شنبه', bookings: 28 },
-  { day: 'جمعه', bookings: 35 },
+  { day: 'Sat', bookings: 12 },
+  { day: 'Sun', bookings: 19 },
+  { day: 'Mon', bookings: 15 },
+  { day: 'Tue', bookings: 22 },
+  { day: 'Wed', bookings: 18 },
+  { day: 'Thu', bookings: 28 },
+  { day: 'Fri', bookings: 35 },
 ];
 
 const bookingsByStatus = [
-  { name: 'تکمیل شده', value: 156, color: '#22c55e' },
-  { name: 'لغو شده', value: 23, color: '#ef4444' },
-  { name: 'عدم حضور', value: 8, color: '#f97316' },
-  { name: 'در انتظار', value: 12, color: '#eab308' },
+  { name: 'Completed', value: 156, color: '#22c55e' },
+  { name: 'Cancelled', value: 23, color: '#ef4444' },
+  { name: 'No Show', value: 8, color: '#f97316' },
+  { name: 'Pending', value: 12, color: '#eab308' },
 ];
 
 const bookingsByAsset = [
-  { asset: 'زمین پدل ۱', bookings: 45 },
-  { asset: 'زمین پدل ۲', bookings: 38 },
-  { asset: 'زمین تنیس', bookings: 32 },
-  { asset: 'سالن VIP', bookings: 28 },
+  { asset: 'Padel Court 1', bookings: 45 },
+  { asset: 'Padel Court 2', bookings: 38 },
+  { asset: 'Tennis Court', bookings: 32 },
+  { asset: 'VIP Lounge', bookings: 28 },
 ];
 
 const dailyTrend = [
-  { date: '۱', bookings: 8 },
-  { date: '۲', bookings: 12 },
-  { date: '۳', bookings: 10 },
-  { date: '۴', bookings: 15 },
-  { date: '۵', bookings: 18 },
-  { date: '۶', bookings: 14 },
-  { date: '۷', bookings: 22 },
-  { date: '۸', bookings: 19 },
-  { date: '۹', bookings: 25 },
-  { date: '۱۰', bookings: 28 },
+  { date: '1', bookings: 8 },
+  { date: '2', bookings: 12 },
+  { date: '3', bookings: 10 },
+  { date: '4', bookings: 15 },
+  { date: '5', bookings: 18 },
+  { date: '6', bookings: 14 },
+  { date: '7', bookings: 22 },
+  { date: '8', bookings: 19 },
+  { date: '9', bookings: 25 },
+  { date: '10', bookings: 28 },
 ];
 
 export function BookingsReport({ period }: BookingsReportProps) {
+  const t = useTranslations('venue-admin.reports');
   const totalBookings = 199;
   const completedBookings = 156;
   const cancelledBookings = 23;
@@ -70,32 +71,31 @@ export function BookingsReport({ period }: BookingsReportProps) {
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">کل رزروها</p>
+          <p className="text-sm text-muted-foreground">{t('totalBookings')}</p>
           <p className="text-2xl font-bold">{totalBookings}</p>
-          <p className="text-xs text-green-600">+۱۲٪ نسبت به دوره قبل</p>
+          <p className="text-xs text-green-600">{t('vsLastPeriod', { percent: 12 })}</p>
         </Card>
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">تکمیل شده</p>
+          <p className="text-sm text-muted-foreground">{t('completed')}</p>
           <p className="text-2xl font-bold text-green-600">{completedBookings}</p>
-          <p className="text-xs text-muted-foreground">{Math.round((completedBookings / totalBookings) * 100)}٪</p>
+          <p className="text-xs text-muted-foreground">{Math.round((completedBookings / totalBookings) * 100)}%</p>
         </Card>
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">لغو شده</p>
+          <p className="text-sm text-muted-foreground">{t('cancelled')}</p>
           <p className="text-2xl font-bold text-red-600">{cancelledBookings}</p>
-          <p className="text-xs text-muted-foreground">{Math.round((cancelledBookings / totalBookings) * 100)}٪</p>
+          <p className="text-xs text-muted-foreground">{Math.round((cancelledBookings / totalBookings) * 100)}%</p>
         </Card>
         <Card className="p-4">
-          <p className="text-sm text-muted-foreground">عدم حضور</p>
+          <p className="text-sm text-muted-foreground">{t('noShow')}</p>
           <p className="text-2xl font-bold text-orange-600">{noShowBookings}</p>
-          <p className="text-xs text-muted-foreground">{Math.round((noShowBookings / totalBookings) * 100)}٪</p>
+          <p className="text-xs text-muted-foreground">{Math.round((noShowBookings / totalBookings) * 100)}%</p>
         </Card>
       </div>
 
       {/* Charts Row 1 */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Bookings by Day */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">رزرو بر اساس روز هفته</h3>
+          <h3 className="mb-4 font-semibold">{t('bookingsByDay')}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={bookingsByDay}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -107,9 +107,8 @@ export function BookingsReport({ period }: BookingsReportProps) {
           </ResponsiveContainer>
         </Card>
 
-        {/* Bookings by Status */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">وضعیت رزروها</h3>
+          <h3 className="mb-4 font-semibold">{t('bookingStatus')}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
@@ -134,9 +133,8 @@ export function BookingsReport({ period }: BookingsReportProps) {
 
       {/* Charts Row 2 */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Bookings by Asset */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">رزرو بر اساس امکانات</h3>
+          <h3 className="mb-4 font-semibold">{t('bookingsByAsset')}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={bookingsByAsset} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -148,9 +146,8 @@ export function BookingsReport({ period }: BookingsReportProps) {
           </ResponsiveContainer>
         </Card>
 
-        {/* Daily Trend */}
         <Card className="p-6">
-          <h3 className="mb-4 font-semibold">روند روزانه رزروها</h3>
+          <h3 className="mb-4 font-semibold">{t('dailyTrend')}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={dailyTrend}>
               <CartesianGrid strokeDasharray="3 3" />

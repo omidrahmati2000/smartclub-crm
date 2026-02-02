@@ -10,6 +10,7 @@ import { QuickActions } from './quick-actions';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import { formatCurrency } from '@smartclub/utils';
 import type { Booking } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 interface DashboardData {
   kpis: {
@@ -46,9 +47,8 @@ export function OverviewContent() {
   const fetchDashboardData = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}/dashboard`);
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.get<DashboardData>(`/venues/${venueId}/dashboard`);
+      if (result.success && result.data) {
         setData(result.data);
       }
     } catch (error) {
@@ -87,7 +87,7 @@ export function OverviewContent() {
   if (!data) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-muted-foreground">خطا در بارگذاری داده‌ها</p>
+        <p className="text-muted-foreground">{t('errorLoadingData')}</p>
       </div>
     );
   }
@@ -115,11 +115,11 @@ export function OverviewContent() {
           value={data.kpis.todayRevenue.amount}
           change={data.kpis.todayRevenue.change}
           icon={<TrendingUp className="h-4 w-4" />}
-          formatValue={(val) => formatCurrency(Number(val), 'IRT', 'fa')}
+          formatValue={(val) => formatCurrency(Number(val), 'AED')}
         />
         <KPICard
           title={t('kpi.occupancyRate')}
-          value={`${data.kpis.occupancyRate.percentage}٪`}
+          value={`${data.kpis.occupancyRate.percentage}%`}
           icon={<Percent className="h-4 w-4" />}
         />
         <KPICard

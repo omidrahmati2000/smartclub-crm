@@ -30,6 +30,10 @@
   },
   "common": {
     "loading": "در حال بارگذاری...",
+    "saving": "در حال ذخیره...",
+    "creating": "در حال ایجاد...",
+    "updating": "در حال بروزرسانی...",
+    "deleting": "در حال حذف...",
     "error": "خطایی رخ داد",
     "retry": "تلاش مجدد",
     "save": "ذخیره",
@@ -52,7 +56,12 @@
     "noResults": "نتیجه‌ای یافت نشد",
     "showMore": "نمایش بیشتر",
     "showLess": "نمایش کمتر",
-    "logout": "خروج"
+    "logout": "خروج",
+    "optional": "اختیاری",
+    "units": {
+      "currency": "تومان",
+      "minutes": "دقیقه"
+    }
   },
   "auth": {
     "login": "ورود",
@@ -108,14 +117,15 @@
     "basketball": "بسکتبال",
     "volleyball": "والیبال",
     "badminton": "بدمینتون",
-    "tableTennis": "پینگ پنگ",
+    "table_tennis": "پینگ پنگ",
     "squash": "اسکواش",
     "swimming": "شنا",
     "billiards": "بیلیارد",
     "bowling": "بولینگ",
     "gaming": "بازی",
     "vr": "واقعیت مجازی",
-    "escapeRoom": "اتاق فرار",
-    "boardGames": "بازی رومیزی"
+    "escape_room": "اتاق فرار",
+    "board_games": "بازی رومیزی",
+    "other": "سایر"
   }
 }

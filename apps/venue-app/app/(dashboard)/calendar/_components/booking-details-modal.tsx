@@ -89,7 +89,7 @@ export function BookingDetailsModal({
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>{t('bookingDetails')}</DialogTitle>
-          <DialogDescription>شناسه رزرو: {booking.id}</DialogDescription>
+          <DialogDescription>{t('bookingId', { id: booking.id })}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -98,11 +98,11 @@ export function BookingDetailsModal({
             <h3 className="font-medium mb-3">{t('bookingInfo')}</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-muted-foreground">تاریخ:</span>
+                <span className="text-muted-foreground">{t('date')}:</span>
                 <p className="font-medium">{booking.date}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">زمان:</span>
+                <span className="text-muted-foreground">{t('time')}:</span>
                 <p className="font-medium">
                   {booking.startTime} - {booking.endTime}
                 </p>
@@ -132,7 +132,7 @@ export function BookingDetailsModal({
             <h3 className="font-medium mb-3">{t('customerInfo')}</h3>
             <div className="text-sm">
               <p className="font-medium">
-                {booking.participants?.[0]?.name || 'مشتری'}
+                {booking.participants?.[0]?.name || t('customer')}
               </p>
             </div>
           </div>
@@ -146,7 +146,7 @@ export function BookingDetailsModal({
               <div>
                 <span className="text-muted-foreground">{t('amount')}:</span>
                 <p className="font-medium">
-                  {formatCurrency(booking.totalPrice, booking.currency, 'fa')}
+                  {formatCurrency(booking.totalPrice, booking.currency)}
                 </p>
               </div>
               <div>
@@ -174,9 +174,9 @@ export function BookingDetailsModal({
                   {booking.participants.map((participant, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <span>{participant.name}</span>
-                      {participant.role === 'host' && (
+                      {participant.isHost && (
                         <Badge variant="outline" className="text-xs">
-                          میزبان
+                          {t('host')}
                         </Badge>
                       )}
                     </div>

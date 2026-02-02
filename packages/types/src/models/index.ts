@@ -148,3 +148,9 @@ export {
   isGDPRRequiredForCountry,
   getDefaultGDPRSettings,
 } from './compliance';
+
+export type {
+  VenuePaymentSettings,
+  GatewayCredentials,
+} from './payment-settings';
+export { DEFAULT_PAYMENT_SETTINGS } from './payment-settings';

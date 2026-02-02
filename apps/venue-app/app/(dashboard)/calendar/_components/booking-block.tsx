@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { cn } from '@smartclub/utils';
 import type { Booking } from '@smartclub/types';
 import { BookingStatus } from '@smartclub/types';
@@ -5,9 +8,20 @@ import { BookingStatus } from '@smartclub/types';
 interface BookingBlockProps {
   booking: Booking;
   onClick: () => void;
+  isDragging?: boolean;
+  onResizeStart?: (edge: 'start' | 'end') => void;
+  showResizeHandles?: boolean;
 }
 
-export function BookingBlock({ booking, onClick }: BookingBlockProps) {
+export function BookingBlock({
+  booking,
+  onClick,
+  isDragging = false,
+  onResizeStart,
+  showResizeHandles = true,
+}: BookingBlockProps) {
+  const t = useTranslations('venue-admin.calendar');
+
   const getStatusColor = (status: BookingStatus) => {
     switch (status) {
       case BookingStatus.CONFIRMED:
@@ -28,19 +42,48 @@ export function BookingBlock({ booking, onClick }: BookingBlockProps) {
   };
 
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        'w-full rounded border-2 p-2 text-start text-xs transition-colors',
-        getStatusColor(booking.status),
+    <div className="relative w-full h-full group">
+      {/* Top resize handle */}
+      {showResizeHandles && onResizeStart && (
+        <div
+          className="absolute -top-1 left-0 right-0 h-2 cursor-ns-resize opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          onMouseDown={(e) => {
+            e.stopPropagation();
+            onResizeStart('start');
+          }}
+        >
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-full" />
+        </div>
       )}
-    >
-      <div className="font-medium truncate">
-        {booking.participants?.[0]?.name || 'مشتری'}
-      </div>
-      <div className="text-[10px] opacity-75">
-        {booking.startTime} - {booking.endTime}
-      </div>
-    </button>
+
+      <button
+        onClick={onClick}
+        className={cn(
+          'w-full h-full rounded border-2 p-2 text-start text-xs transition-colors',
+          getStatusColor(booking.status),
+          isDragging && 'cursor-move ring-2 ring-primary ring-offset-2'
+        )}
+      >
+        <div className="font-medium truncate">
+          {booking.participants?.[0]?.name || t('customer')}
+        </div>
+        <div className="text-[10px] opacity-75">
+          {booking.startTime} - {booking.endTime}
+        </div>
+      </button>
+
+      {/* Bottom resize handle */}
+      {showResizeHandles && onResizeStart && (
+        <div
+          className="absolute -bottom-1 left-0 right-0 h-2 cursor-ns-resize opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          onMouseDown={(e) => {
+            e.stopPropagation();
+            onResizeStart('end');
+          }}
+        >
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-full" />
+        </div>
+      )}
+    </div>
   );
 }

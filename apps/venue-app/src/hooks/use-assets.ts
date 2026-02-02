@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import type { Asset } from '@smartclub/types';
+import { apiClient } from '@/lib/api-client';
 
 // Query keys for assets
 export const assetKeys = {
@@ -13,12 +14,13 @@ export const assetKeys = {
  * Fetch all assets for a venue
  */
 async function fetchAssets(venueId: string): Promise<Asset[]> {
-  const response = await fetch(`/api/venues/${venueId}/assets`);
-  const data = await response.json();
-  if (!data.success) {
-    throw new Error(data.message || 'Failed to fetch assets');
+  const result = await apiClient.get<Asset[]>(`/venues/${venueId}/assets`);
+
+  if (!result.success || !result.data) {
+    throw new Error(result.message || result.error || 'Failed to fetch assets');
   }
-  return data.data;
+
+  return result.data;
 }
 
 /**

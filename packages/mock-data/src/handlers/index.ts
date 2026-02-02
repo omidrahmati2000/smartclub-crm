@@ -11,6 +11,7 @@ import { pricingRulesHandlers } from './pricing-rules';
 import { countryHandlers } from './countries';
 import { taxSettingsHandlers } from './tax-settings';
 import { complianceHandlers } from './compliance';
+import { paymentSettingsHandlers } from './payment-settings';
 
 export const handlers = [
   ...authHandlers,
@@ -26,4 +27,5 @@ export const handlers = [
   ...countryHandlers,
   ...taxSettingsHandlers,
   ...complianceHandlers,
+  ...paymentSettingsHandlers,
 ];

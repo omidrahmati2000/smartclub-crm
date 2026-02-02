@@ -17,6 +17,7 @@ import { EditStaffDialog } from './edit-staff-dialog';
 import { DeleteStaffDialog } from './delete-staff-dialog';
 import { StaffActivityDialog } from './staff-activity-dialog';
 import { RolePermissionsDialog } from './role-permissions-dialog';
+import { apiClient } from '@/lib/api-client';
 
 export function StaffContent() {
   const { data: session } = useSession();
@@ -53,10 +54,9 @@ export function StaffContent() {
   const fetchStaff = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}/staff`);
-      const data = await response.json();
-      if (data.success) {
-        setStaff(data.data);
+      const result = await apiClient.get(`/venues/${venueId}/staff`);
+      if (result.success && result.data) {
+        setStaff(result.data);
       }
     } catch (error) {
       console.error('Failed to fetch staff:', error);
@@ -120,10 +120,9 @@ export function StaffContent() {
 
   const handleViewActivity = async (member: StaffMember) => {
     try {
-      const response = await fetch(`/api/staff/${member.id}/activity`);
-      const data = await response.json();
-      if (data.success) {
-        setActivityStaff({ staff: member, activities: data.data });
+      const result = await apiClient.get(`/staff/${member.id}/activity`);
+      if (result.success && result.data) {
+        setActivityStaff({ staff: member, activities: result.data });
       }
     } catch (error) {
       console.error('Failed to fetch activity:', error);
@@ -132,10 +131,9 @@ export function StaffContent() {
 
   const handleViewPermissions = async (role: VenueRole) => {
     try {
-      const response = await fetch(`/api/roles/${role}/permissions`);
-      const data = await response.json();
-      if (data.success) {
-        setPermissionsRole(data.data);
+      const result = await apiClient.get(`/roles/${role}/permissions`);
+      if (result.success && result.data) {
+        setPermissionsRole(result.data);
       }
     } catch (error) {
       console.error('Failed to fetch permissions:', error);

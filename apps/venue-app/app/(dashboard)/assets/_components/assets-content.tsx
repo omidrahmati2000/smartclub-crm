@@ -7,6 +7,7 @@ import { Button } from '@smartclub/ui/button';
 import type { Asset, CreateAssetDTO } from '@smartclub/types';
 import { AssetCard } from './asset-card';
 import { AssetFormDialog } from './asset-form-dialog';
+import { apiClient } from '@/lib/api-client';
 
 interface AssetsContentProps {
   venueId: string;
@@ -25,10 +26,9 @@ export function AssetsContent({ venueId, canManage }: AssetsContentProps) {
   const fetchAssets = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/venues/${venueId}/assets`);
-      const data = await response.json();
-      if (data.success) {
-        setAssets(data.data);
+      const result = await apiClient.get(`/venues/${venueId}/assets`);
+      if (result.success && result.data) {
+        setAssets(result.data);
       }
     } catch (error) {
       console.error('Failed to fetch assets:', error);
@@ -47,26 +47,16 @@ export function AssetsContent({ venueId, canManage }: AssetsContentProps) {
     try {
       if (editingAsset) {
         // Update existing asset
-        const response = await fetch(`/api/assets/${editingAsset.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const result = await response.json();
-        if (result.success) {
+        const result = await apiClient.put(`/assets/${editingAsset.id}`, data);
+        if (result.success && result.data) {
           setAssets((prev) =>
             prev.map((a) => (a.id === editingAsset.id ? result.data : a))
           );
         }
       } else {
         // Create new asset
-        const response = await fetch(`/api/venues/${venueId}/assets`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const result = await response.json();
-        if (result.success) {
+        const result = await apiClient.post(`/venues/${venueId}/assets`, data);
+        if (result.success && result.data) {
           setAssets((prev) => [...prev, result.data]);
         }
       }
@@ -83,10 +73,7 @@ export function AssetsContent({ venueId, canManage }: AssetsContentProps) {
     }
 
     try {
-      const response = await fetch(`/api/assets/${assetId}`, {
-        method: 'DELETE',
-      });
-      const result = await response.json();
+      const result = await apiClient.delete(`/assets/${assetId}`);
       if (result.success) {
         setAssets((prev) => prev.filter((a) => a.id !== assetId));
       }
@@ -98,11 +85,8 @@ export function AssetsContent({ venueId, canManage }: AssetsContentProps) {
   // Handle toggle status
   const handleToggleStatus = async (assetId: string) => {
     try {
-      const response = await fetch(`/api/assets/${assetId}/status`, {
-        method: 'PATCH',
-      });
-      const result = await response.json();
-      if (result.success) {
+      const result = await apiClient.patch(`/assets/${assetId}/status`);
+      if (result.success && result.data) {
         setAssets((prev) =>
           prev.map((a) => (a.id === assetId ? result.data : a))
         );

@@ -30,6 +30,10 @@
   },
   "common": {
     "loading": "Loading...",
+    "saving": "Saving...",
+    "creating": "Creating...",
+    "updating": "Updating...",
+    "deleting": "Deleting...",
     "error": "An error occurred",
     "retry": "Retry",
     "save": "Save",
@@ -51,7 +55,13 @@
     "none": "None",
     "noResults": "No results found",
     "showMore": "Show more",
-    "showLess": "Show less"
+    "showLess": "Show less",
+    "logout": "Logout",
+    "optional": "Optional",
+    "units": {
+      "currency": "AED",
+      "minutes": "minutes"
+    }
   },
   "auth": {
     "login": "Login",
@@ -107,14 +117,15 @@
     "basketball": "Basketball",
     "volleyball": "Volleyball",
     "badminton": "Badminton",
-    "tableTennis": "Table Tennis",
+    "table_tennis": "Table Tennis",
     "squash": "Squash",
     "swimming": "Swimming",
     "billiards": "Billiards",
     "bowling": "Bowling",
     "gaming": "Gaming",
     "vr": "VR",
-    "escapeRoom": "Escape Room",
-    "boardGames": "Board Games"
+    "escape_room": "Escape Room",
+    "board_games": "Board Games",
+    "other": "Other"
   }
 }

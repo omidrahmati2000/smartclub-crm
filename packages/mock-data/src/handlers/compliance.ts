@@ -118,7 +118,7 @@ export const complianceHandlers = [
       setTimeout(() => {
         const req = dataExportRequests.find((r) => r.id === newRequest.id);
         if (req) {
-          req.status = 'ready';
+          req.status = 'completed';
           req.downloadUrl = `/api/gdpr/exports/${req.id}/download`;
           req.expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
         }
