@@ -13,6 +13,20 @@
     "status": "وضعیت",
     "viewProfile": "مشاهده جزئیات",
     "back": "بازگشت",
+    "status": {
+      "registration_open": "ثبت‌نام باز",
+      "scheduled": "زمان‌بندی شده",
+      "in_progress": "در حال انجام",
+      "completed": "تکمیل شده",
+      "cancelled": "لغو شده"
+    },
+    "formats": {
+      "single_elimination": "تک‌حذفی",
+      "double_elimination": "دوبار حذفی",
+      "round_robin": "دوره‌ای",
+      "americano": "آمریکانو",
+      "mexicano": "مکزیکانو"
+    },
     "create": {
       "title": "ایجاد تورنومنت جدید",
       "steps": {
@@ -82,7 +96,8 @@
     "pricing": "قیمت‌گذاری",
     "reports": "گزارشات",
     "tournaments": "تورنومنت‌ها",
-    "shop": "فروشگاه و POS",
+    "shop": "مدیریت فروشگاه",
+    "pos": "فروشگاه و POS",
     "wallet": "کیف پول مشتریان",
     "valet": "پارکبان (Valet)",
     "coaches": "مربیان و آموزش",
@@ -1120,6 +1135,176 @@
     "saving": "در حال ذخیره...",
     "saved": "تغییرات ذخیره شد",
     "error": "خطا در ذخیره تغییرات"
+  },
+  "pos": {
+    "title": "فروشگاه و POS",
+    "description": "پردازش فروش و مدیریت تراکنش‌ها",
+    "currentOrder": "سفارش جاری",
+    "emptyOrder": "سفارش شما خالی است",
+    "addProducts": "محصولات را از منو اضافه کنید",
+    "searchProducts": "جستجوی محصولات...",
+    "allItems": "همه اقلام",
+    "categories": {
+      "drinks": "نوشیدنی‌ها",
+      "food": "غذا و اسنک",
+      "equipment": "تجهیزات",
+      "rental": "اجاره"
+    },
+    "addToOrder": "افزودن به سفارش",
+    "table": "میز",
+    "clear": "پاک کردن",
+    "subtotal": "جمع جزء",
+    "tax": "مالیات",
+    "total": "جمع کل",
+    "payment": {
+      "cash": "نقدی",
+      "card": "کارت",
+      "wallet": "شارژ کیف پول مشتری",
+      "complete": "تکمیل پرداخت"
+    }
+  },
+  "shop": {
+    "title": "مدیریت فروشگاه",
+    "description": "مدیریت محصولات، موجودی و فروش",
+    "tabs": {
+      "products": "محصولات",
+      "categories": "دسته‌بندی‌ها",
+      "inventory": "موجودی انبار",
+      "sales": "گزارش فروش",
+      "settings": "تنظیمات"
+    },
+    "products": {
+      "title": "محصولات",
+      "addProduct": "افزودن محصول",
+      "editProduct": "ویرایش محصول",
+      "deleteProduct": "حذف محصول",
+      "noProducts": "محصولی یافت نشد",
+      "showingResults": "نمایش {count} محصول",
+      "search": "جستجوی محصولات...",
+      "filterByCategory": "فیلتر بر اساس دسته",
+      "filterByStatus": "فیلتر بر اساس وضعیت",
+      "table": {
+        "image": "تصویر",
+        "name": "نام محصول",
+        "sku": "کد محصول",
+        "category": "دسته‌بندی",
+        "price": "قیمت",
+        "stock": "موجودی",
+        "status": "وضعیت",
+        "actions": "عملیات"
+      },
+      "status": {
+        "all": "همه",
+        "active": "فعال",
+        "inactive": "غیرفعال",
+        "out_of_stock": "اتمام موجودی"
+      },
+      "form": {
+        "basicInfo": "اطلاعات پایه",
+        "name": "نام محصول",
+        "namePlaceholder": "مثلا: اسپرسو",
+        "sku": "کد محصول / بارکد",
+        "skuPlaceholder": "مثلا: BEV-001",
+        "description": "توضیحات",
+        "descriptionPlaceholder": "توضیحات محصول...",
+        "category": "دسته‌بندی",
+        "selectCategory": "انتخاب دسته",
+        "pricing": "قیمت‌گذاری",
+        "price": "قیمت",
+        "costPrice": "قیمت تمام‌شده",
+        "costPriceHelp": "هزینه شما برای این محصول",
+        "inventory": "موجودی انبار",
+        "trackStock": "پیگیری موجودی",
+        "currentStock": "موجودی فعلی",
+        "lowStockThreshold": "هشدار موجودی کم",
+        "lowStockHelp": "زمانی که موجودی از این حد کمتر شود به شما اطلاع داده می‌شود",
+        "image": "تصویر محصول",
+        "imageUrl": "آدرس تصویر",
+        "imageUrlPlaceholder": "https://example.com/image.jpg",
+        "submit": "ذخیره محصول",
+        "cancel": "لغو",
+        "creating": "در حال افزودن...",
+        "updating": "در حال ویرایش...",
+        "created": "محصول با موفقیت اضافه شد",
+        "updated": "محصول با موفقیت ویرایش شد",
+        "deleted": "محصول حذف شد"
+      },
+      "actions": {
+        "edit": "ویرایش",
+        "delete": "حذف",
+        "activate": "فعال‌سازی",
+        "deactivate": "غیرفعال‌سازی",
+        "adjustStock": "تنظیم موجودی",
+        "confirmDelete": "آیا از حذف این محصول اطمینان دارید؟",
+        "deleteWarning": "این عمل غیرقابل بازگشت است."
+      }
+    },
+    "categories": {
+      "title": "دسته‌بندی‌ها",
+      "addCategory": "افزودن دسته",
+      "editCategory": "ویرایش دسته",
+      "deleteCategory": "حذف دسته",
+      "noCategories": "دسته‌ای یافت نشد",
+      "table": {
+        "name": "نام دسته",
+        "productCount": "محصولات",
+        "status": "وضعیت",
+        "actions": "عملیات"
+      },
+      "form": {
+        "name": "نام دسته",
+        "namePlaceholder": "مثلا: نوشیدنی‌ها",
+        "description": "توضیحات",
+        "descriptionPlaceholder": "توضیحات دسته...",
+        "submit": "ذخیره دسته",
+        "cancel": "لغو",
+        "created": "دسته با موفقیت اضافه شد",
+        "updated": "دسته با موفقیت ویرایش شد",
+        "deleted": "دسته حذف شد"
+      }
+    },
+    "inventory": {
+      "title": "موجودی انبار",
+      "lowStock": "محصولات با موجودی کم",
+      "outOfStock": "اتمام موجودی",
+      "adjustStock": "تنظیم موجودی",
+      "stockHistory": "تاریخچه موجودی",
+      "adjustment": {
+        "title": "تنظیم موجودی",
+        "product": "محصول",
+        "currentStock": "موجودی فعلی",
+        "adjustment": "تنظیم",
+        "adjustmentType": "نوع",
+        "increase": "افزایش",
+        "decrease": "کاهش",
+        "newStock": "موجودی جدید",
+        "reason": "دلیل",
+        "reasonPlaceholder": "مثلا: دریافت محموله، کالای معیوب...",
+        "submit": "تنظیم موجودی",
+        "success": "موجودی با موفقیت تنظیم شد"
+      }
+    },
+    "sales": {
+      "title": "گزارش‌های فروش",
+      "period": "بازه زمانی",
+      "totalSales": "کل فروش",
+      "totalOrders": "کل سفارشات",
+      "averageOrderValue": "میانگین ارزش سفارش",
+      "topProducts": "محصولات پرفروش",
+      "salesByCategory": "فروش بر اساس دسته",
+      "salesTrend": "روند فروش"
+    },
+    "settings": {
+      "title": "تنظیمات فروشگاه",
+      "general": "تنظیمات عمومی",
+      "enableShop": "فعال‌سازی فروشگاه و POS",
+      "taxEnabled": "اعمال مالیات بر محصولات",
+      "taxRate": "نرخ مالیات (%)",
+      "receipt": "تنظیمات فاکتور",
+      "receiptHeader": "سرآیند فاکتور",
+      "receiptFooter": "ذیل فاکتور",
+      "submit": "ذخیره تنظیمات"
+    }
   },
   "common": {
     "save": "ذخیره",

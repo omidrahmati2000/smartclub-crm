@@ -12,7 +12,8 @@ import {
     Zap,
     AlertTriangle,
     RefreshCw,
-    Settings
+    Settings,
+    Plus
 } from 'lucide-react'
 import {
     Button,
@@ -30,6 +31,8 @@ import {
     Progress
 } from '@smartclub/ui'
 import { cn } from '@smartclub/utils'
+import { AddAutomationDialog } from './_components/add-automation-dialog'
+import { useSession } from 'next-auth/react'
 
 // Mock Data
 const DEVICES = [
@@ -39,8 +42,22 @@ const DEVICES = [
     { id: 'd4', name: 'Locker Room HVAC', type: 'climate', status: 'on', power: '2.5kW', health: 'warning', autoMode: true },
 ]
 
+const INITIAL_RULES = [
+    { id: 'rule-1', name: 'Night Mode', description: 'All floodlights OFF at 00:00 AM', trigger: 'time', isEnabled: true },
+    { id: 'rule-2', name: 'Open House', description: 'Main Gate UNLOCKS at 07:00 AM', trigger: 'time', isEnabled: true },
+]
+
 export default function AutomationPage() {
     const t = useTranslations('venue-admin')
+    const { data: session } = useSession()
+    const venueId = session?.user?.currentVenue || 'venue-1'
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [rules, setRules] = useState(INITIAL_RULES)
+
+    const handleRuleCreated = (newRule: any) => {
+        setRules([...rules, newRule])
+        setIsDialogOpen(false)
+    }
 
     return (
         <div className="space-y-6">
@@ -128,59 +145,35 @@ export default function AutomationPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-2">
-                        <div className="flex items-center justify-between p-3 rounded-lg border bg-background hover:bg-muted/20 cursor-pointer">
-                            <div className="flex items-center gap-4">
-                                <div className="p-2 bg-blue-100 rounded text-blue-600">
-                                    <Lightbulb className="h-4 w-4" />
+                        {rules.map(rule => (
+                            <div key={rule.id} className="flex items-center justify-between p-3 rounded-lg border bg-background hover:bg-muted/20 cursor-pointer">
+                                <div className="flex items-center gap-4">
+                                    <div className="p-2 bg-blue-100 rounded text-blue-600">
+                                        <Clock className="h-4 w-4" />
+                                    </div>
+                                    <div>
+                                        <p className="font-medium">{rule.name}</p>
+                                        <p className="text-xs text-muted-foreground">{rule.description}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="font-medium">Night Mode</p>
-                                    <p className="text-xs text-muted-foreground">All floodlights OFF at 00:00 AM</p>
-                                </div>
+                                <Switch checked={rule.isEnabled} />
                             </div>
-                            <Switch checked />
-                        </div>
-
-                        <div className="flex items-center justify-between p-3 rounded-lg border bg-background hover:bg-muted/20 cursor-pointer">
-                            <div className="flex items-center gap-4">
-                                <div className="p-2 bg-green-100 rounded text-green-600">
-                                    <DoorOpen className="h-4 w-4" />
-                                </div>
-                                <div>
-                                    <p className="font-medium">Open House</p>
-                                    <p className="text-xs text-muted-foreground">Main Gate UNLOCKS at 07:00 AM</p>
-                                </div>
-                            </div>
-                            <Switch checked />
-                        </div>
+                        ))}
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button variant="ghost" className="w-full gap-2">
+                    <Button variant="ghost" className="w-full gap-2" onClick={() => setIsDialogOpen(true)}>
                         <Plus className="h-4 w-4" /> Add Automation Rule
                     </Button>
                 </CardFooter>
             </Card>
-        </div>
-    )
-}
 
-function Plus(props: any) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M5 12h14" />
-            <path d="M12 5v14" />
-        </svg>
+            <AddAutomationDialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                onSuccess={handleRuleCreated}
+                venueId={venueId}
+            />
+        </div>
     )
 }

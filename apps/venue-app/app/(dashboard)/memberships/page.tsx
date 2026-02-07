@@ -35,6 +35,8 @@ import {
     Separator,
 } from '@smartclub/ui'
 import { cn } from '@smartclub/utils'
+import { CreateMembershipDialog } from './_components/create-membership-dialog'
+import { useSession } from 'next-auth/react'
 
 // Mock Data
 const PLANS = [
@@ -76,7 +78,16 @@ const RECENT_SUBSCRIBERS = [
 
 export default function MembershipsPage() {
     const t = useTranslations('venue-admin')
+    const { data: session } = useSession()
+    const venueId = session?.user?.currentVenue || 'venue-1'
     const [searchQuery, setSearchQuery] = useState('')
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [plans, setPlans] = useState(PLANS)
+
+    const handleMembershipCreated = (newPlan: any) => {
+        setPlans([...plans, newPlan])
+        setIsDialogOpen(false)
+    }
 
     return (
         <div className="space-y-6">
@@ -90,7 +101,7 @@ export default function MembershipsPage() {
                         <Settings className="h-4 w-4" />
                         Benefit Rules
                     </Button>
-                    <Button className="gap-2">
+                    <Button className="gap-2" onClick={() => setIsDialogOpen(true)}>
                         <Plus className="h-4 w-4" />
                         Create Plan
                     </Button>
@@ -98,7 +109,7 @@ export default function MembershipsPage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {PLANS.map(plan => (
+                {plans.map(plan => (
                     <Card key={plan.id} className="relative overflow-hidden border-2 transition-all hover:shadow-2xl hover:scale-[1.02]">
                         <div className={cn("absolute top-0 left-0 h-2 w-full", plan.color)} />
                         <CardHeader>
@@ -237,6 +248,13 @@ export default function MembershipsPage() {
                     </CardContent>
                 </Card>
             </div>
+
+            <CreateMembershipDialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                onSuccess={handleMembershipCreated}
+                venueId={venueId}
+            />
         </div>
     )
 }

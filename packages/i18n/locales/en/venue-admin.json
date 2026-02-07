@@ -13,6 +13,20 @@
     "status": "Status",
     "viewProfile": "View Details",
     "back": "Back",
+    "status": {
+      "registration_open": "Registration Open",
+      "scheduled": "Scheduled",
+      "in_progress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "formats": {
+      "single_elimination": "Single Elimination",
+      "double_elimination": "Double Elimination",
+      "round_robin": "Round Robin",
+      "americano": "Americano",
+      "mexicano": "Mexicano"
+    },
     "create": {
       "title": "Create New Tournament",
       "steps": {

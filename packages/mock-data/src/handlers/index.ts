@@ -6,6 +6,10 @@ import { assetHandlers } from './assets';
 import { venueSettingsHandlers } from './venue-settings';
 import { customerHandlers } from './customers';
 import { staffHandlers } from './staff';
+import { coachesHandlers } from './coaches';
+import { membershipsHandlers } from './memberships';
+import { valetHandlers } from './valet';
+import { automationHandlers } from './automation';
 import { financialReportsHandlers } from './financial-reports';
 import { pricingRulesHandlers } from './pricing-rules';
 import { countryHandlers } from './countries';
@@ -26,6 +30,10 @@ export const handlers = [
   ...venueSettingsHandlers,
   ...customerHandlers,
   ...staffHandlers,
+  ...coachesHandlers,
+  ...membershipsHandlers,
+  ...valetHandlers,
+  ...automationHandlers,
   ...financialReportsHandlers,
   ...pricingRulesHandlers,
   ...countryHandlers,

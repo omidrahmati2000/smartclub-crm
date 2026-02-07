@@ -29,6 +29,8 @@ import {
     Separator,
 } from '@smartclub/ui'
 import { cn } from '@smartclub/utils'
+import { CheckInVehicleDialog } from './_components/check-in-vehicle-dialog'
+import { useSession } from 'next-auth/react'
 
 // Mock Data
 const VALET_CARS = [
@@ -40,12 +42,21 @@ const VALET_CARS = [
 
 export default function ValetPage() {
     const t = useTranslations('venue-admin')
+    const { data: session } = useSession()
+    const venueId = session?.user?.currentVenue || 'venue-1'
     const [searchQuery, setSearchQuery] = useState('')
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [cars, setCars] = useState(VALET_CARS)
 
-    const filteredCars = VALET_CARS.filter(c =>
+    const filteredCars = cars.filter(c =>
         c.plate.toLowerCase().includes(searchQuery.toLowerCase()) ||
         c.owner.toLowerCase().includes(searchQuery.toLowerCase())
     )
+
+    const handleVehicleCheckedIn = (newVehicle: any) => {
+        setCars([...cars, newVehicle])
+        setIsDialogOpen(false)
+    }
 
     const getStatusColor = (status: string) => {
         switch (status) {
@@ -63,7 +74,7 @@ export default function ValetPage() {
                     <h1 className="text-3xl font-bold tracking-tight">{t('nav.valet')}</h1>
                     <p className="text-muted-foreground">Digital valet management and vehicle tracking</p>
                 </div>
-                <Button className="h-12 px-6 gap-2 text-lg shadow-lg shadow-primary/20">
+                <Button className="h-12 px-6 gap-2 text-lg shadow-lg shadow-primary/20" onClick={() => setIsDialogOpen(true)}>
                     <Plus className="h-5 w-5" />
                     Check-in New Vehicle
                 </Button>
@@ -181,6 +192,13 @@ export default function ValetPage() {
                     </Card>
                 ))}
             </div>
+
+            <CheckInVehicleDialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                onSuccess={handleVehicleCheckedIn}
+                venueId={venueId}
+            />
         </div>
     )
 }

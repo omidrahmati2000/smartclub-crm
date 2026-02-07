@@ -33,6 +33,8 @@ import {
     TabsList,
     TabsTrigger,
 } from '@smartclub/ui'
+import { RegisterCoachDialog } from './_components/register-coach-dialog'
+import { useSession } from 'next-auth/react'
 
 // Mock Data
 const COACHES = [
@@ -79,7 +81,16 @@ const CLASSES = [
 
 export default function CoachesPage() {
     const t = useTranslations('venue-admin')
+    const { data: session } = useSession()
+    const venueId = session?.user?.currentVenue || 'venue-1'
     const [searchQuery, setSearchQuery] = useState('')
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [coaches, setCoaches] = useState(COACHES)
+
+    const handleCoachRegistered = (newCoach: any) => {
+        setCoaches([...coaches, newCoach])
+        setIsDialogOpen(false)
+    }
 
     return (
         <div className="space-y-6">
@@ -93,7 +104,7 @@ export default function CoachesPage() {
                         <BookOpen className="h-4 w-4" />
                         Academy Settings
                     </Button>
-                    <Button className="gap-2">
+                    <Button className="gap-2" onClick={() => setIsDialogOpen(true)}>
                         <Plus className="h-4 w-4" />
                         Register New Coach
                     </Button>
@@ -133,7 +144,7 @@ export default function CoachesPage() {
                     </div>
 
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {COACHES.map(coach => (
+                        {coaches.map(coach => (
                             <Card key={coach.id} className="overflow-hidden border-2 hover:border-primary transition-all group">
                                 <CardHeader className="p-0">
                                     <div className="bg-muted h-32 flex items-center justify-center text-4xl font-bold text-muted-foreground/30 group-hover:bg-primary/5 transition-colors">
@@ -223,6 +234,13 @@ export default function CoachesPage() {
                     </Card>
                 </TabsContent>
             </Tabs>
+
+            <RegisterCoachDialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                onSuccess={handleCoachRegistered}
+                venueId={venueId}
+            />
         </div>
     )
 }

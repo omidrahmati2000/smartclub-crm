@@ -1,4 +1,90 @@
 {
+  "tournaments": {
+    "title": "البطولات",
+    "description": "إدارة البطولات والمسابقات",
+    "createTournament": "إنشاء بطولة",
+    "noTournaments": "لا توجد بطولات",
+    "active": "نشطة",
+    "upcoming": "قادمة",
+    "past": "سابقة",
+    "format": "النظام",
+    "participants": "المشاركون",
+    "startDate": "تاريخ البدء",
+    "status": "الحالة",
+    "viewProfile": "عرض التفاصيل",
+    "back": "رجوع",
+    "status": {
+      "registration_open": "التسجيل مفتوح",
+      "scheduled": "مجدولة",
+      "in_progress": "جارية",
+      "completed": "مكتملة",
+      "cancelled": "ملغاة"
+    },
+    "formats": {
+      "single_elimination": "خروج مباشر",
+      "double_elimination": "خروج مزدوج",
+      "round_robin": "دوري",
+      "americano": "أمريكانو",
+      "mexicano": "مكسيكانو"
+    },
+    "create": {
+      "title": "إنشاء بطولة جديدة",
+      "steps": {
+        "basic": "المعلومات الأساسية",
+        "format": "النظام",
+        "schedule": "الجدول الزمني",
+        "registration": "التسجيل"
+      },
+      "fields": {
+        "name": "اسم البطولة",
+        "sport": "الرياضة",
+        "description": "الوصف",
+        "startDate": "تاريخ البدء",
+        "endDate": "تاريخ الانتهاء",
+        "assets": "الملاعب",
+        "entryFee": "رسوم الدخول (درهم)",
+        "maxParticipants": "الحد الأقصى للمشاركين",
+        "registrationDeadline": "الموعد النهائي للتسجيل"
+      },
+      "formats": {
+        "singleTitle": "خروج مباشر",
+        "singleDesc": "نظام الإقصاء المباشر القياسي.",
+        "doubleTitle": "خروج مزدوج",
+        "doubleDesc": "يحصل اللاعبون على فرصة ثانية.",
+        "roundTitle": "دوري",
+        "roundDesc": "الجميع يلعب ضد الجميع.",
+        "americanoTitle": "أمريكانو",
+        "americanoDesc": "مباريات محددة الوقت مع تبديل الشركاء.",
+        "mexicanoTitle": "مكسيكانو",
+        "mexicanoDesc": "مشابه للأمريكانو ولكن متوازن القوة."
+      },
+      "actions": {
+        "cancel": "إلغاء",
+        "back": "السابق",
+        "next": "التالي",
+        "create": "إنشاء البطولة"
+      }
+    },
+    "detail": {
+      "tabs": {
+        "overview": "نظرة عامة",
+        "participants": "المشاركون",
+        "matches": "الأقواس والمباريات",
+        "standings": "الترتيب",
+        "settings": "الإعدادات"
+      },
+      "kpis": {
+        "participants": "المشاركون",
+        "progress": "التقدم",
+        "activeMatches": "المباريات النشطة",
+        "matchesPlayed": "المباريات الملعوبة"
+      },
+      "courtOverview": "نظرة عامة على الملاعب",
+      "quickRankings": "ترتيب سريع",
+      "startNextRound": "بدء الجولة التالية",
+      "finishTournament": "إنهاء البطولة"
+    }
+  },
   "nav": {
     "dashboard": "لوحة التحكم",
     "calendar": "التقويم",
@@ -9,11 +95,23 @@
     "finance": "المالية",
     "pricing": "التسعير",
     "reports": "التقارير",
+    "tournaments": "البطولات",
+    "shop": "إدارة المتجر",
+    "pos": "نقطة البيع (POS)",
+    "wallet": "محفظة العملاء",
+    "valet": "خدمة صف السيارات",
+    "coaches": "المدربون والتدريب",
+    "memberships": "العضويات",
+    "social": "المجتمع والألعاب",
+    "scoreboard": "لوحة النتائج الحية",
+    "marketing": "التسويق والعروض",
+    "automation": "الأتمتة وإنترنت الأشياء",
     "settings": "الإعدادات",
     "groups": {
       "overview": "نظرة عامة",
       "operations": "العمليات",
       "management": "الإدارة",
+      "competitions": "المسابقات",
       "system": "النظام"
     },
     "collapse": "إغلاق الشريط الجانبي",
@@ -894,6 +992,176 @@
     "saving": "جارٍ الحفظ...",
     "saved": "تم حفظ التغييرات",
     "error": "خطأ في حفظ التغييرات"
+  },
+  "pos": {
+    "title": "نقطة البيع",
+    "description": "معالجة المبيعات وإدارة المعاملات",
+    "currentOrder": "الطلب الحالي",
+    "emptyOrder": "طلبك فارغ",
+    "addProducts": "أضف منتجات من القائمة للبدء",
+    "searchProducts": "البحث عن المنتجات...",
+    "allItems": "جميع العناصر",
+    "categories": {
+      "drinks": "المشروبات",
+      "food": "الوجبات الخفيفة",
+      "equipment": "المعدات",
+      "rental": "الإيجارات"
+    },
+    "addToOrder": "إضافة للطلب",
+    "table": "الطاولة",
+    "clear": "مسح",
+    "subtotal": "المجموع الفرعي",
+    "tax": "الضريبة",
+    "total": "الإجمالي",
+    "payment": {
+      "cash": "نقداً",
+      "card": "بطاقة",
+      "wallet": "الشحن إلى محفظة العميل",
+      "complete": "إتمام الدفع"
+    }
+  },
+  "shop": {
+    "title": "إدارة المتجر",
+    "description": "إدارة المنتجات والمخزون والمبيعات",
+    "tabs": {
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "inventory": "المخزون",
+      "sales": "تقارير المبيعات",
+      "settings": "الإعدادات"
+    },
+    "products": {
+      "title": "المنتجات",
+      "addProduct": "إضافة منتج",
+      "editProduct": "تعديل المنتج",
+      "deleteProduct": "حذف المنتج",
+      "noProducts": "لا توجد منتجات",
+      "showingResults": "عرض {count} منتج",
+      "search": "البحث عن المنتجات...",
+      "filterByCategory": "تصفية حسب الفئة",
+      "filterByStatus": "تصفية حسب الحالة",
+      "table": {
+        "image": "الصورة",
+        "name": "اسم المنتج",
+        "sku": "رمز المنتج",
+        "category": "الفئة",
+        "price": "السعر",
+        "stock": "المخزون",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      },
+      "status": {
+        "all": "الكل",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "out_of_stock": "نفذ من المخزون"
+      },
+      "form": {
+        "basicInfo": "المعلومات الأساسية",
+        "name": "اسم المنتج",
+        "namePlaceholder": "مثال: إسبريسو",
+        "sku": "رمز المنتج",
+        "skuPlaceholder": "مثال: BEV-001",
+        "description": "الوصف",
+        "descriptionPlaceholder": "وصف المنتج...",
+        "category": "الفئة",
+        "selectCategory": "اختر الفئة",
+        "pricing": "التسعير",
+        "price": "السعر",
+        "costPrice": "سعر التكلفة",
+        "costPriceHelp": "تكلفتك لهذا المنتج",
+        "inventory": "المخزون",
+        "trackStock": "تتبع المخزون",
+        "currentStock": "المخزون الحالي",
+        "lowStockThreshold": "تنبيه المخزون المنخفض",
+        "lowStockHelp": "سيتم إشعارك عندما ينخفض المخزون عن هذا المستوى",
+        "image": "صورة المنتج",
+        "imageUrl": "رابط الصورة",
+        "imageUrlPlaceholder": "https://example.com/image.jpg",
+        "submit": "حفظ المنتج",
+        "cancel": "إلغاء",
+        "creating": "جارٍ الإضافة...",
+        "updating": "جارٍ التعديل...",
+        "created": "تمت إضافة المنتج بنجاح",
+        "updated": "تم تعديل المنتج بنجاح",
+        "deleted": "تم حذف المنتج"
+      },
+      "actions": {
+        "edit": "تعديل",
+        "delete": "حذف",
+        "activate": "تفعيل",
+        "deactivate": "تعطيل",
+        "adjustStock": "تعديل المخزون",
+        "confirmDelete": "هل أنت متأكد من حذف هذا المنتج؟",
+        "deleteWarning": "هذا الإجراء لا يمكن التراجع عنه."
+      }
+    },
+    "categories": {
+      "title": "الفئات",
+      "addCategory": "إضافة فئة",
+      "editCategory": "تعديل الفئة",
+      "deleteCategory": "حذف الفئة",
+      "noCategories": "لا توجد فئات",
+      "table": {
+        "name": "اسم الفئة",
+        "productCount": "المنتجات",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      },
+      "form": {
+        "name": "اسم الفئة",
+        "namePlaceholder": "مثال: المشروبات",
+        "description": "الوصف",
+        "descriptionPlaceholder": "وصف الفئة...",
+        "submit": "حفظ الفئة",
+        "cancel": "إلغاء",
+        "created": "تمت إضافة الفئة بنجاح",
+        "updated": "تم تعديل الفئة بنجاح",
+        "deleted": "تم حذف الفئة"
+      }
+    },
+    "inventory": {
+      "title": "المخزون",
+      "lowStock": "منتجات منخفضة المخزون",
+      "outOfStock": "نفذ من المخزون",
+      "adjustStock": "تعديل المخزون",
+      "stockHistory": "سجل المخزون",
+      "adjustment": {
+        "title": "تعديل المخزون",
+        "product": "المنتج",
+        "currentStock": "المخزون الحالي",
+        "adjustment": "التعديل",
+        "adjustmentType": "النوع",
+        "increase": "زيادة",
+        "decrease": "نقصان",
+        "newStock": "المخزون الجديد",
+        "reason": "السبب",
+        "reasonPlaceholder": "مثال: استلام شحنة، منتجات تالفة...",
+        "submit": "تعديل المخزون",
+        "success": "تم تعديل المخزون بنجاح"
+      }
+    },
+    "sales": {
+      "title": "تقارير المبيعات",
+      "period": "الفترة",
+      "totalSales": "إجمالي المبيعات",
+      "totalOrders": "إجمالي الطلبات",
+      "averageOrderValue": "متوسط قيمة الطلب",
+      "topProducts": "المنتجات الأكثر مبيعاً",
+      "salesByCategory": "المبيعات حسب الفئة",
+      "salesTrend": "اتجاه المبيعات"
+    },
+    "settings": {
+      "title": "إعدادات المتجر",
+      "general": "الإعدادات العامة",
+      "enableShop": "تفعيل المتجر ونقطة البيع",
+      "taxEnabled": "تطبيق الضريبة على المنتجات",
+      "taxRate": "نسبة الضريبة (%)",
+      "receipt": "إعدادات الفاتورة",
+      "receiptHeader": "رأس الفاتورة",
+      "receiptFooter": "تذييل الفاتورة",
+      "submit": "حفظ الإعدادات"
+    }
   },
   "common": {
     "save": "حفظ",
