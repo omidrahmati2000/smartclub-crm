@@ -82,7 +82,70 @@
       "courtOverview": "Court Overview",
       "quickRankings": "Quick Rankings",
       "startNextRound": "Start Next Round",
-      "finishTournament": "Finish Tournament"
+      "finishTournament": "Finish Tournament",
+      "noStandings": "No standings available yet.",
+      "noCourts": "No courts configured for this tournament.",
+      "noActiveMatch": "No active match scheduled.",
+      "nextUp": "Next Up",
+      "empty": "Empty",
+      "scheduledAt": "Scheduled at {time}",
+      "participants": {
+        "title": "Participants Management",
+        "description": "Manage players for this tournament.",
+        "addPlayer": "Add Player",
+        "seed": "Seed",
+        "player": "Player",
+        "contact": "Contact",
+        "registeredAt": "Registered At",
+        "payment": "Payment",
+        "actions": "Actions",
+        "noParticipants": "No participants registered yet."
+      },
+      "matches": {
+        "title": "Matches & Schedule",
+        "description": "View and manage all matches in the current stage.",
+        "exportSchedule": "Export Schedule",
+        "autoSchedule": "Auto-Schedule",
+        "noMatches": "No matches generated yet."
+      },
+      "standings": {
+        "description": "Live standings based on points earned and point difference.",
+        "downloadPdf": "Download PDF",
+        "rank": "Rank",
+        "player": "Player",
+        "played": "P",
+        "wins": "W",
+        "losses": "L",
+        "draws": "D",
+        "pfPa": "PF/PA",
+        "points": "Points"
+      },
+      "settings": {
+        "title": "Tournament Settings",
+        "matchDuration": "Match Duration (minutes)",
+        "restDuration": "Rest Duration (minutes)",
+        "courtsToUse": "Courts to Use",
+        "save": "Save Settings"
+      },
+      "score": {
+        "title": "Enter Match Score",
+        "cancel": "Cancel",
+        "save": "Save Results",
+        "openScoreboard": "Open Scoreboard"
+      },
+      "grid": {
+        "court": "Court",
+        "team1": "Team 1",
+        "score": "Score",
+        "team2": "Team 2",
+        "actions": "Actions",
+        "result": "Result",
+        "done": "Done",
+        "completed": "Completed",
+        "live": "Live",
+        "upcoming": "Upcoming",
+        "round": "Round {number}"
+      }
     }
   },
   "nav": {
@@ -664,6 +727,201 @@
       "MANAGER": "Access to most sections except venue deletion and adding/removing staff",
       "RECEPTIONIST": "View and create bookings, view customers and assets",
       "CASHIER": "View bookings, customers and financial information"
+    }
+  },
+  "coaches": {
+    "title": "Coaches & Training",
+    "description": "Manage training programs, professional coaches, and academies",
+    "showingResults": "Showing {count} coaches",
+    "registerCoach": "Register New Coach",
+    "noCoaches": "No coaches found",
+    "noPermission": "You do not have permission to view this page",
+    "tabs": {
+      "roster": "Coach Roster",
+      "classes": "Scheduled Classes",
+      "levels": "Training Levels"
+    },
+    "filters": {
+      "search": "Search by name or specialty...",
+      "filterByLevel": "Filter by level",
+      "filterByStatus": "Filter by status",
+      "sortBy": "Sort by"
+    },
+    "levels": {
+      "all": "All Levels",
+      "Elite": "Elite",
+      "HeadCoach": "Head Coach",
+      "Advanced": "Advanced",
+      "Standard": "Standard"
+    },
+    "status": {
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "sort": {
+      "name": "Name",
+      "rating": "Rating",
+      "students": "Students",
+      "experience": "Experience"
+    },
+    "card": {
+      "experience": "Experience",
+      "rating": "Rating",
+      "students": "Students",
+      "hourlyRate": "Hourly Rate",
+      "viewProfile": "View Profile",
+      "viewSchedule": "View Schedule",
+      "activeStudents": "{count} Active Students"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "cancel": "Cancel"
+    },
+    "profile": {
+      "title": "Coach Profile",
+      "tabs": {
+        "overview": "Overview",
+        "schedule": "Schedule",
+        "stats": "Stats"
+      },
+      "bio": "About",
+      "contact": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "specialty": "Specialty",
+      "level": "Level",
+      "certifications": "Certifications",
+      "noCertifications": "No certifications listed",
+      "issuedBy": "Issued by {org}",
+      "stats": {
+        "totalSessions": "Total Sessions",
+        "estimatedRevenue": "Estimated Revenue",
+        "avgRating": "Avg. Rating"
+      },
+      "noSessions": "No upcoming sessions"
+    },
+    "deleteDialog": {
+      "title": "Delete Coach",
+      "description": "Are you sure you want to delete {name}? This will remove their profile, schedule, and all associated data.",
+      "warning": "This action cannot be undone.",
+      "confirm": "Delete Coach"
+    },
+    "editDialog": {
+      "title": "Edit Coach",
+      "description": "Update coach information and rates"
+    },
+    "registerDialog": {
+      "title": "Register New Coach",
+      "description": "Add a new coach to your venue and manage their specialties and rates"
+    },
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter coach name",
+      "email": "Email",
+      "emailPlaceholder": "coach@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+971 50 123 4567",
+      "specialty": "Specialty",
+      "specialtyPlaceholder": "Professional Padel",
+      "experience": "Experience",
+      "experiencePlaceholder": "10 Years",
+      "level": "Level",
+      "selectLevel": "Select level",
+      "hourlyRate": "Hourly Rate (AED)",
+      "hourlyRatePlaceholder": "300",
+      "submit": "Save Changes",
+      "register": "Register Coach",
+      "cancel": "Cancel",
+      "creating": "Registering...",
+      "updating": "Updating..."
+    },
+    "toast": {
+      "created": "Coach registered successfully",
+      "updated": "Coach updated successfully",
+      "deleted": "Coach deleted successfully",
+      "activated": "Coach activated successfully",
+      "deactivated": "Coach deactivated successfully",
+      "error": "An error occurred. Please try again.",
+      "sessionCreated": "Session created successfully",
+      "sessionDeleted": "Session deleted successfully"
+    },
+    "classes": {
+      "title": "Scheduled Classes",
+      "description": "Upcoming sessions and group training",
+      "addSession": "Add Session",
+      "noSessions": "No sessions scheduled",
+      "type": {
+        "private": "Private",
+        "group": "Group",
+        "class": "Class"
+      },
+      "status": {
+        "scheduled": "Scheduled",
+        "in_progress": "In Progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "price": "Price",
+      "enrollment": "Enrollment",
+      "manage": "Manage"
+    },
+    "addSession": {
+      "title": "Add Session",
+      "description": "Schedule a new coaching session",
+      "coach": "Coach",
+      "selectCoach": "Select a coach",
+      "type": "Session Type",
+      "selectType": "Select type",
+      "sessionTitle": "Session Title",
+      "sessionTitlePlaceholder": "e.g., Beginner Workshop",
+      "sessionDescription": "Description",
+      "sessionDescriptionPlaceholder": "Describe the session...",
+      "maxStudents": "Max Students",
+      "price": "Price (AED)",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "submit": "Create Session",
+      "creating": "Creating..."
+    },
+    "trainingLevels": {
+      "title": "Training Levels & Progression",
+      "description": "Academy curriculum and skill development pathways",
+      "progressionPath": "Progression Path",
+      "beginner": {
+        "title": "Beginner",
+        "description": "Fundamentals of technique, rules, and basic court movement. Designed for first-time players.",
+        "audience": "New players with no prior experience",
+        "duration": "8-12 weeks",
+        "frequency": "2 sessions/week"
+      },
+      "intermediate": {
+        "title": "Intermediate",
+        "description": "Building on fundamentals with advanced strokes, positioning, and match play strategies.",
+        "audience": "Players with 6+ months of experience",
+        "duration": "12-16 weeks",
+        "frequency": "3 sessions/week"
+      },
+      "advanced": {
+        "title": "Advanced",
+        "description": "Competitive-level training with tactical analysis, video review, and tournament preparation.",
+        "audience": "Experienced players seeking competitive edge",
+        "duration": "Ongoing",
+        "frequency": "4 sessions/week"
+      },
+      "professional": {
+        "title": "Professional",
+        "description": "Elite coaching for tournament players. Includes fitness conditioning, mental coaching, and match strategy.",
+        "audience": "Competitive and professional athletes",
+        "duration": "Ongoing",
+        "frequency": "5-6 sessions/week"
+      },
+      "targetAudience": "Target Audience",
+      "durationLabel": "Duration",
+      "frequencyLabel": "Frequency"
     }
   },
   "finance": {

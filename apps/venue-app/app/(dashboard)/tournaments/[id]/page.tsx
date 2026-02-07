@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import {
@@ -29,6 +29,7 @@ import {
     Label,
     Input
 } from '@smartclub/ui'
+import { cn } from '@smartclub/utils'
 import Link from 'next/link'
 
 // Components
@@ -38,8 +39,16 @@ import { AmericanoGrid } from '../_components/americano-grid'
 import { ScoreEntryDialog } from '../_components/score-entry-dialog'
 import { Leaderboard } from '../_components/leaderboard'
 
-import { useEffect } from 'react'
 import { localizedFetch } from '@smartclub/utils'
+
+// Asset ID → display name mapping
+const assetNameMap: Record<string, string> = {
+    'asset-1': 'Padel Court 1',
+    'asset-5': 'Padel Court 2',
+    'asset-6': 'Padel Court 3',
+    'asset-7': 'Tennis Court 1',
+    'asset-8': 'Tennis Court 2',
+}
 
 export default function TournamentDetailPage() {
     const { id } = useParams()
@@ -86,7 +95,7 @@ export default function TournamentDetailPage() {
     const stage = tournament.stages?.[0]
     const rounds = stage?.rounds || []
 
-    // Convert TournamentMatch format to component formats
+    // Convert TournamentMatch format to BracketView format
     const bracketRounds = rounds.map((r: any) => ({
         number: r.roundNumber,
         name: r.name,
@@ -104,18 +113,23 @@ export default function TournamentDetailPage() {
                 score: m.score2
             } : undefined,
             status: m.status,
-            winnerId: m.winnerId
+            winnerId: m.winnerId,
+            scheduledTime: m.scheduledTime,
+            assetName: m.assetId ? (assetNameMap[m.assetId] || m.assetId) : undefined,
+            sets: m.sets,
         }))
     }))
 
+    // Convert TournamentMatch format to AmericanoGrid format
     const americanoMatches = rounds.flatMap((r: any) => r.matches.map((m: any) => ({
         round: r.roundNumber,
-        court: m.assetId || 'Court',
+        court: m.assetId ? (assetNameMap[m.assetId] || m.assetId) : 'Court',
         team1: m.team1ParticipantIds?.map((pid: string) => tournament.participants.find((p: any) => p.id === pid)?.name) || [],
         team2: m.team2ParticipantIds?.map((pid: string) => tournament.participants.find((p: any) => p.id === pid)?.name) || [],
         score1: m.score1,
         score2: m.score2,
-        status: m.status === 'completed' ? 'completed' : 'pending'
+        status: m.status,
+        scheduledTime: m.scheduledTime,
     })))
 
     const standings = stage?.standings?.map((s: any) => ({
@@ -128,6 +142,53 @@ export default function TournamentDetailPage() {
     const activeMatches = rounds.reduce((acc: number, r: any) => acc + r.matches.filter((m: any) => m.status === 'in_progress').length, 0)
 
     const progress = totalMatches > 0 ? (completedMatches / totalMatches) * 100 : 0
+
+    // Get current live/scheduled matches for court overview
+    const allMatches = rounds.flatMap((r: any) => r.matches)
+    const courtIds = tournament.settings?.courts || []
+    const courtStatuses = courtIds.map((courtId: string) => {
+        const courtName = assetNameMap[courtId] || courtId
+        const liveMatch = allMatches.find((m: any) => m.assetId === courtId && m.status === 'in_progress')
+        const nextMatch = allMatches.find((m: any) => m.assetId === courtId && m.status === 'scheduled')
+
+        if (liveMatch) {
+            // Resolve team/participant names
+            let team1Name = ''
+            let team2Name = ''
+            if (liveMatch.team1ParticipantIds) {
+                team1Name = liveMatch.team1ParticipantIds.map((pid: string) =>
+                    tournament.participants.find((p: any) => p.id === pid)?.name
+                ).filter(Boolean).join(' + ')
+                team2Name = liveMatch.team2ParticipantIds?.map((pid: string) =>
+                    tournament.participants.find((p: any) => p.id === pid)?.name
+                ).filter(Boolean).join(' + ') || 'TBD'
+            } else {
+                team1Name = tournament.participants.find((p: any) => p.id === liveMatch.participant1Id)?.name || 'TBD'
+                team2Name = tournament.participants.find((p: any) => p.id === liveMatch.participant2Id)?.name || 'TBD'
+            }
+            return { courtName, status: 'live' as const, team1Name, team2Name, score: `${liveMatch.score1 ?? 0} - ${liveMatch.score2 ?? 0}` }
+        }
+
+        if (nextMatch) {
+            let team1Name = ''
+            let team2Name = ''
+            if (nextMatch.team1ParticipantIds) {
+                team1Name = nextMatch.team1ParticipantIds.map((pid: string) =>
+                    tournament.participants.find((p: any) => p.id === pid)?.name
+                ).filter(Boolean).join(' + ')
+                team2Name = nextMatch.team2ParticipantIds?.map((pid: string) =>
+                    tournament.participants.find((p: any) => p.id === pid)?.name
+                ).filter(Boolean).join(' + ') || 'TBD'
+            } else {
+                team1Name = tournament.participants.find((p: any) => p.id === nextMatch.participant1Id)?.name || 'TBD'
+                team2Name = nextMatch.participant2Id ? tournament.participants.find((p: any) => p.id === nextMatch.participant2Id)?.name || 'TBD' : 'TBD'
+            }
+            const time = nextMatch.scheduledTime ? new Date(nextMatch.scheduledTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''
+            return { courtName, status: 'upcoming' as const, team1Name, team2Name, time }
+        }
+
+        return { courtName, status: 'empty' as const }
+    })
 
     const handleMatchClick = (match: any) => {
         setSelectedMatch(match)
@@ -166,7 +227,6 @@ export default function TournamentDetailPage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-4">
-                {/* Same KPI cards as before */}
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">{t('detail.kpis.participants')}</CardTitle>
@@ -242,21 +302,50 @@ export default function TournamentDetailPage() {
                             </CardHeader>
                             <CardContent>
                                 <div className="grid grid-cols-2 gap-4">
-                                    <div className="border rounded-lg p-4 bg-primary/5 border-primary">
-                                        <div className="flex justify-between items-center mb-2">
-                                            <span className="font-bold">Court 1</span>
-                                            <Badge>Live</Badge>
+                                    {courtStatuses.map((court: any) => (
+                                        <div
+                                            key={court.courtName}
+                                            className={cn(
+                                                "border rounded-lg p-4",
+                                                court.status === 'live' && "bg-primary/5 border-primary",
+                                                court.status === 'upcoming' && "bg-muted/30",
+                                                court.status === 'empty' && "bg-muted/50",
+                                            )}
+                                        >
+                                            <div className="flex justify-between items-center mb-2">
+                                                <span className="font-bold">{court.courtName}</span>
+                                                {court.status === 'live' && (
+                                                    <Badge>
+                                                        <span className="relative flex h-2 w-2 me-1.5">
+                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                                        </span>
+                                                        Live
+                                                    </Badge>
+                                                )}
+                                                {court.status === 'upcoming' && <Badge variant="outline">{t('detail.nextUp')}</Badge>}
+                                                {court.status === 'empty' && <Badge variant="outline">{t('detail.empty')}</Badge>}
+                                            </div>
+                                            {court.status === 'live' && (
+                                                <>
+                                                    <p className="text-sm font-semibold">{court.team1Name} vs {court.team2Name}</p>
+                                                    <p className="text-lg font-mono font-bold text-primary mt-1">{court.score}</p>
+                                                </>
+                                            )}
+                                            {court.status === 'upcoming' && (
+                                                <>
+                                                    <p className="text-sm font-semibold">{court.team1Name} vs {court.team2Name}</p>
+                                                    {court.time && <p className="text-xs text-muted-foreground mt-1">{t('detail.scheduledAt', { time: court.time })}</p>}
+                                                </>
+                                            )}
+                                            {court.status === 'empty' && (
+                                                <p className="text-sm text-muted-foreground italic">{t('detail.noActiveMatch')}</p>
+                                            )}
                                         </div>
-                                        <p className="text-sm font-semibold">Ali + Hossein vs Sara + Mina</p>
-                                        <p className="text-xs text-muted-foreground mt-1">Starting soon...</p>
-                                    </div>
-                                    <div className="border rounded-lg p-4 bg-muted/50">
-                                        <div className="flex justify-between items-center mb-2">
-                                            <span className="font-bold">Court 2</span>
-                                            <Badge variant="outline">Empty</Badge>
-                                        </div>
-                                        <p className="text-sm text-muted-foreground italic">No active match scheduled.</p>
-                                    </div>
+                                    ))}
+                                    {courtStatuses.length === 0 && (
+                                        <p className="text-muted-foreground text-sm col-span-2">{t('detail.noCourts')}</p>
+                                    )}
                                 </div>
                             </CardContent>
                         </Card>
@@ -275,6 +364,9 @@ export default function TournamentDetailPage() {
                                             <span className="text-sm font-mono font-bold">{s.totalPoints} pts</span>
                                         </div>
                                     ))}
+                                    {standings.length === 0 && (
+                                        <p className="text-sm text-muted-foreground italic">{t('detail.noStandings')}</p>
+                                    )}
                                 </div>
                             </CardContent>
                         </Card>
@@ -285,10 +377,10 @@ export default function TournamentDetailPage() {
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between">
                             <div>
-                                <CardTitle>Participants Management</CardTitle>
-                                <CardDescription>Manage players for this tournament.</CardDescription>
+                                <CardTitle>{t('detail.participants.title')}</CardTitle>
+                                <CardDescription>{t('detail.participants.description')}</CardDescription>
                             </div>
-                            <Button size="sm">Add Player</Button>
+                            <Button size="sm">{t('detail.participants.addPlayer')}</Button>
                         </CardHeader>
                         <CardContent>
                             <ParticipantList
@@ -305,16 +397,16 @@ export default function TournamentDetailPage() {
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between">
                                 <div>
-                                    <CardTitle>Matches & Schedule</CardTitle>
-                                    <CardDescription>View and manage all matches in the current stage.</CardDescription>
+                                    <CardTitle>{t('detail.matches.title')}</CardTitle>
+                                    <CardDescription>{t('detail.matches.description')}</CardDescription>
                                 </div>
                                 <div className="flex gap-2">
-                                    <Button variant="outline" size="sm">Export Schedule</Button>
-                                    <Button size="sm">Auto-Schedule</Button>
+                                    <Button variant="outline" size="sm">{t('detail.matches.exportSchedule')}</Button>
+                                    <Button size="sm">{t('detail.matches.autoSchedule')}</Button>
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                {tournament.format === 'AMERICANO' ? (
+                                {tournament.format === 'AMERICANO' || tournament.format === 'MEXICANO' ? (
                                     <AmericanoGrid
                                         matches={americanoMatches}
                                         onEntryScore={(idx) => handleMatchClick(americanoMatches[idx])}
@@ -322,7 +414,16 @@ export default function TournamentDetailPage() {
                                 ) : (
                                     <BracketView
                                         rounds={bracketRounds}
-                                        onMatchClick={(id) => handleMatchClick({ id, team1: 'TBD', team2: 'TBD' })}
+                                        onMatchClick={(matchId) => {
+                                            // Find the match data from bracketRounds
+                                            for (const round of bracketRounds) {
+                                                const match = round.matches.find((m: any) => m.id === matchId)
+                                                if (match) {
+                                                    handleMatchClick(match)
+                                                    return
+                                                }
+                                            }
+                                        }}
                                     />
                                 )}
                             </CardContent>
@@ -334,12 +435,12 @@ export default function TournamentDetailPage() {
                     <Card>
                         <CardHeader>
                             <CardTitle>{t('detail.tabs.standings')}</CardTitle>
-                            <CardDescription>Live standings based on points earned and point difference.</CardDescription>
+                            <CardDescription>{t('detail.standings.description')}</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <Leaderboard standings={standings} />
                             <div className="mt-4 flex justify-end">
-                                <Button variant="outline" size="sm">Download PDF</Button>
+                                <Button variant="outline" size="sm">{t('detail.standings.downloadPdf')}</Button>
                             </div>
                         </CardContent>
                     </Card>
@@ -348,27 +449,28 @@ export default function TournamentDetailPage() {
                 <TabsContent value="settings">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Tournament Settings</CardTitle>
+                            <CardTitle>{t('detail.settings.title')}</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label>Match Duration (minutes)</Label>
-                                    <Input type="number" defaultValue={20} />
+                                    <Label>{t('detail.settings.matchDuration')}</Label>
+                                    <Input type="number" defaultValue={tournament.settings?.matchDurationMin || 20} />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label>Rest Duration (minutes)</Label>
-                                    <Input type="number" defaultValue={5} />
+                                    <Label>{t('detail.settings.restDuration')}</Label>
+                                    <Input type="number" defaultValue={tournament.settings?.restDurationMin || 5} />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label>Courts to Use</Label>
+                                    <Label>{t('detail.settings.courtsToUse')}</Label>
                                     <div className="flex gap-2">
-                                        <Badge>Court 1</Badge>
-                                        <Badge>Court 2</Badge>
+                                        {courtIds.map((courtId: string) => (
+                                            <Badge key={courtId}>{assetNameMap[courtId] || courtId}</Badge>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
-                            <Button>Save Settings</Button>
+                            <Button>{t('detail.settings.save')}</Button>
                         </CardContent>
                     </Card>
                 </TabsContent>
@@ -386,8 +488,7 @@ export default function TournamentDetailPage() {
                         })
                         const result = await res.json()
                         if (result.success) {
-                            // Optimistically update or refetch
-                            // For simplicity, we refetch to get updated standings/brackets
+                            // Refetch to get updated standings/brackets
                             const tournamentRes = await localizedFetch(`/api/tournaments/${id}`)
                             const tournamentResult = await tournamentRes.json()
                             if (tournamentResult.success) {

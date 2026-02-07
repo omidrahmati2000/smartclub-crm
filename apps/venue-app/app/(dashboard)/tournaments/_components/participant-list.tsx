@@ -13,13 +13,14 @@ import {
     AvatarFallback,
     AvatarImage
 } from '@smartclub/ui'
+import { useTranslations } from 'next-intl'
 import { MoreVertical, UserMinus, ShieldCheck } from 'lucide-react'
 
 interface Participant {
     id: string
     name: string
-    email: string
-    phone: string
+    email?: string
+    phone?: string
     seed?: number
     paymentStatus: 'paid' | 'pending'
     registeredAt: string
@@ -32,17 +33,19 @@ interface ParticipantListProps {
 }
 
 export function ParticipantList({ participants, onRemove, onUpdateStatus }: ParticipantListProps) {
+    const t = useTranslations('venue-admin.tournaments.detail.participants')
+
     return (
         <div className="rounded-md border">
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[80px]">Seed</TableHead>
-                        <TableHead>Player</TableHead>
-                        <TableHead>Contact</TableHead>
-                        <TableHead>Registered At</TableHead>
-                        <TableHead>Payment</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
+                        <TableHead className="w-[80px]">{t('seed')}</TableHead>
+                        <TableHead>{t('player')}</TableHead>
+                        <TableHead>{t('contact')}</TableHead>
+                        <TableHead>{t('registeredAt')}</TableHead>
+                        <TableHead>{t('payment')}</TableHead>
+                        <TableHead className="text-right">{t('actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -63,8 +66,8 @@ export function ParticipantList({ participants, onRemove, onUpdateStatus }: Part
                             </TableCell>
                             <TableCell>
                                 <div className="flex flex-col text-xs text-muted-foreground">
-                                    <span>{p.email}</span>
-                                    <span>{p.phone}</span>
+                                    <span>{p.email || '-'}</span>
+                                    <span>{p.phone || '-'}</span>
                                 </div>
                             </TableCell>
                             <TableCell className="text-sm text-muted-foreground">
@@ -94,7 +97,7 @@ export function ParticipantList({ participants, onRemove, onUpdateStatus }: Part
                     {participants.length === 0 && (
                         <TableRow>
                             <TableCell colSpan={6} className="h-24 text-center text-muted-foreground">
-                                No participants registered yet.
+                                {t('noParticipants')}
                             </TableCell>
                         </TableRow>
                     )}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,26 +35,26 @@ import { Loader2 } from 'lucide-react';
 import { apiClient } from '@/lib/api-client';
 import type { Coach } from '@smartclub/mock-data/src/fixtures/coaches';
 
-interface RegisterCoachDialogProps {
+interface EditCoachDialogProps {
   open: boolean;
   onClose: () => void;
   onSuccess: (coach: Coach) => void;
-  venueId: string;
+  coach: Coach;
 }
 
 const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  specialty: z.string().min(3, 'Specialty must be at least 3 characters'),
-  experience: z.string().min(1, 'Experience is required'),
+  name: z.string().min(2),
+  email: z.string().email(),
+  phone: z.string().min(10),
+  specialty: z.string().min(3),
+  experience: z.string().min(1),
   level: z.enum(['Elite', 'Head Coach', 'Advanced', 'Standard']),
-  hourlyRate: z.number().min(0, 'Hourly rate must be positive'),
+  hourlyRate: z.number().min(0),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function RegisterCoachDialog({ open, onClose, onSuccess, venueId }: RegisterCoachDialogProps) {
+export function EditCoachDialog({ open, onClose, onSuccess, coach }: EditCoachDialogProps) {
   const t = useTranslations('venue-admin.coaches');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,27 +62,41 @@ export function RegisterCoachDialog({ open, onClose, onSuccess, venueId }: Regis
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      specialty: '',
-      experience: '1 Year',
-      level: 'Standard',
-      hourlyRate: 300,
+      name: coach.name,
+      email: coach.email,
+      phone: coach.phone,
+      specialty: coach.specialty,
+      experience: coach.experience,
+      level: coach.level,
+      hourlyRate: coach.hourlyRate,
     },
   });
+
+  useEffect(() => {
+    if (open && coach) {
+      form.reset({
+        name: coach.name,
+        email: coach.email,
+        phone: coach.phone,
+        specialty: coach.specialty,
+        experience: coach.experience,
+        level: coach.level,
+        hourlyRate: coach.hourlyRate,
+      });
+    }
+  }, [open, coach, form]);
 
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
     try {
-      const result = await apiClient.post<Coach>(`/venues/${venueId}/coaches`, values);
+      const result = await apiClient.put<Coach>(`/coaches/${coach.id}`, values);
 
       if (result.success && result.data) {
-        toast({ title: t('toast.created') });
+        toast({ title: t('toast.updated') });
         onSuccess(result.data);
         form.reset();
       } else {
-        throw new Error(result.error || 'Failed to register coach');
+        throw new Error(result.error || 'Failed to update coach');
       }
     } catch (error) {
       toast({
@@ -106,8 +120,8 @@ export function RegisterCoachDialog({ open, onClose, onSuccess, venueId }: Regis
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>{t('registerDialog.title')}</DialogTitle>
-          <DialogDescription>{t('registerDialog.description')}</DialogDescription>
+          <DialogTitle>{t('editDialog.title')}</DialogTitle>
+          <DialogDescription>{t('editDialog.description')}</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -184,7 +198,7 @@ export function RegisterCoachDialog({ open, onClose, onSuccess, venueId }: Regis
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t('form.level')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder={t('form.selectLevel')} />
@@ -228,7 +242,7 @@ export function RegisterCoachDialog({ open, onClose, onSuccess, venueId }: Regis
               </Button>
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {t('form.register')}
+                {t('form.submit')}
               </Button>
             </DialogFooter>
           </form>

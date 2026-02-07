@@ -11,6 +11,7 @@ import {
     Label
 } from '@smartclub/ui'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface ScoreEntryDialogProps {
     isOpen: boolean
@@ -33,6 +34,7 @@ export function ScoreEntryDialog({
     initialScore2 = 0,
     matchId
 }: ScoreEntryDialogProps) {
+    const t = useTranslations('venue-admin.tournaments.detail.score')
     const [s1, setS1] = useState(initialScore1)
     const [s2, setS2] = useState(initialScore2)
 
@@ -40,7 +42,7 @@ export function ScoreEntryDialog({
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Enter Match Score</DialogTitle>
+                    <DialogTitle>{t('title')}</DialogTitle>
                 </DialogHeader>
                 <div className="grid gap-6 py-4">
                     <div className="grid grid-cols-2 items-center gap-4 text-center">
@@ -68,12 +70,12 @@ export function ScoreEntryDialog({
                     {/* Public Live View Link */}
                     {matchId && (
                         <Button variant="secondary" onClick={() => window.open(`http://localhost:3000/live/${matchId}`, '_blank')}>
-                            Open Scoreboard
+                            {t('openScoreboard')}
                         </Button>
                     )}
                     <div className="flex gap-2">
-                        <Button variant="outline" onClick={onClose}>Cancel</Button>
-                        <Button onClick={() => onSave(s1, s2)}>Save Results</Button>
+                        <Button variant="outline" onClick={onClose}>{t('cancel')}</Button>
+                        <Button onClick={() => onSave(s1, s2)}>{t('save')}</Button>
                     </div>
                 </DialogFooter>
             </DialogContent>

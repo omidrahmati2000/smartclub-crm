@@ -2,6 +2,8 @@
 
 import { MatchCard } from './match-card'
 import { ScrollArea, ScrollBar } from '@smartclub/ui'
+import { useTranslations } from 'next-intl'
+import type { MatchSet } from '@smartclub/types'
 
 interface BracketMatch {
     id: string
@@ -10,6 +12,9 @@ interface BracketMatch {
     p2?: { id: string; name: string; score?: number }
     status: 'scheduled' | 'in_progress' | 'completed' | 'bye'
     winnerId?: string
+    scheduledTime?: string
+    assetName?: string
+    sets?: MatchSet[]
 }
 
 interface BracketViewProps {
@@ -22,6 +27,7 @@ interface BracketViewProps {
 }
 
 export function BracketView({ rounds, onMatchClick }: BracketViewProps) {
+    const t = useTranslations('venue-admin.tournaments.detail.matches')
     return (
         <ScrollArea className="w-full whitespace-nowrap rounded-md border bg-muted/5">
             <div className="flex p-8 gap-16 min-h-[500px] justify-start px-12">
@@ -41,6 +47,9 @@ export function BracketView({ rounds, onMatchClick }: BracketViewProps) {
                                         participant2={match.p2}
                                         status={match.status}
                                         winnerId={match.winnerId}
+                                        scheduledTime={match.scheduledTime}
+                                        assetName={match.assetName}
+                                        sets={match.sets}
                                         onClick={() => onMatchClick?.(match.id)}
                                     />
 
@@ -78,7 +87,7 @@ export function BracketView({ rounds, onMatchClick }: BracketViewProps) {
 
                 {rounds.length === 0 && (
                     <div className="w-full py-20 text-center flex flex-col items-center justify-center border-2 border-dashed rounded-xl bg-background/50">
-                        <p className="text-muted-foreground font-medium italic">No matches generated yet.</p>
+                        <p className="text-muted-foreground font-medium italic">{t('noMatches')}</p>
                     </div>
                 )}
             </div>

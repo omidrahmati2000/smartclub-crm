@@ -70,6 +70,8 @@ export interface TournamentParticipant {
   userId?: string;
   teamId?: string; // For doubles/team tournaments
   name: string;
+  email?: string;
+  phone?: string;
   seed?: number;
   registeredAt: string;
   paymentStatus: 'pending' | 'paid';

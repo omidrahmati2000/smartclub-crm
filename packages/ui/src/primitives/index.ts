@@ -132,3 +132,4 @@ export {
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from './collapsible';
 export { Popover, PopoverTrigger, PopoverContent } from './popover';
 export { Calendar, type CalendarProps } from './calendar';
+export { Progress } from './progress';

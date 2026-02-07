@@ -103,13 +103,13 @@ export default function SocialPage() {
                                                     <AvatarFallback className="bg-primary/5 text-primary text-sm font-bold">{req.image}</AvatarFallback>
                                                 </Avatar>
                                                 <div>
-                                                    <p className="font-bold flex items-center gap-2">
+                                                    <div className="font-bold flex items-center gap-2">
                                                         {req.name}
                                                         <Badge variant="outline" className="text-[10px] uppercase">{req.level}</Badge>
-                                                    </p>
-                                                    <p className="text-sm text-muted-foreground flex items-center gap-1 mt-0.5">
+                                                    </div>
+                                                    <div className="text-sm text-muted-foreground flex items-center gap-1 mt-0.5">
                                                         <MapPin className="h-3 w-3" /> {req.venue} • <span className="text-primary font-medium">{req.time}</span>
-                                                    </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <Badge className="bg-primary/10 text-primary border-none font-bold">

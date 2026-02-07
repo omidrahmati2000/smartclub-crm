@@ -67,7 +67,7 @@
     },
     "detail": {
       "tabs": {
-        "overview": "پیش‌نسخه",
+        "overview": "نمای کلی",
         "participants": "شرکت‌کنندگان",
         "matches": "جدول و مسابقات",
         "standings": "رده‌بندی",
@@ -82,7 +82,70 @@
       "courtOverview": "نمای زمین‌ها",
       "quickRankings": "رده‌بندی سریع",
       "startNextRound": "شروع راند بعدی",
-      "finishTournament": "اتمام تورنومنت"
+      "finishTournament": "اتمام تورنومنت",
+      "noStandings": "هنوز رده‌بندی‌ای موجود نیست.",
+      "noCourts": "هیچ زمینی برای این تورنومنت تنظیم نشده است.",
+      "noActiveMatch": "بازی فعالی برنامه‌ریزی نشده است.",
+      "nextUp": "بعدی",
+      "empty": "خالی",
+      "scheduledAt": "زمان‌بندی: {time}",
+      "participants": {
+        "title": "مدیریت شرکت‌کنندگان",
+        "description": "مدیریت بازیکنان این تورنومنت.",
+        "addPlayer": "افزودن بازیکن",
+        "seed": "سید",
+        "player": "بازیکن",
+        "contact": "تماس",
+        "registeredAt": "تاریخ ثبت‌نام",
+        "payment": "پرداخت",
+        "actions": "عملیات",
+        "noParticipants": "هنوز شرکت‌کننده‌ای ثبت‌نام نکرده."
+      },
+      "matches": {
+        "title": "مسابقات و برنامه‌زمانی",
+        "description": "مشاهده و مدیریت تمام مسابقات مرحله فعلی.",
+        "exportSchedule": "خروجی برنامه",
+        "autoSchedule": "زمان‌بندی خودکار",
+        "noMatches": "هنوز مسابقه‌ای تولید نشده."
+      },
+      "standings": {
+        "description": "رده‌بندی زنده بر اساس امتیاز کسب شده و تفاضل امتیاز.",
+        "downloadPdf": "دانلود PDF",
+        "rank": "رتبه",
+        "player": "بازیکن",
+        "played": "ب",
+        "wins": "پ",
+        "losses": "ش",
+        "draws": "م",
+        "pfPa": "ا.م/ا.خ",
+        "points": "امتیاز"
+      },
+      "settings": {
+        "title": "تنظیمات تورنومنت",
+        "matchDuration": "مدت بازی (دقیقه)",
+        "restDuration": "مدت استراحت (دقیقه)",
+        "courtsToUse": "زمین‌های مورد استفاده",
+        "save": "ذخیره تنظیمات"
+      },
+      "score": {
+        "title": "ثبت نتیجه بازی",
+        "cancel": "انصراف",
+        "save": "ذخیره نتیجه",
+        "openScoreboard": "باز کردن تابلوی امتیاز"
+      },
+      "grid": {
+        "court": "زمین",
+        "team1": "تیم ۱",
+        "score": "امتیاز",
+        "team2": "تیم ۲",
+        "actions": "عملیات",
+        "result": "نتیجه",
+        "done": "انجام شد",
+        "completed": "تکمیل شده",
+        "live": "زنده",
+        "upcoming": "پیش‌رو",
+        "round": "راند {number}"
+      }
     }
   },
   "nav": {
@@ -664,6 +727,201 @@
       "MANAGER": "دسترسی به اکثر بخش‌ها به جز حذف مجموعه و افزودن/حذف کارکنان",
       "RECEPTIONIST": "مشاهده و ایجاد رزرو، مشاهده مشتریان و امکانات",
       "CASHIER": "مشاهده رزروها، مشتریان و اطلاعات مالی"
+    }
+  },
+  "coaches": {
+    "title": "مربیان و آموزش",
+    "description": "مدیریت برنامه‌های آموزشی، مربیان حرفه‌ای و آکادمی‌ها",
+    "showingResults": "نمایش {count} مربی",
+    "registerCoach": "ثبت مربی جدید",
+    "noCoaches": "مربی‌ای یافت نشد",
+    "noPermission": "شما مجوز دسترسی به این صفحه را ندارید",
+    "tabs": {
+      "roster": "لیست مربیان",
+      "classes": "کلاس‌های برنامه‌ریزی شده",
+      "levels": "سطوح آموزشی"
+    },
+    "filters": {
+      "search": "جستجو بر اساس نام یا تخصص...",
+      "filterByLevel": "فیلتر بر اساس سطح",
+      "filterByStatus": "فیلتر بر اساس وضعیت",
+      "sortBy": "مرتب‌سازی"
+    },
+    "levels": {
+      "all": "همه سطوح",
+      "Elite": "نخبه",
+      "HeadCoach": "سرمربی",
+      "Advanced": "پیشرفته",
+      "Standard": "استاندارد"
+    },
+    "status": {
+      "all": "همه",
+      "active": "فعال",
+      "inactive": "غیرفعال"
+    },
+    "sort": {
+      "name": "نام",
+      "rating": "امتیاز",
+      "students": "دانش‌آموزان",
+      "experience": "تجربه"
+    },
+    "card": {
+      "experience": "تجربه",
+      "rating": "امتیاز",
+      "students": "دانش‌آموزان",
+      "hourlyRate": "نرخ ساعتی",
+      "viewProfile": "مشاهده پروفایل",
+      "viewSchedule": "مشاهده برنامه",
+      "activeStudents": "{count} دانش‌آموز فعال"
+    },
+    "actions": {
+      "edit": "ویرایش",
+      "delete": "حذف",
+      "activate": "فعال‌سازی",
+      "deactivate": "غیرفعال‌سازی",
+      "cancel": "انصراف"
+    },
+    "profile": {
+      "title": "پروفایل مربی",
+      "tabs": {
+        "overview": "نمای کلی",
+        "schedule": "برنامه",
+        "stats": "آمار"
+      },
+      "bio": "درباره",
+      "contact": "اطلاعات تماس",
+      "email": "ایمیل",
+      "phone": "تلفن",
+      "specialty": "تخصص",
+      "level": "سطح",
+      "certifications": "گواهینامه‌ها",
+      "noCertifications": "گواهینامه‌ای ثبت نشده",
+      "issuedBy": "صادره از {org}",
+      "stats": {
+        "totalSessions": "کل جلسات",
+        "estimatedRevenue": "درآمد تخمینی",
+        "avgRating": "میانگین امتیاز"
+      },
+      "noSessions": "جلسه آینده‌ای وجود ندارد"
+    },
+    "deleteDialog": {
+      "title": "حذف مربی",
+      "description": "آیا از حذف {name} اطمینان دارید؟ این کار پروفایل، برنامه و تمام داده‌های مرتبط را حذف می‌کند.",
+      "warning": "این عمل قابل بازگشت نیست.",
+      "confirm": "حذف مربی"
+    },
+    "editDialog": {
+      "title": "ویرایش مربی",
+      "description": "به‌روزرسانی اطلاعات و نرخ مربی"
+    },
+    "registerDialog": {
+      "title": "ثبت مربی جدید",
+      "description": "افزودن مربی جدید و مدیریت تخصص‌ها و نرخ‌ها"
+    },
+    "form": {
+      "name": "نام کامل",
+      "namePlaceholder": "نام مربی را وارد کنید",
+      "email": "ایمیل",
+      "emailPlaceholder": "coach@example.com",
+      "phone": "تلفن",
+      "phonePlaceholder": "+971 50 123 4567",
+      "specialty": "تخصص",
+      "specialtyPlaceholder": "پدل حرفه‌ای",
+      "experience": "تجربه",
+      "experiencePlaceholder": "۱۰ سال",
+      "level": "سطح",
+      "selectLevel": "انتخاب سطح",
+      "hourlyRate": "نرخ ساعتی (درهم)",
+      "hourlyRatePlaceholder": "۳۰۰",
+      "submit": "ذخیره تغییرات",
+      "register": "ثبت مربی",
+      "cancel": "انصراف",
+      "creating": "در حال ثبت...",
+      "updating": "در حال به‌روزرسانی..."
+    },
+    "toast": {
+      "created": "مربی با موفقیت ثبت شد",
+      "updated": "مربی با موفقیت به‌روزرسانی شد",
+      "deleted": "مربی با موفقیت حذف شد",
+      "activated": "مربی با موفقیت فعال شد",
+      "deactivated": "مربی با موفقیت غیرفعال شد",
+      "error": "خطایی رخ داده است. لطفاً دوباره تلاش کنید.",
+      "sessionCreated": "جلسه با موفقیت ایجاد شد",
+      "sessionDeleted": "جلسه با موفقیت حذف شد"
+    },
+    "classes": {
+      "title": "کلاس‌های برنامه‌ریزی شده",
+      "description": "جلسات آینده و آموزش گروهی",
+      "addSession": "افزودن جلسه",
+      "noSessions": "جلسه‌ای برنامه‌ریزی نشده",
+      "type": {
+        "private": "خصوصی",
+        "group": "گروهی",
+        "class": "کلاس"
+      },
+      "status": {
+        "scheduled": "برنامه‌ریزی شده",
+        "in_progress": "در حال انجام",
+        "completed": "تکمیل شده",
+        "cancelled": "لغو شده"
+      },
+      "price": "قیمت",
+      "enrollment": "ثبت‌نام",
+      "manage": "مدیریت"
+    },
+    "addSession": {
+      "title": "افزودن جلسه",
+      "description": "برنامه‌ریزی یک جلسه آموزشی جدید",
+      "coach": "مربی",
+      "selectCoach": "انتخاب مربی",
+      "type": "نوع جلسه",
+      "selectType": "انتخاب نوع",
+      "sessionTitle": "عنوان جلسه",
+      "sessionTitlePlaceholder": "مثلاً کارگاه مبتدیان",
+      "sessionDescription": "توضیحات",
+      "sessionDescriptionPlaceholder": "جلسه را توضیح دهید...",
+      "maxStudents": "حداکثر دانش‌آموزان",
+      "price": "قیمت (درهم)",
+      "startTime": "زمان شروع",
+      "endTime": "زمان پایان",
+      "submit": "ایجاد جلسه",
+      "creating": "در حال ایجاد..."
+    },
+    "trainingLevels": {
+      "title": "سطوح آموزشی و پیشرفت",
+      "description": "برنامه درسی آکادمی و مسیرهای توسعه مهارت",
+      "progressionPath": "مسیر پیشرفت",
+      "beginner": {
+        "title": "مبتدی",
+        "description": "اصول تکنیک، قوانین و حرکات پایه در زمین. طراحی شده برای بازیکنان تازه‌کار.",
+        "audience": "بازیکنان جدید بدون تجربه قبلی",
+        "duration": "۸ تا ۱۲ هفته",
+        "frequency": "۲ جلسه در هفته"
+      },
+      "intermediate": {
+        "title": "متوسط",
+        "description": "تقویت مهارت‌های پایه با ضربات پیشرفته، موقعیت‌یابی و استراتژی‌های بازی.",
+        "audience": "بازیکنان با بیش از ۶ ماه تجربه",
+        "duration": "۱۲ تا ۱۶ هفته",
+        "frequency": "۳ جلسه در هفته"
+      },
+      "advanced": {
+        "title": "پیشرفته",
+        "description": "آموزش سطح مسابقات با تحلیل تاکتیکی، بررسی ویدیو و آمادگی برای تورنمنت.",
+        "audience": "بازیکنان با تجربه که به دنبال مزیت رقابتی هستند",
+        "duration": "ادامه‌دار",
+        "frequency": "۴ جلسه در هفته"
+      },
+      "professional": {
+        "title": "حرفه‌ای",
+        "description": "آموزش نخبه برای بازیکنان تورنمنت. شامل آمادگی جسمانی، مربیگری ذهنی و استراتژی مسابقه.",
+        "audience": "ورزشکاران رقابتی و حرفه‌ای",
+        "duration": "ادامه‌دار",
+        "frequency": "۵ تا ۶ جلسه در هفته"
+      },
+      "targetAudience": "مخاطب هدف",
+      "durationLabel": "مدت",
+      "frequencyLabel": "تکرار"
     }
   },
   "finance": {

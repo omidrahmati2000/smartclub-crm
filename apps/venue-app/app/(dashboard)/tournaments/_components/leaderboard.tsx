@@ -12,6 +12,7 @@ import {
     Badge
 } from '@smartclub/ui'
 import { cn } from '@smartclub/utils'
+import { useTranslations } from 'next-intl'
 
 interface Standing {
     participantId: string
@@ -31,19 +32,21 @@ interface LeaderboardProps {
 }
 
 export function Leaderboard({ standings }: LeaderboardProps) {
+    const t = useTranslations('venue-admin.tournaments.detail.standings')
+
     return (
         <div className="rounded-md border">
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[60px] text-center">Rank</TableHead>
-                        <TableHead>Player</TableHead>
-                        <TableHead className="text-center">P</TableHead>
-                        <TableHead className="text-center">W</TableHead>
-                        <TableHead className="text-center">L</TableHead>
-                        <TableHead className="text-center hidden md:table-cell">D</TableHead>
-                        <TableHead className="text-center hidden md:table-cell">PF/PA</TableHead>
-                        <TableHead className="text-center font-bold text-primary">Points</TableHead>
+                        <TableHead className="w-[60px] text-center">{t('rank')}</TableHead>
+                        <TableHead>{t('player')}</TableHead>
+                        <TableHead className="text-center">{t('played')}</TableHead>
+                        <TableHead className="text-center">{t('wins')}</TableHead>
+                        <TableHead className="text-center">{t('losses')}</TableHead>
+                        <TableHead className="text-center hidden md:table-cell">{t('draws')}</TableHead>
+                        <TableHead className="text-center hidden md:table-cell">{t('pfPa')}</TableHead>
+                        <TableHead className="text-center font-bold text-primary">{t('points')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>

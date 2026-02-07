@@ -29,6 +29,10 @@ export const Permission = {
   STAFF_VIEW: 'staff:view',
   STAFF_MANAGE: 'staff:manage',
 
+  // Coaches
+  COACH_VIEW: 'coach:view',
+  COACH_MANAGE: 'coach:manage',
+
   // Finance
   FINANCE_VIEW: 'finance:view',
   FINANCE_MANAGE: 'finance:manage',
