@@ -6,8 +6,8 @@ export const mockTournaments: Tournament[] = [
     {
         id: 'tournament-1',
         venueId: 'venue-1',
-        name: 'Tehran Open 2026',
-        description: 'Biggest Padel tournament of the season in Tehran.',
+        name: 'Dubai Open 2026',
+        description: 'Biggest Padel tournament of the season in Dubai.',
         sportType: SportType.PADEL,
         format: TournamentFormat.SINGLE_ELIMINATION,
         status: TournamentStatus.REGISTRATION_OPEN,
@@ -15,14 +15,14 @@ export const mockTournaments: Tournament[] = [
         endDate: '2026-03-07T20:00:00Z',
         registrationDeadline: '2026-02-25T23:59:59Z',
         maxParticipants: 32,
-        entryFee: 1500000,
-        currency: 'IRT',
-        prizePool: '50,000,000 IRT',
+        entryFee: 500,
+        currency: 'AED',
+        prizePool: '20,000 AED',
         rules: 'Official FIP rules apply. Best of 3 sets.',
         imageUrl: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80',
         participants: [
-            { id: 'p1', tournamentId: 'tournament-1', name: 'Ali & Reza', seed: 1, registeredAt: '2026-01-20T10:00:00Z', paymentStatus: 'paid' },
-            { id: 'p2', tournamentId: 'tournament-1', name: 'Naghi & Taghi', seed: 2, registeredAt: '2026-01-20T11:00:00Z', paymentStatus: 'paid' }
+            { id: 'p1', tournamentId: 'tournament-1', name: 'Ahmed & Rashid', seed: 1, registeredAt: '2026-01-20T10:00:00Z', paymentStatus: 'paid' },
+            { id: 'p2', tournamentId: 'tournament-1', name: 'Omar & Khalid', seed: 2, registeredAt: '2026-01-20T11:00:00Z', paymentStatus: 'paid' }
         ],
         stages: [
             {
@@ -80,18 +80,18 @@ export const mockTournaments: Tournament[] = [
         endDate: '2026-02-02T21:00:00Z',
         registrationDeadline: '2026-02-01T18:00:00Z',
         maxParticipants: 16,
-        entryFee: 500000,
-        currency: 'IRT',
+        entryFee: 150,
+        currency: 'AED',
         prizePool: 'Voucher',
         participants: [
-            { id: 'p1', tournamentId: 'tournament-2', name: 'Ali Rezai', seed: 1, registeredAt: '2026-01-20T10:00:00Z', paymentStatus: 'paid' },
-            { id: 'p2', tournamentId: 'tournament-2', name: 'Sara Kamali', seed: 2, registeredAt: '2026-01-20T11:00:00Z', paymentStatus: 'paid' },
-            { id: 'p3', tournamentId: 'tournament-2', name: 'Mohammad Nouri', seed: 3, registeredAt: '2026-01-21T09:00:00Z', paymentStatus: 'paid' },
-            { id: 'p4', tournamentId: 'tournament-2', name: 'Zahra Karimi', seed: 4, registeredAt: '2026-01-21T14:00:00Z', paymentStatus: 'paid' },
-            { id: 'p5', tournamentId: 'tournament-2', name: 'Hossein Amin', seed: 5, registeredAt: '2026-01-22T10:00:00Z', paymentStatus: 'paid' },
-            { id: 'p6', tournamentId: 'tournament-2', name: 'Mina Shad', seed: 6, registeredAt: '2026-01-22T11:00:00Z', paymentStatus: 'paid' },
-            { id: 'p7', tournamentId: 'tournament-2', name: 'Reza Pahlavi', seed: 7, registeredAt: '2026-01-23T09:00:00Z', paymentStatus: 'paid' },
-            { id: 'p8', tournamentId: 'tournament-2', name: 'Saeed Rad', seed: 8, registeredAt: '2026-01-23T14:00:00Z', paymentStatus: 'paid' },
+            { id: 'p1', tournamentId: 'tournament-2', name: 'Ali Al Rashid', seed: 1, registeredAt: '2026-01-20T10:00:00Z', paymentStatus: 'paid' },
+            { id: 'p2', tournamentId: 'tournament-2', name: 'Sara Abdullah', seed: 2, registeredAt: '2026-01-20T11:00:00Z', paymentStatus: 'paid' },
+            { id: 'p3', tournamentId: 'tournament-2', name: 'Mohammed Al Nouri', seed: 3, registeredAt: '2026-01-21T09:00:00Z', paymentStatus: 'paid' },
+            { id: 'p4', tournamentId: 'tournament-2', name: 'Zahra Al Karimi', seed: 4, registeredAt: '2026-01-21T14:00:00Z', paymentStatus: 'paid' },
+            { id: 'p5', tournamentId: 'tournament-2', name: 'Hussein Al Amin', seed: 5, registeredAt: '2026-01-22T10:00:00Z', paymentStatus: 'paid' },
+            { id: 'p6', tournamentId: 'tournament-2', name: 'Mina Al Hassan', seed: 6, registeredAt: '2026-01-22T11:00:00Z', paymentStatus: 'paid' },
+            { id: 'p7', tournamentId: 'tournament-2', name: 'Rashid Al Maktoum', seed: 7, registeredAt: '2026-01-23T09:00:00Z', paymentStatus: 'paid' },
+            { id: 'p8', tournamentId: 'tournament-2', name: 'Saeed Al Farsi', seed: 8, registeredAt: '2026-01-23T14:00:00Z', paymentStatus: 'paid' },
         ],
         stages: [
             {
