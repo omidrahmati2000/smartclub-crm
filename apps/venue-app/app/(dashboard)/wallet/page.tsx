@@ -46,7 +46,7 @@ const WALLET_DATA = [
         id: 'u1',
         name: 'Ahmed Al Sharif',
         email: 'ahmed@example.com',
-        balance: 2500000,
+        balance: 600,
         lastTransaction: '2024-03-20',
         status: 'active',
         avatar: 'AS'
@@ -55,7 +55,7 @@ const WALLET_DATA = [
         id: 'u2',
         name: 'Sara Abdullah',
         email: 'sara@example.com',
-        balance: 12000000,
+        balance: 2900,
         lastTransaction: '2024-03-21',
         status: 'vip',
         avatar: 'SA'
@@ -64,7 +64,7 @@ const WALLET_DATA = [
         id: 'u3',
         name: 'Rashid Kareem',
         email: 'rashid@example.com',
-        balance: 450000,
+        balance: 110,
         lastTransaction: '2024-03-18',
         status: 'active',
         avatar: 'RK'
@@ -82,7 +82,7 @@ const WALLET_DATA = [
         id: 'u5',
         name: 'Hussein Al Rashid',
         email: 'hussein@example.com',
-        balance: 1500000,
+        balance: 360,
         lastTransaction: '2024-03-22',
         status: 'active',
         avatar: 'HR'
@@ -124,7 +124,7 @@ export default function WalletPage() {
                         <Wallet className="h-4 w-4 opacity-80" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">16,450,000 IRT</div>
+                        <div className="text-2xl font-bold">3,970 AED</div>
                         <p className="text-xs opacity-60">+2.5% from last month</p>
                     </CardContent>
                 </Card>
@@ -134,7 +134,7 @@ export default function WalletPage() {
                         <ArrowUpRight className="h-4 w-4 text-green-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">8,200,000 IRT</div>
+                        <div className="text-2xl font-bold">1,975 AED</div>
                         <p className="text-xs text-muted-foreground">24 individual top-ups</p>
                     </CardContent>
                 </Card>
@@ -144,7 +144,7 @@ export default function WalletPage() {
                         <ArrowDownLeft className="h-4 w-4 text-orange-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">4,150,000 IRT</div>
+                        <div className="text-2xl font-bold">1,000 AED</div>
                         <p className="text-xs text-muted-foreground">Used for bookings & cafe</p>
                     </CardContent>
                 </Card>
@@ -226,9 +226,9 @@ export default function WalletPage() {
                                     </TableCell>
                                     <TableCell className="text-right font-mono font-bold">
                                         <span className={cn(
-                                            user.balance > 5000000 ? "text-green-600" : user.balance === 0 ? "text-destructive" : ""
+                                            user.balance > 1000 ? "text-green-600" : user.balance === 0 ? "text-destructive" : ""
                                         )}>
-                                            {user.balance.toLocaleString()} IRT
+                                            {user.balance.toLocaleString()} AED
                                         </span>
                                     </TableCell>
                                     <TableCell>
