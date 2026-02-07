@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
 import { auth } from '../../../auth';
-import { hasPermission } from '@smartclub/types';
+import { hasPermission, Permission } from '@smartclub/types';
 import { AssetsContent } from './_components/assets-content';
 
 export async function generateMetadata() {
@@ -23,7 +23,7 @@ export default async function AssetsPage() {
   }
 
   // Check if user can manage assets (Owner or Manager)
-  const canManage = hasPermission(session.user, 'venue:assets:write');
+  const canManage = hasPermission(session.user, Permission.ASSET_EDIT);
 
   return <AssetsContent venueId={venueId} canManage={canManage} />;
 }

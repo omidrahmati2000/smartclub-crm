@@ -48,17 +48,10 @@ export const mockTournaments: Tournament[] = [
                                 score2: 0,
                                 status: 'in_progress',
                                 assetId: 'court-center',
-                                liveState: {
-                                    sets: [
-                                        { score1: 6, score2: 4 },
-                                        { score1: 2, score2: 5 }
-                                    ],
-                                    currentSet: 2,
-                                    points1: '15',
-                                    points2: '40',
-                                    servingSide: 'p2',
-                                    isGoldenPoint: false
-                                }
+                                sets: [
+                                    { setNumber: 1, score1: 6, score2: 4 },
+                                    { setNumber: 2, score1: 2, score2: 5 }
+                                ]
                             }
                         ]
                     }
@@ -148,7 +141,7 @@ export const mockTournaments: Tournament[] = [
                                 roundId: 'round-2',
                                 team1ParticipantIds: ['p1', 'p5'],
                                 team2ParticipantIds: ['p2', 'p6'],
-                                status: 'pending',
+                                status: 'scheduled',
                                 assetId: 'court-1',
                             }
                         ]

@@ -32,6 +32,7 @@ import {
     TableRow,
     Avatar,
     AvatarFallback,
+    Separator,
 } from '@smartclub/ui'
 import { cn } from '@smartclub/utils'
 

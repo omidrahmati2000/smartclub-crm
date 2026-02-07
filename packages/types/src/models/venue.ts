@@ -91,20 +91,57 @@ export interface Asset {
   type: SportType;
   bookingType: BookingType;
   description?: string;
-  imageUrl?: string;
-  attributes: Record<string, string>;
+
+  // Images
+  imageUrl?: string; // Primary image (backward compatibility)
+  images?: AssetImage[]; // Multiple images with order
+
+  // Pricing
   pricePerSlot?: number;
   pricePerHour?: number;
   pricePerSession?: number;
   pricePerMinute?: number;
   currency: string;
+
+  // Capacity & Duration
   capacity?: number;
   minDuration?: number; // minutes
   maxDuration?: number; // minutes
   slotDuration?: number; // minutes (for slot-based)
+
+  // Features & Facilities
+  facilities?: AssetFacility[];
+  amenities?: string[];
+
+  // Operating Hours (can override venue hours)
+  operatingHours?: OperatingHours[];
+
+  // Advanced Settings
+  attributes: Record<string, string>;
+  requiresApproval?: boolean; // For bookings
+  advanceBookingDays?: number; // How many days ahead can book
+  cancellationPolicy?: string;
+
+  // Status
   isActive: boolean;
+  maintenanceNote?: string;
+
   createdAt: string;
   updatedAt: string;
+}
+
+export interface AssetImage {
+  id: string;
+  url: string;
+  order: number;
+  caption?: string;
+}
+
+export interface AssetFacility {
+  id: string;
+  name: string;
+  icon: string;
+  available: boolean;
 }
 
 export interface Amenity {

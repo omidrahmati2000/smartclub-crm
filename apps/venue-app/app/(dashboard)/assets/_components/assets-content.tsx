@@ -6,7 +6,7 @@ import { Plus } from 'lucide-react';
 import { Button } from '@smartclub/ui/button';
 import type { Asset, CreateAssetDTO } from '@smartclub/types';
 import { AssetCard } from './asset-card';
-import { AssetFormDialog } from './asset-form-dialog';
+import { AssetFormAdvanced } from './asset-form-advanced';
 import { apiClient } from '@/lib/api-client';
 
 interface AssetsContentProps {
@@ -123,7 +123,7 @@ export function AssetsContent({ venueId, canManage }: AssetsContentProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -131,12 +131,23 @@ export function AssetsContent({ venueId, canManage }: AssetsContentProps) {
           <p className="text-muted-foreground mt-1">{t('description')}</p>
         </div>
         {canManage && (
-          <Button onClick={handleCreateNew}>
-            <Plus className="me-2 h-4 w-4" />
+          <Button onClick={handleCreateNew} size="lg">
+            <Plus className="me-2 h-5 w-5" />
             {t('createAsset')}
           </Button>
         )}
       </div>
+
+      {/* Floating Action Button (Mobile) */}
+      {canManage && (
+        <Button
+          onClick={handleCreateNew}
+          size="lg"
+          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg md:hidden z-50"
+        >
+          <Plus className="h-6 w-6" />
+        </Button>
+      )}
 
       {/* Assets Grid */}
       {assets.length === 0 ? (
@@ -166,7 +177,7 @@ export function AssetsContent({ venueId, canManage }: AssetsContentProps) {
       )}
 
       {/* Create/Edit Dialog */}
-      <AssetFormDialog
+      <AssetFormAdvanced
         open={isFormOpen}
         onClose={handleCloseDialog}
         asset={editingAsset}

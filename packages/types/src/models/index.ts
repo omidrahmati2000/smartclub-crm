@@ -50,7 +50,7 @@ export type {
   AppliedPricingRule,
   PricingRuleFilters,
 } from './pricing-rule';
-export type { Venue, OperatingHours, Asset, Amenity } from './venue';
+export type { Venue, OperatingHours, Asset, Amenity, AssetImage, AssetFacility } from './venue';
 export {
   venueRequiresGDPR,
   getVenueCountry,

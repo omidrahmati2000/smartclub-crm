@@ -36,7 +36,9 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
+    Separator,
 } from '@smartclub/ui'
+import { cn } from '@smartclub/utils'
 
 // Mock Data
 const WALLET_DATA = [

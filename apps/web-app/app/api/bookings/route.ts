@@ -116,6 +116,7 @@ export async function POST(request: Request) {
             duration: duration || 90,
             status: BookingStatus.CONFIRMED, // Auto-confirm for now
             bookingType: BookingType.SLOT_BASED,
+            subtotal: totalPrice || 0,
             totalPrice: totalPrice || 0,
             currency: currency || 'IRT',
             participants: [

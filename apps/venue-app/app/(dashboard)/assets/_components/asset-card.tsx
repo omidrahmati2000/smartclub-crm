@@ -5,7 +5,7 @@ import { Button } from '@smartclub/ui/button';
 import type { Asset } from '@smartclub/types';
 import { BookingType } from '@smartclub/types';
 import { formatCurrency } from '@smartclub/utils';
-import { Edit, Trash2, Power } from 'lucide-react';
+import { Edit, Trash2, Power, Wifi, Car, Droplet, Lock, Wind, Users, Image as ImageIcon, Clock } from 'lucide-react';
 
 interface AssetCardProps {
   asset: Asset;
@@ -26,6 +26,17 @@ export function AssetCard({
 }: AssetCardProps) {
   const t = useTranslations('venue-admin.assets');
   const ts = useTranslations('sports');
+
+  const facilityIcons: Record<string, React.ReactNode> = {
+    Wifi: <Wifi className="h-3.5 w-3.5" />,
+    Car: <Car className="h-3.5 w-3.5" />,
+    Droplet: <Droplet className="h-3.5 w-3.5" />,
+    Lock: <Lock className="h-3.5 w-3.5" />,
+    Wind: <Wind className="h-3.5 w-3.5" />,
+    Users: <Users className="h-3.5 w-3.5" />,
+  };
+
+  const primaryImage = asset.images?.find((img) => img.order === 0) || asset.images?.[0];
 
   const getBookingTypeLabel = (type: BookingType) => {
     switch (type) {
@@ -66,8 +77,34 @@ export function AssetCard({
   };
 
   return (
-    <Card className={!asset.isActive ? 'opacity-60' : ''}>
-      <CardHeader>
+    <Card
+      className={`overflow-hidden ${!asset.isActive ? 'opacity-60' : ''} ${canEdit ? 'cursor-pointer hover:shadow-lg transition-shadow' : ''}`}
+      onClick={() => canEdit && onEdit(asset)}
+    >
+      {/* Image */}
+      {primaryImage ? (
+        <div className="relative h-40 w-full bg-muted">
+          <img
+            src={primaryImage.url}
+            alt={asset.name}
+            className="h-full w-full object-cover"
+          />
+          {asset.images && asset.images.length > 1 && (
+            <div className="absolute bottom-2 end-2 flex items-center gap-1 rounded bg-black/60 px-2 py-1 text-xs text-white">
+              <ImageIcon className="h-3 w-3" />
+              {asset.images.length}
+            </div>
+          )}
+          <Badge
+            variant={asset.isActive ? 'default' : 'secondary'}
+            className="absolute top-2 end-2"
+          >
+            {asset.isActive ? t('active') : t('maintenance')}
+          </Badge>
+        </div>
+      ) : null}
+
+      <CardHeader className={primaryImage ? 'pt-3' : ''}>
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg">{asset.name}</CardTitle>
@@ -75,9 +112,11 @@ export function AssetCard({
               {ts(asset.type)}
             </p>
           </div>
-          <Badge variant={asset.isActive ? 'default' : 'secondary'}>
-            {asset.isActive ? t('active') : t('maintenance')}
-          </Badge>
+          {!primaryImage && (
+            <Badge variant={asset.isActive ? 'default' : 'secondary'}>
+              {asset.isActive ? t('active') : t('maintenance')}
+            </Badge>
+          )}
         </div>
       </CardHeader>
 
@@ -117,23 +156,55 @@ export function AssetCard({
             <span className="font-medium">{t('minutes', { count: asset.slotDuration })}</span>
           </div>
         )}
+
+        {/* Facilities */}
+        {asset.facilities && asset.facilities.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {asset.facilities
+              .filter((f) => f.available)
+              .map((facility) => (
+                <span
+                  key={facility.id}
+                  className="inline-flex items-center gap-1 rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground"
+                  title={facility.name}
+                >
+                  {facilityIcons[facility.icon] || null}
+                  {facility.name}
+                </span>
+              ))}
+          </div>
+        )}
+
+        {/* Operating Hours indicator */}
+        {asset.operatingHours && asset.operatingHours.length > 0 && (
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground pt-1">
+            <Clock className="h-3.5 w-3.5" />
+            <span>{t('operatingHours')}</span>
+          </div>
+        )}
       </CardContent>
 
-      <CardFooter className="flex gap-2">
+      <CardFooter className="flex gap-2 flex-wrap justify-start">
         <Button
           variant="outline"
           size="sm"
-          onClick={() => onToggleStatus(asset.id)}
-          className="flex-1"
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleStatus(asset.id);
+          }}
         >
-          <Power className="me-2 h-4 w-4" />
+          <Power className="me-1 h-4 w-4" />
           {asset.isActive ? t('deactivate') : t('activate')}
         </Button>
         {canEdit && (
           <Button
             variant="outline"
             size="sm"
-            onClick={() => onEdit(asset)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit(asset);
+            }}
+            title={t('edit')}
           >
             <Edit className="h-4 w-4" />
           </Button>
@@ -142,7 +213,11 @@ export function AssetCard({
           <Button
             variant="destructive"
             size="sm"
-            onClick={() => onDelete(asset.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(asset.id);
+            }}
+            title={t('deleteAsset')}
           >
             <Trash2 className="h-4 w-4" />
           </Button>
