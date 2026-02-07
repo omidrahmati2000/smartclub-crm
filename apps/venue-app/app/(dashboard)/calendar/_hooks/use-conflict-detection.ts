@@ -2,6 +2,7 @@
 
 import { useMemo, useCallback } from 'react';
 import type { Booking } from '@smartclub/types';
+import { BookingStatus } from '@smartclub/types';
 
 interface TimeRange {
   startTime: string;
@@ -49,7 +50,7 @@ export function useConflictDetection(bookings: Booking[]) {
           b.assetId === assetId &&
           b.date === date &&
           b.id !== excludeBookingId &&
-          b.status !== 'CANCELLED' // Ignore cancelled bookings
+          b.status !== BookingStatus.CANCELLED // Ignore cancelled bookings; FROZEN and MAINTENANCE still occupy the court
       );
 
       const conflictingBookings = relevantBookings.filter((booking) =>

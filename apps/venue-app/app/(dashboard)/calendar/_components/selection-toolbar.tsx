@@ -38,35 +38,36 @@ export function SelectionToolbar({
       : `${minutes}m`;
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-bottom-4">
-      <div className="bg-background border shadow-lg rounded-lg p-4 flex items-center gap-4">
-        <div className="flex flex-col gap-1">
-          <p className="text-sm font-medium">
+    <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-bottom-4 w-[calc(100%-2rem)] sm:w-auto max-w-lg sm:max-w-none">
+      <div className="bg-background border shadow-lg rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+        <div className="flex flex-col gap-0.5 sm:gap-1">
+          <p className="text-xs sm:text-sm font-medium">
             {selectedSlots.length} {t('slotsSelected', { defaultValue: 'slots selected' })}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-[10px] sm:text-xs text-muted-foreground">
             {t('duration', { defaultValue: 'Duration' })}: {durationText}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 border-s ps-4">
+        <div className="flex items-center gap-2 sm:border-s sm:ps-4 w-full sm:w-auto">
           <Button
             size="sm"
             onClick={onCreateBooking}
             disabled={!allSameAsset || !allSameDate}
+            className="flex-1 sm:flex-none text-xs"
           >
-            <Calendar className="h-4 w-4 me-2" />
+            <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 me-1.5 sm:me-2" />
             {t('createBooking', { defaultValue: 'Create Booking' })}
           </Button>
 
-          <Button size="sm" variant="outline" onClick={onClear}>
-            <X className="h-4 w-4 me-2" />
-            {t('clear', { defaultValue: 'Clear' })}
+          <Button size="sm" variant="outline" onClick={onClear} className="shrink-0">
+            <X className="h-3.5 w-3.5 sm:h-4 sm:w-4 me-0 sm:me-2" />
+            <span className="hidden sm:inline">{t('clear', { defaultValue: 'Clear' })}</span>
           </Button>
         </div>
 
         {(!allSameAsset || !allSameDate) && (
-          <div className="text-xs text-orange-600 border-s ps-4">
+          <div className="text-[10px] sm:text-xs text-orange-600 sm:border-s sm:ps-4">
             {t('selectContinuousSlots', {
               defaultValue: 'Select continuous slots on same asset',
             })}

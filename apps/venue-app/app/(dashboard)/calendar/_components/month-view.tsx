@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { Booking } from '@smartclub/types';
 import { cn } from '@smartclub/utils';
 import { BookingStatus } from '@smartclub/types';
+import { Calendar as CalendarIcon, ChevronRight } from 'lucide-react';
 
 interface MonthViewProps {
   currentDate: Date;
@@ -14,12 +15,14 @@ interface MonthViewProps {
 }
 
 const statusColors: Record<string, string> = {
-  [BookingStatus.PENDING]: 'bg-yellow-500',
-  [BookingStatus.CONFIRMED]: 'bg-blue-500',
-  [BookingStatus.CHECKED_IN]: 'bg-green-500',
-  [BookingStatus.COMPLETED]: 'bg-gray-500',
-  [BookingStatus.CANCELLED]: 'bg-red-500',
-  [BookingStatus.NO_SHOW]: 'bg-orange-500',
+  [BookingStatus.PENDING]: 'bg-amber-500 shadow-[0_0_5px_rgba(245,158,11,0.4)]',
+  [BookingStatus.CONFIRMED]: 'bg-emerald-500 shadow-[0_0_5px_rgba(16,185,129,0.4)]',
+  [BookingStatus.CHECKED_IN]: 'bg-blue-500 shadow-[0_0_5px_rgba(59,130,246,0.4)]',
+  [BookingStatus.COMPLETED]: 'bg-slate-500 shadow-[0_0_5px_rgba(100,116,139,0.4)]',
+  [BookingStatus.CANCELLED]: 'bg-rose-500 shadow-[0_0_5px_rgba(244,63,94,0.4)]',
+  [BookingStatus.NO_SHOW]: 'bg-orange-500 shadow-[0_0_5px_rgba(249,115,22,0.4)]',
+  [BookingStatus.FROZEN]: 'bg-cyan-500 shadow-[0_0_5px_rgba(6,182,212,0.4)]',
+  [BookingStatus.MAINTENANCE]: 'bg-zinc-500 shadow-[0_0_5px_rgba(113,113,122,0.4)]',
 };
 
 export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }: MonthViewProps) {
@@ -104,13 +107,13 @@ export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }:
   };
 
   return (
-    <div className="p-4">
+    <div className="p-2 sm:p-4 bg-background">
       {/* Day headers */}
-      <div className="grid grid-cols-7 mb-2">
+      <div className="grid grid-cols-7 mb-2 sm:mb-4">
         {dayNames.map((day, index) => (
           <div
             key={index}
-            className="text-center text-sm font-medium text-muted-foreground py-2"
+            className="text-center text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-[0.1em] sm:tracking-[0.2em] py-1 sm:py-2 truncate px-0.5"
           >
             {day}
           </div>
@@ -118,86 +121,97 @@ export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }:
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 border rounded-lg overflow-hidden">
+      <div className="grid grid-cols-7 border rounded-xl overflow-hidden shadow-inner bg-muted/20">
         {calendarDays.map((date, index) => {
           if (!date) {
             return (
               <div
                 key={index}
-                className="min-h-[100px] border-b border-e bg-muted/20"
+                className="min-h-[60px] sm:min-h-[120px] border-b border-e bg-muted/10 opacity-40"
               />
             );
           }
 
           const dayBookings = getBookingsForDate(date);
           const summary = getBookingSummary(date);
+          const today = isToday(date);
+          const currentMonth = isCurrentMonth(date);
 
           return (
             <div
               key={index}
               className={cn(
-                'min-h-[100px] border-b border-e p-2 cursor-pointer hover:bg-muted/50 transition-colors',
-                isToday(date) && 'bg-primary/10',
-                !isCurrentMonth(date) && 'opacity-50'
+                'min-h-[60px] sm:min-h-[120px] border-b border-e p-1 sm:p-2 cursor-pointer transition-all duration-300 group hover:shadow-[inset_0_0_20px_rgba(0,0,0,0.02)]',
+                today ? 'bg-primary/5' : 'bg-card',
+                !currentMonth && 'bg-muted/30 opacity-60 grayscale-[0.5]'
               )}
               onClick={() => onDayClick(date)}
             >
               {/* Date number */}
-              <div className="flex items-center justify-between mb-1">
+              <div className="flex items-start justify-between mb-1 sm:mb-2">
                 <span
                   className={cn(
-                    'text-sm font-medium',
-                    isToday(date) && 'bg-primary text-primary-foreground rounded-full w-7 h-7 flex items-center justify-center'
+                    'text-[10px] sm:text-sm font-black w-5 h-5 sm:w-8 sm:h-8 flex items-center justify-center transition-all tabular-nums',
+                    today
+                      ? 'bg-primary text-primary-foreground rounded sm:rounded-lg shadow-lg shadow-primary/30 scale-110'
+                      : 'text-foreground/80 group-hover:text-primary group-hover:scale-110'
                   )}
                 >
                   {formatDate(date)}
                 </span>
                 {dayBookings.length > 0 && (
-                  <span className="text-xs text-muted-foreground">
-                    {dayBookings.length} {t('bookings')}
-                  </span>
+                  <div className="flex items-center gap-0.5 bg-muted/40 px-1 py-0.5 rounded-full border border-muted-foreground/10">
+                    <CalendarIcon className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-muted-foreground hidden sm:block" />
+                    <span className="text-[8px] sm:text-[10px] font-bold text-muted-foreground">
+                      {dayBookings.length}
+                    </span>
+                  </div>
                 )}
               </div>
 
-              {/* Booking summary dots */}
+              {/* Booking summary dots - mobile only shows dots */}
               {summary.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {summary.slice(0, 3).map((item, idx) => (
+                <div className="flex flex-wrap gap-0.5 sm:gap-1 mb-1 sm:mb-2">
+                  {summary.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-1"
+                      className="flex items-center gap-0.5 sm:gap-1 group/dot px-0.5 sm:px-1 rounded-sm hover:bg-muted/50 transition-colors"
                       title={`${item.count} ${item.status}`}
                     >
                       <div
                         className={cn(
-                          'w-2 h-2 rounded-full',
+                          'w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ring-1 ring-background',
                           statusColors[item.status] || 'bg-gray-500'
                         )}
                       />
-                      <span className="text-xs">{item.count}</span>
+                      <span className="text-[8px] sm:text-[9px] font-black opacity-0 group-hover/dot:opacity-100 transition-opacity truncate max-w-[30px] sm:max-w-[40px] hidden sm:inline">
+                        {item.count}
+                      </span>
                     </div>
                   ))}
                 </div>
               )}
 
-              {/* First few bookings preview */}
-              <div className="mt-1 space-y-1">
+              {/* First few bookings preview - hidden on mobile, visible on sm+ */}
+              <div className="space-y-1 hidden sm:block">
                 {dayBookings.slice(0, 2).map((booking) => (
                   <div
                     key={booking.id}
-                    className="text-xs bg-muted rounded px-1 py-0.5 truncate"
+                    className="text-[10px] bg-muted/60 hover:bg-primary/10 hover:text-primary rounded-md px-2 py-1 truncate font-bold border border-transparent hover:border-primary/20 transition-all flex items-center gap-1"
                     onClick={(e) => {
                       e.stopPropagation();
                       onBookingClick(booking);
                     }}
                   >
+                    <div className={cn("w-1 h-1 rounded-full shrink-0", statusColors[booking.status])} />
                     {booking.startTime}
                   </div>
                 ))}
                 {dayBookings.length > 2 && (
-                  <div className="text-xs text-muted-foreground">
-                    +{dayBookings.length - 2} {t('more')}
-                  </div>
+                  <button className="w-full text-[9px] font-black text-muted-foreground/70 hover:text-primary hover:bg-primary/5 py-0.5 rounded transition-all uppercase tracking-tighter flex items-center justify-center gap-0.5">
+                    <span>+{dayBookings.length - 2} {t('more')}</span>
+                    <ChevronRight className="w-2 h-2" />
+                  </button>
                 )}
               </div>
             </div>
@@ -205,28 +219,24 @@ export function MonthView({ currentDate, bookings, onBookingClick, onDayClick }:
         })}
       </div>
 
-      {/* Legend */}
-      <div className="flex flex-wrap gap-4 mt-4 text-xs">
-        <div className="flex items-center gap-1">
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <span>{t('statusLegend.pending')}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="w-3 h-3 rounded-full bg-blue-500" />
-          <span>{t('statusLegend.confirmed')}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="w-3 h-3 rounded-full bg-green-500" />
-          <span>{t('statusLegend.checkedIn')}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="w-3 h-3 rounded-full bg-gray-500" />
-          <span>{t('statusLegend.completed')}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <span>{t('statusLegend.cancelled')}</span>
-        </div>
+      {/* Modern Legend */}
+      <div className="mt-4 sm:mt-8 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3 p-2 sm:p-4 bg-muted/5 rounded-2xl border border-dashed">
+        {[
+          { key: 'pending', color: 'bg-amber-500' },
+          { key: 'confirmed', color: 'bg-emerald-500' },
+          { key: 'checkedIn', color: 'bg-blue-500' },
+          { key: 'completed', color: 'bg-slate-500' },
+          { key: 'cancelled', color: 'bg-rose-500' },
+          { key: 'frozen', color: 'bg-cyan-500' },
+          { key: 'maintenance', color: 'bg-zinc-500' },
+        ].map(item => (
+          <div key={item.key} className="flex items-center gap-1.5 sm:gap-2 group cursor-help">
+            <div className={cn("w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full", item.color, "shadow-[0_0_8px_rgba(0,0,0,0.1)] group-hover:scale-150 transition-transform")} />
+            <span className="text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-wider sm:tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">
+              {t(`statusLegend.${item.key}`)}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

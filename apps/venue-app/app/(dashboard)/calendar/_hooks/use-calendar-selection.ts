@@ -203,22 +203,19 @@ export function useCalendarSelection(options: UseCalendarSelectionOptions = {}) 
   // Handle drag end
   const handleDragEnd = useCallback(() => {
     dragStartRef.current = null;
-    setSelection((prev) => {
-      const finalSlots = prev.selectedSlots;
+    setSelection((prev) => ({
+      ...prev,
+      isDragging: false,
+      dragStart: null,
+      dragEnd: null,
+    }));
 
-      // Call callback if provided
-      if (onSelectionComplete && finalSlots.length > 0) {
-        onSelectionComplete(finalSlots);
-      }
-
-      return {
-        ...prev,
-        isDragging: false,
-        dragStart: null,
-        dragEnd: null,
-      };
-    });
-  }, [onSelectionComplete]);
+    // Call callback outside of setState to avoid updating another component during render
+    const finalSlots = selection.selectedSlots;
+    if (onSelectionComplete && finalSlots.length > 0) {
+      onSelectionComplete(finalSlots);
+    }
+  }, [onSelectionComplete, selection.selectedSlots]);
 
   // Clear selection
   const clearSelection = useCallback(() => {

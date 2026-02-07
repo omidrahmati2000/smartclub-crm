@@ -143,7 +143,7 @@ export function CustomersTable({
                 {customer.totalBookings}
               </TableCell>
               <TableCell className="text-start font-medium">
-                {formatCurrency(customer.totalSpent, customer.currency, locale as 'fa' | 'en')}
+                {formatCurrency(customer.totalSpent, customer.currency, 'en')}
               </TableCell>
               <TableCell className="text-sm text-muted-foreground">
                 {formatDate(customer.lastVisit)}

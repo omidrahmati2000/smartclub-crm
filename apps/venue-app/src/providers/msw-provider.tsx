@@ -42,7 +42,21 @@ export function MSWProvider({ children }: { children: React.ReactNode }) {
 
   // Block rendering until MSW is ready in development
   if (!ready) {
-    return null;
+    return (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        fontFamily: 'system-ui, sans-serif',
+        color: '#666',
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '14px', marginBottom: '8px' }}>Starting Mock Service Worker...</div>
+          <div style={{ fontSize: '12px', color: '#999' }}>Initializing API handlers</div>
+        </div>
+      </div>
+    );
   }
 
   return <>{children}</>;

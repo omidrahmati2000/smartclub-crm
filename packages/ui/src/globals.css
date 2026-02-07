@@ -65,3 +65,51 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Enhanced Date Picker Styles */
+@layer components {
+  .rdp {
+    --rdp-accent-color: hsl(var(--primary));
+    --rdp-background-color: hsl(var(--accent));
+    --rdp-accent-color-dark: hsl(var(--primary));
+    --rdp-background-color-dark: hsl(var(--accent));
+    --rdp-outline: 2px solid hsl(var(--primary) / 0.5);
+    --rdp-outline-selected: 3px solid hsl(var(--primary));
+  }
+
+  /* Smooth animations for calendar cells */
+  .rdp-day_button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rdp-day_button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: hsl(var(--primary) / 0.1);
+    transform: scale(0);
+    transition: transform 0.2s ease-out;
+    border-radius: 0.5rem;
+  }
+
+  .rdp-day_button:hover::before {
+    transform: scale(1);
+  }
+
+  /* Pulse animation for today */
+  @keyframes pulse-ring {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  .rdp .today {
+    animation: pulse-ring 2s ease-in-out infinite;
+  }
+}

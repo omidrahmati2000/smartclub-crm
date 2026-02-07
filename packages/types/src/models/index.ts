@@ -154,3 +154,13 @@ export type {
   GatewayCredentials,
 } from './payment-settings';
 export { DEFAULT_PAYMENT_SETTINGS } from './payment-settings';
+
+export type {
+  Product,
+  ProductCategory,
+  StockAdjustment,
+  Sale,
+  SaleItem,
+  SalesReport,
+} from './product';
+export { ProductStatus, StockAdjustmentType } from './product';

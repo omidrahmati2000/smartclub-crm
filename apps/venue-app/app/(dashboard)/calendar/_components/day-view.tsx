@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import type { Booking, Asset } from '@smartclub/types';
 import { cn } from '@smartclub/utils';
@@ -24,6 +24,7 @@ interface DayViewProps {
     newEndTime: string
   ) => void;
   onResizeBooking?: (booking: Booking, newStartTime: string, newEndTime: string) => void;
+  compactMode?: boolean;
 }
 
 export function DayView({
@@ -34,9 +35,26 @@ export function DayView({
   onCreateBooking,
   onMoveBooking,
   onResizeBooking,
+  compactMode = false,
 }: DayViewProps) {
   const t = useTranslations('venue-admin.calendar');
   const [isSelectionMode, setIsSelectionMode] = useState(false);
+
+  // Responsive slot height: compact or normal, mobile or desktop
+  const [slotHeight, setSlotHeight] = useState(compactMode ? 30 : 60);
+  useEffect(() => {
+    const updateSlotHeight = () => {
+      const isMobile = window.innerWidth < 640;
+      if (compactMode) {
+        setSlotHeight(isMobile ? 24 : 30);
+      } else {
+        setSlotHeight(isMobile ? 48 : 60);
+      }
+    };
+    updateSlotHeight();
+    window.addEventListener('resize', updateSlotHeight);
+    return () => window.removeEventListener('resize', updateSlotHeight);
+  }, [compactMode]);
 
   // Conflict detection hook
   const { checkConflict, isSlotAvailable } = useConflictDetection(bookings);
@@ -79,8 +97,8 @@ export function DayView({
     handleResizeEnd,
     getPreviewPosition,
   } = useBookingDrag({
-    onBookingMove,
-    onBookingResize,
+    onBookingMove: onMoveBooking,
+    onBookingResize: onResizeBooking,
     validateDrop: (assetId, date, startTime, endTime, bookingId) => {
       const conflictInfo = checkConflict(assetId, date, startTime, endTime, bookingId);
       return !conflictInfo.hasConflict;
@@ -97,8 +115,8 @@ export function DayView({
     return slots;
   }, []);
 
-  // Calculate position for a booking block
-  const getBookingPosition = (startTime: string, endTime: string) => {
+  // Calculate position for a booking block (responsive)
+  const getBookingPosition = useCallback((startTime: string, endTime: string) => {
     const parseTime = (time: string) => {
       const [hours, minutes] = time.split(':').map(Number);
       return hours * 60 + minutes;
@@ -108,11 +126,11 @@ export function DayView({
     const endMinutes = parseTime(endTime);
     const startOfDay = 6 * 60; // 6 AM in minutes
 
-    const top = ((startMinutes - startOfDay) / 30) * 60; // 60px per 30 min
-    const height = ((endMinutes - startMinutes) / 30) * 60;
+    const top = ((startMinutes - startOfDay) / 30) * slotHeight;
+    const height = ((endMinutes - startMinutes) / 30) * slotHeight;
 
     return { top, height };
-  };
+  }, [slotHeight]);
 
   // Filter bookings for each asset
   const getAssetBookings = (assetId: string) => {
@@ -128,8 +146,8 @@ export function DayView({
     return hours * 60 + minutes;
   };
 
-  // Get current time indicator position
-  const getCurrentTimePosition = () => {
+  // Get current time indicator position (responsive)
+  const getCurrentTimePosition = useCallback(() => {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
@@ -138,10 +156,10 @@ export function DayView({
 
     const totalMinutes = hours * 60 + minutes;
     const startOfDay = 6 * 60;
-    const top = ((totalMinutes - startOfDay) / 30) * 60;
+    const top = ((totalMinutes - startOfDay) / 30) * slotHeight;
 
     return top;
-  };
+  }, [slotHeight]);
 
   const currentTimeTop = getCurrentTimePosition();
   const isToday = date.toDateString() === new Date().toDateString();
@@ -183,28 +201,35 @@ export function DayView({
 
   return (
     <>
-      <div className="relative overflow-x-auto">
-        <div className="min-w-[800px]">
-            {/* Header with asset names */}
-          <div className="sticky top-0 z-10 grid bg-background border-b" style={{ gridTemplateColumns: `80px repeat(${assets.length}, minmax(150px, 1fr))` }}>
-            <div className="border-e p-2 text-xs font-medium">{t('time')}</div>
+      <div className="relative overflow-x-auto rounded-lg border shadow-sm bg-card -mx-px sm:mx-0">
+        <div className="min-w-[480px] sm:min-w-[800px]">
+          {/* Header with asset names */}
+          <div className="sticky top-0 z-20 grid bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b" style={{ gridTemplateColumns: `56px repeat(${assets.length}, minmax(100px, 1fr))` }}>
+            <div className="border-e p-1.5 sm:p-3 text-[10px] sm:text-xs font-medium text-muted-foreground flex items-center justify-center bg-muted/10">
+              {t('time')}
+            </div>
             {assets.map((asset) => (
-              <div key={asset.id} className="border-e p-2 text-xs font-medium truncate">
-                {asset.name}
+              <div key={asset.id} className="border-e p-1.5 sm:p-3 text-[10px] sm:text-sm font-semibold truncate flex items-center justify-center gap-1 sm:gap-2 hover:bg-muted/20 transition-colors">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary/20 ring-2 ring-primary/40 shrink-0"></span>
+                <span className="truncate">{asset.name}</span>
               </div>
             ))}
           </div>
 
           {/* Time grid */}
           <div className="relative">
-            <div className="grid" style={{ gridTemplateColumns: `80px repeat(${assets.length}, minmax(150px, 1fr))` }}>
+            <div className="grid" style={{ gridTemplateColumns: `56px repeat(${assets.length}, minmax(100px, 1fr))` }}>
               {/* Time labels */}
-              <div className="border-e">
+              <div className="border-e bg-muted/5">
                 {timeSlots.map((time, index) => (
                   <div
                     key={time}
-                    className="h-[60px] border-b p-2 text-xs text-muted-foreground"
-                    style={{ borderBottomStyle: index % 2 === 0 ? 'solid' : 'dashed' }}
+                    className={cn("border-b p-1 sm:p-2 text-muted-foreground font-medium flex items-start justify-center pt-1.5 sm:pt-2 select-none", compactMode ? "text-[8px] sm:text-[9px]" : "text-[9px] sm:text-[10px]")}
+                    style={{
+                      height: `${slotHeight}px`,
+                      borderBottomStyle: index % 2 === 0 ? 'solid' : 'dashed',
+                      borderColor: 'hsl(var(--border) / 0.6)'
+                    }}
                   >
                     {index % 2 === 0 ? time : ''}
                   </div>
@@ -215,7 +240,7 @@ export function DayView({
               {assets.map((asset) => {
                 const dateStr = date.toISOString().split('T')[0];
                 return (
-                  <div key={asset.id} className="relative border-e">
+                  <div key={asset.id} className="relative border-e group/col hover:bg-muted/5 transition-colors">
                     {/* Background grid with selection */}
                     {timeSlots.map((time, index) => {
                       const isSelected = isSlotSelected(dateStr, asset.id, time);
@@ -247,18 +272,20 @@ export function DayView({
                         <div
                           key={time}
                           className={cn(
-                            'h-[60px] border-b cursor-pointer transition-colors',
-                            isSelected && 'bg-primary/20 ring-2 ring-primary ring-inset',
-                            isTarget && !hasConflict && 'bg-green-100 ring-2 ring-green-500 ring-inset',
-                            isTarget && hasConflict && 'bg-red-100 ring-2 ring-red-500 ring-inset',
-                            !isSelected && !isTarget && 'hover:bg-muted/50'
+                            'border-b cursor-pointer transition-all duration-200',
+                            isSelected && 'bg-primary/10 ring-2 ring-primary ring-inset z-10',
+                            isTarget && !hasConflict && 'bg-emerald-500/20 ring-2 ring-emerald-500 ring-inset z-20',
+                            isTarget && hasConflict && 'bg-red-500/20 ring-2 ring-red-500 ring-inset z-20',
+                            !isSelected && !isTarget && 'hover:bg-primary/5'
                           )}
-                          title={hasConflict ? 'Conflict with existing booking' : undefined}
+                          title={hasConflict ? t('conflictWarning') : undefined}
                           style={{
+                            height: `${slotHeight}px`,
                             borderBottomStyle: index % 2 === 0 ? 'solid' : 'dashed',
+                            borderColor: 'hsl(var(--border) / 0.4)',
                             backgroundColor:
                               !isSelected && !isTarget && index % 4 === 0
-                                ? 'transparent'
+                                ? 'rgba(0,0,0,0.01)' // Very subtle shading for hour blocks
                                 : undefined,
                           }}
                           onClick={(e) => {
@@ -299,7 +326,7 @@ export function DayView({
                     })}
 
                     {/* Booking blocks positioned absolutely */}
-                    <div className="absolute inset-0 p-1 pointer-events-none">
+                    <div className="absolute inset-0 p-1 pointer-events-none z-10">
                       {getAssetBookings(asset.id).map((booking) => {
                         const { top, height } = getBookingPosition(
                           booking.startTime,
@@ -311,8 +338,8 @@ export function DayView({
                           <div
                             key={booking.id}
                             className={cn(
-                              'absolute inset-x-1 pointer-events-auto',
-                              isDragging && 'opacity-50 cursor-move'
+                              'absolute inset-x-1 pointer-events-auto transition-all duration-200 ease-out',
+                              isDragging && 'opacity-50 cursor-move scale-105 shadow-xl z-50'
                             )}
                             style={{
                               top: `${top}px`,
@@ -320,6 +347,9 @@ export function DayView({
                             }}
                             draggable
                             onDragStart={(e) => {
+                              // Use preventDefault to avoid native ghosting since we render our own preview/use react-dnd style logic if feasible,
+                              // but here we likely rely on state-driven drag.
+                              // Wait, existing code uses e.preventDefault() + handleDragBookingStart
                               e.preventDefault();
                               handleDragBookingStart(booking);
                             }}
@@ -332,6 +362,8 @@ export function DayView({
                                 }
                               }}
                               isDragging={isDragging}
+                              onResizeStart={(edge) => handleResizeStart(booking, edge)}
+                              compact={compactMode}
                             />
                           </div>
                         );
@@ -340,7 +372,7 @@ export function DayView({
 
                     {/* Preview for dragged booking */}
                     {draggedBooking && getPreviewPosition() && (
-                      <div className="absolute inset-0 p-1 pointer-events-none">
+                      <div className="absolute inset-0 p-1 pointer-events-none z-20">
                         {(() => {
                           const preview = getPreviewPosition();
                           if (
@@ -356,11 +388,11 @@ export function DayView({
                             60000;
 
                           const { top } = getBookingPosition(preview.startTime, preview.startTime);
-                          const height = (duration / 30) * 60;
+                          const height = (duration / 30) * slotHeight;
 
                           return (
                             <div
-                              className="absolute inset-x-1 opacity-50"
+                              className="absolute inset-x-1 opacity-60 scale-[1.01] transition-all"
                               style={{
                                 top: `${top}px`,
                                 height: `${height}px`,
@@ -368,8 +400,10 @@ export function DayView({
                             >
                               <BookingBlock
                                 booking={draggedBooking.booking}
-                                onClick={() => {}}
+                                onClick={() => { }}
                                 isDragging={false}
+                                showResizeHandles={false}
+                                compact={compactMode}
                               />
                             </div>
                           );
@@ -384,10 +418,12 @@ export function DayView({
             {/* Current time indicator */}
             {isToday && currentTimeTop !== null && (
               <div
-                className="absolute inset-x-0 z-20 border-t-2 border-red-500"
+                className="absolute inset-x-0 z-30 border-t-2 border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)] pointer-events-none"
                 style={{ top: `${currentTimeTop}px` }}
               >
-                <div className="absolute -top-1.5 start-2 h-3 w-3 rounded-full bg-red-500" />
+                <div className="absolute -top-2 start-0 h-4 w-4 -translate-x-1/2 rounded-full bg-red-500 shadow-sm flex items-center justify-center ring-2 ring-background">
+                  <div className="w-1.5 h-1.5 bg-white rounded-full" />
+                </div>
               </div>
             )}
           </div>

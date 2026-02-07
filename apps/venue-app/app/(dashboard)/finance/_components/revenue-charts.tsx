@@ -71,7 +71,7 @@ export function RevenueCharts({
 
   const formatTooltipValue = (value: number | undefined) => {
     if (value === undefined) return '';
-    return formatCurrency(value, locale);
+    return formatCurrency(value, 'AED', 'en');
   };
 
   return (

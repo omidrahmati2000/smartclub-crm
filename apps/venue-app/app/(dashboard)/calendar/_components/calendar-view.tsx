@@ -1,20 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Card, CardContent } from '@smartclub/ui/card';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import type { Booking, Asset } from '@smartclub/types';
 import { BookingStatus } from '@smartclub/types';
-import { useUpdateBookingStatus } from '@/hooks/use-bookings';
+import { useUpdateBookingStatus, useUpdateBooking, useToggleVip } from '@/hooks/use-bookings';
 import { CalendarHeader } from './calendar-header';
 import { DayView } from './day-view';
 import { WeekView } from './week-view';
 import { MonthView } from './month-view';
 import { BookingDetailsModal } from './booking-details-modal';
+import { CreateBookingDialog } from './create-booking-dialog';
 import { useActionHistory } from '../_hooks/use-action-history';
 import { apiClient } from '@/lib/api-client';
+import { useToast } from '@smartclub/ui/use-toast';
 
 type ViewMode = 'day' | 'week' | 'month';
 
@@ -28,85 +30,75 @@ export function CalendarView() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDataLoading, setIsDataLoading] = useState(false);
+  const [selectedAssetIds, setSelectedAssetIds] = useState<Set<string>>(new Set());
+  const [compactMode, setCompactMode] = useState(false);
+
+  // Create booking state
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [createParams, setCreateParams] = useState<{
+    assetId: string;
+    assetName: string;
+    date: string;
+    startTime: string;
+    endTime: string;
+  } | null>(null);
+
+  const { toast } = useToast();
   const updateStatus = useUpdateBookingStatus();
+  const updateBooking = useUpdateBooking();
+  const toggleVip = useToggleVip();
 
   // Action history for undo/redo
   const { addAction, undo, redo, canUndo, canRedo } = useActionHistory({
     onUndo: (action) => {
       // Revert the action
       if (action.type === 'move') {
-        setBookings((prev) =>
-          prev.map((b) =>
-            b.id === action.booking.id
-              ? {
-                  ...b,
-                  assetId: action.previousAssetId!,
-                  date: action.previousDate!,
-                  startTime: action.previousStartTime!,
-                  endTime: action.previousEndTime!,
-                }
-              : b
-          )
-        );
+        updateBooking.mutate({
+          bookingId: action.booking.id,
+          assetId: action.previousAssetId!,
+          date: action.previousDate!,
+          startTime: action.previousStartTime!,
+          endTime: action.previousEndTime!,
+        });
       } else if (action.type === 'resize') {
-        setBookings((prev) =>
-          prev.map((b) =>
-            b.id === action.booking.id
-              ? {
-                  ...b,
-                  startTime: action.previousStartTime!,
-                  endTime: action.previousEndTime!,
-                }
-              : b
-          )
-        );
+        updateBooking.mutate({
+          bookingId: action.booking.id,
+          startTime: action.previousStartTime!,
+          endTime: action.previousEndTime!,
+        });
       }
     },
     onRedo: (action) => {
       // Re-apply the action
       if (action.type === 'move') {
-        setBookings((prev) =>
-          prev.map((b) =>
-            b.id === action.booking.id
-              ? {
-                  ...b,
-                  assetId: action.newAssetId!,
-                  date: action.newDate!,
-                  startTime: action.newStartTime!,
-                  endTime: action.newEndTime!,
-                }
-              : b
-          )
-        );
+        updateBooking.mutate({
+          bookingId: action.booking.id,
+          assetId: action.newAssetId!,
+          date: action.newDate!,
+          startTime: action.newStartTime!,
+          endTime: action.newEndTime!,
+        });
       } else if (action.type === 'resize') {
-        setBookings((prev) =>
-          prev.map((b) =>
-            b.id === action.booking.id
-              ? {
-                  ...b,
-                  startTime: action.newStartTime!,
-                  endTime: action.newEndTime!,
-                }
-              : b
-          )
-        );
+        updateBooking.mutate({
+          bookingId: action.booking.id,
+          startTime: action.newStartTime!,
+          endTime: action.newEndTime!,
+        });
       }
     },
   });
 
-  useEffect(() => {
-    if (session?.user?.venueId) {
-      fetchData(session.user.venueId);
-    }
-  }, [session, currentDate, viewMode]);
-
-  const fetchData = async (venueId: string) => {
-    setIsLoading(true);
+  const fetchData = useCallback(async (venueId: string) => {
+    setIsDataLoading(true);
     try {
-      // Fetch assets
-      const assetsResult = await apiClient.get(`/venues/${venueId}/assets`);
-      if (assetsResult.success && assetsResult.data) {
-        setAssets(assetsResult.data);
+      // Fetch assets if not loaded
+      if (assets.length === 0) {
+        const assetsResult = await apiClient.get<Asset[]>(`/venues/${venueId}/assets`);
+        if (assetsResult.success && assetsResult.data) {
+          setAssets(assetsResult.data);
+          setSelectedAssetIds(new Set(assetsResult.data.map((a) => a.id)));
+        }
       }
 
       // Calculate date range based on view mode
@@ -133,7 +125,7 @@ export function CalendarView() {
       const endStr = endDate.toISOString().split('T')[0];
 
       // Fetch bookings for the date range
-      const bookingsResult = await apiClient.get(
+      const bookingsResult = await apiClient.get<Booking[]>(
         `/venues/${venueId}/bookings?startDate=${startStr}&endDate=${endStr}`,
       );
       if (bookingsResult.success && bookingsResult.data) {
@@ -141,10 +133,18 @@ export function CalendarView() {
       }
     } catch (error) {
       console.error('Failed to fetch calendar data:', error);
+      toast({ title: t('toast.error'), description: t('toast.failedLoad'), variant: 'destructive' });
     } finally {
       setIsLoading(false);
+      setIsDataLoading(false);
     }
-  };
+  }, [currentDate, viewMode, assets.length]);
+
+  useEffect(() => {
+    if (session?.user?.venueId) {
+      fetchData(session.user.venueId);
+    }
+  }, [session, fetchData]);
 
   const handlePrevious = () => {
     const newDate = new Date(currentDate);
@@ -174,20 +174,54 @@ export function CalendarView() {
     setCurrentDate(new Date());
   };
 
+  const handleDateChange = (date: Date) => {
+    setCurrentDate(date);
+  };
+
   const handleBookingClick = (booking: Booking) => {
     setSelectedBooking(booking);
   };
 
   const handleCheckIn = (bookingId: string) => {
-    updateStatus.mutate({ bookingId, status: BookingStatus.CHECKED_IN });
+    updateStatus.mutate({ bookingId, status: BookingStatus.CHECKED_IN }, {
+      onSuccess: () => toast({ title: t('toast.checkedIn') }),
+      onError: () => toast({ title: t('toast.error'), description: t('toast.failedCheckIn'), variant: 'destructive' })
+    });
   };
 
   const handleCancel = (bookingId: string) => {
-    updateStatus.mutate({ bookingId, status: BookingStatus.CANCELLED });
+    updateStatus.mutate({ bookingId, status: BookingStatus.CANCELLED }, {
+      onSuccess: () => toast({ title: t('toast.cancelled') }),
+      onError: () => toast({ title: t('toast.error'), description: t('toast.failedCancel'), variant: 'destructive' })
+    });
   };
 
   const handleMarkNoShow = (bookingId: string) => {
-    updateStatus.mutate({ bookingId, status: BookingStatus.NO_SHOW });
+    updateStatus.mutate({ bookingId, status: BookingStatus.NO_SHOW }, {
+      onSuccess: () => toast({ title: t('toast.noShow') }),
+      onError: () => toast({ title: t('toast.error'), description: t('toast.failedNoShow'), variant: 'destructive' })
+    });
+  };
+
+  const handleFreeze = (bookingId: string) => {
+    updateStatus.mutate({ bookingId, status: BookingStatus.FROZEN }, {
+      onSuccess: () => toast({ title: t('toast.frozen') }),
+      onError: () => toast({ title: t('toast.error'), description: t('toast.failedFreeze'), variant: 'destructive' })
+    });
+  };
+
+  const handleMaintenance = (bookingId: string) => {
+    updateStatus.mutate({ bookingId, status: BookingStatus.MAINTENANCE }, {
+      onSuccess: () => toast({ title: t('toast.maintenance') }),
+      onError: () => toast({ title: t('toast.error'), description: t('toast.failedMaintenance'), variant: 'destructive' })
+    });
+  };
+
+  const handleToggleVip = (bookingId: string) => {
+    toggleVip.mutate(bookingId, {
+      onSuccess: () => toast({ title: t('toast.vipUpdated') }),
+      onError: () => toast({ title: t('toast.error'), description: t('toast.failedVip'), variant: 'destructive' })
+    });
   };
 
   const handleCreateBooking = (
@@ -196,10 +230,15 @@ export function CalendarView() {
     startTime: string,
     endTime: string
   ) => {
-    // TODO: Open create booking dialog with pre-filled data
-    console.log('Create booking:', { assetId, date, startTime, endTime });
-    // For now, just show alert
-    alert(`Create booking:\nAsset: ${assetId}\nDate: ${date}\nTime: ${startTime} - ${endTime}`);
+    const asset = assets.find(a => a.id === assetId);
+    setCreateParams({
+      assetId,
+      assetName: asset?.name || t('standardAsset'),
+      date,
+      startTime,
+      endTime
+    });
+    setShowCreateDialog(true);
   };
 
   const handleMoveBooking = (
@@ -224,16 +263,22 @@ export function CalendarView() {
       newEndTime,
     });
 
-    // TODO: Call API to update booking
-    console.log('Move booking:', {
+    // Update via API
+    updateBooking.mutate({
       bookingId: booking.id,
-      newAssetId,
-      newDate,
-      newStartTime,
-      newEndTime,
+      assetId: newAssetId,
+      date: newDate,
+      startTime: newStartTime,
+      endTime: newEndTime,
+    }, {
+      onSuccess: () => toast({ title: t('toast.moved') }),
+      onError: () => {
+        toast({ title: t('toast.error'), description: t('toast.failedMove'), variant: 'destructive' });
+        // Revert local state if needed (React Query does this via onMutate/onError)
+      }
     });
 
-    // Optimistic update
+    // Local state update for immediate feedback (though useUpdateBooking also does this)
     setBookings((prev) =>
       prev.map((b) =>
         b.id === booking.id
@@ -255,10 +300,17 @@ export function CalendarView() {
       newEndTime,
     });
 
-    // TODO: Call API to update booking
-    console.log('Resize booking:', { bookingId: booking.id, newStartTime, newEndTime });
+    // Update via API
+    updateBooking.mutate({
+      bookingId: booking.id,
+      startTime: newStartTime,
+      endTime: newEndTime,
+    }, {
+      onSuccess: () => toast({ title: t('toast.durationUpdated') }),
+      onError: () => toast({ title: t('toast.error'), description: t('toast.failedDuration'), variant: 'destructive' })
+    });
 
-    // Optimistic update
+    // Local state update
     setBookings((prev) =>
       prev.map((b) =>
         b.id === booking.id ? { ...b, startTime: newStartTime, endTime: newEndTime } : b
@@ -268,15 +320,18 @@ export function CalendarView() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
-        <Skeleton className="h-16" />
-        <Skeleton className="h-[600px]" />
+      <div className="space-y-4 sm:space-y-8 p-1">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <Skeleton className="h-10 sm:h-12 w-full sm:w-64 rounded-xl" />
+          <Skeleton className="h-10 sm:h-12 w-full sm:w-48 rounded-xl" />
+        </div>
+        <Skeleton className="h-[400px] sm:h-[700px] w-full rounded-2xl shadow-sm" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <CalendarHeader
         currentDate={currentDate}
         viewMode={viewMode}
@@ -284,19 +339,27 @@ export function CalendarView() {
         onPrevious={handlePrevious}
         onNext={handleNext}
         onToday={handleToday}
+        onDateChange={handleDateChange}
+        isLoading={isDataLoading}
+        assets={assets}
+        selectedAssetIds={selectedAssetIds}
+        onAssetFilterChange={setSelectedAssetIds}
+        compactMode={compactMode}
+        onCompactModeChange={setCompactMode}
       />
 
-      <Card>
+      <Card className="border-none shadow-2xl rounded-2xl overflow-hidden bg-background/50 backdrop-blur-sm">
         <CardContent className="p-0">
           {viewMode === 'day' && (
             <DayView
               date={currentDate}
-              assets={assets}
+              assets={assets.filter((a) => selectedAssetIds.has(a.id))}
               bookings={bookings}
               onBookingClick={handleBookingClick}
               onCreateBooking={handleCreateBooking}
               onMoveBooking={handleMoveBooking}
               onResizeBooking={handleResizeBooking}
+              compactMode={compactMode}
             />
           )}
           {viewMode === 'week' && (
@@ -329,6 +392,17 @@ export function CalendarView() {
         onCancel={handleCancel}
         onMarkNoShow={handleMarkNoShow}
       />
+
+      {createParams && (
+        <CreateBookingDialog
+          open={showCreateDialog}
+          onClose={() => {
+            setShowCreateDialog(false);
+            setCreateParams(null);
+          }}
+          {...createParams}
+        />
+      )}
     </div>
   );
 }

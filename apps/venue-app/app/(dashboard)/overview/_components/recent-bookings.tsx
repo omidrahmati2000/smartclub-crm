@@ -98,7 +98,7 @@ export function RecentBookings({ bookings }: RecentBookingsProps) {
                   </Badge>
                 </TableCell>
                 <TableCell className="text-start">
-                  {formatCurrency(booking.totalPrice, booking.currency, 'fa')}
+                  {formatCurrency(booking.totalPrice, booking.currency, 'en')}
                 </TableCell>
               </TableRow>
             ))}

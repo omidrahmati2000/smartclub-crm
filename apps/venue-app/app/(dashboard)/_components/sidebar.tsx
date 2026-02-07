@@ -24,6 +24,7 @@ import {
   Monitor,
   Percent,
   Cpu,
+  ReceiptText,
 } from 'lucide-react'
 import { Permission } from '@smartclub/types'
 import type { User } from '@smartclub/types'
@@ -89,6 +90,11 @@ export function Sidebar() {
           href: '/shop',
           label: t('nav.shop'),
           icon: ShoppingBag,
+        },
+        {
+          href: '/pos',
+          label: t('nav.pos'),
+          icon: ReceiptText,
         },
         {
           href: '/valet',
@@ -214,12 +220,12 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'hidden h-screen flex-col border-e bg-background transition-all duration-300 md:flex',
+        'hidden h-full flex-col border-e bg-background transition-all duration-300 md:flex',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
       {/* Logo */}
-      <div className="flex h-16 items-center justify-between border-b px-4">
+      <div className="flex h-16 items-center justify-between border-b px-4 flex-shrink-0">
         {!isCollapsed && (
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -253,7 +259,7 @@ export function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <ScrollArea className="flex-1 px-3 py-4">
+      <ScrollArea className="flex-1 overflow-hidden px-3 py-4">
         <nav className="space-y-4">
           {visibleGroups.map((group, index) => (
             <div key={group.label}>
@@ -271,7 +277,7 @@ export function Sidebar() {
       </ScrollArea>
 
       {/* User Menu */}
-      <div className="border-t">
+      <div className="border-t flex-shrink-0">
         <UserMenu isCollapsed={isCollapsed} />
       </div>
     </aside>

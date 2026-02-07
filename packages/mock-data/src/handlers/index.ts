@@ -14,6 +14,8 @@ import { complianceHandlers } from './compliance';
 import { paymentSettingsHandlers } from './payment-settings';
 
 import { tournamentHandlers } from './tournaments';
+import { shopHandlers } from './products';
+import { salesHandlers } from './sales';
 
 export const handlers = [
   ...authHandlers,
@@ -31,4 +33,6 @@ export const handlers = [
   ...complianceHandlers,
   ...paymentSettingsHandlers,
   ...tournamentHandlers,
+  ...shopHandlers,
+  ...salesHandlers,
 ];

@@ -33,13 +33,13 @@ export function CancellationReport({ data }: CancellationReportProps) {
       title: t('totalRefunds'),
       value: data.totalRefunds,
       icon: <DollarSign className="h-4 w-4" />,
-      formatValue: (v: string | number) => formatCurrency(Number(v), locale),
+      formatValue: (v: string | number) => formatCurrency(Number(v), 'AED', 'en'),
     },
     {
       title: t('lostRevenue'),
       value: data.lostRevenue,
       icon: <DollarSign className="h-4 w-4" />,
-      formatValue: (v: string | number) => formatCurrency(Number(v), locale),
+      formatValue: (v: string | number) => formatCurrency(Number(v), 'AED', 'en'),
     },
   ];
 

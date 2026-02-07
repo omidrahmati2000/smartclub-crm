@@ -46,19 +46,19 @@ export function AssetCard({
     switch (asset.bookingType) {
       case BookingType.SLOT_BASED:
         return asset.pricePerSlot
-          ? `${formatCurrency(asset.pricePerSlot, asset.currency, 'fa')} / ${t('pricePerSlot')}`
+          ? `${formatCurrency(asset.pricePerSlot, asset.currency, 'en')} / ${t('pricePerSlot')}`
           : '-';
       case BookingType.DURATION_BASED:
         return asset.pricePerHour
-          ? `${formatCurrency(asset.pricePerHour, asset.currency, 'fa')} / ${t('pricePerHour')}`
+          ? `${formatCurrency(asset.pricePerHour, asset.currency, 'en')} / ${t('pricePerHour')}`
           : '-';
       case BookingType.CAPACITY_BASED:
         return asset.pricePerSession
-          ? `${formatCurrency(asset.pricePerSession, asset.currency, 'fa')} / ${t('pricePerSession')}`
+          ? `${formatCurrency(asset.pricePerSession, asset.currency, 'en')} / ${t('pricePerSession')}`
           : '-';
       case BookingType.OPEN_SESSION:
         return asset.pricePerMinute
-          ? `${formatCurrency(asset.pricePerMinute, asset.currency, 'fa')} / ${t('pricePerMinute')}`
+          ? `${formatCurrency(asset.pricePerMinute, asset.currency, 'en')} / ${t('pricePerMinute')}`
           : '-';
       default:
         return '-';

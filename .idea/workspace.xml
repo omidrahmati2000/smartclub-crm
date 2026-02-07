@@ -6,77 +6,46 @@
   <component name="ChangeListManager">
     <list default="true" id="b53c0f65-7429-4765-926a-e3de1c812029" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLAUDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/CLAUDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/_components/nav-item.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/_components/nav-item.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/_components/sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/_components/sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/_components/user-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/_components/user-menu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/assets/_components/asset-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/assets/_components/asset-card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/assets/_components/asset-form-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/assets/_components/asset-form-dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/assets/_components/assets-content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/assets/_components/assets-content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/bookings/_components/bookings-content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/bookings/_components/bookings-content.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/bookings/_components/bookings-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/bookings/_components/bookings-table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/bookings/_components/create-booking-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/bookings/_components/create-booking-dialog.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/booking-block.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/booking-block.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/booking-details-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/booking-details-modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/booking-tooltip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/booking-tooltip.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/calendar-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/calendar-header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/calendar-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/calendar-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/context-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/context-menu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/day-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/day-view.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/month-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/month-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/selection-toolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/selection-toolbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/week-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_components/week-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/customers/_components/customer-profile-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/customers/_components/customer-profile-modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/customers/_components/customer-stats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/customers/_components/customer-stats.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/occupancy-report.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/occupancy-report.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_hooks/use-calendar-selection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_hooks/use-calendar-selection.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_hooks/use-conflict-detection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/calendar/_hooks/use-conflict-detection.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/customers/_components/customers-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/customers/_components/customers-table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/cancellation-report.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/cancellation-report.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/revenue-charts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/revenue-charts.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/revenue-report.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/finance/_components/revenue-report.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/overview/_components/kpi-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/overview/_components/kpi-card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/overview/_components/overview-content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/overview/_components/overview-content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/pricing/_components/price-preview-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/pricing/_components/price-preview-dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/pricing/_components/pricing-content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/pricing/_components/pricing-content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/bookings-report.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/bookings-report.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/customers-report.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/customers-report.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/performance-report.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/performance-report.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/period-selector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/period-selector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/reports-content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/reports/_components/reports-content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/booking-rules-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/booking-rules-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/compliance-settings-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/compliance-settings-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/location-settings-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/location-settings-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/notification-settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/notification-settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/operating-hours-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/operating-hours-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/settings-content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/settings-content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/tax-settings-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/tax-settings-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/venue-profile-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/venue-profile-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/white-label-settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/settings/_components/white-label-settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/add-staff-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/add-staff-dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/delete-staff-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/delete-staff-dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/edit-staff-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/edit-staff-dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/staff-content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/staff/_components/staff-content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/venue-app/src/hooks/use-assets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/src/hooks/use-assets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/overview/_components/recent-bookings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/overview/_components/recent-bookings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/shop/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/shop/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/valet/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/app/(dashboard)/valet/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/next.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/venue-app/src/hooks/use-bookings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/src/hooks/use-bookings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/ar/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/ar/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/ar/location-compliance.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/ar/location-compliance.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/ar/venue-admin.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/ar/venue-admin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/en/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/en/location-compliance.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/en/location-compliance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/src/lib/msw.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/src/lib/msw.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/venue-app/src/providers/msw-provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/venue-app/src/providers/msw-provider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/i18n/locales/en/venue-admin.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/en/venue-admin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/fa/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/fa/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/i18n/locales/fa/location-compliance.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/fa/location-compliance.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/i18n/locales/fa/venue-admin.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/i18n/locales/fa/venue-admin.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/bookings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/bookings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/customers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/customers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/financial-reports.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/financial-reports.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/pricing-rules.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/pricing-rules.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/staff.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/staff.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/venue-settings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/venue-settings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/mock-data/src/fixtures/venues.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/fixtures/venues.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/handlers/compliance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/handlers/compliance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/handlers/bookings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/handlers/bookings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/mock-data/src/handlers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/handlers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/mock-data/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/mock-data/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/enums/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/enums/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/enums/booking-status.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/enums/booking-status.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/types/src/models/booking.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/models/booking.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/types/src/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/models/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/ui/src/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/ui/src/primitives/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/ui/src/primitives/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/utils/src/currency.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/utils/src/currency.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/utils/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/utils/src/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,6 +115,10 @@
       <workItem from="1769801184577" duration="6664000" />
       <workItem from="1769848907617" duration="12557000" />
       <workItem from="1769933974777" duration="605000" />
+      <workItem from="1770021093741" duration="11264000" />
+      <workItem from="1770102350214" duration="7520000" />
+      <workItem from="1770276873366" duration="601000" />
+      <workItem from="1770447775225" duration="12618000" />
     </task>
     <servers />
   </component>

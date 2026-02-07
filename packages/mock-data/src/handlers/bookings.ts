@@ -147,7 +147,11 @@ export const bookingHandlers = [
       paymentMethod: body.paymentMethod,
       paymentStatus: PaymentStatus.COMPLETED,
       notes: body.notes,
-      isRecurring: false,
+      isRecurring: body.isRecurring || false,
+      isVip: body.isVip || false,
+      priority: body.priority || 'normal',
+      tags: body.tags || [],
+      bookingSource: body.bookingSource || 'online',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -324,6 +328,79 @@ export const bookingHandlers = [
       data: mockBookingsStore[bookingIndex],
       success: true,
       message: 'Booking marked as no-show',
+    });
+  }),
+
+  // Freeze a booking (reserved slot)
+  http.patch('/api/bookings/:id/freeze', ({ params }) => {
+    const bookingIndex = mockBookingsStore.findIndex((b) => b.id === params.id);
+
+    if (bookingIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Not Found', message: 'Booking not found', statusCode: 404 },
+        { status: 404 }
+      );
+    }
+
+    mockBookingsStore[bookingIndex] = {
+      ...mockBookingsStore[bookingIndex],
+      status: BookingStatus.FROZEN,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockBookingsStore[bookingIndex],
+      success: true,
+      message: 'Time slot frozen successfully',
+    });
+  }),
+
+  // Block for maintenance
+  http.patch('/api/bookings/:id/maintenance', ({ params }) => {
+    const bookingIndex = mockBookingsStore.findIndex((b) => b.id === params.id);
+
+    if (bookingIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Not Found', message: 'Booking not found', statusCode: 404 },
+        { status: 404 }
+      );
+    }
+
+    mockBookingsStore[bookingIndex] = {
+      ...mockBookingsStore[bookingIndex],
+      status: BookingStatus.MAINTENANCE,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockBookingsStore[bookingIndex],
+      success: true,
+      message: 'Court blocked for maintenance',
+    });
+  }),
+
+  // Toggle VIP status
+  http.patch('/api/bookings/:id/vip', ({ params }) => {
+    const bookingIndex = mockBookingsStore.findIndex((b) => b.id === params.id);
+
+    if (bookingIndex === -1) {
+      return HttpResponse.json(
+        { error: 'Not Found', message: 'Booking not found', statusCode: 404 },
+        { status: 404 }
+      );
+    }
+
+    const currentVip = mockBookingsStore[bookingIndex].isVip || false;
+    mockBookingsStore[bookingIndex] = {
+      ...mockBookingsStore[bookingIndex],
+      isVip: !currentVip,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return HttpResponse.json({
+      data: mockBookingsStore[bookingIndex],
+      success: true,
+      message: currentVip ? 'VIP status removed' : 'Marked as VIP',
     });
   }),
 

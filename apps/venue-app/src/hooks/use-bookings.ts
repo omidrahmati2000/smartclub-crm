@@ -61,6 +61,8 @@ export function useUpdateBookingStatus() {
         [BookingStatus.CANCELLED]: 'cancel',
         [BookingStatus.NO_SHOW]: 'no-show',
         [BookingStatus.COMPLETED]: 'complete',
+        [BookingStatus.FROZEN]: 'freeze',
+        [BookingStatus.MAINTENANCE]: 'maintenance',
       };
       const action = actionMap[status];
       if (!action) {
@@ -137,6 +139,106 @@ export function useCreateBooking() {
     },
     onSuccess: () => {
       // Invalidate and refetch bookings after creation
+      if (venueId) {
+        queryClient.invalidateQueries({ queryKey: bookingKeys.list(venueId) });
+      }
+    },
+  });
+}
+
+/**
+ * Hook to toggle VIP status on a booking
+ */
+export function useToggleVip() {
+  const { data: session } = useSession();
+  const venueId = session?.user?.venueId;
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (bookingId: string) => {
+      const result = await apiClient.patch(`/bookings/${bookingId}/vip`);
+
+      if (!result.success) {
+        throw new Error(result.message || result.error || 'Failed to toggle VIP status');
+      }
+
+      return result;
+    },
+    onMutate: async (bookingId) => {
+      if (venueId) {
+        await queryClient.cancelQueries({ queryKey: bookingKeys.list(venueId) });
+        const previousBookings = queryClient.getQueryData<Booking[]>(bookingKeys.list(venueId));
+
+        queryClient.setQueryData<Booking[]>(
+          bookingKeys.list(venueId),
+          (old) =>
+            old?.map((booking) =>
+              booking.id === bookingId ? { ...booking, isVip: !booking.isVip } : booking,
+            ) || [],
+        );
+
+        return { previousBookings };
+      }
+    },
+    onError: (_err, _variables, context) => {
+      if (venueId && context?.previousBookings) {
+        queryClient.setQueryData(bookingKeys.list(venueId), context.previousBookings);
+      }
+    },
+    onSettled: () => {
+      if (venueId) {
+        queryClient.invalidateQueries({ queryKey: bookingKeys.list(venueId) });
+      }
+    },
+  });
+}
+
+/**
+ * Hook to update an existing booking (e.g., move or resize)
+ */
+export function useUpdateBooking() {
+  const { data: session } = useSession();
+  const venueId = session?.user?.venueId;
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      bookingId,
+      ...data
+    }: {
+      bookingId: string;
+      [key: string]: any;
+    }) => {
+      const result = await apiClient.patch(`/bookings/${bookingId}`, data);
+
+      if (!result.success) {
+        throw new Error(result.message || result.error || 'Failed to update booking');
+      }
+
+      return result.data;
+    },
+    onMutate: async ({ bookingId, ...data }) => {
+      if (venueId) {
+        await queryClient.cancelQueries({ queryKey: bookingKeys.list(venueId) });
+        const previousBookings = queryClient.getQueryData<Booking[]>(bookingKeys.list(venueId));
+
+        queryClient.setQueryData<Booking[]>(
+          bookingKeys.list(venueId),
+          (old) =>
+            old?.map((booking) =>
+              booking.id === bookingId ? { ...booking, ...data } : booking
+            ) || []
+        );
+
+        return { previousBookings };
+      }
+    },
+    onError: (_err, _variables, context) => {
+      if (venueId && context?.previousBookings) {
+        queryClient.setQueryData(bookingKeys.list(venueId), context.previousBookings);
+      }
+    },
+    onSettled: () => {
       if (venueId) {
         queryClient.invalidateQueries({ queryKey: bookingKeys.list(venueId) });
       }

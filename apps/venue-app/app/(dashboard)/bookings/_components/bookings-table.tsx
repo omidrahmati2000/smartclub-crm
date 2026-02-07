@@ -130,7 +130,7 @@ export function BookingsTable({
                 </Badge>
               </TableCell>
               <TableCell className="text-start">
-                {formatCurrency(booking.totalPrice, booking.currency, 'fa')}
+                {formatCurrency(booking.totalPrice, booking.currency, 'en')}
               </TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">

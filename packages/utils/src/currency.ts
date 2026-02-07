@@ -38,7 +38,7 @@ const currencyConfig: Record<string, CurrencyFormatConfig> = {
  *
  * @example
  *   formatCurrency(138, 'AED')        // "AED 138.00"
- *   formatCurrency(138, 'AED', 'fa')  // "۱۳۸٫۰۰ AED"
+ *   formatCurrency(138, 'AED', 'en')  // "AED 138.00"
  *   formatCurrency(1500, 'IRR', 'fa') // "۱٬۵۰۰ ﷼"
  *   formatCurrency(0.750, 'KWD')      // "KWD 0.750"
  */
@@ -48,7 +48,12 @@ export function formatCurrency(
   locale: 'fa' | 'en' = 'en',
 ): string {
   const config = currencyConfig[currency] ?? { symbol: currency, locale: 'en-US', decimals: 2, position: 'before' };
-  const intlLocale = locale === 'fa' ? 'fa-IR' : config.locale;
+
+  // IMPORTANT: Always use Latin digits (0-9) for English locale
+  // For Persian locale with IRR/IRT, use Persian digits
+  // For all other cases (including Arabic countries), use Latin digits with English locale
+  const shouldUsePersianDigits = locale === 'fa' && (currency === 'IRR' || currency === 'IRT');
+  const intlLocale = shouldUsePersianDigits ? 'fa-IR' : config.locale;
 
   const formatted = new Intl.NumberFormat(intlLocale, {
     minimumFractionDigits: config.decimals,

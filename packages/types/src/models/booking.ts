@@ -32,6 +32,10 @@ export interface Booking {
   notes?: string;
   isRecurring?: boolean;
   recurringGroupId?: string;
+  isVip?: boolean;
+  priority?: 'normal' | 'high' | 'urgent';
+  tags?: string[];
+  bookingSource?: 'online' | 'walk-in' | 'phone' | 'recurring';
   createdAt: string;
   updatedAt: string;
 }

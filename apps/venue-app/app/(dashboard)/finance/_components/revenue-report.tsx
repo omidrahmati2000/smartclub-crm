@@ -75,7 +75,7 @@ export function RevenueReport({ period }: RevenueReportProps) {
       value: mockData.summary.totalRevenue,
       trend: mockData.summary.growthPercentage,
       icon: <DollarSign className="h-4 w-4" />,
-      formatValue: (v: string | number) => formatCurrency(Number(v), 'AED', locale as 'fa' | 'en'),
+      formatValue: (v: string | number) => formatCurrency(Number(v), 'AED', 'en'),
     },
     {
       title: t('summary.totalBookings'),
@@ -91,7 +91,7 @@ export function RevenueReport({ period }: RevenueReportProps) {
       title: t('summary.averageBookingValue'),
       value: mockData.summary.averageBookingValue,
       icon: <DollarSign className="h-4 w-4" />,
-      formatValue: (v: string | number) => formatCurrency(Number(v), 'AED', locale as 'fa' | 'en'),
+      formatValue: (v: string | number) => formatCurrency(Number(v), 'AED', 'en'),
     },
   ];
 
