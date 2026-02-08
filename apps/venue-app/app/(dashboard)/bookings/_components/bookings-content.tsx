@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
+import { usePagination } from '@smartclub/ui/use-pagination';
+import { TablePagination } from '@smartclub/ui/table-pagination';
 import { Button } from '@smartclub/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@smartclub/ui/card';
 import { Skeleton } from '@smartclub/ui/skeleton';
@@ -20,6 +22,7 @@ import { Plus, Download } from 'lucide-react';
 export function BookingsContent() {
   const { data: session } = useSession();
   const t = useTranslations('venue-admin.bookings');
+  const tc = useTranslations('common');
 
   // Use React Query hooks for data fetching
   const { data: bookings = [], isLoading: isLoadingBookings } = useBookings();
@@ -62,6 +65,28 @@ export function BookingsContent() {
       return true;
     });
   }, [bookings, searchQuery, statusFilter, assetFilter]);
+
+  const {
+    paginatedData: paginatedBookings,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    totalPages,
+    totalItems,
+  } = usePagination(filteredBookings);
+
+  const paginationLabels = {
+    showing: tc('pagination.showing'),
+    of: tc('pagination.of'),
+    results: tc('pagination.results'),
+    rowsPerPage: tc('pagination.rowsPerPage'),
+    page: tc('pagination.page'),
+    goToFirst: tc('pagination.goToFirst'),
+    goToPrevious: tc('pagination.goToPrevious'),
+    goToNext: tc('pagination.goToNext'),
+    goToLast: tc('pagination.goToLast'),
+  };
 
   const handleCreateBooking = async (data: any) => {
     await createBooking.mutateAsync(data);
@@ -137,7 +162,7 @@ export function BookingsContent() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
           <p className="text-muted-foreground">
-            {t('subtitle', { count: filteredBookings.length })}
+            {t('subtitle', { count: totalItems })}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -174,11 +199,22 @@ export function BookingsContent() {
 
       {/* Bookings Table */}
       <BookingsTable
-        bookings={filteredBookings}
+        bookings={paginatedBookings}
         onView={setSelectedBooking}
         onCheckIn={handleCheckIn}
         onCancel={handleCancel}
         onMarkNoShow={handleMarkNoShow}
+      />
+
+      {/* Pagination */}
+      <TablePagination
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalItems}
+        totalPages={totalPages}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        labels={paginationLabels}
       />
 
       {/* Create Booking Dialog */}

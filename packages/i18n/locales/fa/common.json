@@ -62,6 +62,17 @@
     "units": {
       "currency": "تومان",
       "minutes": "دقیقه"
+    },
+    "pagination": {
+      "showing": "نمایش",
+      "of": "از",
+      "results": "نتیجه",
+      "rowsPerPage": "تعداد در صفحه",
+      "page": "صفحه",
+      "goToFirst": "صفحه اول",
+      "goToPrevious": "صفحه قبل",
+      "goToNext": "صفحه بعد",
+      "goToLast": "صفحه آخر"
     }
   },
   "auth": {

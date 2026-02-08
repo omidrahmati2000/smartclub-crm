@@ -3,6 +3,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations, useLocale } from 'next-intl';
+import { usePagination } from '@smartclub/ui/use-pagination';
+import { TablePagination } from '@smartclub/ui/table-pagination';
 import { Plus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@smartclub/ui/card';
 import { Button } from '@smartclub/ui/button';
@@ -23,6 +25,7 @@ export function StaffContent() {
   const { data: session } = useSession();
   const locale = useLocale();
   const t = useTranslations('venue-admin.staff');
+  const tc = useTranslations('common');
   const [staff, setStaff] = useState<StaffMember[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -108,6 +111,28 @@ export function StaffContent() {
     return filtered;
   }, [staff, searchQuery, roleFilter, statusFilter, sortBy, locale]);
 
+  const {
+    paginatedData: paginatedStaff,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    totalPages,
+    totalItems,
+  } = usePagination(filteredStaff);
+
+  const paginationLabels = {
+    showing: tc('pagination.showing'),
+    of: tc('pagination.of'),
+    results: tc('pagination.results'),
+    rowsPerPage: tc('pagination.rowsPerPage'),
+    page: tc('pagination.page'),
+    goToFirst: tc('pagination.goToFirst'),
+    goToPrevious: tc('pagination.goToPrevious'),
+    goToNext: tc('pagination.goToNext'),
+    goToLast: tc('pagination.goToLast'),
+  };
+
   const handleEdit = (member: StaffMember) => {
     setSelectedStaff(member);
     setShowEditDialog(true);
@@ -186,7 +211,7 @@ export function StaffContent() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
           <p className="text-muted-foreground mt-1">
-            {t('showingResults', { count: filteredStaff.length })}
+            {t('showingResults', { count: totalItems })}
           </p>
         </div>
         {canManage && (
@@ -218,12 +243,23 @@ export function StaffContent() {
 
       {/* Staff Table */}
       <StaffTable
-        staff={filteredStaff}
+        staff={paginatedStaff}
         onEdit={handleEdit}
         onDelete={handleDelete}
         onViewActivity={handleViewActivity}
         onViewPermissions={handleViewPermissions}
         canManage={canManage}
+      />
+
+      {/* Pagination */}
+      <TablePagination
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalItems}
+        totalPages={totalPages}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        labels={paginationLabels}
       />
 
       {/* Dialogs */}

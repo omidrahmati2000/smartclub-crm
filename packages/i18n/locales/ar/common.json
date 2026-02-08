@@ -62,6 +62,17 @@
     "units": {
       "currency": "درهم",
       "minutes": "دقائق"
+    },
+    "pagination": {
+      "showing": "عرض",
+      "of": "من",
+      "results": "نتائج",
+      "rowsPerPage": "صفوف في الصفحة",
+      "page": "صفحة",
+      "goToFirst": "الصفحة الأولى",
+      "goToPrevious": "الصفحة السابقة",
+      "goToNext": "الصفحة التالية",
+      "goToLast": "الصفحة الأخيرة"
     }
   },
   "auth": {

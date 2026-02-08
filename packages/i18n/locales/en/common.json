@@ -62,6 +62,17 @@
     "units": {
       "currency": "AED",
       "minutes": "minutes"
+    },
+    "pagination": {
+      "showing": "Showing",
+      "of": "of",
+      "results": "results",
+      "rowsPerPage": "Rows per page",
+      "page": "Page",
+      "goToFirst": "First page",
+      "goToPrevious": "Previous page",
+      "goToNext": "Next page",
+      "goToLast": "Last page"
     }
   },
   "auth": {

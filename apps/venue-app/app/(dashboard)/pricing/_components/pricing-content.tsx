@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
+import { usePagination } from '@smartclub/ui/use-pagination';
+import { TablePagination } from '@smartclub/ui/table-pagination';
 import { Plus } from 'lucide-react';
 import { Button } from '@smartclub/ui/button';
 import type {
@@ -28,6 +30,7 @@ interface PricingContentProps {
 export function PricingContent({ venueId, canManage }: PricingContentProps) {
   const t = useTranslations('venue-admin.pricing');
   const tc = useTranslations('venue-admin.common');
+  const tCommon = useTranslations('common');
   const { toast } = useToast();
 
   const [rules, setRules] = useState<PricingRule[]>([]);
@@ -104,6 +107,28 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
       return true;
     });
   }, [rules, search, typeFilter, statusFilter]);
+
+  const {
+    paginatedData: paginatedRules,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    totalPages,
+    totalItems,
+  } = usePagination(filteredRules);
+
+  const paginationLabels = {
+    showing: tCommon('pagination.showing'),
+    of: tCommon('pagination.of'),
+    results: tCommon('pagination.results'),
+    rowsPerPage: tCommon('pagination.rowsPerPage'),
+    page: tCommon('pagination.page'),
+    goToFirst: tCommon('pagination.goToFirst'),
+    goToPrevious: tCommon('pagination.goToPrevious'),
+    goToNext: tCommon('pagination.goToNext'),
+    goToLast: tCommon('pagination.goToLast'),
+  };
 
   // Handle create rule
   const handleCreateRule = async (data: CreatePricingRuleDTO) => {
@@ -261,20 +286,31 @@ export function PricingContent({ venueId, canManage }: PricingContentProps) {
       />
 
       {/* Results count */}
-      {filteredRules.length > 0 && (
+      {totalItems > 0 && (
         <p className="text-sm text-muted-foreground">
-          {t('showingResults', { count: filteredRules.length })}
+          {t('showingResults', { count: totalItems })}
         </p>
       )}
 
       {/* Table */}
       <PricingTable
-        rules={filteredRules}
+        rules={paginatedRules}
         canManage={canManage}
         onEdit={handleEdit}
         onDelete={handleDeleteClick}
         onToggle={handleToggleRule}
         onPreview={handlePreview}
+      />
+
+      {/* Pagination */}
+      <TablePagination
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalItems}
+        totalPages={totalPages}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        labels={paginationLabels}
       />
 
       {/* Dialogs */}

@@ -33,7 +33,9 @@
     "./breadcrumb": "./src/primitives/breadcrumb.tsx",
     "./collapsible": "./src/primitives/collapsible.tsx",
     "./popover": "./src/primitives/popover.tsx",
-    "./calendar": "./src/primitives/calendar.tsx"
+    "./calendar": "./src/primitives/calendar.tsx",
+    "./table-pagination": "./src/composites/table-pagination.tsx",
+    "./use-pagination": "./src/hooks/use-pagination.ts"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",

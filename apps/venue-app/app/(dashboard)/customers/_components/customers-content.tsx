@@ -3,6 +3,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations, useLocale } from 'next-intl';
+import { usePagination } from '@smartclub/ui/use-pagination';
+import { TablePagination } from '@smartclub/ui/table-pagination';
 import { Card, CardContent, CardHeader, CardTitle } from '@smartclub/ui/card';
 import { Skeleton } from '@smartclub/ui/skeleton';
 import type { CustomerListItem, CustomerProfile, CustomerTag } from '@smartclub/types';
@@ -17,6 +19,7 @@ export function CustomersContent() {
   const { data: session } = useSession();
   const locale = useLocale();
   const t = useTranslations('venue-admin.customers');
+  const tc = useTranslations('common');
   const [customers, setCustomers] = useState<CustomerListItem[]>([]);
   const [availableTags, setAvailableTags] = useState<CustomerTag[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -99,6 +102,28 @@ export function CustomersContent() {
     return filtered;
   }, [customers, searchQuery, statusFilter, sortBy, locale]);
 
+  const {
+    paginatedData: paginatedCustomers,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    totalPages,
+    totalItems,
+  } = usePagination(filteredCustomers);
+
+  const paginationLabels = {
+    showing: tc('pagination.showing'),
+    of: tc('pagination.of'),
+    results: tc('pagination.results'),
+    rowsPerPage: tc('pagination.rowsPerPage'),
+    page: tc('pagination.page'),
+    goToFirst: tc('pagination.goToFirst'),
+    goToPrevious: tc('pagination.goToPrevious'),
+    goToNext: tc('pagination.goToNext'),
+    goToLast: tc('pagination.goToLast'),
+  };
+
   const handleViewProfile = async (customerId: string) => {
     try {
       const result = await apiClient.get(`/customers/${customerId}`);
@@ -169,7 +194,7 @@ export function CustomersContent() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         <p className="text-muted-foreground mt-1">
-          {t('showingResults', { count: filteredCustomers.length })}
+          {t('showingResults', { count: totalItems })}
         </p>
       </div>
 
@@ -193,8 +218,19 @@ export function CustomersContent() {
 
       {/* Customers Table */}
       <CustomersTable
-        customers={filteredCustomers}
+        customers={paginatedCustomers}
         onViewProfile={handleViewProfile}
+      />
+
+      {/* Pagination */}
+      <TablePagination
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalItems}
+        totalPages={totalPages}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+        labels={paginationLabels}
       />
 
       {/* Customer Profile Modal */}
