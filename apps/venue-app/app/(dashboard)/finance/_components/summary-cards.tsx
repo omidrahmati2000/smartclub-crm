@@ -22,7 +22,7 @@ export function SummaryCards({ cards }: SummaryCardsProps) {
       {cards.map((card, index) => {
         const displayValue = card.formatValue
           ? card.formatValue(card.value)
-          : card.value.toLocaleString('fa-IR');
+          : card.value.toLocaleString('en-US');
 
         const isPositive = card.trend !== undefined && card.trend > 0;
         const isNegative = card.trend !== undefined && card.trend < 0;
@@ -45,7 +45,7 @@ export function SummaryCards({ cards }: SummaryCardsProps) {
                       isNegative && 'text-red-600',
                     )}
                   >
-                    {Math.abs(card.trend)}٪
+                    {Math.abs(card.trend)}%
                   </span>
                 </div>
               )}
