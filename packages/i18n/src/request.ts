@@ -9,8 +9,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
   }
 
   // Load all translation files for this locale
-  const translations = await import(`../locales/${locale}`);
-
   const messages = {
     auth: (await import(`../locales/${locale}/auth.json`)).default,
     booking: (await import(`../locales/${locale}/booking.json`)).default,
