@@ -1,8 +1,9 @@
 'use client'
 
-import { Menu, Search } from 'lucide-react'
+import { Menu, Search, Bell } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@smartclub/ui/button'
+import { Badge } from '@smartclub/ui/badge'
 import { BreadcrumbNav } from './breadcrumb-nav'
 import { UserMenu } from './user-menu'
 
@@ -15,13 +16,13 @@ export function Header({ onMenuClick, onSearchClick }: HeaderProps) {
   const t = useTranslations('venue-admin')
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-16 items-center gap-4 px-4 sm:px-6">
+    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-xl shadow-sm supports-[backdrop-filter]:bg-background/80">
+      <div className="flex h-16 items-center gap-3 px-4 sm:gap-4 sm:px-6 lg:px-8">
         {/* Mobile Menu Button */}
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="md:hidden hover:bg-muted/80 transition-colors"
           onClick={onMenuClick}
           aria-label={t('nav.menu')}
         >
@@ -29,11 +30,13 @@ export function Header({ onMenuClick, onSearchClick }: HeaderProps) {
         </Button>
 
         {/* Logo - Desktop only */}
-        <div className="hidden md:flex md:w-64 md:items-center md:gap-2 md:px-4">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <span className="text-sm font-bold text-primary-foreground">S</span>
+        <div className="hidden md:flex md:w-64 md:items-center md:gap-3 md:px-4">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-md shadow-primary/20">
+            <span className="text-base font-bold text-primary-foreground">S</span>
           </div>
-          <span className="text-lg font-semibold">SmartClub</span>
+          <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+            SmartClub
+          </span>
         </div>
 
         {/* Breadcrumb - Desktop */}
@@ -43,35 +46,57 @@ export function Header({ onMenuClick, onSearchClick }: HeaderProps) {
 
         {/* Page Title - Mobile */}
         <div className="flex-1 md:hidden">
-          <h1 className="text-lg font-semibold">SmartClub</h1>
+          <h1 className="text-lg font-bold tracking-tight">SmartClub</h1>
         </div>
 
-        {/* Search Button */}
-        <Button
-          variant="outline"
-          className="hidden h-9 w-full max-w-sm items-center gap-2 px-3 text-sm text-muted-foreground md:inline-flex"
-          onClick={onSearchClick}
-        >
-          <Search className="h-4 w-4" />
-          <span className="hidden lg:inline">{t('header.search')}</span>
-          <kbd className="pointer-events-none ml-auto hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 lg:flex">
-            <span className="text-xs">⌘</span>K
-          </kbd>
-        </Button>
+        {/* Actions Container */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Search Button - Desktop */}
+          <Button
+            variant="outline"
+            className="hidden h-10 w-full max-w-xs items-center gap-2 px-4 text-sm text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-all lg:inline-flex lg:max-w-sm shadow-sm"
+            onClick={onSearchClick}
+          >
+            <Search className="h-4 w-4" />
+            <span className="hidden lg:inline">{t('header.search')}</span>
+            <kbd className="pointer-events-none ml-auto hidden h-6 select-none items-center gap-1 rounded-md border border-border/50 bg-muted/50 px-2 font-mono text-[10px] font-medium opacity-100 lg:flex">
+              <span className="text-xs">⌘</span>K
+            </kbd>
+          </Button>
 
-        {/* Mobile Search Icon */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={onSearchClick}
-          aria-label={t('header.search')}
-        >
-          <Search className="h-5 w-5" />
-        </Button>
+          {/* Search Button - Mobile */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden hover:bg-muted/80 transition-colors"
+            onClick={onSearchClick}
+            aria-label={t('header.search')}
+          >
+            <Search className="h-5 w-5" />
+          </Button>
 
-        {/* User Menu */}
-        <UserMenu />
+          {/* Notifications */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative hover:bg-muted/80 transition-colors"
+            aria-label="Notifications"
+          >
+            <Bell className="h-5 w-5" />
+            <Badge
+              variant="destructive"
+              className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-[10px] font-bold shadow-lg animate-in fade-in zoom-in"
+            >
+              3
+            </Badge>
+          </Button>
+
+          {/* Divider */}
+          <div className="hidden h-8 w-px bg-border/60 sm:block" />
+
+          {/* User Menu */}
+          <UserMenu />
+        </div>
       </div>
     </header>
   )
