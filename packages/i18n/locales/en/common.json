@@ -37,6 +37,7 @@
     "error": "An error occurred",
     "retry": "Retry",
     "save": "Save",
+    "saveChanges": "Save Changes",
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
