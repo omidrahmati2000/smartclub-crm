@@ -42,7 +42,7 @@ export function VenueProfileForm() {
   const t = useTranslations('venue-admin.settings.profile');
   const tc = useTranslations('venue-admin.common');
   const ts = useTranslations('venue-admin.settings');
-  const tcommon = useTranslations('common.common');
+  const tcommon = useTranslations('common');
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
