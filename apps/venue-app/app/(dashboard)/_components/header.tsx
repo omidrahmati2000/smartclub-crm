@@ -1,11 +1,11 @@
 'use client'
 
-import { Menu, Search, Bell } from 'lucide-react'
+import { Menu, Search } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@smartclub/ui/button'
-import { Badge } from '@smartclub/ui/badge'
 import { BreadcrumbNav } from './breadcrumb-nav'
 import { UserMenu } from './user-menu'
+import { NotificationDropdown } from './notification-dropdown'
 
 interface HeaderProps {
   onMenuClick: () => void
@@ -76,20 +76,7 @@ export function Header({ onMenuClick, onSearchClick }: HeaderProps) {
           </Button>
 
           {/* Notifications */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="relative hover:bg-muted/80 transition-colors"
-            aria-label="Notifications"
-          >
-            <Bell className="h-5 w-5" />
-            <Badge
-              variant="destructive"
-              className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-[10px] font-bold shadow-lg animate-in fade-in zoom-in"
-            >
-              3
-            </Badge>
-          </Button>
+          <NotificationDropdown />
 
           {/* Divider */}
           <div className="hidden h-8 w-px bg-border/60 sm:block" />

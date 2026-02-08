@@ -1564,6 +1564,16 @@
       "submit": "Save Settings"
     }
   },
+  "notifications": {
+    "title": "Notifications",
+    "unread": "unread",
+    "markAllAsRead": "Mark all as read",
+    "noNotifications": "No notifications yet",
+    "viewAll": "View All Notifications",
+    "clearAll": "Clear All",
+    "markAsRead": "Mark as read",
+    "delete": "Delete"
+  },
   "common": {
     "save": "Save",
     "cancel": "Cancel",

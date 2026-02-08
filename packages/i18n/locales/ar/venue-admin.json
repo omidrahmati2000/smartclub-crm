@@ -1163,6 +1163,16 @@
       "submit": "حفظ الإعدادات"
     }
   },
+  "notifications": {
+    "title": "الإشعارات",
+    "unread": "غير مقروء",
+    "markAllAsRead": "تحديد الكل كمقروء",
+    "noNotifications": "لا توجد إشعارات",
+    "viewAll": "عرض جميع الإشعارات",
+    "clearAll": "مسح الكل",
+    "markAsRead": "تحديد كمقروء",
+    "delete": "حذف"
+  },
   "common": {
     "save": "حفظ",
     "cancel": "إلغاء",

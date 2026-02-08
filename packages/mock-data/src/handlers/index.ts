@@ -16,6 +16,7 @@ import { countryHandlers } from './countries';
 import { taxSettingsHandlers } from './tax-settings';
 import { complianceHandlers } from './compliance';
 import { paymentSettingsHandlers } from './payment-settings';
+import { notificationHandlers } from './notifications';
 
 import { tournamentHandlers } from './tournaments';
 import { shopHandlers } from './products';
@@ -40,6 +41,7 @@ export const handlers = [
   ...taxSettingsHandlers,
   ...complianceHandlers,
   ...paymentSettingsHandlers,
+  ...notificationHandlers,
   ...tournamentHandlers,
   ...shopHandlers,
   ...salesHandlers,
