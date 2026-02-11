@@ -21,46 +21,34 @@ import {
     DropdownMenuTrigger,
     toast,
 } from '@smartclub/ui'
+import { apiClient } from '@/lib/api-client'
 import { CategoryDialog } from './category-dialog'
 
 // API functions
 async function fetchCategories(): Promise<ProductCategory[]> {
-    const res = await fetch('/api/categories')
-    if (!res.ok) throw new Error('Failed to fetch categories')
-    return res.json()
+    const res = await apiClient.get<ProductCategory[]>('/categories')
+    if (!res.success) throw new Error(res.error || 'Failed to fetch categories')
+    return res.data || []
 }
 
 async function createCategory(category: Partial<ProductCategory>): Promise<ProductCategory> {
-    const res = await fetch('/api/categories', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(category),
-    })
-    if (!res.ok) throw new Error('Failed to create category')
-    return res.json()
+    const res = await apiClient.post<ProductCategory>('/categories', category)
+    if (!res.success || !res.data) throw new Error(res.error || 'Failed to create category')
+    return res.data
 }
 
 async function updateCategory(
     id: string,
     category: Partial<ProductCategory>
 ): Promise<ProductCategory> {
-    const res = await fetch(`/api/categories/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(category),
-    })
-    if (!res.ok) throw new Error('Failed to update category')
-    return res.json()
+    const res = await apiClient.put<ProductCategory>(`/categories/${id}`, category)
+    if (!res.success || !res.data) throw new Error(res.error || 'Failed to update category')
+    return res.data
 }
 
 async function deleteCategory(id: string): Promise<void> {
-    const res = await fetch(`/api/categories/${id}`, {
-        method: 'DELETE',
-    })
-    if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.error || 'Failed to delete category')
-    }
+    const res = await apiClient.delete(`/categories/${id}`)
+    if (!res.success) throw new Error(res.error || 'Failed to delete category')
 }
 
 export function CategoriesTab() {

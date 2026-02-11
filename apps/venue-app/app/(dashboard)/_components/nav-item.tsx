@@ -1,7 +1,5 @@
-'use client'
-
-import { useTransition } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Badge } from '@smartclub/ui/badge'
 import { cn } from '@smartclub/utils'
 
@@ -21,48 +19,22 @@ export function NavItem({
   isCollapsed = false,
 }: NavItemProps) {
   const pathname = usePathname()
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
-
   const isActive = pathname === href || pathname.startsWith(href + '/')
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-
-    // Don't navigate if already on this page
-    if (isActive) return
-
-    // Use startTransition for non-blocking, instant visual feedback
-    startTransition(() => {
-      // Use View Transitions API for smooth transition if supported
-      if (document.startViewTransition) {
-        document.startViewTransition(() => {
-          router.push(href)
-        })
-      } else {
-        router.push(href)
-      }
-    })
-  }
-
-  // Prefetch on hover for faster navigation
-  const handleMouseEnter = () => {
-    if (!isActive) {
-      router.prefetch(href)
-    }
-  }
+  const commonClasses = cn(
+    'transition-colors duration-150',
+    isActive
+      ? 'bg-primary text-primary-foreground'
+      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+  )
 
   if (isCollapsed) {
     return (
-      <a
+      <Link
         href={href}
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
         className={cn(
-          'group relative flex h-9 w-9 items-center justify-center rounded-lg transition-colors duration-150',
-          isActive
-            ? 'bg-primary text-primary-foreground'
-            : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+          'group relative flex h-9 w-9 items-center justify-center rounded-lg',
+          commonClasses
         )}
         title={label}
       >
@@ -73,24 +45,19 @@ export function NavItem({
           </span>
         )}
         {/* Tooltip */}
-        <span className="pointer-events-none absolute left-full ml-2 hidden whitespace-nowrap rounded-md bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md group-hover:block">
+        <span className="pointer-events-none absolute left-full ml-2 hidden whitespace-nowrap rounded-md bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md group-hover:block transition-all z-50">
           {label}
         </span>
-      </a>
+      </Link>
     )
   }
 
   return (
-    <a
+    <Link
       href={href}
-      onClick={handleClick}
-      onMouseEnter={handleMouseEnter}
       className={cn(
         'relative flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium',
-        'transition-colors duration-150',
-        isActive
-          ? 'bg-primary text-primary-foreground'
-          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+        commonClasses
       )}
     >
       <Icon className="h-5 w-5 shrink-0" />
@@ -100,6 +67,7 @@ export function NavItem({
           {badge > 99 ? '99+' : badge}
         </Badge>
       )}
-    </a>
+    </Link>
   )
 }
+

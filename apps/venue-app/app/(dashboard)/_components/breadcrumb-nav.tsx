@@ -36,6 +36,17 @@ export function BreadcrumbNav() {
       pricing: t('nav.pricing'),
       reports: t('nav.reports'),
       settings: t('nav.settings'),
+      shop: t('nav.shop'),
+      pos: t('nav.pos'),
+      valet: t('nav.valet'),
+      memberships: t('nav.memberships'),
+      wallet: t('nav.wallet'),
+      marketing: t('nav.marketing'),
+      tournaments: t('nav.tournaments'),
+      scoreboard: t('nav.scoreboard'),
+      coaches: t('nav.coaches'),
+      social: t('nav.social'),
+      automation: t('nav.automation'),
     }
 
     return navLabels[navKey] || segment

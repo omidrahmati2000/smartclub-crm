@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import {
     Cpu,
     Lightbulb,
@@ -33,6 +34,20 @@ import {
 import { cn } from '@smartclub/utils'
 import { AddAutomationDialog } from './_components/add-automation-dialog'
 import { useSession } from 'next-auth/react'
+import { apiClient } from '@/lib/api-client'
+
+// Types
+interface AutomationRule {
+    id: string;
+    venueId: string;
+    name: string;
+    description: string;
+    trigger: 'time' | 'booking' | 'occupancy' | 'temperature';
+    triggerValue: string;
+    action: string;
+    actionDevice: string;
+    isEnabled: boolean;
+}
 
 // Mock Data
 const DEVICES = [
@@ -42,20 +57,22 @@ const DEVICES = [
     { id: 'd4', name: 'Locker Room HVAC', type: 'climate', status: 'on', power: '2.5kW', health: 'warning', autoMode: true },
 ]
 
-const INITIAL_RULES = [
-    { id: 'rule-1', name: 'Night Mode', description: 'All floodlights OFF at 00:00 AM', trigger: 'time', isEnabled: true },
-    { id: 'rule-2', name: 'Open House', description: 'Main Gate UNLOCKS at 07:00 AM', trigger: 'time', isEnabled: true },
-]
-
 export default function AutomationPage() {
     const t = useTranslations('venue-admin')
     const { data: session } = useSession()
-    const venueId = session?.user?.currentVenue || 'venue-1'
+    const queryClient = useQueryClient()
+    const venueId = session?.user?.venueId || 'venue-1'
     const [isDialogOpen, setIsDialogOpen] = useState(false)
-    const [rules, setRules] = useState(INITIAL_RULES)
+
+    const { data: rulesResponse, isLoading } = useQuery({
+        queryKey: ['automation-rules', venueId],
+        queryFn: () => apiClient.get<AutomationRule[]>(`/venues/${venueId}/automation`),
+    })
+
+    const rules = rulesResponse?.data || []
 
     const handleRuleCreated = (newRule: any) => {
-        setRules([...rules, newRule])
+        queryClient.invalidateQueries({ queryKey: ['automation-rules', venueId] })
         setIsDialogOpen(false)
     }
 

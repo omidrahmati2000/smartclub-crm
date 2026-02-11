@@ -42,22 +42,23 @@ interface RegisterCoachDialogProps {
   venueId: string;
 }
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  specialty: z.string().min(3, 'Specialty must be at least 3 characters'),
-  experience: z.string().min(1, 'Experience is required'),
-  level: z.enum(['Elite', 'Head Coach', 'Advanced', 'Standard']),
-  hourlyRate: z.number().min(0, 'Hourly rate must be positive'),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export function RegisterCoachDialog({ open, onClose, onSuccess, venueId }: RegisterCoachDialogProps) {
   const t = useTranslations('venue-admin.coaches');
+  const tv = useTranslations('validation');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formSchema = z.object({
+    name: z.string().min(2, tv('nameMin')),
+    email: z.string().email(tv('emailInvalid')),
+    phone: z.string().min(10, tv('phoneInvalid')),
+    specialty: z.string().min(3, tv('specialtyRequired')),
+    experience: z.string().min(1, tv('experienceRequired')),
+    level: z.enum(['Elite', 'Head Coach', 'Advanced', 'Standard']),
+    hourlyRate: z.number().min(0, tv('hourlyRatePositive')),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

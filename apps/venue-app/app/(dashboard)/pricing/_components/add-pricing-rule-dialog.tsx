@@ -32,32 +32,6 @@ import {
 } from '@smartclub/types';
 import { Plus, X } from 'lucide-react';
 
-const pricingRuleSchema = z.object({
-  name: z.string().min(2, 'Name is required'),
-  description: z.string().optional(),
-  type: z.nativeEnum(PricingRuleType),
-  priority: z.number().min(0).max(100),
-  targetAssets: z.array(z.string()),
-  timeSlots: z.array(
-    z.object({
-      startTime: z.string(),
-      endTime: z.string(),
-    })
-  ),
-  daysOfWeek: z.array(z.number()),
-  dateRangeStart: z.string().optional(),
-  dateRangeEnd: z.string().optional(),
-  minHoursBefore: z.number().optional(),
-  maxHoursBefore: z.number().optional(),
-  adjustmentType: z.nativeEnum(AdjustmentType),
-  adjustmentValue: z.number(),
-  overridePrice: z.number().optional(),
-  validFrom: z.string(),
-  validUntil: z.string().optional(),
-});
-
-type PricingRuleFormData = z.infer<typeof pricingRuleSchema>;
-
 interface AddPricingRuleDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -72,8 +46,35 @@ export function AddPricingRuleDialog({
   assets,
 }: AddPricingRuleDialogProps) {
   const t = useTranslations('venue-admin.pricing');
+  const tv = useTranslations('validation');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeSlots, setTimeSlots] = useState<Array<{ startTime: string; endTime: string }>>([]);
+
+  const pricingRuleSchema = z.object({
+    name: z.string().min(2, tv('nameRequired')),
+    description: z.string().optional(),
+    type: z.nativeEnum(PricingRuleType),
+    priority: z.number().min(0).max(100),
+    targetAssets: z.array(z.string()),
+    timeSlots: z.array(
+      z.object({
+        startTime: z.string(),
+        endTime: z.string(),
+      })
+    ),
+    daysOfWeek: z.array(z.number()),
+    dateRangeStart: z.string().optional(),
+    dateRangeEnd: z.string().optional(),
+    minHoursBefore: z.number().optional(),
+    maxHoursBefore: z.number().optional(),
+    adjustmentType: z.nativeEnum(AdjustmentType),
+    adjustmentValue: z.number(),
+    overridePrice: z.number().optional(),
+    validFrom: z.string(),
+    validUntil: z.string().optional(),
+  });
+
+  type PricingRuleFormData = z.infer<typeof pricingRuleSchema>;
 
   const {
     register,

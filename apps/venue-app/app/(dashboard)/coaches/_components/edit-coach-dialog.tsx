@@ -42,22 +42,23 @@ interface EditCoachDialogProps {
   coach: Coach;
 }
 
-const formSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().min(10),
-  specialty: z.string().min(3),
-  experience: z.string().min(1),
-  level: z.enum(['Elite', 'Head Coach', 'Advanced', 'Standard']),
-  hourlyRate: z.number().min(0),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export function EditCoachDialog({ open, onClose, onSuccess, coach }: EditCoachDialogProps) {
   const t = useTranslations('venue-admin.coaches');
+  const tv = useTranslations('validation');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formSchema = z.object({
+    name: z.string().min(2, tv('nameMin')),
+    email: z.string().email(tv('emailInvalid')),
+    phone: z.string().min(10, tv('phoneInvalid')),
+    specialty: z.string().min(3, tv('specialtyRequired')),
+    experience: z.string().min(1, tv('experienceRequired')),
+    level: z.enum(['Elite', 'Head Coach', 'Advanced', 'Standard']),
+    hourlyRate: z.number().min(0, tv('hourlyRatePositive')),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

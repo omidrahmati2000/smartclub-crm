@@ -23,28 +23,29 @@ import { apiClient } from '@/lib/api-client';
 
 // Validation messages are defined as constants to keep Zod schemas static.
 // They use English by default; runtime translations are shown in the UI layer.
-const venueProfileSchema = z.object({
-  name: z.string().min(2, 'Venue name is required'),
-  description: z.string().min(10, 'Description must be at least 10 characters'),
-  address: z.string().min(5, 'Address is required'),
-  city: z.string().min(2, 'City is required'),
-  phone: z.string().min(10, 'Invalid phone number'),
-  email: z.string().email('Invalid email address').optional().or(z.literal('')),
-  website: z.string().url('Invalid website URL').optional().or(z.literal('')),
-  logoUrl: z.string().optional(),
-  coverImageUrl: z.string().optional(),
-});
-
-type VenueProfileFormData = z.infer<typeof venueProfileSchema>;
-
 export function VenueProfileForm() {
   const { data: session } = useSession();
   const t = useTranslations('venue-admin.settings.profile');
   const tc = useTranslations('venue-admin.common');
   const ts = useTranslations('venue-admin.settings');
   const tcommon = useTranslations('common');
+  const tv = useTranslations('validation');
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const venueProfileSchema = z.object({
+    name: z.string().min(2, tv('nameRequired')),
+    description: z.string().min(10, tv('descriptionMin')),
+    address: z.string().min(5, tv('addressRequired')),
+    city: z.string().min(2, tv('cityRequired')),
+    phone: z.string().min(10, tv('phoneInvalid')),
+    email: z.string().email(tv('emailInvalid')).optional().or(z.literal('')),
+    website: z.string().url(tv('urlInvalid')).optional().or(z.literal('')),
+    logoUrl: z.string().optional(),
+    coverImageUrl: z.string().optional(),
+  });
+
+  type VenueProfileFormData = z.infer<typeof venueProfileSchema>;
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 

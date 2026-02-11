@@ -22,27 +22,28 @@ import { Skeleton } from '@smartclub/ui/skeleton';
 import type { NotificationPreferences } from '@smartclub/types';
 import { apiClient } from '@/lib/api-client';
 
-const notificationSchema = z.object({
-  emailNotificationsEnabled: z.boolean(),
-  notificationEmail: z.string().email('Invalid email address'),
-  notifyOnNewBooking: z.boolean(),
-  notifyOnCancellation: z.boolean(),
-  notifyOnNoShow: z.boolean(),
-  smsNotificationsEnabled: z.boolean(),
-  notificationPhone: z.string().min(10, 'Invalid phone number'),
-  sendCustomerReminders: z.boolean(),
-  reminderHoursBefore: z.number().min(1),
-  sendPromotionalEmails: z.boolean(),
-});
-
-type NotificationFormData = z.infer<typeof notificationSchema>;
-
 export function NotificationSettingsForm() {
   const { data: session } = useSession();
   const t = useTranslations('venue-admin.settings.notifications');
   const tc = useTranslations('venue-admin.common');
   const ts = useTranslations('venue-admin.settings');
+  const tv = useTranslations('validation');
   const [isLoading, setIsLoading] = useState(true);
+
+  const notificationSchema = z.object({
+    emailNotificationsEnabled: z.boolean(),
+    notificationEmail: z.string().email(tv('emailInvalid')),
+    notifyOnNewBooking: z.boolean(),
+    notifyOnCancellation: z.boolean(),
+    notifyOnNoShow: z.boolean(),
+    smsNotificationsEnabled: z.boolean(),
+    notificationPhone: z.string().min(10, tv('phoneInvalid')),
+    sendCustomerReminders: z.boolean(),
+    reminderHoursBefore: z.number().min(1),
+    sendPromotionalEmails: z.boolean(),
+  });
+
+  type NotificationFormData = z.infer<typeof notificationSchema>;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');

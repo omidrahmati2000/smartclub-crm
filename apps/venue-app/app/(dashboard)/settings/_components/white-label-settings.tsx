@@ -23,32 +23,33 @@ import { Skeleton } from '@smartclub/ui/skeleton';
 import type { WhiteLabelSettings } from '@smartclub/types';
 import { apiClient } from '@/lib/api-client';
 
-const whiteLabelSchema = z.object({
-  enabled: z.boolean(),
-  subdomain: z
-    .string()
-    .min(3, 'Subdomain must be at least 3 characters')
-    .regex(/^[a-z0-9-]+$/, 'Only lowercase letters, numbers and hyphens allowed'),
-  customDomain: z.string().optional().or(z.literal('')),
-  logoUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-  faviconUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-  primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format'),
-  secondaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid color format'),
-  metaTitle: z.string().optional(),
-  metaDescription: z.string().optional(),
-  metaKeywords: z.string().optional(),
-  instagramUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-  telegramUrl: z.string().url('Invalid URL').optional().or(z.literal('')),
-  whatsappNumber: z.string().optional(),
-});
-
-type WhiteLabelFormData = z.infer<typeof whiteLabelSchema>;
-
 export function WhiteLabelSettingsForm() {
   const { data: session } = useSession();
   const t = useTranslations('venue-admin.settings.whiteLabel');
   const tc = useTranslations('venue-admin.common');
   const ts = useTranslations('venue-admin.settings');
+  const tv = useTranslations('validation');
+
+  const whiteLabelSchema = z.object({
+    enabled: z.boolean(),
+    subdomain: z
+      .string()
+      .min(3, tv('minLength'))
+      .regex(/^[a-z0-9-]+$/, tv('pattern')),
+    customDomain: z.string().optional().or(z.literal('')),
+    logoUrl: z.string().url(tv('urlInvalid')).optional().or(z.literal('')),
+    faviconUrl: z.string().url(tv('urlInvalid')).optional().or(z.literal('')),
+    primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, tv('primaryColorInvalid')),
+    secondaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/, tv('accentColorInvalid')),
+    metaTitle: z.string().optional(),
+    metaDescription: z.string().optional(),
+    metaKeywords: z.string().optional(),
+    instagramUrl: z.string().url(tv('urlInvalid')).optional().or(z.literal('')),
+    telegramUrl: z.string().url(tv('urlInvalid')).optional().or(z.literal('')),
+    whatsappNumber: z.string().optional(),
+  });
+
+  type WhiteLabelFormData = z.infer<typeof whiteLabelSchema>;
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');

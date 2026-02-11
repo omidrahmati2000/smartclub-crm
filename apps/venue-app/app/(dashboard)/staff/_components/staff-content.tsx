@@ -57,9 +57,9 @@ export function StaffContent() {
   const fetchStaff = async (venueId: string) => {
     setIsLoading(true);
     try {
-      const result = await apiClient.get(`/venues/${venueId}/staff`);
+      const result = await apiClient.get<StaffMember[]>(`/venues/${venueId}/staff`);
       if (result.success && result.data) {
-        setStaff(result.data);
+        setStaff(result.data || []);
       }
     } catch (error) {
       console.error('Failed to fetch staff:', error);
@@ -145,7 +145,7 @@ export function StaffContent() {
 
   const handleViewActivity = async (member: StaffMember) => {
     try {
-      const result = await apiClient.get(`/staff/${member.id}/activity`);
+      const result = await apiClient.get<StaffActivity[]>(`/staff/${member.id}/activity`);
       if (result.success && result.data) {
         setActivityStaff({ staff: member, activities: result.data });
       }
@@ -156,7 +156,7 @@ export function StaffContent() {
 
   const handleViewPermissions = async (role: VenueRole) => {
     try {
-      const result = await apiClient.get(`/roles/${role}/permissions`);
+      const result = await apiClient.get<RolePermissions>(`/roles/${role}/permissions`);
       if (result.success && result.data) {
         setPermissionsRole(result.data);
       }
@@ -198,7 +198,7 @@ export function StaffContent() {
     return (
       <div className="flex items-center justify-center h-64">
         <p className="text-muted-foreground">
-{t('noPermission')}
+          {t('noPermission')}
         </p>
       </div>
     );

@@ -12,16 +12,7 @@ export const authConfig: NextAuthConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard =
-        nextUrl.pathname.includes('/overview') ||
-        nextUrl.pathname.includes('/calendar') ||
-        nextUrl.pathname.includes('/bookings') ||
-        nextUrl.pathname.includes('/assets') ||
-        nextUrl.pathname.includes('/customers') ||
-        nextUrl.pathname.includes('/staff') ||
-        nextUrl.pathname.includes('/finance') ||
-        nextUrl.pathname.includes('/pricing') ||
-        nextUrl.pathname.includes('/reports') ||
-        nextUrl.pathname.includes('/settings');
+        nextUrl.pathname.match(/^(\/[a-z]{2})?\/(overview|calendar|bookings|assets|customers|staff|finance|pricing|reports|settings|automation|scoreboard|shop|pos|valet|memberships|wallet|marketing|tournaments|coaches|social)(\/|$)/);
 
       const isVenueStaff = auth?.user?.userType === UserType.VENUE_STAFF;
 

@@ -44,11 +44,6 @@ export function Header({ onMenuClick, onSearchClick }: HeaderProps) {
           <BreadcrumbNav />
         </div>
 
-        {/* Page Title - Mobile */}
-        <div className="flex-1 md:hidden">
-          <h1 className="text-lg font-bold tracking-tight">SmartClub</h1>
-        </div>
-
         {/* Actions Container */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Search Button - Desktop */}

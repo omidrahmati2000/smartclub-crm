@@ -55,17 +55,6 @@ interface CreateMembershipDialogProps {
   venueId: string;
 }
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  description: z.string().min(5, 'Description must be at least 5 characters'),
-  price: z.number().min(0, 'Price must be positive'),
-  period: z.enum(['Monthly', 'Quarterly', 'Annual', 'Lifetime']),
-  color: z.string().min(1, 'Color is required'),
-  features: z.array(z.string().min(1, 'Feature cannot be empty')).min(1, 'At least one feature required'),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export function CreateMembershipDialog({
   open,
   onClose,
@@ -74,6 +63,18 @@ export function CreateMembershipDialog({
 }: CreateMembershipDialogProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const tv = useTranslations('validation');
+
+  const formSchema = z.object({
+    name: z.string().min(2, tv('nameMin')),
+    description: z.string().min(5, tv('descriptionMin')),
+    price: z.number().min(0, tv('pricePositive')),
+    period: z.enum(['Monthly', 'Quarterly', 'Annual', 'Lifetime']),
+    color: z.string().min(1, tv('colorRequired')),
+    features: z.array(z.string().min(1, tv('required'))).min(1, tv('featuresMin')),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

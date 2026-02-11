@@ -30,28 +30,29 @@ import { Globe, MapPin, Info } from 'lucide-react';
 import type { Venue, CountryInfo, StateProvince } from '@smartclub/types';
 import { Country, Currency, CURRENCY_CONFIGS, isGDPRRequired } from '@smartclub/types';
 
-const locationSchema = z.object({
-  countryCode: z.string().min(1, 'Country is required'),
-  state: z.string().optional(),
-  city: z.string().min(2, 'City is required'),
-  postalCode: z.string().optional(),
-  addressLine1: z.string().min(5, 'Address is required'),
-  addressLine2: z.string().optional(),
-  currency: z.string().min(1, 'Currency is required'),
-  timezone: z.string().min(1, 'Timezone is required'),
-});
-
-type LocationFormData = z.infer<typeof locationSchema>;
-
 export function LocationSettingsForm() {
   const { data: session } = useSession();
   const t = useTranslations('location-compliance.location');
   const ts = useTranslations('venue-admin.settings');
   const tc = useTranslations('location-compliance.countries');
+  const tv = useTranslations('validation');
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+
+  const locationSchema = z.object({
+    countryCode: z.string().min(1, tv('countryRequired')),
+    state: z.string().optional(),
+    city: z.string().min(2, tv('cityRequired')),
+    postalCode: z.string().optional(),
+    addressLine1: z.string().min(5, tv('addressRequired')),
+    addressLine2: z.string().optional(),
+    currency: z.string().min(1, tv('required')),
+    timezone: z.string().min(1, tv('required')),
+  });
+
+  type LocationFormData = z.infer<typeof locationSchema>;
   const [errorMessage, setErrorMessage] = useState('');
   const [countries, setCountries] = useState<CountryInfo[]>([]);
   const [states, setStates] = useState<StateProvince[]>([]);

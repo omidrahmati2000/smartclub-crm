@@ -22,49 +22,40 @@ import {
     DropdownMenuTrigger,
     toast,
 } from '@smartclub/ui'
+import { apiClient } from '@/lib/api-client'
 import { ProductDialog } from './product-dialog'
 
 // API functions
 async function fetchProducts(): Promise<Product[]> {
-    const res = await fetch('/api/products')
-    if (!res.ok) throw new Error('Failed to fetch products')
-    return res.json()
+    const res = await apiClient.get<Product[]>('/products')
+    if (!res.success) throw new Error(res.error || 'Failed to fetch products')
+    return res.data || []
 }
 
 async function fetchCategories(): Promise<ProductCategory[]> {
-    const res = await fetch('/api/categories')
-    if (!res.ok) throw new Error('Failed to fetch categories')
-    return res.json()
+    const res = await apiClient.get<ProductCategory[]>('/categories')
+    if (!res.success) throw new Error(res.error || 'Failed to fetch categories')
+    return res.data || []
 }
 
 async function createProduct(product: Partial<Product>): Promise<Product> {
-    const res = await fetch('/api/products', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product),
-    })
-    if (!res.ok) throw new Error('Failed to create product')
-    return res.json()
+    const res = await apiClient.post<Product>('/products', product)
+    if (!res.success || !res.data) throw new Error(res.error || 'Failed to create product')
+    return res.data
 }
 
 async function updateProduct(
     id: string,
     product: Partial<Product>
 ): Promise<Product> {
-    const res = await fetch(`/api/products/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product),
-    })
-    if (!res.ok) throw new Error('Failed to update product')
-    return res.json()
+    const res = await apiClient.put<Product>(`/products/${id}`, product)
+    if (!res.success || !res.data) throw new Error(res.error || 'Failed to update product')
+    return res.data
 }
 
 async function deleteProduct(id: string): Promise<void> {
-    const res = await fetch(`/api/products/${id}`, {
-        method: 'DELETE',
-    })
-    if (!res.ok) throw new Error('Failed to delete product')
+    const res = await apiClient.delete(`/products/${id}`)
+    if (!res.success) throw new Error(res.error || 'Failed to delete product')
 }
 
 export function ProductsTab() {
@@ -275,9 +266,9 @@ export function ProductsTab() {
                                                     product.currentStock === 0
                                                         ? 'destructive'
                                                         : (product.currentStock || 0) <
-                                                          (product.lowStockThreshold || 0)
-                                                        ? 'secondary'
-                                                        : 'outline'
+                                                            (product.lowStockThreshold || 0)
+                                                            ? 'secondary'
+                                                            : 'outline'
                                                 }
                                             >
                                                 {product.currentStock}

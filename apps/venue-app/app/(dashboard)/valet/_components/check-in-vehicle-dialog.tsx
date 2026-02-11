@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 import {
   Dialog,
@@ -48,17 +49,6 @@ interface CheckInVehicleDialogProps {
   venueId: string;
 }
 
-const formSchema = z.object({
-  plate: z.string().min(5, 'License plate must be at least 5 characters'),
-  owner: z.string().min(2, 'Owner name must be at least 2 characters'),
-  ownerPhone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  type: z.string().min(3, 'Vehicle type is required'),
-  location: z.string().optional(),
-  notes: z.string().optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export function CheckInVehicleDialog({
   open,
   onClose,
@@ -67,6 +57,18 @@ export function CheckInVehicleDialog({
 }: CheckInVehicleDialogProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const tv = useTranslations('validation');
+
+  const formSchema = z.object({
+    plate: z.string().min(5, tv('plateRequired')),
+    owner: z.string().min(2, tv('ownerRequired')),
+    ownerPhone: z.string().min(10, tv('ownerPhoneRequired')),
+    type: z.string().min(3, tv('vehicleTypeRequired')),
+    location: z.string().optional(),
+    notes: z.string().optional(),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -83,7 +85,7 @@ export function CheckInVehicleDialog({
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
     try {
-      const result = await apiClient.post(`/venues/${venueId}/valet`, values);
+      const result = await apiClient.post<Vehicle>(`/venues/${venueId}/valet`, values);
 
       if (result.success && result.data) {
         toast({

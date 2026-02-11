@@ -44,23 +44,24 @@ interface AddSessionDialogProps {
   venueId: string;
 }
 
-const formSchema = z.object({
-  coachId: z.string().min(1, 'Coach is required'),
-  type: z.enum(['private', 'group', 'class']),
-  title: z.string().min(3, 'Title must be at least 3 characters'),
-  description: z.string().optional(),
-  maxStudents: z.number().min(1).max(50),
-  price: z.number().min(0),
-  startTime: z.string().min(1, 'Start time is required'),
-  endTime: z.string().min(1, 'End time is required'),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export function AddSessionDialog({ open, onClose, onSuccess, coaches, venueId }: AddSessionDialogProps) {
   const t = useTranslations('venue-admin.coaches');
+  const tv = useTranslations('validation');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formSchema = z.object({
+    coachId: z.string().min(1, tv('required')),
+    type: z.enum(['private', 'group', 'class']),
+    title: z.string().min(3, tv('titleMin')),
+    description: z.string().optional(),
+    maxStudents: z.number().min(1).max(50),
+    price: z.number().min(0),
+    startTime: z.string().min(1, tv('timeRequired')),
+    endTime: z.string().min(1, tv('timeRequired')),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

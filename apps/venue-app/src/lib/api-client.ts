@@ -59,12 +59,27 @@ class ApiClient {
         };
       }
 
-      const data = await response.json();
+      const text = await response.text();
+      let data: any = {};
+
+      if (text) {
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          console.error('[API Client] Failed to parse JSON:', text);
+          return {
+            success: false,
+            error: 'Invalid JSON response',
+            message: 'Server returned an invalid JSON response.',
+            statusCode: response.status,
+          };
+        }
+      }
 
       if (!response.ok) {
         return {
           success: false,
-          error: data.error || 'Request failed',
+          error: data.error || data.message || `Request failed with status ${response.status}`,
           message: data.message,
           statusCode: response.status,
         };

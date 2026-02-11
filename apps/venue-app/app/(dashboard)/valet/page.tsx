@@ -43,7 +43,7 @@ const VALET_CARS = [
 export default function ValetPage() {
     const t = useTranslations('venue-admin')
     const { data: session } = useSession()
-    const venueId = session?.user?.currentVenue || 'venue-1'
+    const venueId = session?.user?.venueId || 'venue-1'
     const [searchQuery, setSearchQuery] = useState('')
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [cars, setCars] = useState(VALET_CARS)

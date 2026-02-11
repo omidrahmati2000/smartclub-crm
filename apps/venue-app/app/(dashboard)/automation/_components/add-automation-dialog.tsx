@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import * as z from 'zod';
 import {
   Dialog,
@@ -53,17 +54,6 @@ interface AddAutomationDialogProps {
   venueId: string;
 }
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  description: z.string().min(5, 'Description must be at least 5 characters'),
-  trigger: z.enum(['time', 'booking', 'occupancy', 'temperature']),
-  triggerValue: z.string().min(1, 'Trigger value is required'),
-  action: z.string().min(1, 'Action is required'),
-  actionDevice: z.string().min(1, 'Device is required'),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export function AddAutomationDialog({
   open,
   onClose,
@@ -72,6 +62,18 @@ export function AddAutomationDialog({
 }: AddAutomationDialogProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const tv = useTranslations('validation');
+
+  const formSchema = z.object({
+    name: z.string().min(2, tv('nameMin')),
+    description: z.string().min(5, tv('descriptionMin')),
+    trigger: z.enum(['time', 'booking', 'occupancy', 'temperature']),
+    triggerValue: z.string().min(1, tv('valueRequired')),
+    action: z.string().min(1, tv('actionRequired')),
+    actionDevice: z.string().min(1, tv('deviceRequired')),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

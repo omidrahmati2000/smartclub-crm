@@ -43,20 +43,21 @@ interface AddStaffDialogProps {
   venueId: string;
 }
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(11, 'Phone number must be at least 11 digits'),
-  role: z.nativeEnum(VenueRole),
-  notes: z.string().optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export function AddStaffDialog({ open, onClose, onSuccess, venueId }: AddStaffDialogProps) {
   const t = useTranslations('venue-admin.staff');
+  const tv = useTranslations('validation');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formSchema = z.object({
+    name: z.string().min(2, tv('nameMin')),
+    email: z.string().email(tv('emailInvalid')),
+    phone: z.string().min(11, tv('phoneInvalid')),
+    role: z.nativeEnum(VenueRole),
+    notes: z.string().optional(),
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

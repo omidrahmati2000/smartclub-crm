@@ -22,40 +22,37 @@ import {
     TableRow,
     toast,
 } from '@smartclub/ui'
+import { apiClient } from '@/lib/api-client'
 import { StockAdjustmentDialog } from './stock-adjustment-dialog'
 
 // API functions
 async function fetchProducts(): Promise<Product[]> {
-    const res = await fetch('/api/products')
-    if (!res.ok) throw new Error('Failed to fetch products')
-    return res.json()
+    const res = await apiClient.get<Product[]>('/products')
+    if (!res.success) throw new Error(res.error || 'Failed to fetch products')
+    return res.data || []
 }
 
 async function fetchLowStockProducts(): Promise<Product[]> {
-    const res = await fetch('/api/products/low-stock')
-    if (!res.ok) throw new Error('Failed to fetch low stock products')
-    return res.json()
+    const res = await apiClient.get<Product[]>('/products/low-stock')
+    if (!res.success) throw new Error(res.error || 'Failed to fetch low stock products')
+    return res.data || []
 }
 
 async function fetchOutOfStockProducts(): Promise<Product[]> {
-    const res = await fetch('/api/products/out-of-stock')
-    if (!res.ok) throw new Error('Failed to fetch out of stock products')
-    return res.json()
+    const res = await apiClient.get<Product[]>('/products/out-of-stock')
+    if (!res.success) throw new Error(res.error || 'Failed to fetch out of stock products')
+    return res.data || []
 }
 
 async function adjustStock(
     productId: string,
     adjustment: { type: StockAdjustmentType; quantity: number; reason?: string }
 ): Promise<void> {
-    const res = await fetch(`/api/products/${productId}/adjust-stock`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            ...adjustment,
-            createdBy: 'current-user', // TODO: Get from session
-        }),
+    const res = await apiClient.post(`/products/${productId}/adjust-stock`, {
+        ...adjustment,
+        createdBy: 'current-user', // TODO: Get from session
     })
-    if (!res.ok) throw new Error('Failed to adjust stock')
+    if (!res.success) throw new Error(res.error || 'Failed to adjust stock')
 }
 
 export function InventoryTab() {
@@ -330,9 +327,9 @@ export function InventoryTab() {
                                                         product.currentStock === 0
                                                             ? 'destructive'
                                                             : (product.currentStock || 0) <
-                                                              (product.lowStockThreshold || 0)
-                                                            ? 'secondary'
-                                                            : 'outline'
+                                                                (product.lowStockThreshold || 0)
+                                                                ? 'secondary'
+                                                                : 'outline'
                                                     }
                                                 >
                                                     {product.currentStock || 0}
